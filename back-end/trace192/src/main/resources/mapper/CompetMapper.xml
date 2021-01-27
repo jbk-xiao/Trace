@@ -3,7 +3,7 @@
 <mapper namespace="com.trace.trace.mapper.CompetMapper">
 
     <select id="selectCompetByCompany" resultType="Compet_geo">
-         select proj_name,company_name,img_url,region,lng,lat from company,compet where company.regis_id = compet.regis_id and compet.compet_regis_id=${regis_id};
+         select proj_name,company_name,img_url,region,lng,lat from company,compet where company.regis_id = compet.regis_id and compet.regis_id=${regis_id};
     </select>
 
 </mapper>
