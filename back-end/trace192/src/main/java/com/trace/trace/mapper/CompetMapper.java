@@ -1,8 +1,10 @@
 package com.trace.trace.mapper;
 
-import com.trace.trace.entity.Compet;
+import com.trace.trace.entity.CompanyInfo;
+import com.trace.trace.entity.Compet_geo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,10 +21,18 @@ import java.util.List;
 public interface CompetMapper {
 
     /**
-     *
-     * @param compet_regis_id
+     * 根据主公司id获取竞品项目地理信息
+     * @param regis_id
      * @return Compet
      */
-    List<Compet> selectCompetByCompany(@Param("compet_regis_id") String compet_regis_id);
+    List<Compet_geo> selectCompetByCompany(@Param("regis_id") String regis_id);
+
+    /**
+     * 根据公司id获取到公司的基本信息
+     * @param regis_id
+     * @return
+     */
+    @Select("SELECT proj_name,img_url,es_time,region,company_name,proj_desc,address,lng,lat,regis_capital,org_code,phone_num FROM company WHERE regis_id = #{regis_id}")
+    CompanyInfo selectCompanyBasicInfo(@Param("regis_id") String regis_id);
 
 }

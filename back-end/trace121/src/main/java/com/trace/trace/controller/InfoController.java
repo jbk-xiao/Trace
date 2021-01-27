@@ -1,7 +1,7 @@
 package com.trace.trace.controller;
 
-import com.trace.trace.grpc.QueryRequest;
-import com.trace.trace.grpc.QueryResponse;
+import com.trace.trace.grpc.CompetRequest;
+import com.trace.trace.grpc.CompetResponse;
 import com.trace.trace.grpc.SearchServiceGrpc;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -24,13 +24,18 @@ public class InfoController {
         this.searchServiceBlockingStub=searchServiceBlockingStub;
     }
 
-    @RequestMapping(value = "/getCompet/{query}",method = RequestMethod.GET)
-    public String getTestInfo(@PathVariable("query")String query){
-        log.info("receive"+query);
+    /**
+     * 根据主公司id获取到公司的信息和公司竞品项目的信息
+     * @param regis_id
+     * @return
+     */
+    @RequestMapping(value = "/getCompet/{regis_id}",method = RequestMethod.GET)
+    public String getCompetInfo(@PathVariable("regis_id")String regis_id){
+        log.info("receive"+regis_id);
         long start=System.currentTimeMillis();
-        QueryResponse response=this.searchServiceBlockingStub.searchQuery(QueryRequest.newBuilder().setQuery(query).build());
+        CompetResponse response=this.searchServiceBlockingStub.searchCompet(CompetRequest.newBuilder().setRegisId(regis_id).build());
         long end=System.currentTimeMillis();
-        log.info("检索:"+query+"完成，用时："+(end-start));
+        log.info("search:"+regis_id+"over,time："+(end-start));
         return response.getResponse();
 
     }

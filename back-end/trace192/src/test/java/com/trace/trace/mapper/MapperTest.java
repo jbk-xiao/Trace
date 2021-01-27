@@ -10,9 +10,9 @@ import javax.annotation.Resource;
 /**
  * @author Zenglr
  * @program: trace
- * @packagename: com.trace.trace.mapper
+ * @packagename: com.trace.trace192.mapper
  * @Description
- * @create 2021-01-26-5:24 ÏÂÎç
+ * @create 2021-01-26-5:24 ä¸‹åˆ
  */
 @Slf4j
 @SpringBootTest(classes= Trace192Application.class)

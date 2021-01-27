@@ -3,14 +3,14 @@ option java_multiple_files = true;
 package com.trace.trace.grpc;
 
 
-message QueryRequest {
-  string query = 1;
+message CompetRequest {
+  string regis_id = 1;
 }
 
-message QueryResponse {
+message CompetResponse {
   string response = 1;
 }
 
 service SearchService {
-  rpc searchQuery(QueryRequest) returns (QueryResponse);
+  rpc searchCompet(CompetRequest) returns (CompetResponse);
 }

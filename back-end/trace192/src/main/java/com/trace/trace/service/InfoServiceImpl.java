@@ -1,8 +1,11 @@
 package com.trace.trace.service;
 
-import com.trace.trace.entity.Compet;
-import com.trace.trace.grpc.QueryRequest;
-import com.trace.trace.grpc.QueryResponse;
+import com.google.gson.Gson;
+import com.trace.trace.entity.Allinfo;
+import com.trace.trace.entity.CompanyInfo;
+import com.trace.trace.entity.Compet_geo;
+import com.trace.trace.grpc.CompetRequest;
+import com.trace.trace.grpc.CompetResponse;
 import com.trace.trace.grpc.SearchServiceGrpc;
 import com.trace.trace.mapper.CompetMapper;
 import io.grpc.stub.StreamObserver;
@@ -26,14 +29,26 @@ import java.util.List;
 public class InfoServiceImpl extends SearchServiceGrpc.SearchServiceImplBase{
     @Autowired
     private CompetMapper competMapper;
+    private Gson gson = new Gson();
 
+    /**
+     * 竞品模块
+     * @param request
+     * @param responseObserver
+     */
     @Override
-    public void searchQuery(QueryRequest request, StreamObserver<QueryResponse> responseObserver) {
-        String company = request.getQuery();
-        log.info("Receive query = "+company);
-        List<Compet> compets= competMapper.selectCompetByCompany(company);
+    public void searchCompet(CompetRequest request, StreamObserver<CompetResponse> responseObserver) {
+        String regis_id = request.getRegisId();
+        log.info("Receive regis_id = "+regis_id);
+        List<Compet_geo> compets= competMapper.selectCompetByCompany(regis_id);
+        CompanyInfo companyInfo = competMapper.selectCompanyBasicInfo(regis_id);
+        Allinfo allinfo = new Allinfo();
+        allinfo.setCompanyInfo(companyInfo);
+        allinfo.setCompet_geoList(compets);
+        String all_info=gson.toJson(allinfo);
+        log.info(all_info);
         //把结果放入response
-        QueryResponse response = QueryResponse.newBuilder().setResponse(compets.toString()).build();
+        CompetResponse response = CompetResponse.newBuilder().setResponse(all_info).build();
         //放入response，传回客户端
         responseObserver.onNext(response);
         //表示此次连接结束

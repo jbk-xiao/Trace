@@ -11,16 +11,16 @@ import java.io.Serializable;
  * @author Zenglr
  * @program: trace
  * @packagename: com.trace.trace.entity
- * @Description 竞品项目信息
- * @create 2021-01-26-5:05 下午
+ * @Description 公司基本信息
+ * @create 2021-01-26-11:14 下午
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Compet implements Serializable {
-    private String regis_id;
+public class CompanyInfo implements Serializable {
     private String proj_name;
+    private String img_url;
     private String es_time;
     private String region;
     private String company_name;
@@ -31,4 +31,5 @@ public class Compet implements Serializable {
     private String Regis_capital;
     private String org_code;
     private String phone_num;
+
 }

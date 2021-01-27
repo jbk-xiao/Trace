@@ -13,6 +13,10 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>trace</name>
     <description>TraceSystem</description>
+    <modules>
+        <module>trace121</module>
+        <module>trace192</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trace.trace.mapper.CompetMapper">
 
-    <select id="selectCompetByCompany" resultType="Compet">
-         select company.* from company,compet where company.regis_id = compet.regis_id and compet.compet_regis_id=${compet_regis_id};
+    <select id="selectCompetByCompany" resultType="Compet_geo">
+         select proj_name,company_name,img_url,region,lng,lat from company,compet where company.regis_id = compet.regis_id and compet.compet_regis_id=${regis_id};
     </select>
+
 </mapper>
