@@ -1,0 +1,26 @@
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /MyActuator
+  server:
+    port: 12584
+    address: 127.0.0.1
+
+server:
+  port: 8291
+
+app-config:
+  grpc-server-name: localhost
+  grpc-server-port: 8289
+#
+#grpc:
+#  port: 6565
+#
+#app-config:
+#  grpc-server-name: localhost
+#  grpc-server-port: 6565
