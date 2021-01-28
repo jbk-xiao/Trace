@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.com.JingDong.JingDong.mapper.QueryMapper">
+
+    <select id="selectQueryBySkuIds" parameterType="java.util.List" resultType="Query">
+        select *
+        from `load_test`
+        where `skuId` in
+        <foreach collection="skuIds" item="skuId" index="index"
+                 open="(" close=")" separator=",">
+            #{skuId}
+        </foreach>
+    </select>
+</mapper>
