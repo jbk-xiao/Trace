@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @CrossOrigin("*")
 @RestController
-public class WeiboController {
+public class SearchController {
     //从容器中获取调用GRpc stub
     @Autowired
     SearchServiceGrpc.SearchServiceBlockingStub searchServiceBlockingStub;
@@ -33,7 +33,7 @@ public class WeiboController {
     }
 
     @GetMapping("/getDetail/{skuId}")
-    public String relationship(@PathVariable("skuId")String skuId){
+    public String detail(@PathVariable("skuId")String skuId){
         log.info("Receive detail request : "+skuId);
         long start = System.currentTimeMillis();
         QueryResponse response = this.searchServiceBlockingStub

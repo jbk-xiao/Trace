@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="74039f8b-71d9-4866-a969-ac5dfa2318f0" name="Default Changelist" comment="" />
+    <list default="true" id="74039f8b-71d9-4866-a969-ac5dfa2318f0" name="Default Changelist" comment="Complete some debug and add some function like fuzzy search">
+      <change beforePath="$PROJECT_DIR$/back-end/JingDongClient/src/main/java/com/JingDong/JingDong/controller/WeiboController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/JingDongClient/src/main/java/com/JingDong/JingDong/controller/SearchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/JingDongServer/src/main/java/com/JingDong/JingDong/service/SearchServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/JingDongServer/src/main/java/com/JingDong/JingDong/service/SearchServiceImpl.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +26,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1ngqPDxLzzdG2O1GBifjqanu9Ie" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -24,22 +40,58 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/back-end/src/main/resources" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/back-end/JingDongServer/src/main/resources" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\发现杯\FoodCommoditySearch\back-end\src\main\resources" />
-      <recent name="F:\发现杯\FoodCommoditySearch\back-end" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\发现杯\FoodCommoditySearch\back-end" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.JingDong.JingDong.util" />
+      <recent name="com.JingDong.JingDong.redisDao" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\发现杯\FoodCommoditySearch\back-end\JingDongServer\src\main\resources" />
+      <recent name="F:\发现杯\FoodCommoditySearch\back-end\src\main\resources" />
+      <recent name="F:\发现杯\FoodCommoditySearch\back-end" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.ServerApplicationTest.contextLoads">
+    <configuration name="ServerApplicationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="weibo-springboot-192" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.JingDong.JingDong.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.JingDong.JingDong" />
+      <option name="MAIN_CLASS_NAME" value="com.JingDong.JingDong.ServerApplicationTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerApplicationTest.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="weibo-springboot-192" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.JingDong.JingDong.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.JingDong.JingDong" />
+      <option name="MAIN_CLASS_NAME" value="com.JingDong.JingDong.ServerApplicationTest" />
+      <option name="METHOD_NAME" value="contextLoads" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="JingDongApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="back-end" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.jingdongsys.jingdong.JingDongApplication" />
@@ -47,6 +99,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ServerApplicationTest.contextLoads" />
+        <item itemvalue="JUnit.ServerApplicationTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -59,17 +117,77 @@
       <option name="presentableId" value="Default" />
       <updated>1611822054179</updated>
       <workItem from="1611822057354" duration="3663000" />
+      <workItem from="1611837180726" duration="1971000" />
+      <workItem from="1611849846231" duration="1225000" />
+      <workItem from="1611906113748" duration="4826000" />
+      <workItem from="1611924658449" duration="4676000" />
+      <workItem from="1611969714342" duration="7541000" />
     </task>
+    <task id="LOCAL-00001" summary="Complete some debug and add some function like fuzzy search">
+      <created>1611975204984</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1611975204984</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Complete some debug and add some function like fuzzy search" />
+    <option name="LAST_COMMIT_MESSAGE" value="Complete some debug and add some function like fuzzy search" />
   </component>
   <component name="WindowStateProjectService">
     <state x="163" y="0" key="#Project_Structure" timestamp="1611824244823">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="163" y="0" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1611824244823" />
+    <state x="418" y="231" width="529" height="273" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1611909274436">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="418" y="231" width="529" height="273" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1611909274436" />
+    <state x="298" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1611909845079">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="298" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1611909845079" />
+    <state width="1367" height="289" key="GridCell.Tab.0.bottom" timestamp="1611975119402">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1367" height="289" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1611975119402" />
+    <state width="1367" height="289" key="GridCell.Tab.0.center" timestamp="1611975119401">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1367" height="289" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1611975119401" />
+    <state width="1367" height="289" key="GridCell.Tab.0.left" timestamp="1611975119401">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1367" height="289" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1611975119401" />
+    <state width="1367" height="289" key="GridCell.Tab.0.right" timestamp="1611975119401">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1367" height="289" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1611975119401" />
+    <state x="163" y="0" key="SettingsEditor" timestamp="1611850213581">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1611850213581" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1611975357070">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1611975357070" />
     <state x="57" y="24" key="new project wizard" timestamp="1611822847825">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

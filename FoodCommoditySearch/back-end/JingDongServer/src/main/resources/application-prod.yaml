@@ -1,0 +1,42 @@
+# 生产环境配置文件
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /MyActuator
+  server:
+    port: 12583
+    address: 127.0.0.1
+
+spring:
+  datasource:
+    username: root
+    password: 13767376438hyx
+    url: jdbc:mysql://localhost:3306/jingdong?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: localhost
+    port: 6379
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 10
+  application:
+    name: hello-grpc-server
+
+# grpc端口号
+grpc:
+  port: 8289
+
+server:
+  port: 8290
+
+mybatis:
+  # 指定映射文件的位置
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.JingDong.JingDong.entity

@@ -1,13 +1,13 @@
 package com.JingDong.JingDong.service;
 
 import com.JingDong.JingDong.entity.Detail;
-import com.JingDong.JingDong.entity.Query;
 import com.JingDong.JingDong.grpc.QueryResponse;
 import com.JingDong.JingDong.grpc.SearchServiceGrpc;
 import com.JingDong.JingDong.grpc.QueryRequest;
 import com.JingDong.JingDong.mapper.QueryMapper;
 import com.JingDong.JingDong.mapper.DetailMapper;
 import com.JingDong.JingDong.redisDao.RedisDao;
+import com.JingDong.JingDong.redisDao.RedisDao2;
 import com.JingDong.JingDong.util.createJson;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +37,7 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase{
         String queryType = request.getQueryType();
         //获取请求内容
         String query = request.getQuery();
-        String page=request.getPage();
+        String page = request.getPage();
         log.info("Receive queryType = "+queryType+", query = "+query);
         //返回结果初始化
         String jsonInfo = "";
