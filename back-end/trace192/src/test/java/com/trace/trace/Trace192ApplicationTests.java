@@ -1,7 +1,7 @@
 package com.trace.trace;
 
 import com.google.gson.Gson;
-import com.trace.trace.entity.Allinfo;
+import com.trace.trace.entity.AllCompetinfo;
 import com.trace.trace.entity.CompanyInfo;
 import com.trace.trace.entity.Compet_geo;
 import com.trace.trace.entity.JDdetail;
@@ -25,7 +25,7 @@ class Trace192ApplicationTests {
         CompanyInfo companyInfo = competMapper.selectCompanyBasicInfo(regis_id);
         List<JDdetail> jDdetails = competMapper.selectCompetDetails(regis_id);
         JDdetail jDdetail = competMapper.selectMainDetail(regis_id);
-        Allinfo allinfo = new Allinfo();
+        AllCompetinfo allinfo = new AllCompetinfo();
         allinfo.setCompanyInfo(companyInfo);
         allinfo.setCompet_geoList(compets);
         allinfo.setJdetail(jDdetail);

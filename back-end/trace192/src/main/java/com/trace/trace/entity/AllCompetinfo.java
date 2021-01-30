@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Allinfo implements Serializable {
+public class AllCompetinfo implements Serializable {
     private CompanyInfo companyInfo;
     private List<Compet_geo> compet_geoList;
     private JDdetail jdetail;

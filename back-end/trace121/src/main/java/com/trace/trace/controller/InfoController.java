@@ -1,9 +1,8 @@
 package com.trace.trace.controller;
 
-import com.trace.trace.grpc.CompetRequest;
-import com.trace.trace.grpc.CompetResponse;
-import com.trace.trace.grpc.SearchServiceGrpc;
+import com.trace.trace.grpc.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -19,9 +18,35 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class InfoController {
 
-    private SearchServiceGrpc.SearchServiceBlockingStub searchServiceBlockingStub;
-    public InfoController(SearchServiceGrpc.SearchServiceBlockingStub searchServiceBlockingStub){
-        this.searchServiceBlockingStub=searchServiceBlockingStub;
+    //从容器中获取调用GRpc stub
+    @Autowired
+    SearchServiceGrpc.SearchServiceBlockingStub searchServiceBlockingStub;
+
+
+    @GetMapping("/getCommodity/{query}/{page}")
+    public String query(@PathVariable("query")String query, @PathVariable("page")String page){
+        log.info("Receive commodity request : "+query+" page="+page);
+        long start = System.currentTimeMillis();
+        QueryResponse response = this.searchServiceBlockingStub
+                .searchQuery(QueryRequest.newBuilder()
+                        .setQuery(query).setQueryType("keyword").setPage(page).build());
+        long end = System.currentTimeMillis();
+        log.info("Search result : "+response.getResponse());
+        log.info("Retrieval time: "+(end-start));
+        return response.getResponse();
+    }
+
+    @GetMapping("/getDetail/{skuId}")
+    public String detail(@PathVariable("skuId")String skuId){
+        log.info("Receive detail request : "+skuId);
+        long start = System.currentTimeMillis();
+        QueryResponse response = this.searchServiceBlockingStub
+                .searchQuery(QueryRequest.newBuilder()
+                        .setQuery(skuId).setQueryType("detail").build());
+        long end = System.currentTimeMillis();
+        log.info("Search result : "+response.getResponse());
+        log.info("Retrieval time: "+(end-start));
+        return response.getResponse();
     }
 
     /**
@@ -33,7 +58,9 @@ public class InfoController {
     public String getCompetInfo(@PathVariable("regis_id")String regis_id){
         log.info("receive"+regis_id);
         long start=System.currentTimeMillis();
-        CompetResponse response=this.searchServiceBlockingStub.searchCompet(CompetRequest.newBuilder().setRegisId(regis_id).build());
+        QueryResponse response = this.searchServiceBlockingStub
+                .searchQuery(QueryRequest.newBuilder()
+                        .setQuery(regis_id).setQueryType("compet").build());
         long end=System.currentTimeMillis();
         log.info("search:"+regis_id+"over,use time:"+(end-start));
         return response.getResponse();

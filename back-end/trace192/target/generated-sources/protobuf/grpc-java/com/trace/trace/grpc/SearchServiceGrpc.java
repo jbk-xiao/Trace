@@ -27,35 +27,35 @@ public final class SearchServiceGrpc {
   public static final String SERVICE_NAME = "com.trace.trace.grpc.SearchService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<com.trace.trace.grpc.CompetRequest,
-      com.trace.trace.grpc.CompetResponse> getSearchCompetMethod;
+  private static volatile io.grpc.MethodDescriptor<com.trace.trace.grpc.QueryRequest,
+      com.trace.trace.grpc.QueryResponse> getSearchQueryMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "searchCompet",
-      requestType = com.trace.trace.grpc.CompetRequest.class,
-      responseType = com.trace.trace.grpc.CompetResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "searchQuery",
+      requestType = com.trace.trace.grpc.QueryRequest.class,
+      responseType = com.trace.trace.grpc.QueryResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.trace.trace.grpc.CompetRequest,
-      com.trace.trace.grpc.CompetResponse> getSearchCompetMethod() {
-    io.grpc.MethodDescriptor<com.trace.trace.grpc.CompetRequest, com.trace.trace.grpc.CompetResponse> getSearchCompetMethod;
-    if ((getSearchCompetMethod = SearchServiceGrpc.getSearchCompetMethod) == null) {
+  public static io.grpc.MethodDescriptor<com.trace.trace.grpc.QueryRequest,
+      com.trace.trace.grpc.QueryResponse> getSearchQueryMethod() {
+    io.grpc.MethodDescriptor<com.trace.trace.grpc.QueryRequest, com.trace.trace.grpc.QueryResponse> getSearchQueryMethod;
+    if ((getSearchQueryMethod = SearchServiceGrpc.getSearchQueryMethod) == null) {
       synchronized (SearchServiceGrpc.class) {
-        if ((getSearchCompetMethod = SearchServiceGrpc.getSearchCompetMethod) == null) {
-          SearchServiceGrpc.getSearchCompetMethod = getSearchCompetMethod =
-              io.grpc.MethodDescriptor.<com.trace.trace.grpc.CompetRequest, com.trace.trace.grpc.CompetResponse>newBuilder()
+        if ((getSearchQueryMethod = SearchServiceGrpc.getSearchQueryMethod) == null) {
+          SearchServiceGrpc.getSearchQueryMethod = getSearchQueryMethod =
+              io.grpc.MethodDescriptor.<com.trace.trace.grpc.QueryRequest, com.trace.trace.grpc.QueryResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "searchCompet"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "searchQuery"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.trace.trace.grpc.CompetRequest.getDefaultInstance()))
+                  com.trace.trace.grpc.QueryRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.trace.trace.grpc.CompetResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new SearchServiceMethodDescriptorSupplier("searchCompet"))
+                  com.trace.trace.grpc.QueryResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new SearchServiceMethodDescriptorSupplier("searchQuery"))
               .build();
         }
       }
     }
-    return getSearchCompetMethod;
+    return getSearchQueryMethod;
   }
 
   /**
@@ -87,20 +87,20 @@ public final class SearchServiceGrpc {
 
     /**
      */
-    public void searchCompet(com.trace.trace.grpc.CompetRequest request,
-        io.grpc.stub.StreamObserver<com.trace.trace.grpc.CompetResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getSearchCompetMethod(), responseObserver);
+    public void searchQuery(com.trace.trace.grpc.QueryRequest request,
+        io.grpc.stub.StreamObserver<com.trace.trace.grpc.QueryResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getSearchQueryMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getSearchCompetMethod(),
+            getSearchQueryMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.trace.trace.grpc.CompetRequest,
-                com.trace.trace.grpc.CompetResponse>(
-                  this, METHODID_SEARCH_COMPET)))
+                com.trace.trace.grpc.QueryRequest,
+                com.trace.trace.grpc.QueryResponse>(
+                  this, METHODID_SEARCH_QUERY)))
           .build();
     }
   }
@@ -125,10 +125,10 @@ public final class SearchServiceGrpc {
 
     /**
      */
-    public void searchCompet(com.trace.trace.grpc.CompetRequest request,
-        io.grpc.stub.StreamObserver<com.trace.trace.grpc.CompetResponse> responseObserver) {
+    public void searchQuery(com.trace.trace.grpc.QueryRequest request,
+        io.grpc.stub.StreamObserver<com.trace.trace.grpc.QueryResponse> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(getSearchCompetMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getSearchQueryMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -152,9 +152,9 @@ public final class SearchServiceGrpc {
 
     /**
      */
-    public com.trace.trace.grpc.CompetResponse searchCompet(com.trace.trace.grpc.CompetRequest request) {
+    public com.trace.trace.grpc.QueryResponse searchQuery(com.trace.trace.grpc.QueryRequest request) {
       return blockingUnaryCall(
-          getChannel(), getSearchCompetMethod(), getCallOptions(), request);
+          getChannel(), getSearchQueryMethod(), getCallOptions(), request);
     }
   }
 
@@ -178,14 +178,14 @@ public final class SearchServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.trace.trace.grpc.CompetResponse> searchCompet(
-        com.trace.trace.grpc.CompetRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.trace.trace.grpc.QueryResponse> searchQuery(
+        com.trace.trace.grpc.QueryRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(getSearchCompetMethod(), getCallOptions()), request);
+          getChannel().newCall(getSearchQueryMethod(), getCallOptions()), request);
     }
   }
 
-  private static final int METHODID_SEARCH_COMPET = 0;
+  private static final int METHODID_SEARCH_QUERY = 0;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -204,9 +204,9 @@ public final class SearchServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_SEARCH_COMPET:
-          serviceImpl.searchCompet((com.trace.trace.grpc.CompetRequest) request,
-              (io.grpc.stub.StreamObserver<com.trace.trace.grpc.CompetResponse>) responseObserver);
+        case METHODID_SEARCH_QUERY:
+          serviceImpl.searchQuery((com.trace.trace.grpc.QueryRequest) request,
+              (io.grpc.stub.StreamObserver<com.trace.trace.grpc.QueryResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -269,7 +269,7 @@ public final class SearchServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new SearchServiceFileDescriptorSupplier())
-              .addMethod(getSearchCompetMethod())
+              .addMethod(getSearchQueryMethod())
               .build();
         }
       }

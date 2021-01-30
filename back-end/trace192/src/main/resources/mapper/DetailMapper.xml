@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.JingDong.JingDong.mapper.DetailMapper">
+
+<!--    <select id="selectDetailBySkuId" resultType="Detail">-->
+<!--        select  skuId,averageScore,commentCount,goodCount,goodRate,generalCount,generalRate,poorCount,poorRate,commentStr-->
+<!--        from load_test2 where skuId=#{skuId} order by averageScore;-->
+<!--    </select>-->
+</mapper>
