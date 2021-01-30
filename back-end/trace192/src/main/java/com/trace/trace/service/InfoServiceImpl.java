@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.trace.trace.entity.Allinfo;
 import com.trace.trace.entity.CompanyInfo;
 import com.trace.trace.entity.Compet_geo;
+import com.trace.trace.entity.JDdetail;
 import com.trace.trace.grpc.CompetRequest;
 import com.trace.trace.grpc.CompetResponse;
 import com.trace.trace.grpc.SearchServiceGrpc;
@@ -42,9 +43,13 @@ public class InfoServiceImpl extends SearchServiceGrpc.SearchServiceImplBase{
         log.info("Receive regis_id = "+regis_id);
         List<Compet_geo> compets= competMapper.selectCompetByCompany(regis_id);
         CompanyInfo companyInfo = competMapper.selectCompanyBasicInfo(regis_id);
+        List<JDdetail> jDdetails = competMapper.selectCompetDetails(regis_id);
+        JDdetail jDdetail = competMapper.selectMainDetail(regis_id);
         Allinfo allinfo = new Allinfo();
         allinfo.setCompanyInfo(companyInfo);
         allinfo.setCompet_geoList(compets);
+        allinfo.setJdetail(jDdetail);
+        allinfo.setCompet_jdetails(jDdetails);
         String all_info=gson.toJson(allinfo);
         log.info(all_info);
         //把结果放入response

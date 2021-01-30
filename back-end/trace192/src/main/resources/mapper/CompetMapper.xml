@@ -3,7 +3,15 @@
 <mapper namespace="com.trace.trace.mapper.CompetMapper">
 
     <select id="selectCompetByCompany" resultType="Compet_geo">
-         select proj_name,company_name,img_url,region,lng,lat from company,compet where company.regis_id = compet.regis_id and compet.regis_id=${regis_id};
+         select proj_name,company_name,img_url,region,lng,lat from company,compet where company.regis_id = compet.compet_regis_id and compet.regis_id=${regis_id};
+    </select>
+
+    <select id="selectMainDetail" resultType="JDdetail">
+         select pname,price,detail_url,img_url,brand,brand_url,commentCount,goodRate from jd_info j,company_jd c where j.sku_id = c.sku_id and c.regis_id = ${regis_id};
+    </select>
+
+    <select id="selectCompetDetails" resultType="JDdetail">
+         select pname,price,detail_url,img_url,brand,brand_url,commentCount,goodRate from jd_info j,company_jd c,compet_sku c2 where j.sku_id = c2.compet_sku_id and c2.sku_id = c.sku_id and c.regis_id = ${regis_id};
     </select>
 
 </mapper>
