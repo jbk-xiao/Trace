@@ -35,7 +35,7 @@ public class InfoController {
         long start=System.currentTimeMillis();
         CompetResponse response=this.searchServiceBlockingStub.searchCompet(CompetRequest.newBuilder().setRegisId(regis_id).build());
         long end=System.currentTimeMillis();
-        log.info("search:"+regis_id+"over,time："+(end-start));
+        log.info("search:"+regis_id+"over,use time:"+(end-start));
         return response.getResponse();
 
     }

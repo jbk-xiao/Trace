@@ -28,8 +28,6 @@ public class CompanyInfo implements Serializable {
     private String address;
     private String lng;
     private String lat;
-    private String Regis_capital;
-    private String org_code;
     private String phone_num;
 
 }

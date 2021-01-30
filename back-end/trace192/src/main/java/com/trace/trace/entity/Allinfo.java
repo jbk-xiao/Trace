@@ -22,5 +22,7 @@ import java.util.List;
 public class Allinfo implements Serializable {
     private CompanyInfo companyInfo;
     private List<Compet_geo> compet_geoList;
+    private JDdetail jdetail;
+    private List<JDdetail> compet_jdetails;
 
 }
