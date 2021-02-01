@@ -6,4 +6,5 @@
 | /getvideo/{filename:.+} | http://121.46.19.26:8511/getvideo/01-20210130092923.mkv | 视频名称 | 直接返回HttpServletResponse，用\<video\> \<source src="url"\>\</video\>可以接收。 |firefox、chrome、edge测试通过，IE不行|
 | /get_recent_event/{process_name}/{page} | http://121.46.19.26:8511/get_recent_event/product/1 | process_name：生产流程中某个步骤；page：每15条一页 | 返回15个表示标准时间的整数组成的list。第1页是该生产线上最近的15条视频录制的时间（或者15张图片拍摄的时间，图片与视频是一一对应的）。 |由于没有提前商量，不确定时间的传输方式，暂时使用长整型（即1970.1.1至今的时间）。图片和视频的名称需要使用到这个时间（前端展示可能也需要？），所以这里需要改一个合适点的格式。|
 | /getCompet/{regis_id} | http://121.46.19.26:8511/getCompet/440108400003939 | 主公司的工商注册号 | 返回竞品模块的主公司基本信息、竞品公司基本信息和地理信息、主公司商品信息、竞品商品信息 ||
+| /getCommodity/{query}/{page} | http://121.46.19.26:8511/getCommodity/糖果/1 | 查询商品的检索词、要获取的商品页的页码 | 返回对应的检索结果，即对应页码的20条商品的skuId、标题、商店、价格、京东连接url、图片url、评价、类别等||
 
