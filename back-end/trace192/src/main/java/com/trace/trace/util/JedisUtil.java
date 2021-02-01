@@ -24,18 +24,20 @@ public class JedisUtil {
     private String host;
     @Value("${spring.redis.port}")
     private int port;
+    @Value("${spring.redis.password}")
+    private String password;
     @Value("${spring.redis.jedis.pool.max-idle}")
     private int MaxIdle;
     @Value("${spring.redis.jedis.pool.min-idle}")
     private int MinIdle;
 
-
-    public JedisUtil(){
+    public JedisUtil() {
     }
+
     @Bean
-    public JedisPool initPoll(){
+    public JedisPool initPoll() {
         log.info("调用初始化jedisPool方法");
-        JedisPoolConfig jedisPoolConfig=new JedisPoolConfig();
+        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxTotal(1000);
         jedisPoolConfig.setMaxIdle(MaxIdle);
         jedisPoolConfig.setMinIdle(MinIdle);
@@ -44,14 +46,15 @@ public class JedisUtil {
         jedisPoolConfig.setTestOnReturn(true);
         jedisPoolConfig.setTestWhileIdle(true);
 
-        jedisPoolConfig.setMaxWaitMillis(10*1000);
-        JedisPool jedisPool = new JedisPool(jedisPoolConfig,host,port,3000);
-        log.info("检测jedisPool："+jedisPool.getResource());
+        jedisPoolConfig.setMaxWaitMillis(10 * 1000);
+        JedisPool jedisPool = new JedisPool(jedisPoolConfig, host, port, 3000, password);
+        log.info("检测jedisPool：" + jedisPool.getResource());
         return jedisPool;
     }
+
     @Autowired
     JedisPool jedisPool;
-    public Jedis getClient(){
+    public Jedis getClient() {
         log.info("调用getClient");
         return jedisPool.getResource();
     }

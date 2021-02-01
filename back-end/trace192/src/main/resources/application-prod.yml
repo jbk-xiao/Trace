@@ -15,24 +15,26 @@ management:
 spring:
   datasource:
     username: root
-    password: 201379
-    url: jdbc:mysql://localhost:3306/competition?useUnicode=true&characterEncoding=UTF-8
+    password: toor
+    url: jdbc:mysql://localhost:3306/trace?useUnicode=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   redis:
     host: localhost
-    port: 6379
+    port: 6579
     jedis:
       pool:
         min-idle: 0
         max-idle: 10
+    password: nopassword
   application:
     name: hello-grpc-server
 
 # grpc端口号
 grpc:
   port: 8289
-
+  server:
+    max-message-size=: 5194304
 server:
   port: 8290
 
@@ -40,3 +42,13 @@ mybatis:
   # 指定映射文件的位置
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.trace.trace.entity
+
+media:
+  video:
+    path: D:\dajiangsai\trace\trace121\src\main\resources\
+    database: 13
+  picture:
+    path: D:\dajiangsai\trace\trace121\src\main\resources\
+    database: 14
+#  other:
+#    database: 15

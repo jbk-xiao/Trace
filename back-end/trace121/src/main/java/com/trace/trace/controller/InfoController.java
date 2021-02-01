@@ -1,9 +1,17 @@
 package com.trace.trace.controller;
 
+import com.google.protobuf.ByteString;
 import com.trace.trace.grpc.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 
 /**
@@ -18,7 +26,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class InfoController {
 
-    //从容器中获取调用GRpc stub
+    /**
+     *从容器中获取调用GRpc stub
+     */
     @Autowired
     SearchServiceGrpc.SearchServiceBlockingStub searchServiceBlockingStub;
 
@@ -66,4 +76,5 @@ public class InfoController {
         return response.getResponse();
 
     }
+
 }
