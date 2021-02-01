@@ -1,5 +1,5 @@
 #!/bin/bash
-PORT=$(netstat -ntulp | grep 8291)
+PORT=$(netstat -ntulp | grep 8511)
 if [[ -n $PORT  ]]; then
 	echo "ready to close..."
 	RESULT="000"
