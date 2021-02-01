@@ -15,6 +15,7 @@ message QueryRequest {
 //返回检索结果
 message QueryResponse {
     string response = 1;
+    bytes responseMedia = 2;
 }
 
 

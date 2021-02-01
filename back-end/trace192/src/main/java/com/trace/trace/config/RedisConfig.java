@@ -50,7 +50,9 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
 
-    //    缓存配置管理器
+    /**
+     * 缓存配置管理器
+     */
     @Bean
     public CacheManager cacheManager(LettuceConnectionFactory factory){
         //        以锁写入的方式创建RedisCacheWriter对象
