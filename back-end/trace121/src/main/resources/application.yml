@@ -12,7 +12,7 @@ management:
     address: 127.0.0.1
 
 server:
-  port: 8291
+  port: 8511
 
 app-config:
   grpc-server-name: localhost
