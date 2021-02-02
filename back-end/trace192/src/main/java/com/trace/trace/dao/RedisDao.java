@@ -71,17 +71,16 @@ public class RedisDao {
      */
 //    @Cacheable(value = "bw_id", key = "#query")
     public ArrayList<String> getIDList(String query) {
-        log.info("调试" + jedisUtil.toString());
-        Jedis jedis = jedisUtil.getClient();
-        String[] queries = query.split(" ");
-        List<String> list = Arrays.asList(queries);
-        log.info("list:" + list.toString());
+        Jedis jedis= jedisUtil.getClient();
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i<query.length(); i++){
+            list.add(query.substring(i,i+1));
+        }
+        log.info("list:"+list.toString());
         ArrayList<String> res = new ArrayList<String>();
         try {
-            for (String key : list) {
-                if (jedis.exists(key)) {
-                    res.addAll(fuzzySearchList(key));
-                }
+            for(String key:list){
+                res.addAll(FuzzySearchList(key));
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -179,13 +178,14 @@ public class RedisDao {
      * @param query
      * @return
      */
-    public List<String> getIDListOnPage(String query, int page) {
+    public List<String> getIDListOnPage(String query, int page){
         ArrayList<String> list = new ArrayList<String>();
         list = getIDList(query);
-        int start = (page - 1) * pageRecord;
-        int end = start + pageRecord - 1;
+        int start = (page-1)*pageRecord;
+        int end = start+pageRecord-1;
         List<String> res = new ArrayList<>();
-        res = list.subList(start, end + 1);
+        if(list.size()>=end)
+            res = list.subList(start,end+1);
         return res;
     }
 
