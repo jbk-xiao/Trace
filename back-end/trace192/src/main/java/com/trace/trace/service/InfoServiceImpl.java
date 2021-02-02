@@ -84,8 +84,12 @@ public class InfoServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
             String pageCount = "" + redisDao.getPageNumber(query);
             log.info("redis page count: " + pageCount);
             //mysql方法
-            jsonInfo = json.toJson(pageCount, queryMapper.selectQueryBySkuIds(keys));
-            log.info("result: " + jsonInfo);
+            jsonInfo = "";
+            try {
+                jsonInfo = json.toJson(pageCount, queryMapper.selectQueryBySkuIds(keys));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
         //获取某商品的详情信息
         else if ("detail".equals(queryType)) {
