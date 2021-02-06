@@ -33,8 +33,7 @@ spring:
 # grpc端口号
 grpc:
   port: 8289
-  server:
-    max-message-size=: 5194304
+
 server:
   port: 8290
 
@@ -52,3 +51,13 @@ media:
     database: 14
 #  other:
 #    database: 15
+fabric:
+  system:
+    host: 192.168.106.7
+    port: 7054
+    user: appUser
+    wallet: D:\dajiangsai\trace\trace192\src\main\resources\wallet
+    properties: D:\dajiangsai\trace\trace192\src\main\resources\fabric.properties
+    ca-pem: D:\dajiangsai\trace\trace192\src\main\resources\ca.org1.example.com-cert.pem
+    conpath: D:\dajiangsai\trace\trace192\src\main\resources\connection-org1.yaml
+

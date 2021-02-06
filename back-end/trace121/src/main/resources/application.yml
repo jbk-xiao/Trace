@@ -17,10 +17,7 @@ server:
 app-config:
   grpc-server-name: localhost
   grpc-server-port: 8289
-
-grpc:
-  server:
-    max-message-size: 5194304
+  max-message-size: 1073741824
 #
 #grpc:
 #  port: 6565

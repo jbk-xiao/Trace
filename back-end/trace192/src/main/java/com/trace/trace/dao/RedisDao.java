@@ -71,16 +71,16 @@ public class RedisDao {
      */
 //    @Cacheable(value = "bw_id", key = "#query")
     public ArrayList<String> getIDList(String query) {
-        Jedis jedis= jedisUtil.getClient();
+//        Jedis jedis= jedisUtil.getClient();
         List<String> list = new ArrayList<>();
         for (int i = 0; i<query.length(); i++){
             list.add(query.substring(i,i+1));
         }
         log.info("list:"+list.toString());
-        ArrayList<String> res = new ArrayList<String>();
+        ArrayList<String> res = new ArrayList<>();
         try {
             for(String key:list){
-                res.addAll(FuzzySearchList(key));
+                res.addAll(fuzzySearchList(key));
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -96,7 +96,7 @@ public class RedisDao {
      */
     public List<String> fuzzySearchQueryByKeys(String query) {
         log.info("{} 模糊匹配", query);
-        Jedis jedis = jedisUtil.getClient();
+//        Jedis jedis = jedisUtil.getClient();
         String pattern = query.trim().replaceAll("\\s+", "*");
         pattern = "*" + pattern + "*";
         long startTime = System.currentTimeMillis();
@@ -114,31 +114,32 @@ public class RedisDao {
      * @return
      */
     public List<String> fuzzySearchList(String query) {
-        log.info("使用方法FuzzySearchList");
-//        long startTime = System.currentTimeMillis();
-        List<String> keys = new ArrayList<String>();
-        keys.addAll(fuzzySearchQueryByKeys(query));
+        log.info("使用方法fuzzySearchList");
+        long startTime = System.currentTimeMillis();
+        List<String> keys = new ArrayList<>(fuzzySearchQueryByKeys(query));
         Jedis jedis = jedisUtil.getClient();
         log.info("模糊匹配到keys：" + keys.toString());
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         if (keys.size() > 0) {
             for (String key : keys) {
                 list.addAll(jedis.zrevrange(key, 0, -1));
             }
+            jedis.close();
         } else {
             log.info("redis没有查到，返回" + list.toString());
+            jedis.close();
             return list;
         }
         //去重（顺序不变）
-        List<String> result1 = new ArrayList<String>(new LinkedHashSet<String>(list));
+        List<String> result1 = new ArrayList<>(new LinkedHashSet<>(list));
         List<String> result = new ArrayList<>();
         log.info("redis模糊查找:" + query + ",返回" + result1.toString());
         for (String id : result1) {
             id = id.trim();
             result.add(id);
         }
-//        long finishQueryTime = System.currentTimeMillis();
-//        log.info("Jedis process time:" + (finishQueryTime - startTime));
+        long finishQueryTime = System.currentTimeMillis();
+        log.info("Jedis process time:" + (finishQueryTime - startTime));
         return result;
     }
 
@@ -152,7 +153,7 @@ public class RedisDao {
         long startTime = System.currentTimeMillis();
         Jedis jedis = jedisUtil.getClient();
         String cursor = ScanParams.SCAN_POINTER_START;
-        List<String> keys = new ArrayList<String>();
+        List<String> keys = new ArrayList<>();
         ScanParams scanParams = new ScanParams();
         scanParams.match(pattern);
         scanParams.count(Integer.MAX_VALUE);
@@ -168,6 +169,7 @@ public class RedisDao {
         }
         long finishTime = System.currentTimeMillis();
         log.info("jedisScan process time:" + (finishTime - startTime));
+        jedis.close();
         return keys;
     }
 
@@ -184,8 +186,9 @@ public class RedisDao {
         int start = (page-1)*pageRecord;
         int end = start+pageRecord-1;
         List<String> res = new ArrayList<>();
-        if(list.size()>=end)
+        if(list.size()>=end) {
             res = list.subList(start,end+1);
+        }
         return res;
     }
 
@@ -196,7 +199,7 @@ public class RedisDao {
      * @return
      */
     public Long getPageNumber(String query) {
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list;
         list = getIDList(query);
         long num = list.size();
         long page = num / pageRecord + 1;
