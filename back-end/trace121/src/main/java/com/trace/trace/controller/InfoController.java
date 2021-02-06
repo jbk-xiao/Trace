@@ -41,21 +41,21 @@ public class InfoController {
                 .searchQuery(QueryRequest.newBuilder()
                         .setQuery(query).setQueryType("keyword").setPage(page).build());
         long end = System.currentTimeMillis();
-        log.info("Search result : "+response.getResponse());
-        log.info("Retrieval time: "+(end-start));
+        log.info("Search result: " + response.getResponse());
+        log.info("Retrieval time: " + (end - start));
         return response.getResponse();
     }
 
     @GetMapping("/getDetail/{skuId}")
     public String detail(@PathVariable("skuId")String skuId){
-        log.info("Receive detail request : "+skuId);
+        log.info("Receive detail request: " + skuId);
         long start = System.currentTimeMillis();
         QueryResponse response = this.searchServiceBlockingStub
                 .searchQuery(QueryRequest.newBuilder()
                         .setQuery(skuId).setQueryType("detail").build());
         long end = System.currentTimeMillis();
-        log.info("Search result : "+response.getResponse());
-        log.info("Retrieval time: "+(end-start));
+        log.info("Search result : " + response.getResponse());
+        log.info("Retrieval time: " + (end - start));
         return response.getResponse();
     }
 
@@ -64,17 +64,62 @@ public class InfoController {
      * @param regis_id
      * @return
      */
-    @RequestMapping(value = "/getCompet/{regis_id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/getCompet/{regis_id}", method = RequestMethod.GET)
     public String getCompetInfo(@PathVariable("regis_id")String regis_id){
         log.info("receive"+regis_id);
-        long start=System.currentTimeMillis();
+        long start = System.currentTimeMillis();
         QueryResponse response = this.searchServiceBlockingStub
                 .searchQuery(QueryRequest.newBuilder()
                         .setQuery(regis_id).setQueryType("compet").build());
-        long end=System.currentTimeMillis();
-        log.info("search:"+regis_id+"over,use time:"+(end-start));
+        long end = System.currentTimeMillis();
+        log.info("search: " + regis_id + " over, use time: " + (end - start));
         return response.getResponse();
 
+    }
+
+    /**
+     * 根据产品溯源码返回溯源信息
+     * @param originId 唯一溯源码
+     * @return 溯源信息json字符串，如：
+     * {"main_process":"{
+     *   "id":"16119701634150000",
+     *   "process":[
+     *     {"name":"菜籽油生产地","master":"张三","enter":true,"time":1611970163415},
+     *     {"name":"菜籽油生产地","master":"张三","enter":false,"time":1611970595415},
+     *     {"name":"工厂","master":"李四","enter":true,"time":1611970595415},
+     *     {"name":"工厂","master":"李四","enter":false,"time":1611971027415},
+     *     {"name":"分销商","master":"王五","enter":true,"time":1611971027415},
+     *     {"name":"分销商","master":"王五","enter":false,"time":1611971459415},
+     *     {"name":"经销商超市","master":"麻六","enter":true,"time":1611971459415},
+     *     {"name":"经销商超市","master":"麻六","enter":false,"time":1611971891415}
+     *   ]
+     * }",
+     * "industry_process":"{
+     *   "id":"16119701634150000",
+     *   "name":"工厂",
+     *   "master":"李四",
+     *   "procedure":[
+     *     {"name":"烧制玻璃瓶","master":"李四一","start":true,"time":1611974483415},
+     *     {"name":"烧制玻璃瓶","master":"李四一","start":false,"time":1611974915415},
+     *     {"name":"炒制","master":"李四二","start":true,"time":1611974915415},
+     *     {"name":"炒制","master":"李四二","start":false,"time":1611975347415},
+     *     {"name":"罐装","master":"李四三","start":true,"time":1611975347415},
+     *     {"name":"罐装","master":"李四三","start":false,"time":1611975779415},
+     *     {"name":"机器拧盖","master":"李重四","start":true,"time":1611975779415},
+     *     {"name":"机器拧盖","master":"李重四","start":false,"time":1611976211415}
+     *   ]
+     * }"}
+     */
+    @RequestMapping(value = "/getOrigin/{origin_id}", method = RequestMethod.GET)
+    public String getOriginInfo(@PathVariable("origin_id") String originId) {
+        log.info("Receive origin request: " + originId);
+        long start = System.currentTimeMillis();
+        QueryResponse response = this.searchServiceBlockingStub
+                .searchQuery(QueryRequest.newBuilder()
+                        .setQuery(originId).setQueryType("origin").build());
+        long end = System.currentTimeMillis();
+        log.info("Request origin '" + originId +"' over, taking " + (end - start));
+        return response.getResponse();
     }
 
 }
