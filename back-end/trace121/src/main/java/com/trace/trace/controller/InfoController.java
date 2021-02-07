@@ -69,8 +69,7 @@ public class InfoController {
         log.info("receive"+regis_id);
         long start = System.currentTimeMillis();
         QueryResponse response = this.searchServiceBlockingStub
-                .searchQuery(QueryRequest.newBuilder()
-                        .setQuery(regis_id).setQueryType("compet").build());
+                .searchCompet(CompetRequest.newBuilder().setRegisId(regis_id).build());
         long end = System.currentTimeMillis();
         log.info("search: " + regis_id + " over, use time: " + (end - start));
         return response.getResponse();
@@ -114,8 +113,8 @@ public class InfoController {
     public String getOriginInfo(@PathVariable("origin_id") String originId) {
         log.info("Receive origin request: " + originId);
         long start = System.currentTimeMillis();
-        QueryResponse response = this.searchServiceBlockingStub
-                .searchQuery(QueryRequest.newBuilder()
+        TraceResponse response = this.searchServiceBlockingStub
+                .searchTrace(QueryRequest.newBuilder()
                         .setQuery(originId).setQueryType("origin").build());
         long end = System.currentTimeMillis();
         log.info("Request origin '" + originId +"' over, taking " + (end - start));

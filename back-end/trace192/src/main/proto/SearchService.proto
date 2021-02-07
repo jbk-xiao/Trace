@@ -12,8 +12,19 @@ message QueryRequest {
     string page = 3;
 }
 
-//返回检索结果
+//竞品模块请求
+message CompetRequest {
+    string regis_id = 1;
+
+}
+
+//返回
 message QueryResponse {
+    string response = 1;
+}
+
+//返回检索结果
+message TraceResponse {
     string response = 1;
     bytes responseMedia = 2;
 }
@@ -21,4 +32,6 @@ message QueryResponse {
 
 service SearchService {
     rpc searchQuery(QueryRequest) returns (QueryResponse);
+    rpc searchCompet(CompetRequest) returns (QueryResponse);
+    rpc searchTrace(QueryRequest) returns (TraceResponse);
 }

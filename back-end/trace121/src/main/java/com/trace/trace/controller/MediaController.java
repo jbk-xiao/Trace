@@ -4,6 +4,7 @@ import com.google.protobuf.ByteString;
 import com.trace.trace.grpc.QueryRequest;
 import com.trace.trace.grpc.QueryResponse;
 import com.trace.trace.grpc.SearchServiceGrpc;
+import com.trace.trace.grpc.TraceResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -49,10 +50,10 @@ public class MediaController {
                          HttpServletResponse response, HttpServletRequest request) throws IOException {
         log.info("Receive video request:" + filename);
         long start = System.currentTimeMillis();
-        QueryResponse queryResponse = this.searchServiceBlockingStub
-                .searchQuery(QueryRequest.newBuilder()
+        TraceResponse traceResponse = this.searchServiceBlockingStub
+                .searchTrace(QueryRequest.newBuilder()
                         .setQuery(filename).setQueryType("video").build());
-        ByteString responseBytes = queryResponse.getResponseMedia();
+        ByteString responseBytes = traceResponse.getResponseMedia();
         byte[] data = responseBytes.toByteArray();
         assert data != null;
 
@@ -116,10 +117,10 @@ public class MediaController {
         log.info("Receive picture request: " + filename);
         long start = System.currentTimeMillis();
 
-        QueryResponse queryResponse = this.searchServiceBlockingStub
-                .searchQuery(QueryRequest.newBuilder()
+        TraceResponse traceResponse = this.searchServiceBlockingStub
+                .searchTrace(QueryRequest.newBuilder()
                 .setQuery(filename).setQueryType("picture").build());
-        ByteString responseBytes = queryResponse.getResponseMedia();
+        ByteString responseBytes = traceResponse.getResponseMedia();
         byte[] data = responseBytes.toByteArray();
         assert data != null;
         String range = request.getHeader("range");
@@ -145,11 +146,11 @@ public class MediaController {
                                      @PathVariable("page") String page) {
         log.info("Receive recent event request about " + processName + " in " + page);
         long start = System.currentTimeMillis();
-        QueryResponse queryResponse = searchServiceBlockingStub
-            .searchQuery(QueryRequest.newBuilder()
+        TraceResponse traceResponse = searchServiceBlockingStub
+            .searchTrace(QueryRequest.newBuilder()
             .setQueryType("event").setQuery(processName).setPage(page)
             .build());
-        String response = queryResponse.getResponse();
+        String response = traceResponse.getResponse();
         long end = System.currentTimeMillis();
         log.info("Retrieval time: " + (end - start));
         log.info("Search result: " + response);
