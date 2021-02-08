@@ -1,8 +1,13 @@
 package com.trace.trace.dao;
 
 import com.google.gson.Gson;
+import com.trace.trace.config.RedisIndexConfig;
 import com.trace.trace.pojo.FabMediaInfo;
+import com.trace.trace.pojo.ProcedureInfo;
+import com.trace.trace.pojo.ProcessInfo;
+import com.trace.trace.pojo.TraceInfo;
 import com.trace.trace.util.FabricUtil;
+import com.trace.trace.util.JedisUtil;
 import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.Gateway;
 import org.hyperledger.fabric.gateway.Network;
@@ -10,9 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
+import redis.clients.jedis.Jedis;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author jbk-xiao
@@ -23,19 +32,35 @@ import java.io.FileInputStream;
  */
 @Component
 public class FabricDao {
+    final FabricUtil fabricUtil;
 
-    @Autowired
-    FabricUtil fabricUtil;
+    final RedisIndexConfig redisIndexConfig;
+
+    final JedisUtil jedisUtil;
+
+    Map<String, Integer> dbMap;
+    Set<String> databaseSet;
 
     @Value("${media.video.path}")
     String path;
+
+    @Autowired
+    public FabricDao(RedisIndexConfig redisIndexConfig, FabricUtil fabricUtil, JedisUtil jedisUtil) {
+        this.redisIndexConfig = redisIndexConfig;
+        this.fabricUtil = fabricUtil;
+        this.jedisUtil = jedisUtil;
+        dbMap = redisIndexConfig.getMap();
+        databaseSet = dbMap.keySet();
+    }
 
     private enum FabricInfo {
         //
         CHANNEL_NAME("mychannel"),
         MEDIA_CC("fabmedia"),
         TRACE_CC("fabtrace"),
-        INDUSTRY_CC("fabindustry");
+        INDUSTRY_CC("fabindustry"),
+        PICTURE_PREFIX("http://127.0.0.1:8511/getPicture/"),
+        PICTURE_NO_FOUND("picture_no_found.jpg");
 
         final String value;
 
@@ -100,30 +125,40 @@ public class FabricDao {
      * @return 溯源信息json
      */
     public String getInfoByOriginId(String originId) {
-//        String result = "{";
-        StringBuffer sb = new StringBuffer("{");
-//        try (Gateway gateway = fabricUtil.getGateway()) {
+        Gson gson = new Gson();
+        Jedis jedis = jedisUtil.getClient();
+        String traceInfoStr = "{}";
+        String processName;
+        String picturePrefix = FabricInfo.PICTURE_PREFIX.value;
+        String pictureNoFound = FabricInfo.PICTURE_NO_FOUND.value;
+        StringBuilder sb;
         try {
             Network network = fabricUtil.getNetwork();
-//            Network network = gateway.getNetwork(FabricInfo.CHANNEL_NAME.value);
             Contract contract = network.getContract(FabricInfo.TRACE_CC.value);
-            String mainProcess = new String(contract.evaluateTransaction("queryInfoByID", originId));
-//            result = result + "\"main_process\":\"" + mainProcess + "\"";
-            sb.append("\"main_process\":\"");
-            sb.append(mainProcess);
-            sb.append('"');
-            contract = network.getContract(FabricInfo.INDUSTRY_CC.value);
-            String industryProcess = new String(contract.evaluateTransaction("queryInfoByID", originId));
-//            result = result + ",\"industry_process\":\"" + industryProcess + "\"";
-            sb.append(",\"industry_process\":\"");
-            sb.append(industryProcess);
-            sb.append('"');
+            traceInfoStr = new String(contract.evaluateTransaction("queryInfoByID", originId));
+            TraceInfo traceInfo = gson.fromJson(traceInfoStr, TraceInfo.class);
+            String id = traceInfo.getId();
+            String picture = pictureNoFound;
+            List<String> list;
+            for (ProcessInfo process: traceInfo.getProcess()) {
+                processName = process.getName();
+                for (ProcedureInfo procedure: process.getProcedure()) {
+                    sb = new StringBuilder(processName);
+                    sb.append("_").append(procedure.getName());
+                    if (databaseSet.contains(sb.toString())) {
+                        jedis.select(dbMap.get(sb.toString()));
+                        list = jedis.lrange(id, 0, 0);
+                        picture = list.isEmpty() ? pictureNoFound : list.get(0);
+                        procedure.setPicture(picturePrefix + picture);
+                    }
+                }
+                process.setPicture(picturePrefix + picture);
+            }
+            traceInfoStr = gson.toJson(traceInfo);
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        result = result + "}";
-        sb.append('}');
-//        return result;
-        return sb.toString();
+        jedis.close();
+        return "[" + traceInfoStr + "]";
     }
 }

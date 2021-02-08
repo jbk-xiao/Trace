@@ -5,29 +5,30 @@ package com.trace.trace.grpc;
 
 /**
  * <pre>
- *返回
+ *返回检索结果
  * </pre>
  *
- * Protobuf type {@code com.trace.trace.grpc.QueryResponse}
+ * Protobuf type {@code com.trace.trace.grpc.TraceResponse}
  */
-public  final class QueryResponse extends
+public  final class TraceResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:com.trace.trace.grpc.QueryResponse)
-    QueryResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:com.trace.trace.grpc.TraceResponse)
+    TraceResponseOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use QueryResponse.newBuilder() to construct.
-  private QueryResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use TraceResponse.newBuilder() to construct.
+  private TraceResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private QueryResponse() {
+  private TraceResponse() {
     response_ = "";
+    responseMedia_ = com.google.protobuf.ByteString.EMPTY;
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new QueryResponse();
+    return new TraceResponse();
   }
 
   @java.lang.Override
@@ -35,7 +36,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private QueryResponse(
+  private TraceResponse(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -59,6 +60,11 @@ private static final long serialVersionUID = 0L;
             response_ = s;
             break;
           }
+          case 18: {
+
+            responseMedia_ = input.readBytes();
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -80,15 +86,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_QueryResponse_descriptor;
+    return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_TraceResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_QueryResponse_fieldAccessorTable
+    return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_TraceResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.trace.trace.grpc.QueryResponse.class, com.trace.trace.grpc.QueryResponse.Builder.class);
+            com.trace.trace.grpc.TraceResponse.class, com.trace.trace.grpc.TraceResponse.Builder.class);
   }
 
   public static final int RESPONSE_FIELD_NUMBER = 1;
@@ -125,6 +131,15 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int RESPONSEMEDIA_FIELD_NUMBER = 2;
+  private com.google.protobuf.ByteString responseMedia_;
+  /**
+   * <code>bytes responseMedia = 2;</code>
+   */
+  public com.google.protobuf.ByteString getResponseMedia() {
+    return responseMedia_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -142,6 +157,9 @@ private static final long serialVersionUID = 0L;
     if (!getResponseBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, response_);
     }
+    if (!responseMedia_.isEmpty()) {
+      output.writeBytes(2, responseMedia_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -154,6 +172,10 @@ private static final long serialVersionUID = 0L;
     if (!getResponseBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, response_);
     }
+    if (!responseMedia_.isEmpty()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBytesSize(2, responseMedia_);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -164,13 +186,15 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.trace.trace.grpc.QueryResponse)) {
+    if (!(obj instanceof com.trace.trace.grpc.TraceResponse)) {
       return super.equals(obj);
     }
-    com.trace.trace.grpc.QueryResponse other = (com.trace.trace.grpc.QueryResponse) obj;
+    com.trace.trace.grpc.TraceResponse other = (com.trace.trace.grpc.TraceResponse) obj;
 
     if (!getResponse()
         .equals(other.getResponse())) return false;
+    if (!getResponseMedia()
+        .equals(other.getResponseMedia())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -184,74 +208,76 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + RESPONSE_FIELD_NUMBER;
     hash = (53 * hash) + getResponse().hashCode();
+    hash = (37 * hash) + RESPONSEMEDIA_FIELD_NUMBER;
+    hash = (53 * hash) + getResponseMedia().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.TraceResponse parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.TraceResponse parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.TraceResponse parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.TraceResponse parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(byte[] data)
+  public static com.trace.trace.grpc.TraceResponse parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.TraceResponse parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(java.io.InputStream input)
+  public static com.trace.trace.grpc.TraceResponse parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.TraceResponse parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.trace.trace.grpc.QueryResponse parseDelimitedFrom(java.io.InputStream input)
+  public static com.trace.trace.grpc.TraceResponse parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static com.trace.trace.grpc.QueryResponse parseDelimitedFrom(
+  public static com.trace.trace.grpc.TraceResponse parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.TraceResponse parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.TraceResponse parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -264,7 +290,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.trace.trace.grpc.QueryResponse prototype) {
+  public static Builder newBuilder(com.trace.trace.grpc.TraceResponse prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -281,29 +307,29 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   *返回
+   *返回检索结果
    * </pre>
    *
-   * Protobuf type {@code com.trace.trace.grpc.QueryResponse}
+   * Protobuf type {@code com.trace.trace.grpc.TraceResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:com.trace.trace.grpc.QueryResponse)
-      com.trace.trace.grpc.QueryResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:com.trace.trace.grpc.TraceResponse)
+      com.trace.trace.grpc.TraceResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_QueryResponse_descriptor;
+      return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_TraceResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_QueryResponse_fieldAccessorTable
+      return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_TraceResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.trace.trace.grpc.QueryResponse.class, com.trace.trace.grpc.QueryResponse.Builder.class);
+              com.trace.trace.grpc.TraceResponse.class, com.trace.trace.grpc.TraceResponse.Builder.class);
     }
 
-    // Construct using com.trace.trace.grpc.QueryResponse.newBuilder()
+    // Construct using com.trace.trace.grpc.TraceResponse.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -323,23 +349,25 @@ private static final long serialVersionUID = 0L;
       super.clear();
       response_ = "";
 
+      responseMedia_ = com.google.protobuf.ByteString.EMPTY;
+
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_QueryResponse_descriptor;
+      return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_TraceResponse_descriptor;
     }
 
     @java.lang.Override
-    public com.trace.trace.grpc.QueryResponse getDefaultInstanceForType() {
-      return com.trace.trace.grpc.QueryResponse.getDefaultInstance();
+    public com.trace.trace.grpc.TraceResponse getDefaultInstanceForType() {
+      return com.trace.trace.grpc.TraceResponse.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.trace.trace.grpc.QueryResponse build() {
-      com.trace.trace.grpc.QueryResponse result = buildPartial();
+    public com.trace.trace.grpc.TraceResponse build() {
+      com.trace.trace.grpc.TraceResponse result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -347,9 +375,10 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.trace.trace.grpc.QueryResponse buildPartial() {
-      com.trace.trace.grpc.QueryResponse result = new com.trace.trace.grpc.QueryResponse(this);
+    public com.trace.trace.grpc.TraceResponse buildPartial() {
+      com.trace.trace.grpc.TraceResponse result = new com.trace.trace.grpc.TraceResponse(this);
       result.response_ = response_;
+      result.responseMedia_ = responseMedia_;
       onBuilt();
       return result;
     }
@@ -388,19 +417,22 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.trace.trace.grpc.QueryResponse) {
-        return mergeFrom((com.trace.trace.grpc.QueryResponse)other);
+      if (other instanceof com.trace.trace.grpc.TraceResponse) {
+        return mergeFrom((com.trace.trace.grpc.TraceResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.trace.trace.grpc.QueryResponse other) {
-      if (other == com.trace.trace.grpc.QueryResponse.getDefaultInstance()) return this;
+    public Builder mergeFrom(com.trace.trace.grpc.TraceResponse other) {
+      if (other == com.trace.trace.grpc.TraceResponse.getDefaultInstance()) return this;
       if (!other.getResponse().isEmpty()) {
         response_ = other.response_;
         onChanged();
+      }
+      if (other.getResponseMedia() != com.google.protobuf.ByteString.EMPTY) {
+        setResponseMedia(other.getResponseMedia());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -417,11 +449,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      com.trace.trace.grpc.QueryResponse parsedMessage = null;
+      com.trace.trace.grpc.TraceResponse parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (com.trace.trace.grpc.QueryResponse) e.getUnfinishedMessage();
+        parsedMessage = (com.trace.trace.grpc.TraceResponse) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -499,6 +531,35 @@ private static final long serialVersionUID = 0L;
       onChanged();
       return this;
     }
+
+    private com.google.protobuf.ByteString responseMedia_ = com.google.protobuf.ByteString.EMPTY;
+    /**
+     * <code>bytes responseMedia = 2;</code>
+     */
+    public com.google.protobuf.ByteString getResponseMedia() {
+      return responseMedia_;
+    }
+    /**
+     * <code>bytes responseMedia = 2;</code>
+     */
+    public Builder setResponseMedia(com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      responseMedia_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bytes responseMedia = 2;</code>
+     */
+    public Builder clearResponseMedia() {
+      
+      responseMedia_ = getDefaultInstance().getResponseMedia();
+      onChanged();
+      return this;
+    }
     @java.lang.Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -512,41 +573,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:com.trace.trace.grpc.QueryResponse)
+    // @@protoc_insertion_point(builder_scope:com.trace.trace.grpc.TraceResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:com.trace.trace.grpc.QueryResponse)
-  private static final com.trace.trace.grpc.QueryResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:com.trace.trace.grpc.TraceResponse)
+  private static final com.trace.trace.grpc.TraceResponse DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.trace.trace.grpc.QueryResponse();
+    DEFAULT_INSTANCE = new com.trace.trace.grpc.TraceResponse();
   }
 
-  public static com.trace.trace.grpc.QueryResponse getDefaultInstance() {
+  public static com.trace.trace.grpc.TraceResponse getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<QueryResponse>
-      PARSER = new com.google.protobuf.AbstractParser<QueryResponse>() {
+  private static final com.google.protobuf.Parser<TraceResponse>
+      PARSER = new com.google.protobuf.AbstractParser<TraceResponse>() {
     @java.lang.Override
-    public QueryResponse parsePartialFrom(
+    public TraceResponse parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new QueryResponse(input, extensionRegistry);
+      return new TraceResponse(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<QueryResponse> parser() {
+  public static com.google.protobuf.Parser<TraceResponse> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<QueryResponse> getParserForType() {
+  public com.google.protobuf.Parser<TraceResponse> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.trace.trace.grpc.QueryResponse getDefaultInstanceForType() {
+  public com.trace.trace.grpc.TraceResponse getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

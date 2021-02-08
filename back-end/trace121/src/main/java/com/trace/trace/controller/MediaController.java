@@ -2,7 +2,6 @@ package com.trace.trace.controller;
 
 import com.google.protobuf.ByteString;
 import com.trace.trace.grpc.QueryRequest;
-import com.trace.trace.grpc.QueryResponse;
 import com.trace.trace.grpc.SearchServiceGrpc;
 import com.trace.trace.grpc.TraceResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -33,19 +32,20 @@ import java.io.OutputStream;
 public class MediaController {
 
     /**
-     *从容器中获取调用GRpc stub
+     * 从容器中获取调用GRpc stub
      */
     @Autowired
     SearchServiceGrpc.SearchServiceBlockingStub searchServiceBlockingStub;
 
     /**
      * 处理远程视频请求和服务器视频返回。
+     *
      * @param filename request filename.
      * @param response remote httpServletResponse.
-     * @param request remote httpServletRequest.
+     * @param request  remote httpServletRequest.
      * @throws IOException if IOException occurs.
      */
-    @RequestMapping(value = "/getvideo/{filename:.+}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getVideo/{filename:.+}", method = RequestMethod.GET)
     public void getVideo(@PathVariable("filename") String filename,
                          HttpServletResponse response, HttpServletRequest request) throws IOException {
         log.info("Receive video request:" + filename);
@@ -101,25 +101,26 @@ public class MediaController {
             os.close();
         }
         long end = System.currentTimeMillis();
-        log.info("Retrieval time: "+(end-start));
+        log.info("Retrieval time: " + (end - start));
     }
 
     /**
      * 处理远程图片请求和服务器图片返回。
+     *
      * @param filename request filename.
      * @param response remote httpServletResponse.
-     * @param request remote httpServletRequest.
+     * @param request  remote httpServletRequest.
      * @throws IOException if IOException occurs.
      */
-    @RequestMapping(value = "/getpicture/{filename:.+}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getPicture/{filename:.+}", method = RequestMethod.GET)
     public void getPicture(@PathVariable("filename") String filename,
-                             HttpServletResponse response, HttpServletRequest request) throws IOException {
+                           HttpServletResponse response, HttpServletRequest request) throws IOException {
         log.info("Receive picture request: " + filename);
         long start = System.currentTimeMillis();
 
         TraceResponse traceResponse = this.searchServiceBlockingStub
                 .searchTrace(QueryRequest.newBuilder()
-                .setQuery(filename).setQueryType("picture").build());
+                        .setQuery(filename).setQueryType("picture").build());
         ByteString responseBytes = traceResponse.getResponseMedia();
         byte[] data = responseBytes.toByteArray();
         assert data != null;
@@ -138,18 +139,18 @@ public class MediaController {
         is.close();
         os.close();
         long end = System.currentTimeMillis();
-        log.info("Retrieval time: "+(end-start));
+        log.info("Retrieval time: " + (end - start));
     }
 
-    @RequestMapping(value = "/get_recent_event/{process_name}/{page}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getRecentEvent/{process_name}/{page}", method = RequestMethod.GET)
     public String getRecentEventList(@PathVariable("process_name") String processName,
                                      @PathVariable("page") String page) {
         log.info("Receive recent event request about " + processName + " in " + page);
         long start = System.currentTimeMillis();
         TraceResponse traceResponse = searchServiceBlockingStub
-            .searchTrace(QueryRequest.newBuilder()
-            .setQueryType("event").setQuery(processName).setPage(page)
-            .build());
+                .searchTrace(QueryRequest.newBuilder()
+                        .setQueryType("event").setQuery(processName).setPage(page)
+                        .build());
         String response = traceResponse.getResponse();
         long end = System.currentTimeMillis();
         log.info("Retrieval time: " + (end - start));

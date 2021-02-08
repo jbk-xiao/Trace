@@ -1,5 +1,6 @@
 package com.trace.trace.util.media;
 
+import com.trace.trace.dao.FabricDao;
 import com.trace.trace.util.JedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,9 @@ public class SaveUtil {
     @Autowired
     JedisUtil jedisUtil;
 
+    @Autowired
+    FabricDao fabricDao;
+
     /**
      * 保存文件路径
      *
@@ -48,9 +52,7 @@ public class SaveUtil {
      * @throws FileNotFoundException if the file can't be found in local path.
      */
     public void saveName(String fullname) throws UnexpectedException, FileNotFoundException {
-
-//        String[] splitname = fullname.split("\\.");
-//        String filename = splitname[0];
+        /*检查文件类型*/
         String filetype = fullname.split("\\.")[1];
         int database;
         String savepath;
@@ -63,7 +65,7 @@ public class SaveUtil {
         } else {
             throw new UnexpectedException("Unexpect filetype: " + filetype);
         }
-
+        /*检查文件状态*/
         File file = new File(savepath);
         if ( !file.exists() ) {
             throw new FileNotFoundException("No such file found in: " + savepath);
@@ -76,15 +78,16 @@ public class SaveUtil {
             jedis.rpush("product", fullname);
         }
         jedis.close();
+        /* 获取md5码 */
         String md5code = null;
         try {
             md5code = DigestUtils.md5DigestAsHex(new FileInputStream(file));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        log.info("save \"" + savepath + "\" to redis, md5 is: " + md5code);
-        /*
-        缺区块链访问逻辑，即调用addMedia（方法）将文件类型（整型1为图片，2为视频）、文件名称（String）、md5code（String）、checkTime（当前时间的long）传入。
-         */
+        log.info("save \"" + fullname + "\" to redis, md5 is: " + md5code);
+        /* 调用区块链中存储文件信息的逻辑 */
+        fabricDao.saveMedia(filetype, fullname, md5code);
+        log.info("save '" + fullname + "' to fabric.");
     }
 }

@@ -3,8 +3,8 @@
 
 package com.trace.trace.grpc;
 
-public interface QueryResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:com.trace.trace.grpc.QueryResponse)
+public interface TraceResponseOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:com.trace.trace.grpc.TraceResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**
@@ -16,4 +16,9 @@ public interface QueryResponseOrBuilder extends
    */
   com.google.protobuf.ByteString
       getResponseBytes();
+
+  /**
+   * <code>bytes responseMedia = 2;</code>
+   */
+  com.google.protobuf.ByteString getResponseMedia();
 }

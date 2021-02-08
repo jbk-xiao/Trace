@@ -5,29 +5,29 @@ package com.trace.trace.grpc;
 
 /**
  * <pre>
- *返回
+ *竞品模块请求
  * </pre>
  *
- * Protobuf type {@code com.trace.trace.grpc.QueryResponse}
+ * Protobuf type {@code com.trace.trace.grpc.CompetRequest}
  */
-public  final class QueryResponse extends
+public  final class CompetRequest extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:com.trace.trace.grpc.QueryResponse)
-    QueryResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:com.trace.trace.grpc.CompetRequest)
+    CompetRequestOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use QueryResponse.newBuilder() to construct.
-  private QueryResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use CompetRequest.newBuilder() to construct.
+  private CompetRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private QueryResponse() {
-    response_ = "";
+  private CompetRequest() {
+    regisId_ = "";
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new QueryResponse();
+    return new CompetRequest();
   }
 
   @java.lang.Override
@@ -35,7 +35,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private QueryResponse(
+  private CompetRequest(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -56,7 +56,7 @@ private static final long serialVersionUID = 0L;
           case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            response_ = s;
+            regisId_ = s;
             break;
           }
           default: {
@@ -80,45 +80,45 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_QueryResponse_descriptor;
+    return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_CompetRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_QueryResponse_fieldAccessorTable
+    return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_CompetRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.trace.trace.grpc.QueryResponse.class, com.trace.trace.grpc.QueryResponse.Builder.class);
+            com.trace.trace.grpc.CompetRequest.class, com.trace.trace.grpc.CompetRequest.Builder.class);
   }
 
-  public static final int RESPONSE_FIELD_NUMBER = 1;
-  private volatile java.lang.Object response_;
+  public static final int REGIS_ID_FIELD_NUMBER = 1;
+  private volatile java.lang.Object regisId_;
   /**
-   * <code>string response = 1;</code>
+   * <code>string regis_id = 1;</code>
    */
-  public java.lang.String getResponse() {
-    java.lang.Object ref = response_;
+  public java.lang.String getRegisId() {
+    java.lang.Object ref = regisId_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      response_ = s;
+      regisId_ = s;
       return s;
     }
   }
   /**
-   * <code>string response = 1;</code>
+   * <code>string regis_id = 1;</code>
    */
   public com.google.protobuf.ByteString
-      getResponseBytes() {
-    java.lang.Object ref = response_;
+      getRegisIdBytes() {
+    java.lang.Object ref = regisId_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      response_ = b;
+      regisId_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -139,8 +139,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getResponseBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, response_);
+    if (!getRegisIdBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, regisId_);
     }
     unknownFields.writeTo(output);
   }
@@ -151,8 +151,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getResponseBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, response_);
+    if (!getRegisIdBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, regisId_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -164,13 +164,13 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.trace.trace.grpc.QueryResponse)) {
+    if (!(obj instanceof com.trace.trace.grpc.CompetRequest)) {
       return super.equals(obj);
     }
-    com.trace.trace.grpc.QueryResponse other = (com.trace.trace.grpc.QueryResponse) obj;
+    com.trace.trace.grpc.CompetRequest other = (com.trace.trace.grpc.CompetRequest) obj;
 
-    if (!getResponse()
-        .equals(other.getResponse())) return false;
+    if (!getRegisId()
+        .equals(other.getRegisId())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -182,76 +182,76 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + RESPONSE_FIELD_NUMBER;
-    hash = (53 * hash) + getResponse().hashCode();
+    hash = (37 * hash) + REGIS_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getRegisId().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.CompetRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.CompetRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.CompetRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.CompetRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(byte[] data)
+  public static com.trace.trace.grpc.CompetRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.CompetRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(java.io.InputStream input)
+  public static com.trace.trace.grpc.CompetRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.CompetRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.trace.trace.grpc.QueryResponse parseDelimitedFrom(java.io.InputStream input)
+  public static com.trace.trace.grpc.CompetRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static com.trace.trace.grpc.QueryResponse parseDelimitedFrom(
+  public static com.trace.trace.grpc.CompetRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.CompetRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.trace.trace.grpc.QueryResponse parseFrom(
+  public static com.trace.trace.grpc.CompetRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -264,7 +264,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.trace.trace.grpc.QueryResponse prototype) {
+  public static Builder newBuilder(com.trace.trace.grpc.CompetRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -281,29 +281,29 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   *返回
+   *竞品模块请求
    * </pre>
    *
-   * Protobuf type {@code com.trace.trace.grpc.QueryResponse}
+   * Protobuf type {@code com.trace.trace.grpc.CompetRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:com.trace.trace.grpc.QueryResponse)
-      com.trace.trace.grpc.QueryResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:com.trace.trace.grpc.CompetRequest)
+      com.trace.trace.grpc.CompetRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_QueryResponse_descriptor;
+      return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_CompetRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_QueryResponse_fieldAccessorTable
+      return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_CompetRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.trace.trace.grpc.QueryResponse.class, com.trace.trace.grpc.QueryResponse.Builder.class);
+              com.trace.trace.grpc.CompetRequest.class, com.trace.trace.grpc.CompetRequest.Builder.class);
     }
 
-    // Construct using com.trace.trace.grpc.QueryResponse.newBuilder()
+    // Construct using com.trace.trace.grpc.CompetRequest.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -321,7 +321,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      response_ = "";
+      regisId_ = "";
 
       return this;
     }
@@ -329,17 +329,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_QueryResponse_descriptor;
+      return com.trace.trace.grpc.SearchServiceOuterClass.internal_static_com_trace_trace_grpc_CompetRequest_descriptor;
     }
 
     @java.lang.Override
-    public com.trace.trace.grpc.QueryResponse getDefaultInstanceForType() {
-      return com.trace.trace.grpc.QueryResponse.getDefaultInstance();
+    public com.trace.trace.grpc.CompetRequest getDefaultInstanceForType() {
+      return com.trace.trace.grpc.CompetRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.trace.trace.grpc.QueryResponse build() {
-      com.trace.trace.grpc.QueryResponse result = buildPartial();
+    public com.trace.trace.grpc.CompetRequest build() {
+      com.trace.trace.grpc.CompetRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -347,9 +347,9 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.trace.trace.grpc.QueryResponse buildPartial() {
-      com.trace.trace.grpc.QueryResponse result = new com.trace.trace.grpc.QueryResponse(this);
-      result.response_ = response_;
+    public com.trace.trace.grpc.CompetRequest buildPartial() {
+      com.trace.trace.grpc.CompetRequest result = new com.trace.trace.grpc.CompetRequest(this);
+      result.regisId_ = regisId_;
       onBuilt();
       return result;
     }
@@ -388,18 +388,18 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.trace.trace.grpc.QueryResponse) {
-        return mergeFrom((com.trace.trace.grpc.QueryResponse)other);
+      if (other instanceof com.trace.trace.grpc.CompetRequest) {
+        return mergeFrom((com.trace.trace.grpc.CompetRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.trace.trace.grpc.QueryResponse other) {
-      if (other == com.trace.trace.grpc.QueryResponse.getDefaultInstance()) return this;
-      if (!other.getResponse().isEmpty()) {
-        response_ = other.response_;
+    public Builder mergeFrom(com.trace.trace.grpc.CompetRequest other) {
+      if (other == com.trace.trace.grpc.CompetRequest.getDefaultInstance()) return this;
+      if (!other.getRegisId().isEmpty()) {
+        regisId_ = other.regisId_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -417,11 +417,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      com.trace.trace.grpc.QueryResponse parsedMessage = null;
+      com.trace.trace.grpc.CompetRequest parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (com.trace.trace.grpc.QueryResponse) e.getUnfinishedMessage();
+        parsedMessage = (com.trace.trace.grpc.CompetRequest) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -431,71 +431,71 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object response_ = "";
+    private java.lang.Object regisId_ = "";
     /**
-     * <code>string response = 1;</code>
+     * <code>string regis_id = 1;</code>
      */
-    public java.lang.String getResponse() {
-      java.lang.Object ref = response_;
+    public java.lang.String getRegisId() {
+      java.lang.Object ref = regisId_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        response_ = s;
+        regisId_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string response = 1;</code>
+     * <code>string regis_id = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getResponseBytes() {
-      java.lang.Object ref = response_;
+        getRegisIdBytes() {
+      java.lang.Object ref = regisId_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        response_ = b;
+        regisId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string response = 1;</code>
+     * <code>string regis_id = 1;</code>
      */
-    public Builder setResponse(
+    public Builder setRegisId(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      response_ = value;
+      regisId_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string response = 1;</code>
+     * <code>string regis_id = 1;</code>
      */
-    public Builder clearResponse() {
+    public Builder clearRegisId() {
       
-      response_ = getDefaultInstance().getResponse();
+      regisId_ = getDefaultInstance().getRegisId();
       onChanged();
       return this;
     }
     /**
-     * <code>string response = 1;</code>
+     * <code>string regis_id = 1;</code>
      */
-    public Builder setResponseBytes(
+    public Builder setRegisIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      response_ = value;
+      regisId_ = value;
       onChanged();
       return this;
     }
@@ -512,41 +512,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:com.trace.trace.grpc.QueryResponse)
+    // @@protoc_insertion_point(builder_scope:com.trace.trace.grpc.CompetRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:com.trace.trace.grpc.QueryResponse)
-  private static final com.trace.trace.grpc.QueryResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:com.trace.trace.grpc.CompetRequest)
+  private static final com.trace.trace.grpc.CompetRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.trace.trace.grpc.QueryResponse();
+    DEFAULT_INSTANCE = new com.trace.trace.grpc.CompetRequest();
   }
 
-  public static com.trace.trace.grpc.QueryResponse getDefaultInstance() {
+  public static com.trace.trace.grpc.CompetRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<QueryResponse>
-      PARSER = new com.google.protobuf.AbstractParser<QueryResponse>() {
+  private static final com.google.protobuf.Parser<CompetRequest>
+      PARSER = new com.google.protobuf.AbstractParser<CompetRequest>() {
     @java.lang.Override
-    public QueryResponse parsePartialFrom(
+    public CompetRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new QueryResponse(input, extensionRegistry);
+      return new CompetRequest(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<QueryResponse> parser() {
+  public static com.google.protobuf.Parser<CompetRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<QueryResponse> getParserForType() {
+  public com.google.protobuf.Parser<CompetRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.trace.trace.grpc.QueryResponse getDefaultInstanceForType() {
+  public com.trace.trace.grpc.CompetRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

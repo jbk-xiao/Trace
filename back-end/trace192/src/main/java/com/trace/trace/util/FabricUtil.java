@@ -1,7 +1,6 @@
 package com.trace.trace.util;
 
 import lombok.extern.slf4j.Slf4j;
-import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.Gateway;
 import org.hyperledger.fabric.gateway.Identities;
 import org.hyperledger.fabric.gateway.Identity;
@@ -39,9 +38,6 @@ import java.util.Set;
 @Slf4j
 @Component
 public class FabricUtil {
-//    static {
-//        System.setProperty("org.hyperledger.fabric.sdk.service_discovery.as_localhost", "true");
-//    }
 
     @Value("${fabric.system.host}")
     private String host;
@@ -181,7 +177,10 @@ public class FabricUtil {
     /**
      * use appUser to connect to fabric network.
      * @return connected fabric Gateway
+     * @deprecated too slow
+     * @see #getNetwork()
      */
+    @Deprecated
     public Gateway getGateway() {
         Gateway.Builder builder = Gateway.createBuilder();
         Path networkConfigPath = Paths.get(conPath);
@@ -205,7 +204,6 @@ public class FabricUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return builder.connect().getNetwork("mychannel");
     }
 }

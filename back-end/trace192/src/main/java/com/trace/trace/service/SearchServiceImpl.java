@@ -1,13 +1,15 @@
 package com.trace.trace.service;
 
-import com.google.protobuf.ByteString;
-import com.trace.trace.grpc.*;
+import com.trace.trace.grpc.CompetRequest;
+import com.trace.trace.grpc.QueryRequest;
+import com.trace.trace.grpc.QueryResponse;
+import com.trace.trace.grpc.SearchServiceGrpc;
+import com.trace.trace.grpc.TraceResponse;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 
 /**
@@ -33,6 +35,7 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
 
     /**
      * 竞品查询模块
+     *
      * @param request
      * @param responseObserver
      */
@@ -52,69 +55,24 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
     }
 
     /**
-     * 溯源查询模块
-     * @param request
-     * @param responseObserver
+     * 溯源查询模块，调用searchTrace，得到trace response并传回客户端
+     *
+     * @param request          request
+     * @param responseObserver response
+     * @see SearchTrace#searchTrace(QueryRequest)
+     * @see com.trace.trace.grpc.TraceResponse
      */
     @Override
     public void searchTrace(QueryRequest request, StreamObserver<TraceResponse> responseObserver) {
-        //获取请求类型
-        String queryType = request.getQueryType();
-        //获取请求内容
-        String query = request.getQuery();
-        log.info("Receive queryType = " + queryType + ", query = " + query);
-        //返回结果初始化
-        String jsonInfo = "";
-
-        //强加一个逻辑
-        ByteString mediaData = ByteString.EMPTY;
-        boolean isString = true;
-        switch (queryType) {
-            case "video": {
-                /*  视频访问  */
-                String filename = request.getQuery();
-                isString = false;
-                log.info("Encoding video '" + filename + "'...");
-                mediaData =
-                break;
-            }
-            case "picture": {
-                //图片访问
-                String filename = request.getQuery();
-                isString = false;
-                log.info("Encoding picture '" + filename + "'...");
-                mediaData =
-                break;
-            }
-            case "event": {
-                //生产线“最近动态”列表
-                String processName = request.getQuery();
-                int page = Integer.parseInt(request.getPage());
-                jsonInfo =
-                break;
-            }
-            case "origin": {
-                //依据溯源id查询流水线信息
-                String originId = request.getQuery();
-                log.info("Searching '" + originId + "' in fabric.");
-                jsonInfo =
-                log.info("Fabric return: " + jsonInfo);
-                break;
-            }
-        }
-        //把结果放入response
-        TraceResponse response = isString
-                ? TraceResponse.newBuilder().setResponse(jsonInfo).build()
-                : TraceResponse.newBuilder().setResponseMedia(mediaData).build();
-        //放入response，传回客户端
+        TraceResponse response = searchTrace.searchTrace(request);
         responseObserver.onNext(response);
-        //表示此次连接结束
         responseObserver.onCompleted();
     }
 
 
     /**
      * 电商查询模块
+     *
      * @param request
      * @param responseObserver
      */
@@ -129,26 +87,24 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
         String jsonInfo = "";
         //分情况
 
-        switch (queryType) {
-            case "keyword": {
-                //分页检索，每次返回二十条商品
-                log.info("Start searching keyword");
-                String page = request.getPage();
-                try {
-                    jsonInfo = searchProduct.searchProducts(query,page);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
+        if ("keyword".equals(queryType)) {
+            //分页检索，每次返回二十条商品
+            log.info("Start searching keyword");
+            String page = request.getPage();
+            try {
+                jsonInfo = searchProduct.searchProducts(query, page);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            case "detail":
-                //获取某商品的详情信息
-                log.info("Start searching detail");
-                String skuId = query;
-                //调用mysql方法，获取相关id的详情
-                jsonInfo = searchProduct.searchDetails(skuId);
-                log.info("detail result: " + jsonInfo);
-                break;
+        } else if ("detail".equals(queryType)) {
+            //获取某商品的详情信息
+            log.info("Start searching detail");
+            String skuId = query;
+            //调用mysql方法，获取相关id的详情
+            jsonInfo = searchProduct.searchDetails(skuId);
+            log.info("detail result: " + jsonInfo);
+        } else {
+            log.error("Receive the wrong message!");
         }
 
         QueryResponse queryResponse = QueryResponse.newBuilder().setResponse(jsonInfo).build();
@@ -156,4 +112,5 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
         responseObserver.onNext(queryResponse);
         //表示此次连接结束
         responseObserver.onCompleted();
+    }
 }
