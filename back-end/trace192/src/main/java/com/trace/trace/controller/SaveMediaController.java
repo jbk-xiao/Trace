@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author jbk-xiao
  * @program trace
  * @packagename com.trace.trace.controller
- * @Description save media's name from raspberry
+ * @Description save media's name from raspberrypi
  * @create 2021-01-31-19:42
  */
 @Slf4j
@@ -25,8 +25,9 @@ public class SaveMediaController {
     @Autowired
     SaveUtil saveUtil;
 
-    @GetMapping("/savename/{filename}")
+    @GetMapping("/saveName/{filename}")
     public void saveMedia(@PathVariable("filename") String filename, HttpServletRequest request) {
+        long start = System.currentTimeMillis();
         String host = request.getRemoteHost();
         int port = request.getRemotePort();
         log.info("receive file: " + host + ":" + port + filename);
@@ -35,5 +36,7 @@ public class SaveMediaController {
         } catch (Exception e) {
             log.error(e.toString());
         }
+        long end = System.currentTimeMillis();
+        log.info("Retrieval time: " + (end - start) + "ms");
     }
 }

@@ -3,6 +3,9 @@ package com.trace.trace;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author Zenglr
+ */
 @SpringBootApplication
 public class Trace192Application {
 

@@ -1,5 +1,63 @@
 # 开发环境配置文件
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /MyActuator
+  server:
+    port: 12583
+    address: 127.0.0.1
+
+spring:
+  datasource:
+    username: root
+    password: toor
+    url: jdbc:mysql://localhost:3306/trace?useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: localhost
+    port: 6579
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 10
+    password: nopassword
+  application:
+    name: hello-grpc-server
+
+# grpc端口号
+grpc:
+  port: 8289
+
 server:
-  port: 8287
-  servlet:
-    context-path: /TraceSys
+  port: 8290
+
+mybatis:
+  # 指定映射文件的位置
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.trace.trace.entity
+
+media:
+  video:
+    path: D:\dajiangsai\monitor_files
+    database: 13
+  picture:
+    path: D:\dajiangsai\monitor_files
+    database: 14
+#  other:
+#    database: 15
+fabric:
+  system:
+    host: 192.168.106.7
+    port: 7054
+    user: appUser
+    wallet: D:\dajiangsai\trace\trace192\src\main\resources\wallet
+    properties: D:\dajiangsai\trace\trace192\src\main\resources\fabric.properties
+    ca-pem: D:\dajiangsai\trace\trace192\src\main\resources\ca.org1.example.com-cert.pem
+    conpath: D:\dajiangsai\trace\trace192\src\main\resources\connection-org1.yaml
+

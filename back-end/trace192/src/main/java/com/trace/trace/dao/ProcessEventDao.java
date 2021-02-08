@@ -39,7 +39,8 @@ public class ProcessEventDao {
     public List<Long> getEventTitleListOnPage(String processName, int page) {
         Jedis jedis = jedisUtil.getClient();
         jedis.select(database);
-        List<String> list = jedis.lrange(processName, RECORD_PER_PAGE * (page - 1), RECORD_PER_PAGE * page - 1);
+        List<String> list = jedis.lrange(processName, (long) RECORD_PER_PAGE * (page - 1),
+                (long) RECORD_PER_PAGE * page - 1);
         List<Long> result = new ArrayList<>();
         for (String filename: list) {
             result.add(filenameToDate(filename));

@@ -27,7 +27,7 @@ class SaveMediaControllerTest {
 
     @Test
     public void saveMedia() throws Exception {
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("http://localhost:8290/savename/test.mp4");
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("http://localhost:8290/saveName/test.mp4");
         ResultActions resultActions = mockMvc.perform(requestBuilder);
         resultActions.andDo(MockMvcResultHandlers.print());
     }
