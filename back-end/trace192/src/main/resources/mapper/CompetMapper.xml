@@ -2,16 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trace.trace.mapper.CompetMapper">
 
-    <select id="selectCompetByCompany" resultType="Compet_geo">
-         select proj_name,company_name,img_url,region,lng,lat from company,compet where company.regis_id = compet.compet_regis_id and compet.regis_id=${regis_id};
+    <select id="selectCompetBySkuIds" parameterType="java.util.List" resultType="JDdetail">
+        select pname,price,detail_url,img_url,brand,brand_url,commentCount,goodRate
+        from `jd_info`
+        where `sku_id` in
+        <foreach collection="skuIds" item="skuId" index="index"
+                 open="(" close=")" separator=",">
+            #{skuId}
+        </foreach>
+        order by field(
+        `sku_id`,
+        <foreach collection="skuIds" separator="," item="skuId">
+            #{skuId}
+        </foreach>
+        )
     </select>
 
-    <select id="selectMainDetail" resultType="JDdetail">
-         select pname,price,detail_url,img_url,brand,brand_url,commentCount,goodRate from jd_info j,company_jd c where j.sku_id = c.sku_id and c.regis_id = ${regis_id};
+    <select id="selectCompetByRegisIds" parameterType="java.util.List" resultType="Compet_geo">
+        select proj_name,company_name,img_url,region,lng,lat
+        from `company`
+        where `regis_id` in
+        <foreach collection="regisIds" item="regisId" index="index"
+                 open="(" close=")" separator=",">
+            #{regisId}
+        </foreach>
     </select>
 
-    <select id="selectCompetDetails" resultType="JDdetail">
-         select pname,price,detail_url,img_url,brand,brand_url,commentCount,goodRate from jd_info j,company_jd c,compet_sku c2 where j.sku_id = c2.compet_sku_id and c2.sku_id = c.sku_id and c.regis_id = ${regis_id};
+    <select id="selectCommentScoreBySkuIds" parameterType="java.util.List" resultType="Comment_score">
+        select brand,package_score,price_score,logistics_score,taste_score,service_score
+        from `comment_score`
+        where `sku_id` in
+        <foreach collection="skuIds" item="skuId" index="index"
+                 open="(" close=")" separator=",">
+            #{skuId}
+        </foreach>
+        order by field(
+        `sku_id`,
+        <foreach collection="skuIds" separator="," item="skuId">
+            #{skuId}
+        </foreach>
+        )
     </select>
 
 </mapper>

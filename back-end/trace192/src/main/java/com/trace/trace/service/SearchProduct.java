@@ -1,29 +1,13 @@
 package com.trace.trace.service;
 
-import com.google.gson.Gson;
-import com.google.protobuf.ByteString;
-import com.trace.trace.dao.FabricDao;
 import com.trace.trace.dao.RedisDao;
-import com.trace.trace.dao.ProcessEventDao;
-import com.trace.trace.entity.AllCompetinfo;
-import com.trace.trace.entity.CompanyInfo;
-import com.trace.trace.entity.Compet_geo;
 import com.trace.trace.entity.Detail;
-import com.trace.trace.entity.JDdetail;
-import com.trace.trace.grpc.QueryRequest;
-import com.trace.trace.grpc.QueryResponse;
-import com.trace.trace.grpc.SearchServiceGrpc;
-import com.trace.trace.mapper.CompetMapper;
 import com.trace.trace.mapper.DetailMapper;
 import com.trace.trace.mapper.QueryMapper;
-import com.trace.trace.util.media.FileUtil;
 import com.trace.trace.util.createJson;
-import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
-import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

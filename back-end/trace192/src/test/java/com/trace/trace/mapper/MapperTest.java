@@ -23,6 +23,6 @@ public class MapperTest {
     @Test
     public void selectCompet(){
         String compet_regis_id = "440108400003939";
-        System.out.println(competMapper.selectCompetByCompany(compet_regis_id).toString());
+//        System.out.println(competMapper.selectCompetByCompany(compet_regis_id).toString());
     }
 }
