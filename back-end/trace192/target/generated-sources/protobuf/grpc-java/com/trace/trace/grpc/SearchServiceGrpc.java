@@ -120,6 +120,37 @@ public final class SearchServiceGrpc {
     return getSearchTraceMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.trace.trace.grpc.GraphRequest,
+      com.trace.trace.grpc.GraphResponse> getSearchGraphMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "searchGraph",
+      requestType = com.trace.trace.grpc.GraphRequest.class,
+      responseType = com.trace.trace.grpc.GraphResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.trace.trace.grpc.GraphRequest,
+      com.trace.trace.grpc.GraphResponse> getSearchGraphMethod() {
+    io.grpc.MethodDescriptor<com.trace.trace.grpc.GraphRequest, com.trace.trace.grpc.GraphResponse> getSearchGraphMethod;
+    if ((getSearchGraphMethod = SearchServiceGrpc.getSearchGraphMethod) == null) {
+      synchronized (SearchServiceGrpc.class) {
+        if ((getSearchGraphMethod = SearchServiceGrpc.getSearchGraphMethod) == null) {
+          SearchServiceGrpc.getSearchGraphMethod = getSearchGraphMethod =
+              io.grpc.MethodDescriptor.<com.trace.trace.grpc.GraphRequest, com.trace.trace.grpc.GraphResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "searchGraph"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.trace.trace.grpc.GraphRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.trace.trace.grpc.GraphResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new SearchServiceMethodDescriptorSupplier("searchGraph"))
+              .build();
+        }
+      }
+    }
+    return getSearchGraphMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -168,6 +199,13 @@ public final class SearchServiceGrpc {
       asyncUnimplementedUnaryCall(getSearchTraceMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void searchGraph(com.trace.trace.grpc.GraphRequest request,
+        io.grpc.stub.StreamObserver<com.trace.trace.grpc.GraphResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getSearchGraphMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -191,6 +229,13 @@ public final class SearchServiceGrpc {
                 com.trace.trace.grpc.QueryRequest,
                 com.trace.trace.grpc.TraceResponse>(
                   this, METHODID_SEARCH_TRACE)))
+          .addMethod(
+            getSearchGraphMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.trace.trace.grpc.GraphRequest,
+                com.trace.trace.grpc.GraphResponse>(
+                  this, METHODID_SEARCH_GRAPH)))
           .build();
     }
   }
@@ -236,6 +281,14 @@ public final class SearchServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(getSearchTraceMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void searchGraph(com.trace.trace.grpc.GraphRequest request,
+        io.grpc.stub.StreamObserver<com.trace.trace.grpc.GraphResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getSearchGraphMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -275,6 +328,13 @@ public final class SearchServiceGrpc {
     public com.trace.trace.grpc.TraceResponse searchTrace(com.trace.trace.grpc.QueryRequest request) {
       return blockingUnaryCall(
           getChannel(), getSearchTraceMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.trace.trace.grpc.GraphResponse searchGraph(com.trace.trace.grpc.GraphRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getSearchGraphMethod(), getCallOptions(), request);
     }
   }
 
@@ -319,11 +379,20 @@ public final class SearchServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(getSearchTraceMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.trace.trace.grpc.GraphResponse> searchGraph(
+        com.trace.trace.grpc.GraphRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getSearchGraphMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_SEARCH_QUERY = 0;
   private static final int METHODID_SEARCH_COMPET = 1;
   private static final int METHODID_SEARCH_TRACE = 2;
+  private static final int METHODID_SEARCH_GRAPH = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -353,6 +422,10 @@ public final class SearchServiceGrpc {
         case METHODID_SEARCH_TRACE:
           serviceImpl.searchTrace((com.trace.trace.grpc.QueryRequest) request,
               (io.grpc.stub.StreamObserver<com.trace.trace.grpc.TraceResponse>) responseObserver);
+          break;
+        case METHODID_SEARCH_GRAPH:
+          serviceImpl.searchGraph((com.trace.trace.grpc.GraphRequest) request,
+              (io.grpc.stub.StreamObserver<com.trace.trace.grpc.GraphResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -418,6 +491,7 @@ public final class SearchServiceGrpc {
               .addMethod(getSearchQueryMethod())
               .addMethod(getSearchCompetMethod())
               .addMethod(getSearchTraceMethod())
+              .addMethod(getSearchGraphMethod())
               .build();
         }
       }

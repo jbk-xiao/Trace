@@ -121,4 +121,16 @@ public class InfoController {
         return response.getResponse();
     }
 
+    @RequestMapping(value = "/getGraph/{kind}", method = RequestMethod.GET)
+    public String getGraph(@PathVariable("kind")String kind){
+        log.info("receive" + kind);
+        long start = System.currentTimeMillis();
+        GraphResponse response = this.searchServiceBlockingStub
+                .searchGraph(GraphRequest.newBuilder().setKind(kind).build());
+        long end = System.currentTimeMillis();
+        log.info("search: " + kind + " over, use time: " + (end - start));
+        return response.getResponse();
+    }
+
+
 }
