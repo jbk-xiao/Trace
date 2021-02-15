@@ -6,6 +6,7 @@ import com.trace.trace.entity.CompanyInfo;
 import com.trace.trace.entity.Compet_geo;
 import com.trace.trace.entity.JDdetail;
 import com.trace.trace.mapper.CompetMapper;
+import com.trace.trace.service.SearchGraph;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -17,6 +18,8 @@ class Trace192ApplicationTests {
 
     @Test
     void contextLoads() {
+        SearchGraph searchGraph = new SearchGraph();
+        System.out.println(searchGraph.searchGraphByBrand("湾仔码头"));
     }
 
 }
