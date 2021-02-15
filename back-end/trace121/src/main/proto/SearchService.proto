@@ -18,9 +18,14 @@ message CompetRequest {
 
 }
 
-//知识图谱请求
-message GraphRequest {
+//知识图谱请求（根据品类）
+message GraphRequestByKind {
     string kind = 1;
+}
+
+//知识图谱请求（根据品牌）
+message GraphRequestByBrand {
+    string brand = 1;
 }
 
 //返回
@@ -34,7 +39,13 @@ message TraceResponse {
     bytes responseMedia = 2;
 }
 
-message GraphResponse {
+//返回知识图谱信息（根据品类）
+message GraphResponseByKind {
+    string  response = 1;
+}
+
+//返回知识图谱信息（根据品类）
+message GraphResponseByBrand {
     string  response = 1;
 }
 
@@ -42,5 +53,6 @@ service SearchService {
     rpc searchQuery(QueryRequest) returns (QueryResponse);
     rpc searchCompet(CompetRequest) returns (QueryResponse);
     rpc searchTrace(QueryRequest) returns (TraceResponse);
-    rpc searchGraph(GraphRequest) returns (GraphResponse);
+    rpc searchGraphByKind(GraphRequestByKind) returns (GraphResponseByKind);
+    rpc searchGraphByBrand(GraphRequestByBrand) returns (GraphResponseByBrand);
 }

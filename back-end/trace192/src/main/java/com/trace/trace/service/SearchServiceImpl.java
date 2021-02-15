@@ -1,10 +1,6 @@
 package com.trace.trace.service;
 
-import com.trace.trace.grpc.CompetRequest;
-import com.trace.trace.grpc.QueryRequest;
-import com.trace.trace.grpc.QueryResponse;
-import com.trace.trace.grpc.SearchServiceGrpc;
-import com.trace.trace.grpc.TraceResponse;
+import com.trace.trace.grpc.*;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import org.lognet.springboot.grpc.GRpcService;
@@ -32,6 +28,9 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
 
     @Autowired
     SearchProduct searchProduct;
+
+    @Autowired
+    SearchGraph searchGraph;
 
     /**
      * 竞品查询模块
@@ -110,6 +109,44 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
         QueryResponse queryResponse = QueryResponse.newBuilder().setResponse(jsonInfo).build();
         //放入response，传回客户端
         responseObserver.onNext(queryResponse);
+        //表示此次连接结束
+        responseObserver.onCompleted();
+    }
+
+    /**
+     * 知识图谱查询模块（根据品类）
+     * @param request
+     * @param responseObserver
+     */
+    public void searchGraphByKind(GraphRequestByKind request, StreamObserver<GraphResponseByKind> responseObserver)
+    {
+        String kind = request.getKind();
+        log.info("receive kind: " + kind);
+        log.info("Start search graph...");
+        String responseInfo = searchGraph.searchGraphByKind(kind);
+        log.info("find info: "+ responseInfo);
+        GraphResponseByKind response = GraphResponseByKind.newBuilder().setResponse(responseInfo).build();
+        //放入response，传回客户端
+        responseObserver.onNext(response);
+        //表示此次连接结束
+        responseObserver.onCompleted();
+    }
+
+    /**
+     *知识图谱查询模块（根据品牌）
+     * @param request
+     * @param responseObserver
+     */
+    public void searchGraphByBrand(GraphRequestByBrand request, StreamObserver<GraphResponseByBrand> responseObserver)
+    {
+        String brand = request.getBrand();
+        log.info("receive brand: " + brand);
+        log.info("Start search graph...");
+        String responseInfo = searchGraph.searchGraphByBrand(brand);
+        log.info("find info: "+ responseInfo);
+        GraphResponseByBrand response = GraphResponseByBrand.newBuilder().setResponse(responseInfo).build();
+        //放入response，传回客户端
+        responseObserver.onNext(response);
         //表示此次连接结束
         responseObserver.onCompleted();
     }

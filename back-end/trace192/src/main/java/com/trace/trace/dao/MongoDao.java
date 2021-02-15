@@ -37,7 +37,13 @@ public class MongoDao {
     public  MongoDatabase database;
     public  MongoCollection<Document> collection;
     public  Document document;
-    public String getGraph(String kind)
+
+    /**
+     * 根据品类查询知识图谱信息
+     * @param kind
+     * @return
+     */
+    public String getGraphByKind(String kind)
     {
 //        Query query = new Query(Criteria.where("keyword").is(kind));
 //        List<Graph> graphs = mongoTemplate.find(query,Graph.class);
@@ -56,7 +62,6 @@ public class MongoDao {
      */
     public  String getGraphByBrand(String brand)
     {
-        log.info("进入方法");
         ArrayList<DBObject> objList = new ArrayList<DBObject>();
         StringBuilder sb = new StringBuilder();
         sb.append("[");

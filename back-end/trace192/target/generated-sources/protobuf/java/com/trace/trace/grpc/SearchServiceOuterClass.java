@@ -25,10 +25,15 @@ public final class SearchServiceOuterClass {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_trace_trace_grpc_CompetRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_trace_trace_grpc_GraphRequest_descriptor;
+    internal_static_com_trace_trace_grpc_GraphRequestByKind_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_trace_trace_grpc_GraphRequest_fieldAccessorTable;
+      internal_static_com_trace_trace_grpc_GraphRequestByKind_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_trace_trace_grpc_GraphRequestByBrand_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_trace_trace_grpc_GraphRequestByBrand_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_trace_trace_grpc_QueryResponse_descriptor;
   static final 
@@ -40,10 +45,15 @@ public final class SearchServiceOuterClass {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_trace_trace_grpc_TraceResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_trace_trace_grpc_GraphResponse_descriptor;
+    internal_static_com_trace_trace_grpc_GraphResponseByKind_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_trace_trace_grpc_GraphResponse_fieldAccessorTable;
+      internal_static_com_trace_trace_grpc_GraphResponseByKind_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_trace_trace_grpc_GraphResponseByBrand_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_trace_trace_grpc_GraphResponseByBrand_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -56,21 +66,26 @@ public final class SearchServiceOuterClass {
       "\n\023SearchService.proto\022\024com.trace.trace.g" +
       "rpc\">\n\014QueryRequest\022\021\n\tqueryType\030\001 \001(\t\022\r" +
       "\n\005query\030\002 \001(\t\022\014\n\004page\030\003 \001(\t\"!\n\rCompetReq" +
-      "uest\022\020\n\010regis_id\030\001 \001(\t\"\034\n\014GraphRequest\022\014" +
-      "\n\004kind\030\001 \001(\t\"!\n\rQueryResponse\022\020\n\010respons" +
-      "e\030\001 \001(\t\"8\n\rTraceResponse\022\020\n\010response\030\001 \001" +
-      "(\t\022\025\n\rresponseMedia\030\002 \001(\014\"!\n\rGraphRespon" +
-      "se\022\020\n\010response\030\001 \001(\t2\361\002\n\rSearchService\022V" +
-      "\n\013searchQuery\022\".com.trace.trace.grpc.Que" +
-      "ryRequest\032#.com.trace.trace.grpc.QueryRe" +
-      "sponse\022X\n\014searchCompet\022#.com.trace.trace" +
-      ".grpc.CompetRequest\032#.com.trace.trace.gr" +
-      "pc.QueryResponse\022V\n\013searchTrace\022\".com.tr" +
-      "ace.trace.grpc.QueryRequest\032#.com.trace." +
-      "trace.grpc.TraceResponse\022V\n\013searchGraph\022" +
-      "\".com.trace.trace.grpc.GraphRequest\032#.co" +
-      "m.trace.trace.grpc.GraphResponseB\002P\001b\006pr" +
-      "oto3"
+      "uest\022\020\n\010regis_id\030\001 \001(\t\"\"\n\022GraphRequestBy" +
+      "Kind\022\014\n\004kind\030\001 \001(\t\"$\n\023GraphRequestByBran" +
+      "d\022\r\n\005brand\030\001 \001(\t\"!\n\rQueryResponse\022\020\n\010res" +
+      "ponse\030\001 \001(\t\"8\n\rTraceResponse\022\020\n\010response" +
+      "\030\001 \001(\t\022\025\n\rresponseMedia\030\002 \001(\014\"\'\n\023GraphRe" +
+      "sponseByKind\022\020\n\010response\030\001 \001(\t\"(\n\024GraphR" +
+      "esponseByBrand\022\020\n\010response\030\001 \001(\t2\360\003\n\rSea" +
+      "rchService\022V\n\013searchQuery\022\".com.trace.tr" +
+      "ace.grpc.QueryRequest\032#.com.trace.trace." +
+      "grpc.QueryResponse\022X\n\014searchCompet\022#.com" +
+      ".trace.trace.grpc.CompetRequest\032#.com.tr" +
+      "ace.trace.grpc.QueryResponse\022V\n\013searchTr" +
+      "ace\022\".com.trace.trace.grpc.QueryRequest\032" +
+      "#.com.trace.trace.grpc.TraceResponse\022h\n\021" +
+      "searchGraphByKind\022(.com.trace.trace.grpc" +
+      ".GraphRequestByKind\032).com.trace.trace.gr" +
+      "pc.GraphResponseByKind\022k\n\022searchGraphByB" +
+      "rand\022).com.trace.trace.grpc.GraphRequest" +
+      "ByBrand\032*.com.trace.trace.grpc.GraphResp" +
+      "onseByBrandB\002P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -88,29 +103,41 @@ public final class SearchServiceOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_trace_trace_grpc_CompetRequest_descriptor,
         new java.lang.String[] { "RegisId", });
-    internal_static_com_trace_trace_grpc_GraphRequest_descriptor =
+    internal_static_com_trace_trace_grpc_GraphRequestByKind_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_com_trace_trace_grpc_GraphRequest_fieldAccessorTable = new
+    internal_static_com_trace_trace_grpc_GraphRequestByKind_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_trace_trace_grpc_GraphRequest_descriptor,
+        internal_static_com_trace_trace_grpc_GraphRequestByKind_descriptor,
         new java.lang.String[] { "Kind", });
-    internal_static_com_trace_trace_grpc_QueryResponse_descriptor =
+    internal_static_com_trace_trace_grpc_GraphRequestByBrand_descriptor =
       getDescriptor().getMessageTypes().get(3);
+    internal_static_com_trace_trace_grpc_GraphRequestByBrand_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_trace_trace_grpc_GraphRequestByBrand_descriptor,
+        new java.lang.String[] { "Brand", });
+    internal_static_com_trace_trace_grpc_QueryResponse_descriptor =
+      getDescriptor().getMessageTypes().get(4);
     internal_static_com_trace_trace_grpc_QueryResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_trace_trace_grpc_QueryResponse_descriptor,
         new java.lang.String[] { "Response", });
     internal_static_com_trace_trace_grpc_TraceResponse_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_com_trace_trace_grpc_TraceResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_trace_trace_grpc_TraceResponse_descriptor,
         new java.lang.String[] { "Response", "ResponseMedia", });
-    internal_static_com_trace_trace_grpc_GraphResponse_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_com_trace_trace_grpc_GraphResponse_fieldAccessorTable = new
+    internal_static_com_trace_trace_grpc_GraphResponseByKind_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_com_trace_trace_grpc_GraphResponseByKind_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_trace_trace_grpc_GraphResponse_descriptor,
+        internal_static_com_trace_trace_grpc_GraphResponseByKind_descriptor,
+        new java.lang.String[] { "Response", });
+    internal_static_com_trace_trace_grpc_GraphResponseByBrand_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_com_trace_trace_grpc_GraphResponseByBrand_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_trace_trace_grpc_GraphResponseByBrand_descriptor,
         new java.lang.String[] { "Response", });
   }
 

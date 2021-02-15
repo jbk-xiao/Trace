@@ -121,16 +121,26 @@ public class InfoController {
         return response.getResponse();
     }
 
-    @RequestMapping(value = "/getGraph/{kind}", method = RequestMethod.GET)
-    public String getGraph(@PathVariable("kind")String kind){
+    @RequestMapping(value = "/getGraphByKind/{kind}", method = RequestMethod.GET)
+    public String getGraphByKind(@PathVariable("kind")String kind){
         log.info("receive" + kind);
         long start = System.currentTimeMillis();
-        GraphResponse response = this.searchServiceBlockingStub
-                .searchGraph(GraphRequest.newBuilder().setKind(kind).build());
+        GraphResponseByKind response = this.searchServiceBlockingStub
+                .searchGraphByKind(GraphRequestByKind.newBuilder().setKind(kind).build());
         long end = System.currentTimeMillis();
         log.info("search: " + kind + " over, use time: " + (end - start));
         return response.getResponse();
     }
 
+    @RequestMapping(value = "/getGraphByBrand/{brand}", method = RequestMethod.GET)
+    public String getGraphByBrand(@PathVariable("brand")String brand){
+        log.info("receive" + brand);
+        long start = System.currentTimeMillis();
+        GraphResponseByBrand response = this.searchServiceBlockingStub
+                .searchGraphByBrand(GraphRequestByBrand.newBuilder().setBrand(brand).build());
+        long end = System.currentTimeMillis();
+        log.info("search: " + brand + " over, use time: " + (end - start));
+        return response.getResponse();
+    }
 
 }
