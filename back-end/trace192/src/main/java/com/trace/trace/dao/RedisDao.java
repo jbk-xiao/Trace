@@ -68,16 +68,16 @@ public class RedisDao {
      * @param query 检索词
      * @return keys
      */
-//    @Cacheable(value = "bw_id", key = "#query")
     public ArrayList<String> getIDList(String query) {
-//        Jedis jedis= jedisUtil.getClient();
+        Jedis jedis= jedisUtil.getClient();
         List<String> list = new ArrayList<>();
         for (int i = 0; i<query.length(); i++){
             list.add(query.substring(i,i+1));
         }
         log.info("list:"+list.toString());
-        ArrayList<String> res = new ArrayList<>();
+        ArrayList<String> res = new ArrayList<String>();
         try {
+            res.addAll(fuzzySearchList(query));
             for(String key:list){
                 res.addAll(fuzzySearchList(key));
             }
