@@ -28,6 +28,10 @@ public class ProcessInfo {
     private long time;
 
     @Expose
+    @SerializedName("location")
+    private final String location = "123";
+
+    @Expose
     @SerializedName("picture")
     private String picture;
 
@@ -35,9 +39,10 @@ public class ProcessInfo {
     @SerializedName("procedure")
     private List<ProcedureInfo> procedure;
 
-    public ProcessInfo(String name, String master, long time) {
+    public ProcessInfo(String name, String master, long time, String location) {
         this.name = name;
         this.master = master;
         this.time = time;
+//        this.location = location;
     }
 }

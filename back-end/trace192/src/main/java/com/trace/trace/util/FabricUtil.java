@@ -1,6 +1,7 @@
 package com.trace.trace.util;
 
 import lombok.extern.slf4j.Slf4j;
+import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.Gateway;
 import org.hyperledger.fabric.gateway.Identities;
 import org.hyperledger.fabric.gateway.Identity;
@@ -8,7 +9,14 @@ import org.hyperledger.fabric.gateway.Network;
 import org.hyperledger.fabric.gateway.Wallet;
 import org.hyperledger.fabric.gateway.Wallets;
 import org.hyperledger.fabric.gateway.X509Identity;
+import org.hyperledger.fabric.gateway.impl.GatewayImpl;
+import org.hyperledger.fabric.gateway.impl.NetworkImpl;
+import org.hyperledger.fabric.gateway.spi.Checkpointer;
+import org.hyperledger.fabric.gateway.spi.CommitListener;
+import org.hyperledger.fabric.sdk.BlockEvent;
+import org.hyperledger.fabric.sdk.Channel;
 import org.hyperledger.fabric.sdk.Enrollment;
+import org.hyperledger.fabric.sdk.Peer;
 import org.hyperledger.fabric.sdk.User;
 import org.hyperledger.fabric.sdk.security.CryptoSuite;
 import org.hyperledger.fabric.sdk.security.CryptoSuiteFactory;
@@ -25,8 +33,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.PrivateKey;
+import java.util.Collection;
 import java.util.Properties;
 import java.util.Set;
+import java.util.function.Consumer;
 
 /**
  * @author jbk-xiao
@@ -175,35 +185,36 @@ public class FabricUtil {
     private Wallet wallet;
 
     /**
-     * use appUser to connect to fabric network.
+     * 使用appUser连接到fabric network，获得网关
+     * 无fabric环境时交换方法体中注释内容。
      * @return connected fabric Gateway
-     * @deprecated too slow
      * @see #getNetwork()
      */
-    @Deprecated
+    @Bean
     public Gateway getGateway() {
-        Gateway.Builder builder = Gateway.createBuilder();
-        Path networkConfigPath = Paths.get(conPath);
-        try {
-            builder.identity(wallet, user).networkConfig(networkConfigPath).discovery(true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return builder.connect();
+        //测试时注释掉下边所有内容
+//        Gateway.Builder builder = Gateway.createBuilder();
+//        Path networkConfigPath = Paths.get(conPath);
+//        try {
+//            builder.identity(wallet, user).networkConfig(networkConfigPath).discovery(true);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return builder.connect();
+
+        //测试时取消下边内容的注释
+        return new NoErrorGateway();
     }
 
+    @Autowired
+    private Gateway gateway;
+
     /**
-     * test speed
+     * 直接使用@Bean注解，一开始就将连接注入spring
      * @return network to mychannel
      */
+    @Bean
     public Network getNetwork() {
-        Gateway.Builder builder = Gateway.createBuilder();
-        Path networkConfigPath = Paths.get(conPath);
-        try {
-            builder.identity(wallet, user).networkConfig(networkConfigPath).discovery(true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return builder.connect().getNetwork("mychannel");
+        return gateway.getNetwork("mychannel");
     }
 }
