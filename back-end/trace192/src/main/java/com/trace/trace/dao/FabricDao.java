@@ -38,6 +38,8 @@ public class FabricDao {
 
     final JedisUtil jedisUtil;
 
+    final Network network;
+
     Map<String, Integer> dbMap;
     Set<String> databaseSet;
 
@@ -45,21 +47,20 @@ public class FabricDao {
     String path;
 
     @Autowired
-    public FabricDao(RedisIndexConfig redisIndexConfig, FabricUtil fabricUtil, JedisUtil jedisUtil) {
+    public FabricDao(RedisIndexConfig redisIndexConfig, FabricUtil fabricUtil, JedisUtil jedisUtil, Network network) {
         this.redisIndexConfig = redisIndexConfig;
         this.fabricUtil = fabricUtil;
         this.jedisUtil = jedisUtil;
+        this.network = network;
         dbMap = redisIndexConfig.getMap();
         databaseSet = dbMap.keySet();
     }
 
     private enum FabricInfo {
         //
-        CHANNEL_NAME("mychannel"),
         MEDIA_CC("fabmedia"),
         TRACE_CC("fabtrace"),
-        INDUSTRY_CC("fabindustry"),
-        PICTURE_PREFIX("http://127.0.0.1:8511/getPicture/"),
+        PICTURE_PREFIX("http://121.46.19.26:8511/getPicture/"),
         PICTURE_NO_FOUND("picture_no_found.jpg");
 
         final String value;
@@ -77,8 +78,6 @@ public class FabricDao {
      * @param md5code  md5code
      */
     public void saveMedia(String filetype, String filename, String md5code) {
-        Gateway gateway = fabricUtil.getGateway();
-        Network network = gateway.getNetwork(FabricInfo.CHANNEL_NAME.value);
         Contract contract = network.getContract(FabricInfo.MEDIA_CC.value);
 
         String type = "jpg".equals(filetype) ? 1 + "" : 2 + "";
@@ -88,8 +87,6 @@ public class FabricDao {
             contract.submitTransaction("addMedia", type, filename, md5code, checkTime);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            gateway.close();
         }
     }
 
@@ -103,14 +100,11 @@ public class FabricDao {
         Gson gson = new Gson();
         try {
             String currentCode = DigestUtils.md5DigestAsHex(new FileInputStream(path + File.separator + filename));
-            Gateway gateway = fabricUtil.getGateway();
-            Network network = gateway.getNetwork(FabricInfo.CHANNEL_NAME.value);
             Contract contract = network.getContract(FabricInfo.MEDIA_CC.value);
 
             String result = new String(contract.evaluateTransaction("queryMedia", filename));
 
             FabMediaInfo mediaInfo = gson.fromJson(result, FabMediaInfo.class);
-            gateway.close();
             return currentCode.equals(mediaInfo.getMd5code());
 
         } catch (Exception e) {
@@ -133,7 +127,6 @@ public class FabricDao {
         String pictureNoFound = FabricInfo.PICTURE_NO_FOUND.value;
         StringBuilder sb;
         try {
-            Network network = fabricUtil.getNetwork();
             Contract contract = network.getContract(FabricInfo.TRACE_CC.value);
             traceInfoStr = new String(contract.evaluateTransaction("queryInfoByID", originId));
             TraceInfo traceInfo = gson.fromJson(traceInfoStr, TraceInfo.class);

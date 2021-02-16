@@ -77,9 +77,9 @@ public class SearchTrace {
                 break;
         }
         return (isString
-                ? TraceResponse.newBuilder().setResponse(jsonInfo)
-                : TraceResponse.newBuilder().setResponseMedia(mediaData))
-                .build();
+            ? TraceResponse.newBuilder().setResponse(jsonInfo)
+            : TraceResponse.newBuilder().setResponseMedia(mediaData)
+        ).build();
     }
 
 }

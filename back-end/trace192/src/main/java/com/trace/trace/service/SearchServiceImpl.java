@@ -118,6 +118,7 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
      * @param request
      * @param responseObserver
      */
+    @Override
     public void searchGraphByKind(GraphRequestByKind request, StreamObserver<GraphResponseByKind> responseObserver)
     {
         String kind = request.getKind();
@@ -137,6 +138,7 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
      * @param request
      * @param responseObserver
      */
+    @Override
     public void searchGraphByBrand(GraphRequestByBrand request, StreamObserver<GraphResponseByBrand> responseObserver)
     {
         String brand = request.getBrand();
