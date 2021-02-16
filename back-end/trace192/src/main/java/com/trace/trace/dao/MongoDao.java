@@ -37,7 +37,13 @@ public class MongoDao {
     public  MongoDatabase database;
     public  MongoCollection<Document> collection;
     public  Document document;
-    public String getGraph(String kind)
+
+    /**
+     * 根据品类查询知识图谱
+     * @param kind
+     * @return
+     */
+    public String getGraphByKind(String kind)
     {
         database= MongoDBUtil.getConnect("trace");
         collection=database.getCollection("Graph");
@@ -45,6 +51,11 @@ public class MongoDao {
         return document.toJson();
     }
 
+    /**
+     * 根据品牌查询知识图谱
+     * @param brand
+     * @return
+     */
     public  String getGraphByBrand(String brand)
     {
         StringBuilder nodesSB = new StringBuilder();
@@ -112,6 +123,11 @@ public class MongoDao {
         return sb.toString();
     }
 
+    /**
+     * 对字符串数组进行去重
+     * @param arr
+     * @return
+     */
     public static String[] unique(String[] arr){
         //用来记录去除重复之后的数组长度和给临时数组作为下标索引
         int t = 0;
