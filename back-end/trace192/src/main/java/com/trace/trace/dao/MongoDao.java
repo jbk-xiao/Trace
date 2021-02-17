@@ -74,7 +74,7 @@ public class MongoDao {
             ]}
         ).pretty()
          */
-        BasicDBObject nodeObj = new BasicDBObject("nodesMap", new BasicDBObject("$elemMatch", new BasicDBObject("name", new BasicDBObject("$eq", brand))));
+        BasicDBObject nodeObj = new BasicDBObject("nodesMap", new BasicDBObject("$elemMatch", new BasicDBObject("name", new BasicDBObject("$regex", brand))));
         BasicDBObject keywordObj1 = new BasicDBObject("keyword", new BasicDBObject("$ne","生鲜"));
         BasicDBObject keywordObj2 = new BasicDBObject("keyword", new BasicDBObject("$ne","食品饮料、保健食品"));
         BasicDBObject andObj = new BasicDBObject("$and", Arrays.asList(nodeObj,keywordObj1,keywordObj2));
