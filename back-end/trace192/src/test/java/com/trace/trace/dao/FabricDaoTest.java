@@ -24,4 +24,16 @@ class FabricDaoTest {
         Assertions.assertTrue(result);
     }
 
+    @Test
+    public void addProcess() {
+        String result = fabricDao.addProcess("123456", "", "", "");
+        System.out.println(result);
+    }
+
+
+    @Test
+    public void addProcedure() {
+        String result = fabricDao.addProcedure("123456", "", "");
+        System.out.println(result);
+    }
 }
