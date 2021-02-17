@@ -1,5 +1,6 @@
 package com.trace.trace.util.media;
 
+import com.trace.trace.config.RedisIndexConfig;
 import com.trace.trace.dao.FabricDao;
 import com.trace.trace.util.JedisUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -26,15 +27,6 @@ import java.rmi.UnexpectedException;
 @Component
 public class SaveUtil {
 
-    @Value("${media.video.database}")
-    private int videoBase;
-
-    @Value("${media.picture.database}")
-    private int picBase;
-
-    @Value("${media.video.path}")
-    private String videoPath;
-
     @Value("${media.picture.path}")
     private String picPath;
 
@@ -43,6 +35,9 @@ public class SaveUtil {
 
     @Autowired
     FabricDao fabricDao;
+
+    @Autowired
+    RedisIndexConfig redisIndexConfig;
 
     /**
      * 保存文件路径
@@ -54,13 +49,8 @@ public class SaveUtil {
     public void saveName(String fullname) throws UnexpectedException, FileNotFoundException {
         /*检查文件类型*/
         String filetype = fullname.split("\\.")[1];
-        int database;
         String savepath;
-        if ("mp4".equalsIgnoreCase(filetype) || "mkv".equalsIgnoreCase(filetype)) {
-            database = videoBase;
-            savepath = videoPath + File.separator + fullname;
-        } else if ("jpg".equalsIgnoreCase(filetype)) {
-            database = picBase;
+        if ("jpg".equalsIgnoreCase(filetype)) {
             savepath = picPath + File.separator + fullname;
         } else {
             throw new UnexpectedException("Unexpect filetype: " + filetype);
@@ -70,12 +60,15 @@ public class SaveUtil {
         if ( !file.exists() ) {
             throw new FileNotFoundException("No such file found in: " + savepath);
         }
+        String step = fullname.split("-")[0];
+        int database = redisIndexConfig.getMap().get(step);
         Jedis jedis = jedisUtil.getClient();
         jedis.select(database);
-        if (jedis.lrange("product", 0, -1).contains(fullname)) {
+        String traceCode = jedis.get("latestCode");
+        if (jedis.lrange(traceCode, 0, -1).contains(fullname)) {
             throw new UnexpectedException('"' + fullname + "\" already exits in redis.");
         } else {
-            jedis.rpush("product", fullname);
+            jedis.rpush(traceCode, fullname);
         }
         jedis.close();
         /* 获取md5码 */
