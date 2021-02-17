@@ -1,6 +1,6 @@
 package com.trace.trace.config;
 
-import com.google.common.reflect.TypeToken;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 import lombok.Data;
 import org.springframework.core.io.ClassPathResource;

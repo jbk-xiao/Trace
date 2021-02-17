@@ -1,5 +1,6 @@
 package com.trace.trace.dao;
 
+import com.google.common.hash.HashCode;
 import com.google.gson.Gson;
 import com.trace.trace.config.RedisIndexConfig;
 import com.trace.trace.pojo.FabMediaInfo;
@@ -8,8 +9,8 @@ import com.trace.trace.pojo.ProcessInfo;
 import com.trace.trace.pojo.TraceInfo;
 import com.trace.trace.util.FabricUtil;
 import com.trace.trace.util.JedisUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.hyperledger.fabric.gateway.Contract;
-import org.hyperledger.fabric.gateway.Gateway;
 import org.hyperledger.fabric.gateway.Network;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -30,6 +32,7 @@ import java.util.Set;
  * @Description
  * @create 2021-02-01-10:53
  */
+@Slf4j
 @Component
 public class FabricDao {
     final FabricUtil fabricUtil;
@@ -39,6 +42,8 @@ public class FabricDao {
     final JedisUtil jedisUtil;
 
     final Network network;
+
+    final Gson gson = new Gson();
 
     Map<String, Integer> dbMap;
     Set<String> databaseSet;
@@ -54,20 +59,6 @@ public class FabricDao {
         this.network = network;
         dbMap = redisIndexConfig.getMap();
         databaseSet = dbMap.keySet();
-    }
-
-    private enum FabricInfo {
-        //
-        MEDIA_CC("fabmedia"),
-        TRACE_CC("fabtrace"),
-        PICTURE_PREFIX("http://121.46.19.26:8511/getPicture/"),
-        PICTURE_NO_FOUND("picture_no_found.jpg");
-
-        final String value;
-
-        FabricInfo(final String value) {
-            this.value = value;
-        }
     }
 
     /**
@@ -115,11 +106,11 @@ public class FabricDao {
 
     /**
      * 查询fabric，返回溯源信息，包括大阶段和在工厂内的阶段。
+     *
      * @param originId 唯一溯源码
      * @return 溯源信息json
      */
     public String getInfoByOriginId(String originId) {
-        Gson gson = new Gson();
         Jedis jedis = jedisUtil.getClient();
         String traceInfoStr = "{}";
         String processName;
@@ -133,9 +124,9 @@ public class FabricDao {
             String id = traceInfo.getId();
             String picture = pictureNoFound;
             List<String> list;
-            for (ProcessInfo process: traceInfo.getProcess()) {
+            for (ProcessInfo process : traceInfo.getProcess()) {
                 processName = process.getName();
-                for (ProcedureInfo procedure: process.getProcedure()) {
+                for (ProcedureInfo procedure : process.getProcedure()) {
                     sb = new StringBuilder(processName);
                     sb.append("_").append(procedure.getName());
                     if (databaseSet.contains(sb.toString())) {
@@ -153,5 +144,44 @@ public class FabricDao {
         }
         jedis.close();
         return "[" + traceInfoStr + "]";
+    }
+
+    public String addProcess(String id, String name, String master, String location) {
+        String info = "";
+        try {
+            Contract contract = network.getContract(FabricInfo.TRACE_CC.value);
+            byte[] bytes = contract.submitTransaction("addProcess", id, name, master,
+                    System.currentTimeMillis()+"", location);
+            info = new String(bytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return info;
+    }
+
+    public String addProcedure(String id, String name, String master) {
+        String info = "";
+        try {
+            Contract contract = network.getContract(FabricInfo.TRACE_CC.value);
+            info = new String(contract.submitTransaction("addProcedure", id, name, master,
+                    System.currentTimeMillis()+""));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return info;
+    }
+
+    private enum FabricInfo {
+        //
+        MEDIA_CC("fabmedia"),
+        TRACE_CC("fabtrace"),
+        PICTURE_PREFIX("http://121.46.19.26:8511/getPicture/"),
+        PICTURE_NO_FOUND("picture_no_found.jpg");
+
+        final String value;
+
+        FabricInfo(final String value) {
+            this.value = value;
+        }
     }
 }

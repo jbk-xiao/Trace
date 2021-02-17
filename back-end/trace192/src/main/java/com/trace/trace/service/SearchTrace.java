@@ -1,6 +1,7 @@
 package com.trace.trace.service;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.protobuf.ByteString;
 import com.trace.trace.dao.FabricDao;
 import com.trace.trace.dao.ProcessEventDao;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -26,14 +28,18 @@ public class SearchTrace {
 
     private final Gson gson = new Gson();
 
-    @Autowired
-    private ProcessEventDao processEventDao;
+    private final ProcessEventDao processEventDao;
+
+    private final FabricDao fabricDao;
+
+    private final FileUtil fileUtil;
 
     @Autowired
-    private FabricDao fabricDao;
-
-    @Autowired
-    private FileUtil fileUtil;
+    public SearchTrace(ProcessEventDao processEventDao, FabricDao fabricDao, FileUtil fileUtil) {
+        this.processEventDao = processEventDao;
+        this.fabricDao = fabricDao;
+        this.fileUtil = fileUtil;
+    }
 
     public TraceResponse searchTrace(QueryRequest request) {
 
@@ -72,6 +78,18 @@ public class SearchTrace {
                 jsonInfo = fabricDao.getInfoByOriginId(query);
                 log.info("Fabric return: " + jsonInfo);
                 break;
+            case "addProcess":
+                //添加一道流程信息
+                long start = System.currentTimeMillis();
+                jsonInfo = addProcess(query);
+                log.info("192 add process takes {} ms", System.currentTimeMillis() - start);
+                break;
+            case "addProcedure":
+                //添加工厂内一道工序信息
+                start = System.currentTimeMillis();
+                jsonInfo = addProcedure(query);
+                log.info("192 add procedure takes {} ms", System.currentTimeMillis() - start);
+                break;
             default:
                 log.error("Receive the wrong message!");
                 break;
@@ -82,4 +100,13 @@ public class SearchTrace {
         ).build();
     }
 
+    private String addProcess(String params) {
+        HashMap<String, String> map = gson.fromJson(params, new TypeToken<HashMap<String, String>>() {}.getType());
+        return fabricDao.addProcess(map.get("id"), map.get("name"), map.get("master"), map.get("location"));
+    }
+
+    private String addProcedure(String params) {
+        HashMap<String, String> map = gson.fromJson(params, new TypeToken<HashMap<String, String>>() {}.getType());
+        return fabricDao.addProcedure(map.get("id"), map.get("name"), map.get("master"));
+    }
 }
