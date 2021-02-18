@@ -30,16 +30,4 @@ public class createJson {
         return jsonInfo;
     }
 
-    /**
-     * 为请求类型为bw_id的生成结果JSON
-     * @param relationships
-     * @param query
-     * @return
-     */
-    public  String toJson(List<Detail> relationships, List<Query> query){
-        String queryJson=toJson(query),
-                relationshipsJson=toJson(relationships);
-        String jsonInfo=queryJson.substring(0, queryJson.length()-1)+",{\"relationship\":"+relationshipsJson+"}]";
-        return jsonInfo;
-    }
 }

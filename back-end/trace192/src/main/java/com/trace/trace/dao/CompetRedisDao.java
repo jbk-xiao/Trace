@@ -22,6 +22,11 @@ public class CompetRedisDao {
     @Autowired
     JedisUtil jedisUtil;
 
+    /**
+     * 获取到regis_id对应的sku_id
+     * @param regis_id
+     * @return
+     */
     public String getSkuId(String regis_id){
         Jedis jedis = jedisUtil.getClient();
         jedis.select(1);
@@ -40,6 +45,11 @@ public class CompetRedisDao {
         return sku_id;
     }
 
+    /**
+     * 获取到主公司regis_id对应的所有竞品公司regis_id
+     * @param regis_id
+     * @return
+     */
     public List<String> getCompetRegisId(String regis_id){
         Jedis jedis = jedisUtil.getClient();
         jedis.select(2);
@@ -57,6 +67,11 @@ public class CompetRedisDao {
         return regisIdList;
     }
 
+    /**
+     * 根据主公司sku_id获取到所有竞品商品的sku_id
+     * @param sku_id
+     * @return
+     */
     public List<String> getCompetSkuId(String sku_id){
         Jedis jedis = jedisUtil.getClient();
         jedis.select(2);

@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * @author: Clivia-Han
- * @projectName: JsonToMangodb
+ * @projectName: JsonToMongodb
  * @packageName: PACKAGE_NAME
  * @Description:
  * @create: 2021-02-06-11:14

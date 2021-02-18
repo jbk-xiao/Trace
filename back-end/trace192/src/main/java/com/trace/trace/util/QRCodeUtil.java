@@ -29,6 +29,12 @@ public class QRCodeUtil {
     @Value("${media.picture.path}")
     private String picPath;
 
+    /**
+     * 生成带有溯源码的二维码图片
+     * @param content
+     * @param code
+     * @return
+     */
     public byte[] addCode(String content, String code) {
         try {
             BufferedImage image = getBasicQRCode(content);
@@ -63,6 +69,11 @@ public class QRCodeUtil {
         return null;
     }
 
+    /**
+     * 生成二维码图片
+     * @param content
+     * @return
+     */
     private BufferedImage getBasicQRCode(String content) {
         int width = 300;
         int height = 300;
