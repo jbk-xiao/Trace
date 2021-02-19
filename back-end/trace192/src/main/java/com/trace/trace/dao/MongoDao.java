@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.regex;
 
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
@@ -45,10 +46,56 @@ public class MongoDao {
      */
     public String getGraphByKind(String kind)
     {
+        StringBuilder nodesSB = new StringBuilder();
+        StringBuilder linkSB = new StringBuilder();
+        String categoryStr = null;
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
         database= MongoDBUtil.getConnect("trace");
         collection=database.getCollection("Graph");
-        document = collection.find(eq("keyword", kind)).first();
-        return document.toJson();
+        MongoCursor<Document> cursor = collection.find(regex("keyword", kind)).iterator();
+        while (cursor.hasNext()){
+            document = cursor.next();
+            String totalStr = document.toJson();
+            String str1 = totalStr.split("\", \"nodesMap\" : \\[")[1];
+            String nodeStr = str1.split("], \"linksMap\" : \\[")[0];
+            nodesSB.append(" ");
+            nodesSB.append(nodeStr);
+            nodesSB.append(",");
+            String str2 = str1.split("], \"linksMap\" : \\[")[1];
+            String linkStr = str2.split("], \"categoriesMap\" : \\[")[0];
+            linkSB.append(linkStr);
+            linkSB.append(",");
+            categoryStr = " \"categories\" : ["+str2.split("], \"categoriesMap\" : \\[")[1];
+        }
+        log.info("node"+nodesSB.toString());
+        log.info("link"+linkSB.toString());
+        String[] singleNodes = nodesSB.toString().split("},");
+        singleNodes = unique(singleNodes);
+        String[] singleLinks = linkSB.toString().split("},");
+        singleLinks = unique(singleLinks);
+        sb.append("\"nodes\" :");
+        sb.append(" [");
+        for (int i=0; i<singleNodes.length; i++)
+        {
+            sb.append(singleNodes[i]);
+            sb.append("},");
+        }
+        sb.deleteCharAt(sb.lastIndexOf(","));
+        sb.append("], ");
+        sb.append("\"links\" :");
+        sb.append(" [");
+        for (int j=0; j<singleLinks.length; j++)
+        {
+            sb.append(singleLinks[j]);
+            sb.append("},");
+        }
+        sb.deleteCharAt(sb.lastIndexOf(","));
+        sb.append("], ");
+        sb.append(categoryStr);
+        sb.append("}");
+        sb.deleteCharAt(sb.lastIndexOf("}"));
+        return sb.toString();
     }
 
     /**

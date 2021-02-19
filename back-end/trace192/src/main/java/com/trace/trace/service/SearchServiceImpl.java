@@ -32,6 +32,8 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
     @Autowired
     SearchGraph searchGraph;
 
+    @Autowired
+    ManageProducts manageProducts;
     /**
      * 竞品查询模块
      *
@@ -147,6 +149,69 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
         String responseInfo = searchGraph.searchGraphByBrand(brand);
         log.info("find info: "+ responseInfo);
         GraphResponseByBrand response = GraphResponseByBrand.newBuilder().setResponse(responseInfo).build();
+        //放入response，传回客户端
+        responseObserver.onNext(response);
+        //表示此次连接结束
+        responseObserver.onCompleted();
+    }
+
+    /**
+     * 产品列表查询
+     * @param request
+     * @param responseObserver
+     */
+    @Override
+    public void searchProducts(ProductsRequest request, StreamObserver<ProductsResponse> responseObserver)
+    {
+        String key = request.getKey();
+        log.info("receive key: " + key);
+        log.info("Start search products...");
+        String responseInfo = manageProducts.SearchProducts(key);
+        log.info("find info: "+ responseInfo);
+        ProductsResponse response = ProductsResponse.newBuilder().setResponse(responseInfo).build();
+        //放入response，传回客户端
+        responseObserver.onNext(response);
+        //表示此次连接结束
+        responseObserver.onCompleted();
+    }
+
+    /**
+     * 添加产品
+     * @param request
+     * @param responseObserver
+     */
+    @Override
+    public void addProduct(AddProductRequest request, StreamObserver<AddProductResponse> responseObserver)
+    {
+        String key = request.getKey();
+        String field = request.getField();
+        String value = request.getValue();
+        log.info("receive: " + key + "-" + field + "-" + value);
+        log.info("Start adding products...");
+        String responseInfo = manageProducts.AddProduct(key, field, value);
+        log.info("find info: "+ responseInfo);
+        AddProductResponse response = AddProductResponse.newBuilder().setResponse(responseInfo).build();
+        //放入response，传回客户端
+        responseObserver.onNext(response);
+        //表示此次连接结束
+        responseObserver.onCompleted();
+    }
+
+    /**
+     * 删除产品
+     * @param request
+     * @param responseObserver
+     */
+    @Override
+    public void deleteProduct(DeleteProductRequest request, StreamObserver<DeleteProductResponse> responseObserver)
+    {
+        String key = request.getKey();
+        String field = request.getField();
+        log.info("receive: " + key + "-" + field);
+        log.info("Start deleting products...");
+        String responseInfo = manageProducts.DeleteProduct(key, field);
+        log.info("find info: "+ responseInfo);
+        DeleteProductResponse response = DeleteProductResponse.newBuilder().setResponse(responseInfo).build();
         //放入response，传回客户端
         responseObserver.onNext(response);
         //表示此次连接结束

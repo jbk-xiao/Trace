@@ -1,13 +1,6 @@
 package com.trace.trace.controller;
 
-import com.trace.trace.grpc.CompetRequest;
-import com.trace.trace.grpc.GraphRequestByBrand;
-import com.trace.trace.grpc.GraphRequestByKind;
-import com.trace.trace.grpc.GraphResponseByBrand;
-import com.trace.trace.grpc.GraphResponseByKind;
-import com.trace.trace.grpc.QueryRequest;
-import com.trace.trace.grpc.QueryResponse;
-import com.trace.trace.grpc.SearchServiceGrpc;
+import com.trace.trace.grpc.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -77,7 +70,6 @@ public class InfoController {
         long end = System.currentTimeMillis();
         log.info("search: " + regis_id + " over, use time: " + (end - start));
         return response.getResponse();
-
     }
 
     @RequestMapping(value = "/getGraphByKind/{kind}", method = RequestMethod.GET)
@@ -102,4 +94,42 @@ public class InfoController {
         return response.getResponse();
     }
 
+    @RequestMapping(value = "/getProducts/{key}", method = RequestMethod.GET)
+    public String getProducts(@PathVariable("key") String key) {
+        log.info("Receive product request : " + key);
+        long start = System.currentTimeMillis();
+        ProductsResponse response = this.searchServiceBlockingStub
+                .searchProducts(ProductsRequest.newBuilder()
+                        .setKey(key).build());
+        long end = System.currentTimeMillis();
+        log.info("Search result: " + response.getResponse());
+        log.info("Retrieval time: " + (end - start));
+        return response.getResponse();
+    }
+
+    @RequestMapping(value = "/addProduct/{key}/{field}/{value}", method = RequestMethod.GET)
+    public String addProduct(@PathVariable("key") String key, @PathVariable("field") String field, @PathVariable("value") String value) {
+        log.info("Receive product request : " + key + "-" + field + "-" + value);
+        long start = System.currentTimeMillis();
+        AddProductResponse response = this.searchServiceBlockingStub
+                .addProduct(AddProductRequest.newBuilder()
+                        .setKey(key).setField(field).setValue(value).build());
+        long end = System.currentTimeMillis();
+        log.info("Add result: " + response.getResponse());
+        log.info("Retrieval time: " + (end - start));
+        return response.getResponse();
+    }
+
+    @RequestMapping(value = "/addProduct/{key}/{field}", method = RequestMethod.GET)
+    public String deleteProduct(@PathVariable("key") String key, @PathVariable("field") String field) {
+        log.info("Receive product request : " + key + "-" + field);
+        long start = System.currentTimeMillis();
+        DeleteProductResponse response = this.searchServiceBlockingStub
+                .deleteProduct(DeleteProductRequest.newBuilder()
+                        .setKey(key).setField(field).build());
+        long end = System.currentTimeMillis();
+        log.info("Delete result: " + response.getResponse());
+        log.info("Retrieval time: " + (end - start));
+        return response.getResponse();
+    }
 }

@@ -28,6 +28,24 @@ message GraphRequestByBrand {
     string brand = 1;
 }
 
+//添加产品请求
+message AddProductRequest {
+    string key = 1;
+    string field = 2;
+    string value = 3;
+}
+
+//删除产品请求
+message DeleteProductRequest {
+    string key = 1;
+    string field = 2;
+}
+
+//查询产品请求
+message ProductsRequest {
+    string key = 1;
+}
+
 //返回
 message QueryResponse {
     string response = 1;
@@ -49,10 +67,28 @@ message GraphResponseByBrand {
     string  response = 1;
 }
 
+//添加产品结果
+message AddProductResponse {
+    string  response = 1;
+}
+
+//删除产品结果
+message DeleteProductResponse {
+    string  response = 1;
+}
+
+//查询产品结果
+message ProductsResponse {
+    string  response = 1;
+}
+
 service SearchService {
     rpc searchQuery(QueryRequest) returns (QueryResponse);
     rpc searchCompet(CompetRequest) returns (QueryResponse);
     rpc searchTrace(QueryRequest) returns (TraceResponse);
     rpc searchGraphByKind(GraphRequestByKind) returns (GraphResponseByKind);
     rpc searchGraphByBrand(GraphRequestByBrand) returns (GraphResponseByBrand);
+    rpc addProduct(AddProductRequest) returns (AddProductResponse);
+    rpc deleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
+    rpc searchProducts(ProductsRequest) returns (ProductsResponse);
 }
