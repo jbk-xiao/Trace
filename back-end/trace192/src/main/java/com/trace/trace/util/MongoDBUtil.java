@@ -26,4 +26,18 @@ public class MongoDBUtil {
         }
         return mongoDatabase;
     }
+
+    /**
+     * @return Mongodb的连接
+     */
+    public static MongoClient getConn(){
+        MongoClient mongoClient = null;
+        try{
+            mongoClient = new MongoClient("localhost", 27017);
+        }catch (Exception e){
+            log.error(e.getClass().getName()+": "+e.getMessage());
+        }
+        return mongoClient;
+
+    }
 }

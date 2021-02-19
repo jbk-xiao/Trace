@@ -64,7 +64,7 @@ public class SaveUtil {
         int database = redisIndexConfig.getMap().get(step);
         Jedis jedis = jedisUtil.getClient();
         jedis.select(database);
-        String traceCode = jedis.get("latestCode");
+        String traceCode = jedis.lindex("latestCode",-1);
         if (jedis.lrange(traceCode, 0, -1).contains(fullname)) {
             throw new UnexpectedException('"' + fullname + "\" already exits in redis.");
         } else {

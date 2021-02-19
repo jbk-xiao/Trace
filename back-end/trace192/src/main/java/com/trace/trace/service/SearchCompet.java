@@ -2,6 +2,7 @@ package com.trace.trace.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.trace.trace.dao.CompetMongoDao;
 import com.trace.trace.dao.CompetRedisDao;
 import com.trace.trace.entity.*;
 import com.trace.trace.mapper.CompetMapper;
@@ -27,11 +28,13 @@ public class SearchCompet {
     CompetMapper competMapper;
     @Autowired
     CompetRedisDao competRedisDao;
+    @Autowired
+    CompetMongoDao competMongoDao;
 
     public String searchCompetBasic(String regis_id) {
         log.info("Receive regis_id:" + regis_id);
         String skuId = competRedisDao.getSkuId(regis_id);
-        String responseInfo = null;
+        StringBuilder sb = new StringBuilder();
         if(skuId == null) {
             log.info("skuId didn't find");
         }else{
@@ -43,16 +46,20 @@ public class SearchCompet {
             List<JDdetail> jDdetails = competMapper.selectCompetBySkuIds(skuIdList);
             skuIdList.add(0,skuId);
             List<Comment_score> comment_scores = competMapper.selectCommentScoreBySkuIds(skuIdList);
+            String comment_statistic = competMongoDao.getCommentStatistic(skuId);
             AllCompetinfo allinfo = new AllCompetinfo();
             allinfo.setCompanyInfo(companyInfo);
             allinfo.setCompet_geoList(compets);
             allinfo.setJdetail(jDdetail);
             allinfo.setCompet_jdetails(jDdetails);
             allinfo.setScoreList(comment_scores);
-            responseInfo = gson.toJson(allinfo);
-            log.info("competPart response:" + responseInfo);
+            sb.append(gson.toJson(allinfo));
+            sb.deleteCharAt(sb.length() - 1);
+            sb.append(",");
+            sb.append(comment_statistic);
+            log.info("competPart response");
         }
-        return responseInfo;
+        return sb.toString();
     }
 
 }
