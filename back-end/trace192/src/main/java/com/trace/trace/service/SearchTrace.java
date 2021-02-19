@@ -55,7 +55,7 @@ public class SearchTrace {
 
         switch (queryType) {
             case "video":
-                /*  视频访问  */
+                //视频访问
                 isString = false;
                 log.info("Encoding video '" + query + "'...");
                 mediaData = ByteString.copyFrom(fileUtil.getBytesFromVideo(query));
@@ -78,6 +78,9 @@ public class SearchTrace {
                 jsonInfo = fabricDao.getInfoByOriginId(query);
                 log.info("Fabric return: " + jsonInfo);
                 break;
+            case "addFirstProcess":
+                jsonInfo = addFirstProcess(query);
+                break;
             case "addProcess":
                 //添加一道流程信息
                 long start = System.currentTimeMillis();
@@ -98,6 +101,12 @@ public class SearchTrace {
             ? TraceResponse.newBuilder().setResponse(jsonInfo)
             : TraceResponse.newBuilder().setResponseMedia(mediaData)
         ).build();
+    }
+
+    private String addFirstProcess(String params) {
+        HashMap<String, String> map = gson.fromJson(params, new TypeToken<HashMap<String, String>>() {}.getType());
+        return fabricDao.addFirstProcess(map.get("foodType"), map.get("com"), Integer.parseInt(map.get("processCount")),
+                map.get("name"), map.get("master"), map.get("location"));
     }
 
     private String addProcess(String params) {
