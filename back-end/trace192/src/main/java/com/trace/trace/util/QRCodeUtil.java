@@ -60,7 +60,7 @@ public class QRCodeUtil {
             byte[] bytes = baos.toByteArray();
 
             // 二维码生成的路径，但是实际项目中，我们是把这生成的二维码显示到界面上的，因此下面的这行代码可以注释掉
-            ImageIO.write(image, "png", new File(picPath + code + ".png"));
+            ImageIO.write(image, "png", new File(picPath + File.separator + code + ".png"));
             baos.close();
             return bytes;
         } catch (Exception e) {

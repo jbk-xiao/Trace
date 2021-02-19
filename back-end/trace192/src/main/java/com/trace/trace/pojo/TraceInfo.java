@@ -20,6 +20,38 @@ public class TraceInfo {
     private String id;
 
     @Expose
+    @SerializedName("foodName")
+    private String foodName;
+
+    @Expose
+    @SerializedName("specification")
+    private String specification;
+
+    @Expose
+    @SerializedName("category")
+    private String category;
+
+    @Expose
+    @SerializedName("processCount")
+    private Integer processCount;
+
+    @Expose
+    @SerializedName("com")
+    private String com;
+
+    @Expose
+    @SerializedName("address")
+    private String address;
+
+    @Expose
+    @SerializedName("contact")
+    private String contact;
+
+    @Expose
+    @SerializedName("qrCode")
+    private String qrCode;
+
+    @Expose
     @SerializedName("process")
     private List<ProcessInfo> process;
 
