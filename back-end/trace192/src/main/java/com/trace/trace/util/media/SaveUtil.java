@@ -64,11 +64,11 @@ public class SaveUtil {
         int database = redisIndexConfig.getMap().get(step);
         Jedis jedis = jedisUtil.getClient();
         jedis.select(database);
-        String traceCode = jedis.lindex("latestCode",-1);
+        String traceCode = jedis.lindex("latestCode",0);
         if (jedis.lrange(traceCode, 0, -1).contains(fullname)) {
             throw new UnexpectedException('"' + fullname + "\" already exits in redis.");
         } else {
-            jedis.rpush(traceCode, fullname);
+            jedis.lpush(traceCode, fullname);
         }
         jedis.close();
         /* 获取md5码 */
