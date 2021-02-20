@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -26,93 +28,131 @@ public class ProductRedisDao {
     Gson gson = new Gson();
 
     /**
-     * 添加产品
-     * @param key
-     * @param field
-     * @param value
+     * 添加商品
+     * @param regis_id
+     * @param product_name
+     * @param code
      * @return
      */
-    public int insert(String key, String field, String value){
+    public int insert(String regis_id, String product_name, String code){
+        Jedis jedis = null;
         try {
-            Jedis jedis = jedisUtil.getClient();
+            jedis = jedisUtil.getClient();
             jedis.select(4);
-            jedis.hset(key, field, value);
+            jedis.hset(regis_id, product_name, code);
         }catch (Exception e){
             e.printStackTrace();
             return 0;
+        }finally {
+            jedis.close();
         }
         return 1;
     }
 
     /**
-     * 删除产品
-     * @param key
-     * @param field
+     * 删除商品
+     * @param regis_id
+     * @param product_name
      * @return
      */
-    public int delete(String key, String field){
+    public int delete(String regis_id, String product_name){
+        Jedis jedis = null;
         try{
-            Jedis jedis = jedisUtil.getClient();
+            jedis = jedisUtil.getClient();
             jedis.select(4);
-            jedis.hdel(key, field);
+            jedis.hdel(regis_id, product_name);
         }catch (Exception e){
             e.printStackTrace();
             return 0;
+        }finally {
+            jedis.close();
         }
         return 1;
     }
 
     /**
-     * 更新产品信息
-     * @param key
-     * @param field
-     * @param value
+     * 更新商品信息
+     * @param code
+     * @param regis_id
+     * @param product_name
      * @return
      */
-    public int update(String key, String field, String value){
+    public int update(String regis_id, String product_name, String code){
+        Jedis jedis = null;
         try{
-            Jedis jedis = jedisUtil.getClient();
+            jedis = jedisUtil.getClient();
             jedis.select(4);
-            jedis.hset(key, field, value);
+            jedis.hset(regis_id, product_name, code);
         }catch (Exception e){
             e.printStackTrace();
             return 0;
+        }finally {
+            jedis.close();
         }
         return 1;
     }
 
     /**查找单个产品
      *
-     * @param key
-     * @param field
+     * @param regis_id
+     * @param product_name
      * @return
      */
-    public String find(String key, String field){
+    public String find(String regis_id, String product_name){
         String value = null;
+        Jedis jedis = null;
         try{
-            Jedis jedis = jedisUtil.getClient();
+            jedis = jedisUtil.getClient();
             jedis.select(4);
-            value = jedis.hget(key, field);
+            value = jedis.hget(regis_id, product_name);
         }catch (Exception e){
             e.printStackTrace();
+        }finally {
+            jedis.close();
         }
         return value;
     }
 
     /**
-     * 获取所有产品
-     * @param key
+     * 获取所有商品与对应十三位条形码
+     * @param regis_id
      * @return
      */
-    public String getAll(String key){
+    public String getAll(String regis_id){
         Map<String, String> map = null;
+        Jedis jedis = null;
         try{
-            Jedis jedis = jedisUtil.getClient();
+            jedis = jedisUtil.getClient();
             jedis.select(4);
-            map = jedis.hgetAll(key);
+            map = jedis.hgetAll(regis_id);
         }catch (Exception e){
             e.printStackTrace();
+        }finally {
+            jedis.close();
         }
         return gson.toJson(map);
+    }
+
+    /**
+     * 获取到所有的商品名称
+     * @param regis_id
+     * @return
+     */
+    public List<String> getAllProductName(String regis_id){
+        Jedis jedis = jedisUtil.getClient();
+        jedis.select(4);
+        List<String> productList = new ArrayList<>();
+        try {
+            if (jedis.exists(regis_id)) {
+                productList.addAll(jedis.hkeys(regis_id));
+            }else {
+                log.info("redis没有找到"+regis_id);
+            }
+        }catch (NullPointerException e) {
+            e.printStackTrace();
+        }finally {
+            jedis.close();
+        }
+        return productList;
     }
 }

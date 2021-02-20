@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @author: Clivia-Han
  * @projectName: Foxishengcun-github-new
  * @packageName: com.trace.trace.service
- * @Description:
+ * @Description: 管理模块
  * @create: 2021-02-19-16:54
  */
 @Slf4j
@@ -42,6 +42,17 @@ public class ManageProducts {
 
     public String SearchProducts(String key){
         String res = productRedisDao.getAll(key);
+        return res;
+    }
+
+    /**
+     * 获取到所有的商品名称列表，用于商品名称选择
+     * TODO 设计数据格式
+     * @param regis_id
+     * @return
+     */
+    public String getAllProductNameList(String regis_id){
+        String res = productRedisDao.getAllProductName(regis_id).toString();
         return res;
     }
 }

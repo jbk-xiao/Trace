@@ -59,27 +59,27 @@ message TraceResponse {
 
 //返回知识图谱信息（根据品类）
 message GraphResponseByKind {
-    string  response = 1;
+    string response = 1;
 }
 
 //返回知识图谱信息（根据品类）
 message GraphResponseByBrand {
-    string  response = 1;
+    string response = 1;
 }
 
-//添加产品结果
+//添加商品名称列表结果
 message AddProductResponse {
-    string  response = 1;
+    string response = 1;
 }
 
-//删除产品结果
+//删除商品名称列表结果
 message DeleteProductResponse {
-    string  response = 1;
+    string response = 1;
 }
 
-//查询产品结果
+//查询商品名称列表结果
 message ProductsResponse {
-    string  response = 1;
+    string response = 1;
 }
 
 service SearchService {

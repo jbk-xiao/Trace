@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
 import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
@@ -33,9 +34,6 @@ import static com.mongodb.client.model.Filters.regex;
 @Service
 public class MongoDao {
 
-    Gson gson = new Gson();
-    MongoDBUtil mongoDBUtil = new MongoDBUtil();
-    public  MongoDatabase database;
     public  MongoCollection<Document> collection;
     public  Document document;
 
@@ -51,8 +49,8 @@ public class MongoDao {
         String categoryStr = null;
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        database= MongoDBUtil.getConnect("trace");
-        collection=database.getCollection("Graph");
+        MongoClient mongoClient = MongoDBUtil.getConn();
+        collection=mongoClient.getDatabase("trace").getCollection("Graph");
         MongoCursor<Document> cursor = collection.find(regex("keyword", kind)).iterator();
         while (cursor.hasNext()){
             document = cursor.next();
@@ -95,6 +93,7 @@ public class MongoDao {
         sb.append(categoryStr);
         sb.append("}");
         sb.deleteCharAt(sb.lastIndexOf("}"));
+        mongoClient.close();
         return sb.toString();
     }
 
@@ -110,8 +109,8 @@ public class MongoDao {
         String categoryStr = null;
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        database= MongoDBUtil.getConnect("trace");
-        collection=database.getCollection("Graph");
+        MongoClient mongoClient = MongoDBUtil.getConn();
+        collection=mongoClient.getDatabase("trace").getCollection("Graph");
         /*db.Graph.find(
          {$and:
             [
@@ -167,6 +166,7 @@ public class MongoDao {
         sb.append(categoryStr);
         sb.append("}");
         sb.deleteCharAt(sb.lastIndexOf("}"));
+        mongoClient.close();
         return sb.toString();
     }
 

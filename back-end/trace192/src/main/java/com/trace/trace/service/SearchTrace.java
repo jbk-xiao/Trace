@@ -1,12 +1,17 @@
 package com.trace.trace.service;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.protobuf.ByteString;
+import com.trace.trace.dao.CompetMongoDao;
 import com.trace.trace.dao.FabricDao;
 import com.trace.trace.dao.ProcessEventDao;
+import com.trace.trace.dao.ProductRedisDao;
+import com.trace.trace.entity.CompanyInfo;
 import com.trace.trace.grpc.QueryRequest;
 import com.trace.trace.grpc.TraceResponse;
+import com.trace.trace.mapper.CompetMapper;
 import com.trace.trace.util.media.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +31,7 @@ import java.util.List;
 @Slf4j
 public class SearchTrace {
 
-    private final Gson gson = new Gson();
+    private final Gson gson = new GsonBuilder().disableHtmlEscaping().create();  //防止出现字符转换
 
     private final ProcessEventDao processEventDao;
 
@@ -34,11 +39,17 @@ public class SearchTrace {
 
     private final FileUtil fileUtil;
 
+    private final ProductRedisDao productRedisDao;
+
+    private final CompetMapper competMapper;
+
     @Autowired
-    public SearchTrace(ProcessEventDao processEventDao, FabricDao fabricDao, FileUtil fileUtil) {
+    public SearchTrace(ProcessEventDao processEventDao, FabricDao fabricDao, FileUtil fileUtil, ProductRedisDao productRedisDao, CompetMapper competMapper) {
         this.processEventDao = processEventDao;
         this.fabricDao = fabricDao;
         this.fileUtil = fileUtil;
+        this.productRedisDao = productRedisDao;
+        this.competMapper = competMapper;
     }
 
     public TraceResponse searchTrace(QueryRequest request) {
@@ -117,5 +128,23 @@ public class SearchTrace {
     private String addProcedure(String params) {
         HashMap<String, String> map = gson.fromJson(params, new TypeToken<HashMap<String, String>>() {}.getType());
         return fabricDao.addProcedure(map.get("id"), map.get("name"), map.get("master"));
+    }
+
+    /**
+     * 获取到第一次流程输入时所需的公司基本信息以及商品列表
+     * @param regis_id
+     * @return
+     */
+    public String getFirstProcessInfo(String regis_id){
+        List<String> productNameList = productRedisDao.getAllProductName(regis_id);
+        CompanyInfo companyInfo = competMapper.selectCompanyBasicInfo(regis_id);
+        StringBuilder sb = new StringBuilder();
+        sb.append(gson.toJson(companyInfo));
+        sb.deleteCharAt(sb.length() - 1);
+        sb.append("\"productNameList\":");
+        sb.append(",");
+        sb.append(productNameList.toString());
+        sb.append("}");
+        return sb.toString();
     }
 }
