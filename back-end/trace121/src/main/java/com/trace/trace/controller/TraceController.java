@@ -119,13 +119,13 @@ public class TraceController {
         return traceResponse.getResponse();
     }
 
-    @RequestMapping(value = "/getAllTraceInfo/{company_name}/{product_name}", method = RequestMethod.GET)
-    public String getAllTraceInfo(@PathVariable("product_name") String product_name,@PathVariable("company_name") String company_name){
+    @RequestMapping(value = "/getAllTraceInfo/{regis_id}/{product_name}", method = RequestMethod.GET)
+    public String getAllTraceInfo(@PathVariable("product_name") String product_name,@PathVariable("regis_id") String regis_id){
         log.info("Receive product_name request: "+product_name);
         long start = System.currentTimeMillis();
         QueryResponse queryResponse = this.searchServiceBlockingStub
                 .searchAllTraceByName(AllTraceRequest.newBuilder()
-                        .setProductName(product_name).setCompanyName(company_name).build());
+                        .setProductName(product_name).setRegisId(regis_id).build());
         long end = System.currentTimeMillis();
         log.info("Request product_name request '" + product_name + "' over, taking " + (end - start));
         return queryResponse.getResponse();

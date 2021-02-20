@@ -227,9 +227,9 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
     public void searchAllTraceByName(AllTraceRequest request, StreamObserver<QueryResponse> responseObserver)
     {
         String product_name = request.getProductName();
-        String company_name = request.getCompanyName();
+        String regis_id = request.getRegisId();
         String page = request.getPage();
-        String responseInfo = searchTrace.searchAllTraceByName(product_name,company_name,page);
+        String responseInfo = searchTrace.searchAllTraceByName(product_name,regis_id,page);
         QueryResponse response = QueryResponse.newBuilder().setResponse(responseInfo).build();
         //放入response，传回客户端
         responseObserver.onNext(response);

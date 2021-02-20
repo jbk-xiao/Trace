@@ -84,7 +84,7 @@ message ProductsResponse {
 
 message AllTraceRequest {
     string productName = 1;
-    string companyName = 2;
+    string regisId = 2;
     string page = 3;
 }
 
