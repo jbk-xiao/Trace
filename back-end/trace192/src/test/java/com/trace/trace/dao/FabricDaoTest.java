@@ -43,7 +43,7 @@ class FabricDaoTest {
 
     @Test
     void getManagerInfoList() {
-        List<TraceManagerInfo> list = fabricDao.getManagerInfoList("123456", "16119701634150000");
-        System.out.println(list);
+//        List<TraceManagerInfo> list = fabricDao.getManagerInfoList();
+//        System.out.println(list);
     }
 }
