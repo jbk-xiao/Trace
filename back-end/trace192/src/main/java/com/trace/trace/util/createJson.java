@@ -22,7 +22,7 @@ public class createJson {
      * @param queries
      * @return
      */
-    public  String toJson(String pageCount, List<Query> queries){
+    public <T> String toJson(String pageCount, List<T> queries){
         String jsonInfo=toJson(queries),
                 jsonPageCount="[{\"pageCount\":\""+pageCount+"\"}";
         if(queries.size()==0) jsonInfo=jsonPageCount+"]";

@@ -59,28 +59,35 @@ message TraceResponse {
 
 //返回知识图谱信息（根据品类）
 message GraphResponseByKind {
-    string response = 1;
+    string  response = 1;
 }
 
 //返回知识图谱信息（根据品类）
 message GraphResponseByBrand {
-    string response = 1;
+    string  response = 1;
 }
 
-//添加商品名称列表结果
+//添加产品结果
 message AddProductResponse {
-    string response = 1;
+    string  response = 1;
 }
 
-//删除商品名称列表结果
+//删除产品结果
 message DeleteProductResponse {
-    string response = 1;
+    string  response = 1;
 }
 
-//查询商品名称列表结果
+//查询产品结果
 message ProductsResponse {
-    string response = 1;
+    string  response = 1;
 }
+
+message AllTraceRequest {
+    string productName = 1;
+    string companyName = 2;
+    string page = 3;
+}
+
 
 service SearchService {
     rpc searchQuery(QueryRequest) returns (QueryResponse);
@@ -91,4 +98,5 @@ service SearchService {
     rpc addProduct(AddProductRequest) returns (AddProductResponse);
     rpc deleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
     rpc searchProducts(ProductsRequest) returns (ProductsResponse);
+    rpc searchAllTraceByName(AllTraceRequest) returns (QueryResponse);
 }

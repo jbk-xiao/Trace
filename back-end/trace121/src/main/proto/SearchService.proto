@@ -82,6 +82,13 @@ message ProductsResponse {
     string  response = 1;
 }
 
+message AllTraceRequest {
+    string productName = 1;
+    string companyName = 2;
+    string page = 3;
+}
+
+
 service SearchService {
     rpc searchQuery(QueryRequest) returns (QueryResponse);
     rpc searchCompet(CompetRequest) returns (QueryResponse);
@@ -91,4 +98,5 @@ service SearchService {
     rpc addProduct(AddProductRequest) returns (AddProductResponse);
     rpc deleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
     rpc searchProducts(ProductsRequest) returns (ProductsResponse);
+    rpc searchAllTraceByName(AllTraceRequest) returns (QueryResponse);
 }

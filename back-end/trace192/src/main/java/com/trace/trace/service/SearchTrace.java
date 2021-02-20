@@ -4,19 +4,19 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.protobuf.ByteString;
-import com.trace.trace.dao.CompetMongoDao;
-import com.trace.trace.dao.FabricDao;
-import com.trace.trace.dao.ProcessEventDao;
-import com.trace.trace.dao.ProductRedisDao;
+import com.trace.trace.dao.*;
 import com.trace.trace.entity.CompanyInfo;
 import com.trace.trace.grpc.QueryRequest;
 import com.trace.trace.grpc.TraceResponse;
 import com.trace.trace.mapper.CompetMapper;
+import com.trace.trace.pojo.TraceManagerInfo;
+import com.trace.trace.util.createJson;
 import com.trace.trace.util.media.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,13 +43,18 @@ public class SearchTrace {
 
     private final CompetMapper competMapper;
 
+    private final TraceRedisDao traceRedisDao;
+
+    private final createJson json = new createJson();
+
     @Autowired
-    public SearchTrace(ProcessEventDao processEventDao, FabricDao fabricDao, FileUtil fileUtil, ProductRedisDao productRedisDao, CompetMapper competMapper) {
+    public SearchTrace(ProcessEventDao processEventDao, FabricDao fabricDao, FileUtil fileUtil, ProductRedisDao productRedisDao, CompetMapper competMapper, TraceRedisDao traceRedisDao) {
         this.processEventDao = processEventDao;
         this.fabricDao = fabricDao;
         this.fileUtil = fileUtil;
         this.productRedisDao = productRedisDao;
         this.competMapper = competMapper;
+        this.traceRedisDao = traceRedisDao;
     }
 
     public TraceResponse searchTrace(QueryRequest request) {
@@ -141,10 +146,33 @@ public class SearchTrace {
         StringBuilder sb = new StringBuilder();
         sb.append(gson.toJson(companyInfo));
         sb.deleteCharAt(sb.length() - 1);
-        sb.append("\"productNameList\":");
         sb.append(",");
+        sb.append("\"productNameList\":\"");
         sb.append(productNameList.toString());
-        sb.append("}");
+        sb.append("\"}");
         return sb.toString();
+    }
+
+    /**
+     * 根据公司名、商品名、页码获取到管理员界面的溯源信息列表
+     * @param product_name
+     * @param company_name
+     * @param page
+     * @return
+     */
+    public String searchAllTraceByName(String product_name, String company_name, String page){
+        String code = traceRedisDao.getProductCode(product_name,company_name);
+        List<String> traceCodeList = traceRedisDao.getAllTraceCode(code,Integer.parseInt(page));
+        String pageCount = "" + traceRedisDao.getPageNumber(code);
+        List<TraceManagerInfo> allTraceInfo = fabricDao.getManagerInfoList(traceCodeList);
+        String foodName = product_name.split("-")[0];
+        String specification = product_name.split("-")[1];
+        String category = product_name.split("-")[2];
+        for(TraceManagerInfo traceInfo:allTraceInfo){
+            traceInfo.setFoodName(foodName);
+            traceInfo.setSpecification(specification);
+            traceInfo.setCategory(category);
+        }
+        return json.toJson(pageCount,allTraceInfo);
     }
 }

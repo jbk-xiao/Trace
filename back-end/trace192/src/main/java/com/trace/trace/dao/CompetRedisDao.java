@@ -40,8 +40,9 @@ public class CompetRedisDao {
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
+        }finally {
+            jedis.close();
         }
-        jedis.close();
         return sku_id;
     }
 
@@ -63,6 +64,8 @@ public class CompetRedisDao {
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
+        }finally {
+            jedis.close();
         }
         return regisIdList;
     }
@@ -85,6 +88,8 @@ public class CompetRedisDao {
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
+        }finally {
+            jedis.close();
         }
         return skuIdList;
     }

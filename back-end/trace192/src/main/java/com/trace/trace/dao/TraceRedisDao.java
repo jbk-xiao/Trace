@@ -22,6 +22,8 @@ public class TraceRedisDao {
 
     @Autowired
     JedisUtil jedisUtil;
+    //分页的每一页的结果数
+    static int pageRecord = 10;
 
     /**
      * 获得初始流程输入时的产品列表选项内容
@@ -41,33 +43,75 @@ public class TraceRedisDao {
             }
         }catch (NullPointerException e) {
             e.printStackTrace();
+        }finally {
+            jedis.close();
         }
-        jedis.close();
         return productList;
     }
 
 
     /**
      * 从redis中获取到公司产品对应的条形码，用来构建溯源码
-     * @param pname
+     * @param product_name
      * @param company_name
-     * @return
+     * @return Code
      */
-    public String getProductCode(String pname,String company_name){
+    public String getProductCode(String product_name,String company_name){
         Jedis jedis = jedisUtil.getClient();
         jedis.select(4);
-        String productCode = null;
+        String code = null;
         try {
             if (jedis.exists(company_name)) {
-                productCode = jedis.hget(company_name,pname);
-                log.info("redis found productCode:" + productCode);
+                code = jedis.hget(company_name,product_name);
+                log.info("redis found code:" + code);
             }else {
                 log.info("redis没有找到"+company_name);
             }
         }catch (NullPointerException e) {
             e.printStackTrace();
+        }finally {
+            jedis.close();
         }
-        jedis.close();
-        return productCode;
+        return code;
+    }
+
+    /**
+     * 根据页码返回该商品下所有溯源码，一次十条
+     * @param code
+     * @param page
+     * @return
+     */
+    public List<String> getAllTraceCode(String code,int page){
+        Jedis jedis = jedisUtil.getClient();
+        jedis.select(4);
+        List<String> traceCodeList = new ArrayList<>();
+        int start = (page-1)*pageRecord;
+        int end = start+pageRecord-1;
+        try{
+            traceCodeList.addAll(jedis.lrange(code,start,end));
+        }finally {
+            jedis.close();
+        }
+        return traceCodeList;
+    }
+
+    /**
+     * 返回要显示的页码总数
+     *
+     * @param Code
+     * @return
+     */
+    public Long getPageNumber(String Code) {
+        Jedis jedis = jedisUtil.getClient();
+        jedis.select(4);
+        List<String> traceCodeList = new ArrayList<>();
+        try{
+            traceCodeList.addAll(jedis.lrange(Code,0,-1));
+        }finally {
+            jedis.close();
+        }
+        long num = traceCodeList.size();
+        long page = num / pageRecord + 1;
+        return page;
     }
 }

@@ -1,9 +1,7 @@
 package com.trace.trace.controller;
 
 import com.google.gson.Gson;
-import com.trace.trace.grpc.QueryRequest;
-import com.trace.trace.grpc.SearchServiceGrpc;
-import com.trace.trace.grpc.TraceResponse;
+import com.trace.trace.grpc.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -119,5 +117,17 @@ public class TraceController {
         long end = System.currentTimeMillis();
         log.info("add process over, taking " + (end - start));
         return traceResponse.getResponse();
+    }
+
+    @RequestMapping(value = "/getAllTraceInfo/{product_name}", method = RequestMethod.GET)
+    public String getAllTraceInfo(@PathVariable("product_name") String product_name){
+        log.info("Receive product_name request: "+product_name);
+        long start = System.currentTimeMillis();
+        QueryResponse queryResponse = this.searchServiceBlockingStub
+                .searchAllTraceByName(AllTraceRequest.newBuilder()
+                        .setProductName(product_name).build());
+        long end = System.currentTimeMillis();
+        log.info("Request product_name request '" + product_name + "' over, taking " + (end - start));
+        return queryResponse.getResponse();
     }
 }

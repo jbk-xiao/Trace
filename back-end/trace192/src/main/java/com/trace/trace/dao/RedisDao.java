@@ -69,7 +69,6 @@ public class RedisDao {
      * @return keys
      */
     public ArrayList<String> getIDList(String query) {
-        Jedis jedis= jedisUtil.getClient();
         List<String> list = new ArrayList<>();
         for (int i = 0; i<query.length(); i++){
             list.add(query.substring(i,i+1));

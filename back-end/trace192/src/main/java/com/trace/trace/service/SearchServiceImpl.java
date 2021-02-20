@@ -217,4 +217,23 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
         //表示此次连接结束
         responseObserver.onCompleted();
     }
+
+    /**
+     * 管理界面获取到所有的溯源列表
+     * @param request
+     * @param responseObserver
+     */
+    @Override
+    public void searchAllTraceByName(AllTraceRequest request, StreamObserver<QueryResponse> responseObserver)
+    {
+        String product_name = request.getProductName();
+        String company_name = request.getCompanyName();
+        String page = request.getPage();
+        String responseInfo = searchTrace.searchAllTraceByName(product_name,company_name,page);
+        QueryResponse response = QueryResponse.newBuilder().setResponse(responseInfo).build();
+        //放入response，传回客户端
+        responseObserver.onNext(response);
+        //表示此次连接结束
+        responseObserver.onCompleted();
+    }
 }

@@ -2,6 +2,7 @@ package com.trace.trace.util;
 
 import com.mongodb.MongoClient;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 /**
  * @author: Clivia-Han
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  * @create: 2021-02-06-10:29
  */
 @Slf4j
+@Component
 public class MongoDBUtil {
     /**
      * @return Mongodb的连接

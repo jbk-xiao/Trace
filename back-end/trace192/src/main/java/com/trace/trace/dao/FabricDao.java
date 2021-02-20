@@ -255,7 +255,7 @@ public class FabricDao {
      * @param ids id列表
      * @return List<TraceManagerInfo>
      */
-    public List<TraceManagerInfo> getManagerInfoList(String... ids) {
+    public List<TraceManagerInfo> getManagerInfoList(List<String> ids) {
         StringBuilder idList = new StringBuilder("[");
         for (String id : ids) {
             idList.append(id).append(",");
