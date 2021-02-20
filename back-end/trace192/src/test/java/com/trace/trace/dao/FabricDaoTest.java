@@ -1,9 +1,13 @@
 package com.trace.trace.dao;
 
+import com.trace.trace.pojo.TraceManagerInfo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author jbk-xiao
@@ -35,5 +39,11 @@ class FabricDaoTest {
     public void addProcedure() {
         String result = fabricDao.addProcedure("123456", "", "");
         System.out.println(result);
+    }
+
+    @Test
+    void getManagerInfoList() {
+        List<TraceManagerInfo> list = fabricDao.getManagerInfoList("123456", "16119701634150000");
+        System.out.println(list);
     }
 }

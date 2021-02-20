@@ -1,11 +1,14 @@
 package com.trace.trace.dao;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.trace.trace.config.RedisIndexConfig;
 import com.trace.trace.pojo.FabMediaInfo;
 import com.trace.trace.pojo.ProcedureInfo;
 import com.trace.trace.pojo.ProcessInfo;
 import com.trace.trace.pojo.TraceInfo;
+import com.trace.trace.pojo.TraceManagerInfo;
 import com.trace.trace.util.CreateTraceCode;
 import com.trace.trace.util.FabricUtil;
 import com.trace.trace.util.JedisUtil;
@@ -15,7 +18,6 @@ import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.Network;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 import redis.clients.jedis.Jedis;
@@ -48,7 +50,7 @@ public class FabricDao {
 
     final CreateTraceCode createTraceCode;
 
-    final Gson gson = new Gson();
+    final Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 
     Map<String, Integer> dbMap;
     Set<String> databaseSet;
@@ -131,7 +133,7 @@ public class FabricDao {
             TraceInfo traceInfo = gson.fromJson(traceInfoStr, TraceInfo.class);
             String id = traceInfo.getId();
             String picture = pictureNoFound;
-            List<String> list;
+            String latestPic;
             for (ProcessInfo process : traceInfo.getProcess()) {
                 processName = process.getName();
                 for (ProcedureInfo procedure : process.getProcedure()) {
@@ -139,8 +141,8 @@ public class FabricDao {
                     sb.append("_").append(procedure.getName());
                     if (databaseSet.contains(sb.toString())) {
                         jedis.select(dbMap.get(sb.toString()));
-                        list = jedis.lrange(id, 0, 0);
-                        picture = list.isEmpty() ? pictureNoFound : list.get(0);
+                        latestPic = jedis.lindex(id, 0);
+                        picture = latestPic == null ? pictureNoFound : latestPic;
                         procedure.setPicture(picturePrefix + picture);
                     }
                 }
@@ -170,6 +172,12 @@ public class FabricDao {
                                   String location) {
         //生成溯源码
         String id = createTraceCode.getTraceCode(foodType, com);
+
+        //将生成的溯源码id存入redis4号库，从左侧存入，因此较小索引为较新的id
+        Jedis jedis = jedisUtil.getClient();
+        jedis.select(4);
+        jedis.lpush(id.substring(0, 13), id);
+        jedis.close();
 
         String[] food = foodType.split("-");
         //依据生成的id和拆分过的食品基本信息调用区块链的createFood方法生成新的食品记录
@@ -231,9 +239,41 @@ public class FabricDao {
             info = new String(contract.submitTransaction("addProcedure", id, name, master,
                     System.currentTimeMillis() + ""));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.toString());
         }
+
+        Jedis jedis = jedisUtil.getClient();
+        int db = dbMap.get("工厂_" + name);
+        jedis.select(db);
+        jedis.lpush("latestCode", id);
+        jedis.close();
         return info;
+    }
+
+    /**
+     * 依据传入的id获取管理员界面产品列表，即TraceManagerList的列表
+     * @param ids id列表
+     * @return List<TraceManagerInfo>
+     */
+    public List<TraceManagerInfo> getManagerInfoList(String... ids) {
+        StringBuilder idList = new StringBuilder("[");
+        for (String id : ids) {
+            idList.append(id).append(",");
+        }
+        int end = idList.lastIndexOf(",");
+        if (end == -1) {
+            idList.append("]");
+        } else {
+            idList.replace(end, end, "]");
+        }
+        String infoList = "";
+        try {
+            Contract contract = network.getContract(FabricInfo.TRACE_CC.value);
+            infoList = new String(contract.evaluateTransaction("managerQueryInfos", idList.toString()));
+        } catch (Exception e) {
+            log.error(e.toString());
+        }
+        return gson.fromJson(infoList, new TypeToken<List<TraceManagerInfo>>() {}.getType());
     }
 
     private enum FabricInfo {
