@@ -229,6 +229,7 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
         String product_name = request.getProductName();
         String regis_id = request.getRegisId();
         String page = request.getPage();
+        log.info("receive regis_id: ");
         String responseInfo = searchTrace.searchAllTraceByName(product_name,regis_id,page);
         QueryResponse response = QueryResponse.newBuilder().setResponse(responseInfo).build();
         //放入response，传回客户端

@@ -86,9 +86,20 @@ public class TraceRedisDao {
         jedis.select(4);
         List<String> traceCodeList = new ArrayList<>();
         int start = (page-1)*pageRecord;
+        log.info("start: " + start);
         int end = start+pageRecord-1;
+        long length = jedis.llen(code);
+        if(end > length){
+            end = (int) length;
+        }
+        log.info("end: " + end);
         try{
-            traceCodeList.addAll(jedis.lrange(code,start,end));
+            if (jedis.exists(code)) {
+                traceCodeList.addAll(jedis.lrange(code, start, end));
+                log.info("redis found traceCodeList:" + traceCodeList.toString());
+            }else {
+                log.info("redis didn't find traceCodeList: " + code);
+            }
         }finally {
             jedis.close();
         }
@@ -98,20 +109,20 @@ public class TraceRedisDao {
     /**
      * 返回要显示的页码总数
      *
-     * @param Code
+     * @param code
      * @return
      */
-    public Long getPageNumber(String Code) {
+    public Long getPageNumber(String code) {
         Jedis jedis = jedisUtil.getClient();
         jedis.select(4);
-        List<String> traceCodeList = new ArrayList<>();
+        long num;
         try{
-            traceCodeList.addAll(jedis.lrange(Code,0,-1));
+             num = jedis.llen(code);
         }finally {
             jedis.close();
         }
-        long num = traceCodeList.size();
         long page = num / pageRecord + 1;
+        log.info("pageCount: "+page);
         return page;
     }
 }
