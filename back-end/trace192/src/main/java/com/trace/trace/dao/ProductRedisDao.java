@@ -119,18 +119,31 @@ public class ProductRedisDao {
      * @return
      */
     public String getAll(String regis_id){
+        StringBuilder res = new StringBuilder();
         Map<String, String> map = null;
         Jedis jedis = null;
         try{
             jedis = jedisUtil.getClient();
             jedis.select(4);
             map = jedis.hgetAll(regis_id);
+            res.append("[");
+            for(Map.Entry<String, String> entry : map.entrySet()){
+                res.append("{");
+                res.append("\"product\":");
+                res.append("\""+entry.getKey().trim()+"\"");
+                res.append(",");
+                res.append("\"code\":");
+                res.append(entry.getValue().trim());
+                res.append("},");
+            }
+            res.deleteCharAt(res.lastIndexOf(","));
+            res.append("]");
         }catch (Exception e){
             e.printStackTrace();
         }finally {
             jedis.close();
         }
-        return gson.toJson(map);
+        return res.toString();
     }
 
     /**
