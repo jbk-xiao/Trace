@@ -15,6 +15,6 @@
 |/addProcedure||POST请求接收三个参数：id=123456 &name=hahaha &master=lalala| 同上                                                         ||
 |/getAllTraceInfo/{regis_id}/{product_name}/{page}|http://121.46.19.26:8511/getAllTraceInfo/440108400003939/原味八宝粥-370g-速食粥/1|公司工商注册号regis_id、商品名称product_name、页码page| 返回总页码pageCount以及溯源列表信息（溯源码id、产品名称foodname、规格specification、分类category、最新流程latestProcess、时间time） |
 |/getFirstProcessInfo/{regis_id}||公司工商注册号regis_id| 该公司的公司基本信息以及公司所有商品名称列表 |第一次流程获取的信息|
-| /getProducts/{regis_id} | http://121.46.19.26:8511/getProducts/{440108400003939} | 公司工商注册号regis_id | 该公司的所有产品及其对应的编码 ||
-| /addProduct/{regis_id}/{product_name}/{code} | http://121.46.19.26:8511/addProducts/{440108400003939}/桂圆莲子八宝粥-370g-速食粥/6902613100020 | 公司工商注册号regis_id、商品名称product_name、产品编码code | 返回添加产品的执行结果（成功或不成功的字符串） ||
-| /deleteProduct/{regis_id}/{product_name} | http://121.46.19.26:8511/deleteProducts/{440108400003939}/桂圆莲子八宝粥-370g-速食粥 | 公司工商注册号regis_id、商品名称product_name | 返回删除产品的执行结果（成功或不成功的字符串） ||
+| /getProducts/{regis_id} | http://121.46.19.26:8511/getProducts/440108400003939 | 公司工商注册号regis_id | 该公司的所有产品及其对应的编码 ||
+| /addProduct/{regis_id}/{product_name}/{code} | http://121.46.19.26:8511/addProducts/440108400003939/桂圆莲子八宝粥-370g-速食粥/6902613100020 | 公司工商注册号regis_id、商品名称product_name、产品编码code | 返回添加产品的执行结果（成功或不成功的字符串） ||
+| /deleteProduct/{regis_id}/{product_name} | http://121.46.19.26:8511/deleteProducts/440108400003939/桂圆莲子八宝粥-370g-速食粥 | 公司工商注册号regis_id、商品名称product_name | 返回删除产品的执行结果（成功或不成功的字符串） ||
