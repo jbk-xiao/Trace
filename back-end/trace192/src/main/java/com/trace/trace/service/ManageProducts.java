@@ -47,12 +47,12 @@ public class ManageProducts {
 
     /**
      * 获取到所有的商品名称列表，用于商品名称选择
-     * TODO 设计数据格式
+     *
      * @param regis_id
      * @return
      */
-    public String getAllProductNameList(String regis_id){
-        String res = productRedisDao.getAllProductName(regis_id).toString();
-        return res;
-    }
+//    public String getAllProductNameList(String regis_id){
+//        String res = productRedisDao.getAllProductName(regis_id).toString();
+//        return res;
+//    }
 }

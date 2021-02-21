@@ -119,15 +119,54 @@ public class TraceController {
         return traceResponse.getResponse();
     }
 
+    /**
+     * 根据regis_id、商品名称、页码来获取溯源列表
+     * @param product_name
+     * @param regis_id
+     * @param page
+     * @return
+     */
     @RequestMapping(value = "/getAllTraceInfo/{regis_id}/{product_name}/{page}", method = RequestMethod.GET)
     public String getAllTraceInfo(@PathVariable("product_name") String product_name,@PathVariable("regis_id") String regis_id,@PathVariable("page") String page){
-        log.info("Receive product_name request: "+product_name);
+        log.info("Receive product_name request: "+product_name+",regis_id: "+regis_id+",page: "+page);
         long start = System.currentTimeMillis();
         QueryResponse queryResponse = this.searchServiceBlockingStub
                 .searchAllTraceByName(AllTraceRequest.newBuilder()
                         .setProductName(product_name).setRegisId(regis_id).setPage(page).build());
         long end = System.currentTimeMillis();
         log.info("Request product_name request '" + product_name + "' over, taking " + (end - start));
+        return queryResponse.getResponse();
+    }
+
+    /**
+     * 根据regis_id获取到该公司的所有的商品名称
+     * @param regis_id
+     * @return
+     */
+//    @RequestMapping(value = "/getAllProductNameList/{regis_id}", method = RequestMethod.GET)
+//    public String getAllTraceInfo(@PathVariable("regis_id") String regis_id){
+//        log.info("Receive regis_id request: "+regis_id);
+//        long start = System.currentTimeMillis();
+//        QueryResponse queryResponse = this.searchServiceBlockingStub
+//                .getAllProductNameList(ProductsRequest.newBuilder().setKey(regis_id).build());
+//        long end = System.currentTimeMillis();
+//        log.info("Request regis_id request '" + regis_id + "' to getAllProductNameList over, taking " + (end - start));
+//        return queryResponse.getResponse();
+//    }
+
+    /**
+     * 获取到第一次流程输入的公司基本信息以及商品选项列表
+     * @param regis_id
+     * @return
+     */
+    @RequestMapping(value = "/getFirstProcessInfo/{regis_id}", method = RequestMethod.GET)
+    public String getFirstProcessInfo(@PathVariable("regis_id") String regis_id){
+        log.info("Receive regis_id request: "+regis_id);
+        long start = System.currentTimeMillis();
+        QueryResponse queryResponse = this.searchServiceBlockingStub
+                .getFirstProcessInfo(ProductsRequest.newBuilder().setKey(regis_id).build());
+        long end = System.currentTimeMillis();
+        log.info("Request regis_id request '" + regis_id + "' to getAllProductNameList over, taking " + (end - start));
         return queryResponse.getResponse();
     }
 }

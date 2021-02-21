@@ -33,7 +33,6 @@ public class CreateTraceCode {
         StringBuilder traceCode = new StringBuilder();
         String productCode = traceRedisDao.getProductCode(pname,company_name);
         traceCode.append(productCode);
-        traceCode.deleteCharAt(traceCode.length() - 1);
         String now = new SimpleDateFormat("yyMMddHHmmss").format(new Date());
         traceCode.append(now);
         log.info("traceCode:" + traceCode);

@@ -38,7 +38,7 @@ public class QRCodeUtil {
     public byte[] addCode(String content, String code) {
         try {
             BufferedImage image = getBasicQRCode(content);
-            BufferedImage outImage = new BufferedImage(300, 325, BufferedImage.TYPE_4BYTE_ABGR);
+            BufferedImage outImage = new BufferedImage(300, 345, BufferedImage.TYPE_4BYTE_ABGR);
             Graphics2D outg = outImage.createGraphics();
             //画二维码到新的面板
             assert image != null;
@@ -47,9 +47,22 @@ public class QRCodeUtil {
             outg.setColor(Color.BLACK);
             //字体、字型、字号
             outg.setFont(new Font("微软雅黑", Font.BOLD, 20));
-            int strWidth = outg.getFontMetrics().stringWidth(code);
-            outg.drawString(code, 150 - strWidth / 2,
-                    image.getHeight() + (outImage.getHeight() - image.getHeight()) / 2 + 10); //画文字
+            //            int strWidth = outg.getFontMetrics().stringWidth(code);
+            String code1 = code.substring(0, code.length()/2);
+            String code2 = code.substring(code.length()/2, code.length());
+            int strWidth1 = outg.getFontMetrics().stringWidth(code1);
+            int strWidth2 = outg.getFontMetrics().stringWidth(code2);
+//            outg.drawString(code, 150  - strWidth/2 , image.getHeight() + (outImage.getHeight() - image.getHeight())/2 + 10 ); //画文字
+            outg.drawString(code1, 150  - strWidth1/2, image.getHeight() + (outImage.getHeight() - image.getHeight())/2 + 5 );
+            BufferedImage outImage2 = new BufferedImage(300, 365, BufferedImage.TYPE_4BYTE_ABGR);
+            Graphics2D outg2 = outImage2.createGraphics();
+            outg2.drawImage(outImage, 0, 0, outImage.getWidth(), outImage.getHeight(), null);
+            outg2.setColor(Color.BLACK);
+            outg2.setFont(new Font("微软雅黑",Font.BOLD,20)); //字体、字型、字号
+            outg2.drawString(code2, 150  - strWidth2/2, outImage.getHeight() + (outImage2.getHeight() - outImage.getHeight())/2 + 1 );
+            outg2.dispose();
+            outImage2.flush();
+            outImage = outImage2;
             outg.dispose();
             outImage.flush();
             image = outImage;

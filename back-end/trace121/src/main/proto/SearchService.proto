@@ -99,4 +99,6 @@ service SearchService {
     rpc deleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
     rpc searchProducts(ProductsRequest) returns (ProductsResponse);
     rpc searchAllTraceByName(AllTraceRequest) returns (QueryResponse);
+    rpc getAllProductNameList(ProductsRequest) returns (QueryResponse);
+    rpc getFirstProcessInfo(ProductsRequest) returns (QueryResponse);
 }

@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 
@@ -146,10 +145,14 @@ public class SearchTrace {
         StringBuilder sb = new StringBuilder();
         sb.append(gson.toJson(companyInfo));
         sb.deleteCharAt(sb.length() - 1);
-        sb.append(",");
-        sb.append("\"productNameList\":\"");
-        sb.append(productNameList.toString());
-        sb.append("\"}");
+        sb.append(",\"productNameList\":[");
+        for(String productName:productNameList){
+            sb.append("{\"name\":\"");
+            sb.append(productName);
+            sb.append("\"},");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        sb.append("]}");
         return sb.toString();
     }
 

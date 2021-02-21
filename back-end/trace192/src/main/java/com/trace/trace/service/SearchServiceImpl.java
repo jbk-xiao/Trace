@@ -229,8 +229,45 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
         String product_name = request.getProductName();
         String regis_id = request.getRegisId();
         String page = request.getPage();
-        log.info("receive regis_id: ");
+        log.info("receive regis_id: " + regis_id + ",product_name: " + product_name + ",page: " + page);
         String responseInfo = searchTrace.searchAllTraceByName(product_name,regis_id,page);
+        log.info("searchAllTraceByName response: " + responseInfo);
+        QueryResponse response = QueryResponse.newBuilder().setResponse(responseInfo).build();
+        //放入response，传回客户端
+        responseObserver.onNext(response);
+        //表示此次连接结束
+        responseObserver.onCompleted();
+    }
+
+    /**
+     * 获取到所有商品名称列表
+     * @param request
+     * @param responseObserver
+     */
+//    @Override
+//    public void getAllProductNameList(ProductsRequest request, StreamObserver<QueryResponse> responseObserver){
+//        String regis_id = request.getKey();
+//        log.info("receive regis_id: " + regis_id);
+//        String responseInfo = manageProducts.getAllProductNameList(regis_id);
+//        log.info("getAllProductNameList response: " + responseInfo);
+//        QueryResponse response = QueryResponse.newBuilder().setResponse(responseInfo).build();
+//        //放入response，传回客户端
+//        responseObserver.onNext(response);
+//        //表示此次连接结束
+//        responseObserver.onCompleted();
+//    }
+
+    /**
+     * 返回第一次流程填写所需的信息
+     * @param request
+     * @param responseObserver
+     */
+    @Override
+    public void getFirstProcessInfo(ProductsRequest request, StreamObserver<QueryResponse> responseObserver){
+        String regis_id = request.getKey();
+        log.info("receive regis_id: " + regis_id);
+        String responseInfo = searchTrace.getFirstProcessInfo(regis_id);
+        log.info("getFirstProcessInfo response: " + responseInfo);
         QueryResponse response = QueryResponse.newBuilder().setResponse(responseInfo).build();
         //放入response，传回客户端
         responseObserver.onNext(response);
