@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -43,7 +44,7 @@ class FabricDaoTest {
 
     @Test
     void getManagerInfoList() {
-//        List<TraceManagerInfo> list = fabricDao.getManagerInfoList();
-//        System.out.println(list);
+        List<TraceManagerInfo> list = fabricDao.getManagerInfoList(new ArrayList<String>(Arrays.asList("123456", "16119701634150000")));
+        System.out.println(list);
     }
 }

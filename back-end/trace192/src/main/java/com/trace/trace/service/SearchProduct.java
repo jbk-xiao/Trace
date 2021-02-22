@@ -33,14 +33,15 @@ public class SearchProduct{
 
     private final createJson json = new createJson();
 
-    public String searchProducts(String query,String page) {
+    public String searchProducts(String query, String page) {
         //分页检索，每次返回二十条商品
         log.info("Start searching keyword");
-        //redis方法，传入一个(query,page)，返回list
+        //redis方法，传入一个(query,page)，返回list，其中list的首位是总页数
         List<String> keys = redisDao.getIDListOnPage(query, Integer.parseInt(page));
-        log.info("redis weibo list: " + keys.toString());
-        //redis方法，传入一个(query)，返回总页数
-        String pageCount = "" + redisDao.getPageNumber(query);
+        log.info("redis food_id list: " + keys.toString());
+        //获取总页数
+        String pageCount = keys.get(0);
+        keys.remove(0);
         log.info("redis page count: " + pageCount);
         //mysql方法
         String jsonInfo = "";

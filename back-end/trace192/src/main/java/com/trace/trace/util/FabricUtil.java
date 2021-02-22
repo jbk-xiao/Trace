@@ -48,7 +48,9 @@ import java.util.function.Consumer;
 @Slf4j
 @Component
 public class FabricUtil {
-
+    /**
+     * fabric网路中peer节点所在的主机。
+     */
     @Value("${fabric.system.host}")
     private String host;
 
@@ -75,8 +77,8 @@ public class FabricUtil {
     }
 
     /**
-     * initialize fabric wallet, create admin and appUser
-     * @return initialized wallet
+     * 初始化fabric的Wallet对象，里边包括两个身份信息文件：admin.id和appUser.id
+     * @return 包含admin和appUser两个用户的Wallet对象实例
      */
     @Bean
     protected Wallet initWallet() {
@@ -84,7 +86,7 @@ public class FabricUtil {
         try {
             props.load(new FileInputStream(propPath));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.toString());
         }
 
         Wallet wallet = null;
@@ -94,15 +96,15 @@ public class FabricUtil {
             CryptoSuite cryptoSuite = CryptoSuiteFactory.getDefault().getCryptoSuite();
             caClient.setCryptoSuite(cryptoSuite);
 
-            // Create a wallet for managing identities
+            // 依据id文件所在的目录创建wallet对象
             wallet = Wallets.newFileSystemWallet(Paths.get(walletPath));
             X509Identity adminIdentity = null;
 
-            // Check to see if we've already enrolled the admin user.
-            if (wallet.get("admin") != null) {
+            // 检查admin用户是否已经加入网络
+            if ((adminIdentity = (X509Identity) wallet.get("admin")) != null) {
                 log.warn("An identity for the admin user \"admin\" already exists in the wallet");
             } else {
-                // Enroll the admin user, and import the new identity into the wallet.
+                //admin用户未加入网络时创建其并加入，并将新的身份信息加入wallet
                 final EnrollmentRequest enrollmentRequestTLS = new EnrollmentRequest();
                 enrollmentRequestTLS.addHost(host);
                 enrollmentRequestTLS.setProfile("tls");
@@ -111,70 +113,60 @@ public class FabricUtil {
                 wallet.put("admin", adminIdentity);
                 log.info("Successfully enrolled user \"admin\" and imported it into the wallet");
             }
-
+            // 判断当wallet中已存在appUser时，直接返回Wallet对象
             if (wallet.get(user) != null) {
                 log.warn("An identity for the user \"" + user + "\" already exists in the wallet");
-            } else {
-                if (adminIdentity == null) {
-                    log.error("\"admin\" needs to be enrolled and added to the wallet first!!");
-                }
-                X509Identity finalAdminIdentity = adminIdentity;
-                User admin = new User() {
-
-                    @Override
-                    public String getName() {
-                        return "admin";
-                    }
-
-                    @Override
-                    public Set<String> getRoles() {
-                        return null;
-                    }
-
-                    @Override
-                    public String getAccount() {
-                        return null;
-                    }
-
-                    @Override
-                    public String getAffiliation() {
-                        return "org1.department1";
-                    }
-
-                    @Override
-                    public Enrollment getEnrollment() {
-                        return new Enrollment() {
-
-                            @Override
-                            public PrivateKey getKey() {
-                                return finalAdminIdentity.getPrivateKey();
-                            }
-
-                            @Override
-                            public String getCert() {
-                                return Identities.toPemString(finalAdminIdentity.getCertificate());
-                            }
-                        };
-                    }
-
-                    @Override
-                    public String getMspId() {
-                        return "Org1MSP";
-                    }
-
-                };
-
-                // Register the user, enroll the user, and import the new identity into the wallet.
-                RegistrationRequest registrationRequest = new RegistrationRequest(user);
-                registrationRequest.setAffiliation("org1.department1");
-                registrationRequest.setEnrollmentID(user);
-                String enrollmentSecret = caClient.register(registrationRequest, admin);
-                Enrollment enrollment = caClient.enroll(user, enrollmentSecret);
-                Identity userId = Identities.newX509Identity("Org1MSP", adminIdentity.getCertificate(),
-                        adminIdentity.getPrivateKey());
-                wallet.put(user, userId);
-                log.info("Successfully enrolled user \"" + user + "\" and imported it into the wallet");
+                return wallet;
             }
+            // 创建X509Identity的final对象，用于创建admin的User对象
+            final X509Identity finalAdminIdentity = adminIdentity;
+            User admin = new User() {
+                @Override
+                public String getName() {
+                    return "admin";
+                }
+                @Override
+                public Set<String> getRoles() {
+                    return null;
+                }
+                @Override
+                public String getAccount() {
+                    return null;
+                }
+                @Override
+                public String getAffiliation() {
+                    return "org1.department1";
+                }
+                @Override
+                public Enrollment getEnrollment() {
+                    return new Enrollment() {
+                        @Override
+                        public PrivateKey getKey() {
+                            return finalAdminIdentity.getPrivateKey();
+                        }
+                        @Override
+                        public String getCert() {
+                            return Identities.toPemString(finalAdminIdentity.getCertificate());
+                        }
+                    };
+                }
+                @Override
+                public String getMspId() {
+                    return "Org1MSP";
+                }
+            };
+
+            // 使用admin注册appUser，让appUser加入网络，并将appUser导入wallet
+            RegistrationRequest registrationRequest = new RegistrationRequest(user);
+            registrationRequest.setAffiliation("org1.department1");
+            registrationRequest.setEnrollmentID(user);
+            String enrollmentSecret = caClient.register(registrationRequest, admin);
+            Enrollment enrollment = caClient.enroll(user, enrollmentSecret);
+            Identity userId = Identities.newX509Identity("Org1MSP", adminIdentity.getCertificate(),
+                    adminIdentity.getPrivateKey());
+            wallet.put(user, userId);
+            log.info("Successfully enrolled user \"" + user + "\" and imported it into the wallet");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -185,7 +177,7 @@ public class FabricUtil {
     private Wallet wallet;
 
     /**
-     * 使用appUser连接到fabric network，获得网关
+     * 使用wallet中的appUser连接到fabric网络，获得Gateway的对象。并将Gateway的对象作为Bean加载。
      * 无fabric环境时交换方法体中注释内容。
      * @return connected fabric Gateway
      * @see #getNetwork()
@@ -210,8 +202,9 @@ public class FabricUtil {
     private Gateway gateway;
 
     /**
-     * 直接使用@Bean注解，一开始就将连接注入spring
-     * @return network to mychannel
+     * 使用已连接入fabric网络的gateway对象连接到mychannel合约，获得Network的对象。
+     * 直接使用@Bean注解，一开始就将Network的连接注入spring。
+     * @return 已连接到mychannel的network对象。
      */
     @Bean
     public Network getNetwork() {

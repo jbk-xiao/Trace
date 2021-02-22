@@ -9,8 +9,13 @@ import redis.clients.jedis.ScanParams;
 import redis.clients.jedis.ScanResult;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 @Slf4j
@@ -24,64 +29,36 @@ public class RedisDao {
     JedisUtil jedisUtil;
 
     /**
-     * 根据页码查询id
-     * @param query 检索词
-     * @param page 页码
-     * @return keys
-     */
-//    public List<String> getIDListOnPage(String query, int page) {
-//        int start = (page - 1 ) * pagecount;
-//        int end = start + pagecount - 1;
-//        log.info("jedisUtil.toString(): "+jedisUtil.toString());
-//        List<String> queries = FuzzySearchQueryByKeys(query);
-//        Jedis jedis= jedisUtil.getClient();
-//        List<String> keys = new ArrayList<String>();
-//        try {
-//            if (jedis.exists(query)) {
-//                log.info("使用redis查询query返回idList");
-//                keys.addAll(jedis.zrevrange(query,start,end));
-//            } else {
-//                log.info("redis没有找到query");
-//            }
-//        } catch (NullPointerException e) {
-//            e.printStackTrace();
-//        }
-//        return keys;
-//    }
-//
-//    /**
-//     * 返回页码总数
-//     * @param query 检索词
-//     * @return page
-//     */
-//    public long getPageNumber(String query)
-//    {
-//        Jedis jedis= jedisUtil.getClient();
-//        long num = jedis.zcard(query);
-//        long page = num/pagecount + 1;
-//        return page;
-//    }
-
-    /**
      * 查询首页的id
      *
      * @param query 检索词
      * @return keys
      */
-    public ArrayList<String> getIDList(String query) {
+    public List<String> getIDList(String query) {
         List<String> list = new ArrayList<>();
-        for (int i = 0; i<query.length(); i++){
-            list.add(query.substring(i,i+1));
+        for (int i = 0; i < query.length(); i++) {
+            list.add(query.substring(i, i + 1));
         }
-        log.info("list:"+list.toString());
-        ArrayList<String> res = new ArrayList<String>();
+        int runsize = list.size();
+        ExecutorService executor = Executors.newFixedThreadPool(runsize);
+        final CountDownLatch latch = new CountDownLatch(runsize);
+        log.info("list:" + list.toString());
+        List<String> res = Collections.synchronizedList(new ArrayList<>(fuzzySearchList(query)));
+//        ArrayList<String> res = new ArrayList<String>(fuzzySearchList(query));
+        for (String key : list) {
+            executor.execute(() -> {
+                try {
+                    res.addAll(fuzzySearchList(key));
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
+                latch.countDown();
+            });
+        }
         try {
-            res.addAll(fuzzySearchList(query));
-            for(String key:list){
-                res.addAll(fuzzySearchList(key));
-            }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+            latch.await();
+        } catch (InterruptedException e) {
+            log.error(e.toString());
         }
         return res;
     }
@@ -94,7 +71,6 @@ public class RedisDao {
      */
     public List<String> fuzzySearchQueryByKeys(String query) {
         log.info("{} 模糊匹配", query);
-//        Jedis jedis = jedisUtil.getClient();
         String pattern = query.trim().replaceAll("\\s+", "*");
         pattern = "*" + pattern + "*";
         long startTime = System.currentTimeMillis();
@@ -151,20 +127,17 @@ public class RedisDao {
         long startTime = System.currentTimeMillis();
         Jedis jedis = jedisUtil.getClient();
         String cursor = ScanParams.SCAN_POINTER_START;
-        List<String> keys = new ArrayList<>();
         ScanParams scanParams = new ScanParams();
         scanParams.match(pattern);
         scanParams.count(Integer.MAX_VALUE);
-        while (true) {
+        List<String> keys = new ArrayList<>();
+        do {
             //使用scan命令获取数据，使用cursor游标记录位置，下次循环使用
             ScanResult<String> scanResult = jedis.scan(cursor, scanParams);
             /* 返回0 说明遍历完成 */
             cursor = scanResult.getCursor();
             keys = scanResult.getResult();
-            if ("0".equals(cursor)) {
-                break;
-            }
-        }
+        } while (!"0".equals(cursor));
         long finishTime = System.currentTimeMillis();
         log.info("jedisScan process time:" + (finishTime - startTime));
         jedis.close();
@@ -178,29 +151,26 @@ public class RedisDao {
      * @param query
      * @return
      */
-    public List<String> getIDListOnPage(String query, int page){
-        ArrayList<String> list = new ArrayList<String>();
-        list = getIDList(query);
-        int start = (page-1)*pageRecord;
-        int end = start+pageRecord-1;
+    public List<String> getIDListOnPage(String query, int page) {
+        List<String> list = getIDList(query);
+        int start = (page - 1) * pageRecord;
+        int end = start + pageRecord - 1;
         List<String> res = new ArrayList<>();
-        if(list.size()>=end) {
-            res = list.subList(start,end+1);
+        if (list.size() >= end) {
+            res = list.subList(start, end + 1);
         }
+        res.add(0, getPageNumber(list) + "");
         return res;
     }
 
     /**
      * 返回要显示的页码总数
      *
-     * @param query
+     * @param list
      * @return
      */
-    public Long getPageNumber(String query) {
-        ArrayList<String> list;
-        list = getIDList(query);
+    private Long getPageNumber(List<String> list) {
         long num = list.size();
-        long page = num / pageRecord + 1;
-        return page;
+        return num / pageRecord + (num % pageRecord == 0 ? 0 : 1);
     }
 }
