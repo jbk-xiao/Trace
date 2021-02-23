@@ -1,10 +1,18 @@
 package com.trace.trace.dao;
 
+import com.google.gson.Gson;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.trace.trace.entity.AgeDistributionData;
+import com.trace.trace.entity.ProvinceIndexData;
+import com.trace.trace.mapper.ChartsMapper;
+import com.trace.trace.pojo.AgeDistribution;
+import com.trace.trace.pojo.ProvinceIndex;
 import com.trace.trace.util.MongoDBUtil;
+import javafx.animation.KeyValue;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static com.mongodb.client.model.Filters.regex;
@@ -18,7 +26,7 @@ import static com.mongodb.client.model.Filters.regex;
  */
 @Slf4j
 @Component
-public class MongoSearchChartsDao {
+public class SearchChartsMongoDao {
 
     public String getPredictData(String companyName) {
         StringBuilder result = new StringBuilder();

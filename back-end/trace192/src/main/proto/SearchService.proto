@@ -106,4 +106,6 @@ service SearchService {
     rpc getFirstProcessInfo(ProductsRequest) returns (QueryResponse);
     rpc getPredict(ChartsRequestByString) returns (QueryResponse);
     rpc getNews(ChartsRequestByString) returns (QueryResponse);
+    rpc getAgeDistribution(ChartsRequestByString) returns (QueryResponse);
+    rpc getProvinceIndex(ChartsRequestByString) returns (QueryResponse);
 }

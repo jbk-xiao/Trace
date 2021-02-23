@@ -283,24 +283,56 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
         responseObserver.onCompleted();
     }
 
+    /**
+     * 取出前端需求的预测曲线的json内容。
+     * @param request 包含公司名称的grpc请求。
+     * @param responseObserver StreamObserver<QueryResponse>
+     */
     @Override
     public void getPredict(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
         String companyName = request.getRequest();
         log.info("getPredict: {}", companyName);
         String predictData = searchCharts.getPredictData(companyName);
-        log.info("getPredict response: {}", companyName);
+        log.info("getPredict response: {}", predictData);
         QueryResponse response = QueryResponse.newBuilder().setResponse(predictData).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 
+    /**
+     * 取出企业的新闻标题和链接的url并返回给前端。
+     * @param request 包含公司名称的grpc请求。
+     * @param responseObserver StreamObserver<QueryResponse>
+     */
     @Override
     public void getNews(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
         String companyName = request.getRequest();
         log.info("getNews: {}", companyName);
         String newsData = searchCharts.getNewsData(companyName);
-        log.info("getNews response: {}", companyName);
+        log.info("getNews response: {}", newsData);
         QueryResponse response = QueryResponse.newBuilder().setResponse(newsData).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getAgeDistribution(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
+        String keyword = request.getRequest();
+        log.info("getAgeDistribution: {}", keyword);
+        String ageDistributionData = searchCharts.getAgeDistribution(keyword);
+        log.info("getAgeDistribution: {}", ageDistributionData);
+        QueryResponse response = QueryResponse.newBuilder().setResponse(ageDistributionData).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getProvinceIndex(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
+        String keyword = request.getRequest();
+        log.info("getProvinceIndex: {}", keyword);
+        String provinceIndex = searchCharts.getProvinceIndex(keyword);
+        log.info("getProvinceIndex: {}", provinceIndex);
+        QueryResponse response = QueryResponse.newBuilder().setResponse(provinceIndex).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
