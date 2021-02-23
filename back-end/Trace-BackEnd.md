@@ -2472,7 +2472,6 @@ CREATE TABLE relate_search(
 
 ```json
 {
-    "relate_word": {
         "keyword": "八宝粥",
         "period": "20200223|20210214",
         "data": [
@@ -2487,26 +2486,7 @@ CREATE TABLE relate_search(
                 "ratio": 1.46
             }
         ]
-    }
-}
-
-{
-    "relate_word": {
-        "keyword": "八宝粥",
-        "period": "20200223|20210214",
-        "data": {
-            "word":[
-                "八宝粥有哪8种材料","银鹭八宝粥"
-            ],
-            "pv":[
-                758,3434
-            ],
-            "ratio":[
-                0.8,1.46
-            ]
-        }
-    }
-}
+   }
 ```
 
 
