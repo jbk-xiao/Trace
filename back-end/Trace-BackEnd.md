@@ -3370,6 +3370,35 @@ company,news,news_url
 老干妈,茅台女总工入围院士候选人，网友称“老干妈”陶华碧也具备资格,https://new.qq.com/omn/20210218/20210218A04J3E00.html
 泰奇食品,家豪食品、泰奇食品“失意” 三批次产品被检不合格,https://www.163.com/dy/article/G0HM78910525CR59.html
 ```
+
+**存储结构**
+```
+{
+        "_id" : ObjectId("6034a94c5b7af28f10e8df93"),
+        "company_name" : "老干妈",
+        "news_url" : "https://baijiahao.baidu.com/s?id=1673972543213543768&wfr=spider&for=pc",
+        "news_title" : "一代传奇老干妈:不改变,时代就会无情地抛弃你!"
+}
+{
+        "_id" : ObjectId("6034a94c5b7af28f10e8df94"),
+        "company_name" : "老干妈",
+        "news_url" : "https://baijiahao.baidu.com/s?id=1673336793117478159&wfr=spider&for=pc",
+        "news_title" : "中国大名鼎鼎的“四大名酱”,竟然没老干妈!全部吃过的堪称食神"
+}
+{
+        "_id" : ObjectId("6034a9555b7af28f10e8df95"),
+        "company_name" : "泰奇食品",
+        "news_url" : "http://dy.163.com/article/G0HM78910525CR59.html",
+        "news_title" : "家豪食品、泰奇食品“失意” 三批次产品被检不合格"
+}
+{
+        "_id" : ObjectId("6034a9555b7af28f10e8df96"),
+        "company_name" : "泰奇食品",
+        "news_url" : "https://www.163.com/dy/article/G0HM2N0M0525CR59.html",
+        "news_title" : "IP荒来临 泰奇食品打造《忍者萌剑传》原创IP"
+}
+```
+
 **存储逻辑**
 
 从百度资讯中爬取相关资讯，首先在redis数据库的10号数据库中的“news”集合判断是否存在相关资讯，若不存在，则将标题存在redis的10号数据库中，将公司名、标题、url等信息存储在MongoDB的trace数据库，名为“news”的集合中。
