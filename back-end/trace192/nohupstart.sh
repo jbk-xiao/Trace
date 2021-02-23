@@ -1,2 +1,3 @@
 #!/bin/bash
-nohup mvn spring-boot:run > trace.out 2>&1 &
+tm=$(date +%F-%H%M%S)
+nohup mvn spring-boot:run > trace"${tm}".out 2>&1 &

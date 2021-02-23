@@ -20,20 +20,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
 
-    @Autowired
-    SearchCompet searchCompet;
+    final SearchCompet searchCompet;
 
-    @Autowired
-    SearchTrace searchTrace;
+    final SearchTrace searchTrace;
 
-    @Autowired
-    SearchProduct searchProduct;
+    final SearchProduct searchProduct;
 
-    @Autowired
-    SearchGraph searchGraph;
+    final SearchGraph searchGraph;
 
+    final ManageProducts manageProducts;
+
+    final SearchCharts searchCharts;
     @Autowired
-    ManageProducts manageProducts;
+    public SearchServiceImpl(SearchCompet searchCompet, SearchTrace searchTrace, SearchProduct searchProduct,
+                             SearchGraph searchGraph, ManageProducts manageProducts, SearchCharts searchCharts) {
+        this.searchCompet = searchCompet;
+        this.searchTrace = searchTrace;
+        this.searchProduct = searchProduct;
+        this.searchGraph = searchGraph;
+        this.manageProducts = manageProducts;
+        this.searchCharts = searchCharts;
+    }
+
     /**
      * 竞品查询模块
      *
@@ -272,6 +280,28 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
         //放入response，传回客户端
         responseObserver.onNext(response);
         //表示此次连接结束
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getPredict(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
+        String companyName = request.getRequest();
+        log.info("getPredict: {}", companyName);
+        String predictData = searchCharts.getPredictData(companyName);
+        log.info("getPredict response: {}", companyName);
+        QueryResponse response = QueryResponse.newBuilder().setResponse(predictData).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getNews(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
+        String companyName = request.getRequest();
+        log.info("getNews: {}", companyName);
+        String newsData = searchCharts.getNewsData(companyName);
+        log.info("getNews response: {}", companyName);
+        QueryResponse response = QueryResponse.newBuilder().setResponse(newsData).build();
+        responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 }

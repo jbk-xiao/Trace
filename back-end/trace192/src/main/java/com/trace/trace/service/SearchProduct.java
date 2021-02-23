@@ -1,5 +1,6 @@
 package com.trace.trace.service;
 
+import com.google.gson.Gson;
 import com.trace.trace.dao.RedisDao;
 import com.trace.trace.entity.Detail;
 import com.trace.trace.mapper.DetailMapper;
@@ -22,23 +23,27 @@ import java.util.List;
 @Component
 public class SearchProduct{
 
-    @Autowired
-    private QueryMapper queryMapper;
+    private final QueryMapper queryMapper;
 
-    @Autowired
-    private DetailMapper detailMapper;
+    private final DetailMapper detailMapper;
 
-    @Autowired
-    private RedisDao redisDao;
+    private final RedisDao redisDao;
 
     private final createJson json = new createJson();
+
+    @Autowired
+    public SearchProduct(QueryMapper queryMapper, DetailMapper detailMapper, RedisDao redisDao) {
+        this.queryMapper = queryMapper;
+        this.detailMapper = detailMapper;
+        this.redisDao = redisDao;
+    }
 
     public String searchProducts(String query, String page) {
         //分页检索，每次返回二十条商品
         log.info("Start searching keyword");
         //redis方法，传入一个(query,page)，返回list，其中list的首位是总页数
         List<String> keys = redisDao.getIDListOnPage(query, Integer.parseInt(page));
-        log.info("redis food_id list: " + keys.toString());
+        log.info("redis skuId list: " + keys.toString());
         //获取总页数
         String pageCount = keys.get(0);
         keys.remove(0);
@@ -48,7 +53,7 @@ public class SearchProduct{
         try {
             jsonInfo = json.toJson(pageCount, queryMapper.selectQueryBySkuIds(keys));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("" + e);
         }
         return jsonInfo;
     }
@@ -58,8 +63,7 @@ public class SearchProduct{
         log.info("Start searching detail");
         //调用mysql方法，获取相关id的详情
         Detail detail = detailMapper.selectDetailBySkuId(skuId);
-        String jsonInfo = json.toJson((List) detail);
-        return jsonInfo;
+        return new Gson().toJson(detail);
     }
 
 }

@@ -185,17 +185,17 @@ public class FabricUtil {
     @Bean
     public Gateway getGateway() {
         //测试时注释掉下边所有内容
-//        Gateway.Builder builder = Gateway.createBuilder();
-//        Path networkConfigPath = Paths.get(conPath);
-//        try {
-//            builder.identity(wallet, user).networkConfig(networkConfigPath).discovery(true);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return builder.connect();
+        Gateway.Builder builder = Gateway.createBuilder();
+        Path networkConfigPath = Paths.get(conPath);
+        try {
+            builder.identity(wallet, user).networkConfig(networkConfigPath).discovery(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return builder.connect();
 
         //测试时取消下边内容的注释
-        return new NoErrorGateway();
+//        return new NoErrorGateway();
     }
 
     @Autowired

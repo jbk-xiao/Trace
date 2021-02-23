@@ -4,101 +4,106 @@ package com.trace.trace.grpc;
 
 //请求
 message QueryRequest {
-    //类型
-    string queryType = 1;
-    //请求内容
-    string query = 2;
-    //分页的页数
-    string page = 3;
+  //类型
+  string queryType = 1;
+  //请求内容
+  string query = 2;
+  //分页的页数
+  string page = 3;
 }
 
 //竞品模块请求
 message CompetRequest {
-    string regis_id = 1;
+  string regis_id = 1;
 
 }
 
 //知识图谱请求（根据品类）
 message GraphRequestByKind {
-    string kind = 1;
+  string kind = 1;
 }
 
 //知识图谱请求（根据品牌）
 message GraphRequestByBrand {
-    string brand = 1;
+  string brand = 1;
 }
 
 //添加产品请求
 message AddProductRequest {
-    string key = 1;
-    string field = 2;
-    string value = 3;
+  string key = 1;
+  string field = 2;
+  string value = 3;
 }
 
 //删除产品请求
 message DeleteProductRequest {
-    string key = 1;
-    string field = 2;
+  string key = 1;
+  string field = 2;
 }
 
 //查询产品请求
 message ProductsRequest {
-    string key = 1;
+  string key = 1;
 }
 
 //返回
 message QueryResponse {
-    string response = 1;
+  string response = 1;
 }
 
 //返回检索结果
 message TraceResponse {
-    string response = 1;
-    bytes responseMedia = 2;
+  string response = 1;
+  bytes responseMedia = 2;
 }
 
 //返回知识图谱信息（根据品类）
 message GraphResponseByKind {
-    string  response = 1;
+  string  response = 1;
 }
 
 //返回知识图谱信息（根据品类）
 message GraphResponseByBrand {
-    string  response = 1;
+  string  response = 1;
 }
 
 //添加产品结果
 message AddProductResponse {
-    string  response = 1;
+  string  response = 1;
 }
 
 //删除产品结果
 message DeleteProductResponse {
-    string  response = 1;
+  string  response = 1;
 }
 
 //查询产品结果
 message ProductsResponse {
-    string  response = 1;
+  string  response = 1;
 }
 
 message AllTraceRequest {
-    string productName = 1;
-    string regisId = 2;
-    string page = 3;
+  string productName = 1;
+  string regisId = 2;
+  string page = 3;
+}
+//以单String查询竞品图表，目前包括：getPredict、getNews
+message ChartsRequestByString {
+    string request = 1;
 }
 
-
 service SearchService {
-    rpc searchQuery(QueryRequest) returns (QueryResponse);
-    rpc searchCompet(CompetRequest) returns (QueryResponse);
-    rpc searchTrace(QueryRequest) returns (TraceResponse);
-    rpc searchGraphByKind(GraphRequestByKind) returns (GraphResponseByKind);
-    rpc searchGraphByBrand(GraphRequestByBrand) returns (GraphResponseByBrand);
-    rpc addProduct(AddProductRequest) returns (AddProductResponse);
-    rpc deleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
-    rpc searchProducts(ProductsRequest) returns (ProductsResponse);
-    rpc searchAllTraceByName(AllTraceRequest) returns (QueryResponse);
-    rpc getAllProductNameList(ProductsRequest) returns (QueryResponse);
-    rpc getFirstProcessInfo(ProductsRequest) returns (QueryResponse);
+  rpc searchQuery(QueryRequest) returns (QueryResponse);
+  rpc searchCompet(CompetRequest) returns (QueryResponse);
+  rpc searchTrace(QueryRequest) returns (TraceResponse);
+  rpc searchGraphByKind(GraphRequestByKind) returns (GraphResponseByKind);
+  rpc searchGraphByBrand(GraphRequestByBrand) returns (GraphResponseByBrand);
+  rpc addProduct(AddProductRequest) returns (AddProductResponse);
+  rpc deleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
+  rpc searchProducts(ProductsRequest) returns (ProductsResponse);
+  rpc searchAllTraceByName(AllTraceRequest) returns (QueryResponse);
+  rpc getAllProductNameList(ProductsRequest) returns (QueryResponse);
+  rpc getFirstProcessInfo(ProductsRequest) returns (QueryResponse);
+  rpc getPredict(ChartsRequestByString) returns (QueryResponse);
+  rpc getNews(ChartsRequestByString) returns (QueryResponse);
 }

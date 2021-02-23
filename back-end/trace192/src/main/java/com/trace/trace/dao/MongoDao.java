@@ -19,8 +19,6 @@ import java.util.Arrays;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
 
 
 /**

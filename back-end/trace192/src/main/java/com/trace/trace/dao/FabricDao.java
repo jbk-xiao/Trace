@@ -72,11 +72,11 @@ public class FabricDao {
     }
 
     /**
-     * save a media record to fabric.
+     * 接收文件类型、文件名称、文件md5码三个参数，将其存储至fabric。
      *
      * @param filetype mp4, mkv, jpg
-     * @param filename full basename with filetype.
-     * @param md5code  md5code
+     * @param filename 带有扩展名的文件名称
+     * @param md5code  md5码
      */
     public void saveMedia(String filetype, String filename, String md5code) {
         Contract contract = network.getContract(FabricInfo.MEDIA_CC.value);
@@ -92,9 +92,9 @@ public class FabricDao {
     }
 
     /**
-     * Check if the file had been modified since it stored.
+     * 调用区块链中数据查看文件自生成以来是否被修改过。
      *
-     * @param filename full basename.
+     * @param filename 带有扩展名的文件basename。
      * @return boolean
      */
     public boolean isModified(String filename) {
@@ -142,7 +142,7 @@ public class FabricDao {
                     if (databaseSet.contains(sb.toString())) {
                         jedis.select(dbMap.get(sb.toString()));
                         latestPic = jedis.lindex(id, 0);
-                        picture = latestPic == null ? pictureNoFound : latestPic;
+                        picture = (latestPic == null) ? pictureNoFound : latestPic;
                         procedure.setPicture(picturePrefix + picture);
                     }
                 }
@@ -199,12 +199,12 @@ public class FabricDao {
     }
 
     /**
-     * 接收产品某个process的信息，将其存入fabric
-     * @param id
-     * @param name
-     * @param master
-     * @param location
-     * @return
+     * 接收产品某个具体process的信息，将其存入fabric。
+     * @param id 唯一溯源码
+     * @param name process名称
+     * @param master 该process负责人
+     * @param location 该process所在城市
+     * @return 溯源码为id批次的产品所对应的TraceInfo的json字符串。
      */
     public String addProcess(String id, String name, String master, String location) {
         String infoStr = "";

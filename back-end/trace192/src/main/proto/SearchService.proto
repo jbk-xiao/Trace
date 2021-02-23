@@ -87,7 +87,10 @@ message AllTraceRequest {
     string regisId = 2;
     string page = 3;
 }
-
+//以单String查询竞品图表，目前包括：getPredict、getNews
+message ChartsRequestByString {
+    string request = 1;
+}
 
 service SearchService {
     rpc searchQuery(QueryRequest) returns (QueryResponse);
@@ -101,4 +104,6 @@ service SearchService {
     rpc searchAllTraceByName(AllTraceRequest) returns (QueryResponse);
     rpc getAllProductNameList(ProductsRequest) returns (QueryResponse);
     rpc getFirstProcessInfo(ProductsRequest) returns (QueryResponse);
+    rpc getPredict(ChartsRequestByString) returns (QueryResponse);
+    rpc getNews(ChartsRequestByString) returns (QueryResponse);
 }

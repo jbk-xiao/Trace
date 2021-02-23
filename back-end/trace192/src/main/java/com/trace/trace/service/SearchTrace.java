@@ -47,7 +47,8 @@ public class SearchTrace {
     private final createJson json = new createJson();
 
     @Autowired
-    public SearchTrace(ProcessEventDao processEventDao, FabricDao fabricDao, FileUtil fileUtil, ProductRedisDao productRedisDao, CompetMapper competMapper, TraceRedisDao traceRedisDao) {
+    public SearchTrace(ProcessEventDao processEventDao, FabricDao fabricDao, FileUtil fileUtil,
+                       ProductRedisDao productRedisDao, CompetMapper competMapper, TraceRedisDao traceRedisDao) {
         this.processEventDao = processEventDao;
         this.fabricDao = fabricDao;
         this.fileUtil = fileUtil;
@@ -69,18 +70,20 @@ public class SearchTrace {
         boolean isString = true;
 
         switch (queryType) {
-            case "video":
+            case "video": {
                 //视频访问
                 isString = false;
                 log.info("Encoding video '" + query + "'...");
                 mediaData = ByteString.copyFrom(fileUtil.getBytesFromVideo(query));
                 break;
-            case "picture":
+            }
+            case "picture": {
                 //图片访问
                 isString = false;
                 log.info("Encoding picture '" + query + "'...");
                 mediaData = ByteString.copyFrom(fileUtil.getBytesFromPicture(query));
                 break;
+            }
             case "event":
                 //生产线“最近动态”列表
                 int page = Integer.parseInt(request.getPage());
@@ -93,24 +96,31 @@ public class SearchTrace {
                 jsonInfo = fabricDao.getInfoByOriginId(query);
                 log.info("Fabric return: " + jsonInfo);
                 break;
-            case "addFirstProcess":
-                jsonInfo = addFirstProcess(query);
+            case "addFirstProcess": {
+                HashMap<String, String> map = gson.fromJson(query, new TypeToken<HashMap<String, String>>() {}.getType());
+                jsonInfo = fabricDao.addFirstProcess(map.get("foodType"), map.get("com"), Integer.parseInt(map.get("processCount")),
+                        map.get("name"), map.get("master"), map.get("location"));
                 break;
-            case "addProcess":
+            }
+            case "addProcess": {
                 //添加一道流程信息
                 long start = System.currentTimeMillis();
-                jsonInfo = addProcess(query);
+                HashMap<String, String> map = gson.fromJson(query, new TypeToken<HashMap<String, String>>() {}.getType());
+                jsonInfo = fabricDao.addProcess(map.get("id"), map.get("name"), map.get("master"), map.get("location"));
                 log.info("192 add process takes {} ms", System.currentTimeMillis() - start);
                 break;
-            case "addProcedure":
+            }
+            case "addProcedure": {
                 //添加工厂内一道工序信息
-                start = System.currentTimeMillis();
+                long start = System.currentTimeMillis();
                 jsonInfo = addProcedure(query);
                 log.info("192 add procedure takes {} ms", System.currentTimeMillis() - start);
                 break;
-            default:
+            }
+            default: {
                 log.error("Receive the wrong message!");
                 break;
+            }
         }
         return (isString
             ? TraceResponse.newBuilder().setResponse(jsonInfo)
@@ -118,16 +128,6 @@ public class SearchTrace {
         ).build();
     }
 
-    private String addFirstProcess(String params) {
-        HashMap<String, String> map = gson.fromJson(params, new TypeToken<HashMap<String, String>>() {}.getType());
-        return fabricDao.addFirstProcess(map.get("foodType"), map.get("com"), Integer.parseInt(map.get("processCount")),
-                map.get("name"), map.get("master"), map.get("location"));
-    }
-
-    private String addProcess(String params) {
-        HashMap<String, String> map = gson.fromJson(params, new TypeToken<HashMap<String, String>>() {}.getType());
-        return fabricDao.addProcess(map.get("id"), map.get("name"), map.get("master"), map.get("location"));
-    }
 
     private String addProcedure(String params) {
         HashMap<String, String> map = gson.fromJson(params, new TypeToken<HashMap<String, String>>() {}.getType());
