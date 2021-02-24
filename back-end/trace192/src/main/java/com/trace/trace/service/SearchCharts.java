@@ -25,6 +25,7 @@ public class SearchCharts {
     final SearchChartsMongoDao searchChartsMongoDao;
     final ChartsMapper chartsMapper;
     final Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+
     @Autowired
     public SearchCharts(SearchChartsMongoDao searchChartsMongoDao, ChartsMapper chartsMapper) {
         this.searchChartsMongoDao = searchChartsMongoDao;
@@ -44,7 +45,7 @@ public class SearchCharts {
         //从mysql中查找年龄分布
         AgeOrSexDistributionData[] ageDistributionData = chartsMapper.selectAgeDistributionData(keyword);
         log.info("mysql selecting ageDistributionData {} uses: {}ms", keyword, System.currentTimeMillis() - start);
-        //TODO 是否增加一个列表在redis，表示寻找最新的period？
+        //TODO 是否增加一个列表在redis，表示寻找最新的period？是否考虑年龄与性别的时间段一致性问题？
         AgeOrSexDistribution ageDistribution = new AgeOrSexDistribution(keyword, ageDistributionData[0].getPeriod());
         ageDistribution.setAgeOrSexDistributionData(ageDistributionData);
         //从mysql中查找性别分布
@@ -59,6 +60,7 @@ public class SearchCharts {
 
     public String getProvinceIndex(String keyword) {
         long start = System.currentTimeMillis();
+        //从mysql中查找用户省份分布指数
         ProvinceIndexData[] provinceIndexData = chartsMapper.selectProvinceIndexData(keyword);
         log.info("mysql selecting {} uses: {}ms", keyword, System.currentTimeMillis() - start);
         ProvinceIndex provinceIndex = new ProvinceIndex(keyword, provinceIndexData[0].getPeriod());

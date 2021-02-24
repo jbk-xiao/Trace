@@ -5,10 +5,12 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 /**
+ * 年龄或性别分布返回值中列表内的每个数据。（复用）
+ *
  * @author jbk-xiao
  * @program trace192
  * @packagename com.trace.trace.entity
- * @Description 年龄分布返回值列表内每个数据。
+ * @Description
  * @create 2021-02-23-20:55
  */
 @Data

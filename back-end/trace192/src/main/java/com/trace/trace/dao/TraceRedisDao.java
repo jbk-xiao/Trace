@@ -27,10 +27,11 @@ public class TraceRedisDao {
 
     /**
      * 获得初始流程输入时的产品列表选项内容
+     *
      * @param regis_id
      * @return
      */
-    public List<String> getProductList(String regis_id){
+    public List<String> getProductList(String regis_id) {
         Jedis jedis = jedisUtil.getClient();
         jedis.select(4);
         List<String> productList = new ArrayList<>();
@@ -38,12 +39,12 @@ public class TraceRedisDao {
             if (jedis.exists(regis_id)) {
                 productList.addAll(jedis.hkeys(regis_id));
                 log.info("redis found productList:" + productList.toString());
-            }else {
-                log.info("redis没有找到"+regis_id);
+            } else {
+                log.info("redis没有找到" + regis_id);
             }
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             jedis.close();
         }
         return productList;
@@ -52,24 +53,25 @@ public class TraceRedisDao {
 
     /**
      * 从redis中获取到公司产品对应的条形码，用来构建溯源码
+     *
      * @param product_name
      * @param regis_id
      * @return Code
      */
-    public String getProductCode(String product_name,String regis_id){
+    public String getProductCode(String product_name, String regis_id) {
         Jedis jedis = jedisUtil.getClient();
         jedis.select(4);
         String code = null;
         try {
             if (jedis.exists(regis_id)) {
-                code = jedis.hget(regis_id,product_name);
+                code = jedis.hget(regis_id, product_name);
                 log.info("redis found code:" + code);
-            }else {
-                log.info("redis没有找到"+regis_id);
+            } else {
+                log.info("redis没有找到" + regis_id);
             }
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             jedis.close();
         }
         return code;
@@ -77,30 +79,31 @@ public class TraceRedisDao {
 
     /**
      * 根据页码返回该商品下所有溯源码，一次十条
+     *
      * @param code
      * @param page
      * @return
      */
-    public List<String> getAllTraceCode(String code,int page){
+    public List<String> getAllTraceCode(String code, int page) {
         Jedis jedis = jedisUtil.getClient();
         jedis.select(4);
         List<String> traceCodeList = new ArrayList<>();
-        int start = (page-1)*pageRecord;
+        int start = (page - 1) * pageRecord;
         log.info("start: " + start);
-        int end = start+pageRecord-1;
+        int end = start + pageRecord - 1;
         long length = jedis.llen(code);
-        if(end > length){
+        if (end > length) {
             end = (int) length;
         }
         log.info("end: " + end);
-        try{
+        try {
             if (jedis.exists(code)) {
                 traceCodeList.addAll(jedis.lrange(code, start, end));
                 log.info("redis found traceCodeList:" + traceCodeList.toString());
-            }else {
+            } else {
                 log.info("redis didn't find traceCodeList: " + code);
             }
-        }finally {
+        } finally {
             jedis.close();
         }
         return traceCodeList;
@@ -116,13 +119,13 @@ public class TraceRedisDao {
         Jedis jedis = jedisUtil.getClient();
         jedis.select(4);
         long num;
-        try{
-             num = jedis.llen(code);
-        }finally {
+        try {
+            num = jedis.llen(code);
+        } finally {
             jedis.close();
         }
         long page = num / pageRecord + 1;
-        log.info("pageCount: "+page);
+        log.info("pageCount: " + page);
         return page;
     }
 }

@@ -25,6 +25,7 @@ public interface CompetMapper {
 
     /**
      * 根据公司id获取到公司的基本信息
+     *
      * @param regis_id
      * @return
      */
@@ -33,6 +34,7 @@ public interface CompetMapper {
 
     /**
      * 根据skuIds获取到商品信息
+     *
      * @param skuIds
      * @return
      */
@@ -40,6 +42,7 @@ public interface CompetMapper {
 
     /**
      * 根据skuId获取到商品信息
+     *
      * @param skuId
      * @return
      */
@@ -48,6 +51,7 @@ public interface CompetMapper {
 
     /**
      * 根据regisids获取竞品项目地理信息
+     *
      * @param regisIds
      * @return
      */
@@ -55,6 +59,7 @@ public interface CompetMapper {
 
     /**
      * 根据skuIds获取到对应商品以及竞品的评论维度分数
+     *
      * @param skuIds
      * @return
      */

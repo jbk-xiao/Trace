@@ -1,7 +1,6 @@
 package com.trace.trace.util;
 
 import lombok.extern.slf4j.Slf4j;
-import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.Gateway;
 import org.hyperledger.fabric.gateway.Identities;
 import org.hyperledger.fabric.gateway.Identity;
@@ -9,14 +8,7 @@ import org.hyperledger.fabric.gateway.Network;
 import org.hyperledger.fabric.gateway.Wallet;
 import org.hyperledger.fabric.gateway.Wallets;
 import org.hyperledger.fabric.gateway.X509Identity;
-import org.hyperledger.fabric.gateway.impl.GatewayImpl;
-import org.hyperledger.fabric.gateway.impl.NetworkImpl;
-import org.hyperledger.fabric.gateway.spi.Checkpointer;
-import org.hyperledger.fabric.gateway.spi.CommitListener;
-import org.hyperledger.fabric.sdk.BlockEvent;
-import org.hyperledger.fabric.sdk.Channel;
 import org.hyperledger.fabric.sdk.Enrollment;
-import org.hyperledger.fabric.sdk.Peer;
 import org.hyperledger.fabric.sdk.User;
 import org.hyperledger.fabric.sdk.security.CryptoSuite;
 import org.hyperledger.fabric.sdk.security.CryptoSuiteFactory;
@@ -29,14 +21,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.PrivateKey;
-import java.util.Collection;
 import java.util.Properties;
 import java.util.Set;
-import java.util.function.Consumer;
 
 /**
  * @author jbk-xiao
@@ -78,6 +66,7 @@ public class FabricUtil {
 
     /**
      * 初始化fabric的Wallet对象，里边包括两个身份信息文件：admin.id和appUser.id
+     *
      * @return 包含admin和appUser两个用户的Wallet对象实例
      */
     @Bean
@@ -125,18 +114,22 @@ public class FabricUtil {
                 public String getName() {
                     return "admin";
                 }
+
                 @Override
                 public Set<String> getRoles() {
                     return null;
                 }
+
                 @Override
                 public String getAccount() {
                     return null;
                 }
+
                 @Override
                 public String getAffiliation() {
                     return "org1.department1";
                 }
+
                 @Override
                 public Enrollment getEnrollment() {
                     return new Enrollment() {
@@ -144,12 +137,14 @@ public class FabricUtil {
                         public PrivateKey getKey() {
                             return finalAdminIdentity.getPrivateKey();
                         }
+
                         @Override
                         public String getCert() {
                             return Identities.toPemString(finalAdminIdentity.getCertificate());
                         }
                     };
                 }
+
                 @Override
                 public String getMspId() {
                     return "Org1MSP";
@@ -179,23 +174,24 @@ public class FabricUtil {
     /**
      * 使用wallet中的appUser连接到fabric网络，获得Gateway的对象。并将Gateway的对象作为Bean加载。
      * 无fabric环境时交换方法体中注释内容。
+     *
      * @return connected fabric Gateway
      * @see #getNetwork()
      */
     @Bean
     public Gateway getGateway() {
         //测试时注释掉下边所有内容
-        Gateway.Builder builder = Gateway.createBuilder();
-        Path networkConfigPath = Paths.get(conPath);
-        try {
-            builder.identity(wallet, user).networkConfig(networkConfigPath).discovery(true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return builder.connect();
+//        Gateway.Builder builder = Gateway.createBuilder();
+//        Path networkConfigPath = Paths.get(conPath);
+//        try {
+//            builder.identity(wallet, user).networkConfig(networkConfigPath).discovery(true);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return builder.connect();
 
         //测试时取消下边内容的注释
-//        return new NoErrorGateway();
+        return new NoErrorGateway();
     }
 
     @Autowired
@@ -204,6 +200,7 @@ public class FabricUtil {
     /**
      * 使用已连接入fabric网络的gateway对象连接到mychannel合约，获得Network的对象。
      * 直接使用@Bean注解，一开始就将Network的连接注入spring。
+     *
      * @return 已连接到mychannel的network对象。
      */
     @Bean

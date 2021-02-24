@@ -35,20 +35,20 @@ public class Graph {
         this.nodesMap = nodesMap;
         this.linksMap = linksMap;
         ArrayList<Map> mapList = new ArrayList<>();
-        HashMap<String,String> map = new HashMap<>();
-        map.put("name","first_class");
+        HashMap<String, String> map = new HashMap<>();
+        map.put("name", "first_class");
         mapList.add(map);
         map = new HashMap<>();
-        map.put("name","second_class");
+        map.put("name", "second_class");
         mapList.add(map);
         map = new HashMap<>();
-        map.put("name","third_class");
+        map.put("name", "third_class");
         mapList.add(map);
         map = new HashMap<>();
-        map.put("name","brand");
+        map.put("name", "brand");
         mapList.add(map);
         Map[] mapArray = new Map[mapList.size()];
-        for(int n=0;n<mapList.size();n++){
+        for (int n = 0; n < mapList.size(); n++) {
             mapArray[n] = mapList.get(n);
         }
         this.categoriesMap = mapArray;
@@ -89,10 +89,10 @@ public class Graph {
     @Override
     public String toString() {
         return "GraphBean{" +
-                "keyword='" + keyword + '\'' +
-                ", nodesMap=" + Arrays.toString(nodesMap) +
-                ", linksMap=" + Arrays.toString(linksMap) +
-                ", categoriesMap=" + Arrays.toString(categoriesMap) +
-                '}';
+               "keyword='" + keyword + '\'' +
+               ", nodesMap=" + Arrays.toString(nodesMap) +
+               ", linksMap=" + Arrays.toString(linksMap) +
+               ", categoriesMap=" + Arrays.toString(categoriesMap) +
+               '}';
     }
 }

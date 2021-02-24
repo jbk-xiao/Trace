@@ -89,7 +89,7 @@ message AllTraceRequest {
 }
 //以单String查询竞品图表，目前包括：getPredict、getNews
 message ChartsRequestByString {
-    string request = 1;
+  string request = 1;
 }
 
 service SearchService {

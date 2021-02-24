@@ -18,10 +18,10 @@ public class ManageProducts {
     @Autowired
     ProductRedisDao productRedisDao;
 
-    public String AddProduct(String key, String field, String value){
+    public String AddProduct(String key, String field, String value) {
         String info = "";
         int flag = productRedisDao.insert(key, field, value);
-        if(flag == 1){
+        if (flag == 1) {
             info = "添加产品成功";
         } else {
             info = "添加产品失败";
@@ -29,10 +29,10 @@ public class ManageProducts {
         return info;
     }
 
-    public String DeleteProduct(String key, String field){
+    public String DeleteProduct(String key, String field) {
         String info = "";
         int flag = productRedisDao.delete(key, field);
-        if(flag == 1){
+        if (flag == 1) {
             info = "删除产品成功";
         } else {
             info = "删除产品失败";
@@ -40,7 +40,7 @@ public class ManageProducts {
         return info;
     }
 
-    public String SearchProducts(String key){
+    public String SearchProducts(String key) {
         String res = productRedisDao.getAll(key);
         return res;
     }

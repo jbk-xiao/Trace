@@ -1,9 +1,5 @@
 package com.trace.trace.service;
 
-import com.trace.trace.grpc.QueryRequest;
-import com.trace.trace.grpc.QueryResponse;
-import com.trace.trace.grpc.SearchServiceGrpc;
-
 /**
  * @author Zenglr
  * @program: trace

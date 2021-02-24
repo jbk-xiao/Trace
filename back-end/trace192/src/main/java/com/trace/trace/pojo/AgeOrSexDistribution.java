@@ -6,6 +6,8 @@ import com.trace.trace.entity.AgeOrSexDistributionData;
 import lombok.Data;
 
 /**
+ * 性别或年龄分布返回数据对应pojo。（复用）
+ *
  * @author jbk-xiao
  * @program trace192
  * @packagename com.trace.trace.pojo
@@ -23,8 +25,9 @@ public class AgeOrSexDistribution {
     @Expose
     @SerializedName("data")
     private AgeOrSexDistributionData[] ageOrSexDistributionData;
+
     public AgeOrSexDistribution(String keyword, String period) {
         this.keyword = keyword;
-        this.period =period;
+        this.period = period;
     }
 }

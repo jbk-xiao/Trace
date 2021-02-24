@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class SearchProduct{
+public class SearchProduct {
 
     private final QueryMapper queryMapper;
 

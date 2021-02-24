@@ -34,17 +34,17 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean
     @Override
-    public KeyGenerator keyGenerator(){
-        return new KeyGenerator(){
+    public KeyGenerator keyGenerator() {
+        return new KeyGenerator() {
             @Override
-            public Object generate(Object target, Method method, Object... params){
+            public Object generate(Object target, Method method, Object... params) {
                 StringBuilder sb = new StringBuilder();
                 sb.append(target.getClass().getName());
                 sb.append(method.getName());
-                for (Object obj : params){
+                for (Object obj : params) {
                     sb.append(obj.toString());
                 }
-                return  sb.toString();
+                return sb.toString();
             }
         };
     }
@@ -54,7 +54,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * 缓存配置管理器
      */
     @Bean
-    public CacheManager cacheManager(LettuceConnectionFactory factory){
+    public CacheManager cacheManager(LettuceConnectionFactory factory) {
         //        以锁写入的方式创建RedisCacheWriter对象
         RedisCacheWriter writer = RedisCacheWriter.lockingRedisCacheWriter(factory);
         //        创建默认缓存配置对象
@@ -66,14 +66,14 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     @Bean
-    public RedisTemplate<String,Object> redisTemplate(LettuceConnectionFactory factory){
-        RedisTemplate<String,Object> template = new RedisTemplate<>();
+    public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory factory) {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(factory);
 
         Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance , ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
+        om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
         jackson2JsonRedisSerializer.setObjectMapper(om);
 
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();

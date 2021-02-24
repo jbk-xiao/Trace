@@ -16,6 +16,7 @@ import java.util.function.Consumer;
 
 /**
  * 模拟一个空gateway，用于在未配置fabric环境时测试
+ *
  * @author jbk-xiao
  * @program trace192
  * @packagename com.trace.trace.util

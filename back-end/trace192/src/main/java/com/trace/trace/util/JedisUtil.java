@@ -54,6 +54,7 @@ public class JedisUtil {
 
     @Autowired
     JedisPool jedisPool;
+
     public Jedis getClient() {
         log.info("调用getClient");
         return jedisPool.getResource();

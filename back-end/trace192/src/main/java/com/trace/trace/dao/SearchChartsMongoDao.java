@@ -30,6 +30,7 @@ public class SearchChartsMongoDao {
             String docJson = document.toJson();
             result.append(docJson);
         }
+        mongoClient.close();
         return result.toString();
     }
 
@@ -43,6 +44,7 @@ public class SearchChartsMongoDao {
             String docJson = document.toJson();
             result.append(",").append(docJson);
         }
+        mongoClient.close();
         try {
             result.deleteCharAt(result.indexOf(","));
         } catch (StringIndexOutOfBoundsException e) {

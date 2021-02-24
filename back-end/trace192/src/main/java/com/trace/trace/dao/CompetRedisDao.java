@@ -24,23 +24,24 @@ public class CompetRedisDao {
 
     /**
      * 获取到regis_id对应的sku_id
+     *
      * @param regis_id
      * @return
      */
-    public String getSkuId(String regis_id){
+    public String getSkuId(String regis_id) {
         Jedis jedis = jedisUtil.getClient();
         jedis.select(1);
         String sku_id = null;
         try {
             if (jedis.exists(regis_id)) {
                 sku_id = jedis.get(regis_id);
-                log.info("regis_id:"+regis_id+",sku_id:"+sku_id);
-            }else {
-                log.info("redis didn't find"+regis_id);
+                log.info("regis_id:" + regis_id + ",sku_id:" + sku_id);
+            } else {
+                log.info("redis didn't find" + regis_id);
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             jedis.close();
         }
         return sku_id;
@@ -48,10 +49,11 @@ public class CompetRedisDao {
 
     /**
      * 获取到主公司regis_id对应的所有竞品公司regis_id
+     *
      * @param regis_id
      * @return
      */
-    public List<String> getCompetRegisId(String regis_id){
+    public List<String> getCompetRegisId(String regis_id) {
         Jedis jedis = jedisUtil.getClient();
         jedis.select(2);
         List<String> regisIdList = new ArrayList<>();
@@ -59,12 +61,12 @@ public class CompetRedisDao {
             if (jedis.exists(regis_id)) {
                 regisIdList.addAll(jedis.smembers(regis_id));
                 log.info(regisIdList.toString());
-            }else {
-                log.info("redis didn't find"+regis_id);
+            } else {
+                log.info("redis didn't find" + regis_id);
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             jedis.close();
         }
         return regisIdList;
@@ -72,23 +74,24 @@ public class CompetRedisDao {
 
     /**
      * 根据主公司sku_id获取到所有竞品商品的sku_id
+     *
      * @param sku_id
      * @return
      */
-    public List<String> getCompetSkuId(String sku_id){
+    public List<String> getCompetSkuId(String sku_id) {
         Jedis jedis = jedisUtil.getClient();
         jedis.select(2);
         List<String> skuIdList = new ArrayList<>();
         try {
             if (jedis.exists(sku_id)) {
-                skuIdList.addAll(jedis.zrevrange(sku_id,0,-1));
+                skuIdList.addAll(jedis.zrevrange(sku_id, 0, -1));
                 log.info(skuIdList.toString());
-            }else {
-                log.info("redis didn't find"+sku_id);
+            } else {
+                log.info("redis didn't find" + sku_id);
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             jedis.close();
         }
         return skuIdList;

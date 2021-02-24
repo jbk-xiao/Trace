@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 用于所有图表所需数据的返回。
+ * 用于竞品图表所需数据的返回。
  *
  * @author jbk-xiao
  * @program trace121
@@ -31,6 +31,7 @@ public class ChartsController {
 
     /**
      * 取出前端需求的预测曲线的json内容。
+     *
      * @param companyName 传入主公司名称。
      * @return 返回“预测曲线”所需内容。
      */
@@ -47,6 +48,7 @@ public class ChartsController {
 
     /**
      * 取出企业的新闻标题和链接的url并返回给前端
+     *
      * @param companyName 企业名称
      * @return json
      */
@@ -61,6 +63,12 @@ public class ChartsController {
         return response.getResponse();
     }
 
+    /**
+     * 利用百度指数中的关键词获得最新一段时间内的用户年龄分布指数和性别分布指数。
+     *
+     * @param keyword 百度指数中的关键词。
+     * @return 关键词对应用户的年龄分布指数和性别分布指数。
+     */
     @RequestMapping(value = "/getAgeDistribution/{keyword}", method = RequestMethod.GET)
     public String getAgeOrSexDistribution(@PathVariable("keyword") String keyword) {
         long start = System.currentTimeMillis();
@@ -72,6 +80,12 @@ public class ChartsController {
         return response.getResponse();
     }
 
+    /**
+     * 利用百度指数中的关键词获得最新一段时间内的用户省份分布指数
+     *
+     * @param keyword 百度指数中的关键词。
+     * @return 关键词对应用户的省份分布指数。
+     */
     @RequestMapping(value = "/getProvinceIndex/{keyword}", method = RequestMethod.GET)
     public String getProvinceIndex(@PathVariable("keyword") String keyword) {
         long start = System.currentTimeMillis();

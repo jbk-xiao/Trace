@@ -101,9 +101,9 @@ public class RedisDao {
         log.info("模糊匹配到keys：" + keys.toString());
         List<String> list = new ArrayList<>();
 //        if (keys.size() > 0) {
-            for (String key : keys) {
-                list.addAll(jedis.zrevrange(key, 0, -1));
-            }
+        for (String key : keys) {
+            list.addAll(jedis.zrevrange(key, 0, -1));
+        }
 //        } else {
 //            log.info("redis没有查到，返回" + list.toString());
 //        }
@@ -167,6 +167,7 @@ public class RedisDao {
     private Integer getPageNumber(List<String> list) {
         return getPageNumber(list.size());
     }
+
     private Integer getPageNumber(int length) {
         return length / pageRecord + (length % pageRecord == 0 ? 0 : 1);
     }
