@@ -3,7 +3,6 @@ package com.trace.trace.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @author jbk-xiao
@@ -13,10 +12,12 @@ import lombok.NoArgsConstructor;
  * @create 2021-02-23-20:55
  */
 @Data
-public class AgeDistributionData {
+public class AgeOrSexDistributionData {
+    @Expose(serialize = false, deserialize = false)
+    private String period;
     @Expose
-    @SerializedName("age_range")
-    private String ageRange;
+    @SerializedName("range")
+    private String range;
     @Expose
     @SerializedName("tgi")
     private Double tgi;

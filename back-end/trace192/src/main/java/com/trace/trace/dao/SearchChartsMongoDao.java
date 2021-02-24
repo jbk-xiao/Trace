@@ -1,18 +1,10 @@
 package com.trace.trace.dao;
 
-import com.google.gson.Gson;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
-import com.trace.trace.entity.AgeDistributionData;
-import com.trace.trace.entity.ProvinceIndexData;
-import com.trace.trace.mapper.ChartsMapper;
-import com.trace.trace.pojo.AgeDistribution;
-import com.trace.trace.pojo.ProvinceIndex;
 import com.trace.trace.util.MongoDBUtil;
-import javafx.animation.KeyValue;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static com.mongodb.client.model.Filters.regex;
@@ -49,8 +41,13 @@ public class SearchChartsMongoDao {
                 .getCollection("news");
         for (Document document : collection.find(regex("company_name", companyName))) {
             String docJson = document.toJson();
-            result.append(docJson);
+            result.append(",").append(docJson);
         }
-        return result.toString();
+        try {
+            result.deleteCharAt(result.indexOf(","));
+        } catch (StringIndexOutOfBoundsException e) {
+            log.warn("{} has no news.", companyName);
+        }
+        return "[" + result.toString() + "]";
     }
 }

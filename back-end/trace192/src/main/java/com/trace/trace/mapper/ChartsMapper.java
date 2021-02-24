@@ -1,6 +1,6 @@
 package com.trace.trace.mapper;
 
-import com.trace.trace.entity.AgeDistributionData;
+import com.trace.trace.entity.AgeOrSexDistributionData;
 import com.trace.trace.entity.ProvinceIndexData;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,10 +17,15 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface ChartsMapper {
-    @Select("SELECT age_range ageRange, tgi, word_rate wordRate, all_rate allRate FROM age_distribution "
+    @Select("SELECT period, age_range `range`, tgi, word_rate wordRate, all_rate allRate FROM age_distribution "
             + "WHERE keyword = #{keyword}")
-    AgeDistributionData[] selectAgeDistributionData(@Param("keyword") String keyword);
+    AgeOrSexDistributionData[] selectAgeDistributionData(@Param("keyword") String keyword);
 
-    @Select("SELECT province name, sum_index value FROM province_index WHERE keyword = #{keyword}")
+    @Select("SELECT period, sex_range `range`, tgi, word_rate wordRate, all_rate allRate FROM sex_distribution "
+            + "WHERE keyword = #{keyword}")
+    AgeOrSexDistributionData[] selectSexDistributionData(String keyword);
+
+    @Select("SELECT period, province name, sum_index value FROM province_index WHERE keyword = #{keyword}")
     ProvinceIndexData[] selectProvinceIndexData(@Param("keyword") String keyword);
+
 }

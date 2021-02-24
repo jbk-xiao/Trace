@@ -62,7 +62,7 @@ public class ChartsController {
     }
 
     @RequestMapping(value = "/getAgeDistribution/{keyword}", method = RequestMethod.GET)
-    public String getAgeDistribution(@PathVariable("keyword") String keyword) {
+    public String getAgeOrSexDistribution(@PathVariable("keyword") String keyword) {
         long start = System.currentTimeMillis();
         log.info("request getAgeDistribution: {}", keyword);
         QueryResponse response = searchServiceBlockingStub

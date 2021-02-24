@@ -13,6 +13,8 @@ import lombok.Data;
  */
 @Data
 public class ProvinceIndexData {
+    @Expose(serialize = false, deserialize = false)
+    private String period;
     @Expose
     @SerializedName("name")
     private String name;

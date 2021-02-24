@@ -2,7 +2,7 @@ package com.trace.trace.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.trace.trace.entity.AgeDistributionData;
+import com.trace.trace.entity.AgeOrSexDistributionData;
 import lombok.Data;
 
 /**
@@ -13,7 +13,7 @@ import lombok.Data;
  * @create 2021-02-23-21:26
  */
 @Data
-public class AgeDistribution {
+public class AgeOrSexDistribution {
     @Expose
     @SerializedName("keyword")
     private String keyword;
@@ -22,11 +22,9 @@ public class AgeDistribution {
     private String period;
     @Expose
     @SerializedName("data")
-    private AgeDistributionData[] ageDistributionData;
-    public AgeDistribution() {
-
-    }
-    public AgeDistribution(String keyword) {
+    private AgeOrSexDistributionData[] ageOrSexDistributionData;
+    public AgeOrSexDistribution(String keyword, String period) {
         this.keyword = keyword;
+        this.period =period;
     }
 }

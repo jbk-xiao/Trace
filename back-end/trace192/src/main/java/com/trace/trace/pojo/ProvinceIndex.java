@@ -24,7 +24,8 @@ public class ProvinceIndex {
     @SerializedName("data")
     private ProvinceIndexData[] provinceIndexData;
 
-    public ProvinceIndex(String keyword) {
+    public ProvinceIndex(String keyword, String period) {
         this.keyword = keyword;
+        this.period = period;
     }
 }
