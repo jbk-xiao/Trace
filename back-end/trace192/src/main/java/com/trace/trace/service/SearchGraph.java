@@ -18,11 +18,11 @@ public class SearchGraph {
     @Autowired
     MongoDao mongodbDao;
 
-    public String searchGraphByKind(String kind){
+    public String searchGraphByKind(String kind) {
         return mongodbDao.getGraphByKind(kind);
     }
 
-    public  String searchGraphByBrand(String brand){
+    public String searchGraphByBrand(String brand) {
         return mongodbDao.getGraphByBrand(brand);
     }
 }

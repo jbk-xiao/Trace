@@ -32,8 +32,9 @@ public class ProcessEventDao {
 
     /**
      * Return a list of time when the videos are created.
+     *
      * @param processName event in which process.
-     * @param page in which page, 15 records per page.
+     * @param page        in which page, 15 records per page.
      * @return a list of Long Integer. (1970.1.1)
      */
     public List<Long> getEventTitleListOnPage(String processName, int page) {
@@ -42,7 +43,7 @@ public class ProcessEventDao {
         List<String> list = jedis.lrange(processName, (long) RECORD_PER_PAGE * (page - 1),
                 (long) RECORD_PER_PAGE * page - 1);
         List<Long> result = new ArrayList<>();
-        for (String filename: list) {
+        for (String filename : list) {
             result.add(filenameToDate(filename));
         }
         return result;
@@ -50,6 +51,7 @@ public class ProcessEventDao {
 
     /**
      * Receive a filename and find the date.
+     *
      * @param filename picture name.
      * @return current-1970.1.1
      */

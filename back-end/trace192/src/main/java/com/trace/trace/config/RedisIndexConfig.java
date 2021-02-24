@@ -1,7 +1,7 @@
 package com.trace.trace.config;
 
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import lombok.Data;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
@@ -38,7 +38,8 @@ public class RedisIndexConfig {
             }
             String json = sb.toString();
             Gson gson = new Gson();
-            Type type = new TypeToken<HashMap<String, Integer>>() {}.getType();
+            Type type = new TypeToken<HashMap<String, Integer>>() {
+            }.getType();
             map = gson.fromJson(json, type);
             reader.close();
         } catch (IOException e) {

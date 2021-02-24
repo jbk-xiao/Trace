@@ -10,7 +10,6 @@ import redis.clients.jedis.Jedis;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author: Clivia-Han
@@ -29,21 +28,22 @@ public class ProductRedisDao {
 
     /**
      * 添加商品
+     *
      * @param regis_id
      * @param product_name
      * @param code
      * @return
      */
-    public int insert(String regis_id, String product_name, String code){
+    public int insert(String regis_id, String product_name, String code) {
         Jedis jedis = null;
         try {
             jedis = jedisUtil.getClient();
             jedis.select(4);
             jedis.hset(regis_id, product_name, code);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return 0;
-        }finally {
+        } finally {
             jedis.close();
         }
         return 1;
@@ -51,20 +51,21 @@ public class ProductRedisDao {
 
     /**
      * 删除商品
+     *
      * @param regis_id
      * @param product_name
      * @return
      */
-    public int delete(String regis_id, String product_name){
+    public int delete(String regis_id, String product_name) {
         Jedis jedis = null;
-        try{
+        try {
             jedis = jedisUtil.getClient();
             jedis.select(4);
             jedis.hdel(regis_id, product_name);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return 0;
-        }finally {
+        } finally {
             jedis.close();
         }
         return 1;
@@ -72,42 +73,44 @@ public class ProductRedisDao {
 
     /**
      * 更新商品信息
+     *
      * @param code
      * @param regis_id
      * @param product_name
      * @return
      */
-    public int update(String regis_id, String product_name, String code){
+    public int update(String regis_id, String product_name, String code) {
         Jedis jedis = null;
-        try{
+        try {
             jedis = jedisUtil.getClient();
             jedis.select(4);
             jedis.hset(regis_id, product_name, code);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return 0;
-        }finally {
+        } finally {
             jedis.close();
         }
         return 1;
     }
 
-    /**查找单个产品
+    /**
+     * 查找单个产品
      *
      * @param regis_id
      * @param product_name
      * @return
      */
-    public String find(String regis_id, String product_name){
+    public String find(String regis_id, String product_name) {
         String value = null;
         Jedis jedis = null;
-        try{
+        try {
             jedis = jedisUtil.getClient();
             jedis.select(4);
             value = jedis.hget(regis_id, product_name);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             jedis.close();
         }
         return value;
@@ -115,22 +118,23 @@ public class ProductRedisDao {
 
     /**
      * 获取所有商品与对应十三位条形码
+     *
      * @param regis_id
      * @return
      */
-    public String getAll(String regis_id){
+    public String getAll(String regis_id) {
         StringBuilder res = new StringBuilder();
         Map<String, String> map = null;
         Jedis jedis = null;
-        try{
+        try {
             jedis = jedisUtil.getClient();
             jedis.select(4);
             map = jedis.hgetAll(regis_id);
             res.append("[");
-            for(Map.Entry<String, String> entry : map.entrySet()){
+            for (Map.Entry<String, String> entry : map.entrySet()) {
                 res.append("{");
                 res.append("\"product\":");
-                res.append("\""+entry.getKey().trim()+"\"");
+                res.append("\"" + entry.getKey().trim() + "\"");
                 res.append(",");
                 res.append("\"code\":");
                 res.append(entry.getValue().trim());
@@ -138,9 +142,9 @@ public class ProductRedisDao {
             }
             res.deleteCharAt(res.lastIndexOf(","));
             res.append("]");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             jedis.close();
         }
         return res.toString();
@@ -148,22 +152,23 @@ public class ProductRedisDao {
 
     /**
      * 获取到所有的商品名称
+     *
      * @param regis_id
      * @return
      */
-    public List<String> getAllProductName(String regis_id){
+    public List<String> getAllProductName(String regis_id) {
         Jedis jedis = jedisUtil.getClient();
         jedis.select(4);
         List<String> productList = new ArrayList<>();
         try {
             if (jedis.exists(regis_id)) {
                 productList.addAll(jedis.hkeys(regis_id));
-            }else {
-                log.info("redis没有找到"+regis_id);
+            } else {
+                log.info("redis没有找到" + regis_id);
             }
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             jedis.close();
         }
         return productList;

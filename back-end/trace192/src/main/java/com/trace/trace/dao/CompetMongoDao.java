@@ -18,31 +18,29 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class CompetMongoDao {
-    private static MongoCollection<Document> collection;
-    private static StringBuilder sb;
 
-
-    public String getCommentStatistic(String sku_id){
-        MongoClient mongoClient=null;
-       try{
-           mongoClient = MongoDBUtil.getConn();
-           collection = mongoClient.getDatabase("trace").getCollection("comment_statistic");
-           sb= new StringBuilder();
-           BasicDBObject sku = new BasicDBObject("sku_id",sku_id);
-           Document originDoc = collection.find(sku).first();
-           Document extractedDoc = new Document();
-           if (originDoc!=null&&!originDoc.isEmpty()) {
-               extractedDoc.put("comment_statistic",originDoc.get("data"));
-               sb.append(extractedDoc.toJson());
-           }else{
-               sb.append("{}");
-               log.info("not found");
-           }
-           sb.deleteCharAt(0);
-           log.info("has already comment_statistic from MongoDB");
-       }finally {
-           mongoClient.close();
-       }
+    public String getCommentStatistic(String sku_id) {
+        MongoClient mongoClient = null;
+        StringBuilder sb;
+        try {
+            mongoClient = MongoDBUtil.getConn();
+            MongoCollection<Document> collection = mongoClient.getDatabase("trace").getCollection("comment_statistic");
+            sb = new StringBuilder();
+            BasicDBObject sku = new BasicDBObject("sku_id", sku_id);
+            Document originDoc = collection.find(sku).first();
+            Document extractedDoc = new Document();
+            if (originDoc != null && !originDoc.isEmpty()) {
+                extractedDoc.put("comment_statistic", originDoc.get("data"));
+                sb.append(extractedDoc.toJson());
+            } else {
+                sb.append("{}");
+                log.info("not found");
+            }
+            sb.deleteCharAt(0);
+            log.info("has already comment_statistic from MongoDB");
+        } finally {
+            mongoClient.close();
+        }
         return sb.toString();
     }
 }

@@ -12,14 +12,12 @@ import java.util.List;
 @Component
 public interface QueryMapper {
     /**
-     *
      * @param skuIds
      * @return
      */
     List<Query> selectQueryBySkuIds(@Param("skuIds") List<String> skuIds);
 
     /**
-     *
      * @param skuId
      * @return Query
      */

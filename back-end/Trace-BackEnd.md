@@ -2525,55 +2525,71 @@ CREATE TABLE age_distribution(
 	)ENGINE=InnoDB AUTO_INCREMENT=1001 CHARSET=utf8;
 ```
 
-示例数据
+示例数据（年龄＋性别）
 
 ```json
 {
-    "age_distribution": {
-        "keyword": "八宝粥",
-        "period": "2021-01-01|2021-01-31",
-        "data": [
-            {
-                "age_range": "0-19",
-                "tgi": 48.61,
-                "word_rate": 4.53,
-                "all_rate": 9.33,
-            },
-            {
-                "age_range": "20-29",
-                "tgi": 85.88,
-                "word_rate": 28.63,
-                "all_rate": 33.34,
-            }
-        ]
-    }
-}
-
-
-
-{
-    "age_distribution": {
-        "keyword": "八宝粥",
-        "period": "2021-01-01|2021-01-31",
-        "data": {
-            "age_range": [ //横坐标
-                "0-19",
-                "20-29"
-            ],
-            "tgi": [ //折线
-                48.61,
-                85.88
-            ],
-            "word_rate": [ //柱状
-                4.53,
-                28.63
-            ],
-            "all_rate": [ //柱状
-                9.33,
-                33.34
-            ]
-        }
-    }
+  "age_distribution": {
+    "keyword": "辣椒酱",
+    "period": "2021-01-01|2021-01-3",
+    "data": [
+      {
+        "period": "2021-01-01|2021-01-3",
+        "range": "0-19",
+        "tgi": 86.63,
+        "word_rate": 8.08,
+        "all_rate": 9.33
+      },
+      {
+        "period": "2021-01-01|2021-01-3",
+        "range": "20-29",
+        "tgi": 139.09,
+        "word_rate": 46.35,
+        "all_rate": 33.34
+      },
+      {
+        "period": "2021-01-01|2021-01-3",
+        "range": "30-39",
+        "tgi": 90.81,
+        "word_rate": 30.96,
+        "all_rate": 34.12
+      },
+      {
+        "period": "2021-01-01|2021-01-3",
+        "range": "40-49",
+        "tgi": 57.24,
+        "word_rate": 9.62,
+        "all_rate": 16.81
+      },
+      {
+        "period": "2021-01-01|2021-01-3",
+        "range": "50+",
+        "tgi": 78.21,
+        "word_rate": 5.0,
+        "all_rate": 6.4
+      }
+    ]
+  },
+  "sex_distribution": {
+    "keyword": "辣椒酱",
+    "period": "2021-01-01|2021-01-3",
+    "data": [
+      {
+        "period": "2021-01-01|2021-01-3",
+        "range": "女",
+        "tgi": 98.61,
+        "word_rate": 47.6,
+        "all_rate": 48.27
+      },
+      {
+        "period": "2021-01-01|2021-01-3",
+        "range": "男",
+        "tgi": 101.3,
+        "word_rate": 52.4,
+        "all_rate": 51.73
+      }
+    ]
+  }
 }
 ```
 
@@ -2730,6 +2746,28 @@ CREATE TABLE province_index(
 	keyword VARCHAR(20),
 	PRIMARY KEY(province_id)
 	)ENGINE=InnoDB AUTO_INCREMENT=1001 CHARSET=utf8;
+```
+
+返回值
+
+```json
+{
+  "keyword": "辣椒酱",
+  "period": "2021-02-15|2021-02-22",
+  "data": [
+    {
+      "period": "2021-02-15|2021-02-22",
+      "name": "山东",
+      "value": 936
+    },
+    {
+      "period": "2021-02-15|2021-02-22",
+      "name": "贵州",
+      "value": 545
+    },
+    ........
+  ]
+}
 ```
 
 

@@ -72,11 +72,11 @@ public class FabricDao {
     }
 
     /**
-     * save a media record to fabric.
+     * 接收文件类型、文件名称、文件md5码三个参数，将其存储至fabric。
      *
      * @param filetype mp4, mkv, jpg
-     * @param filename full basename with filetype.
-     * @param md5code  md5code
+     * @param filename 带有扩展名的文件名称
+     * @param md5code  md5码
      */
     public void saveMedia(String filetype, String filename, String md5code) {
         Contract contract = network.getContract(FabricInfo.MEDIA_CC.value);
@@ -92,9 +92,9 @@ public class FabricDao {
     }
 
     /**
-     * Check if the file had been modified since it stored.
+     * 调用区块链中数据查看文件自生成以来是否被修改过。
      *
-     * @param filename full basename.
+     * @param filename 带有扩展名的文件basename。
      * @return boolean
      */
     public boolean isModified(String filename) {
@@ -142,7 +142,7 @@ public class FabricDao {
                     if (databaseSet.contains(sb.toString())) {
                         jedis.select(dbMap.get(sb.toString()));
                         latestPic = jedis.lindex(id, 0);
-                        picture = latestPic == null ? pictureNoFound : latestPic;
+                        picture = (latestPic == null) ? pictureNoFound : latestPic;
                         procedure.setPicture(picturePrefix + picture);
                     }
                 }
@@ -159,14 +159,15 @@ public class FabricDao {
     /**
      * 接收产品基本信息+第一个process的所有信息，利用产品基本信息生成id并使用id和基本信息在区块链中创建产品
      * 而后调用 addProcess 方法存储第一个process的信息。
-     * @see #addProcess(String id, String name, String master, String location)
-     * @param foodType 油辣椒酱-275g-辣椒酱(foodName-specification-category)
-     * @param com 公司名称
+     *
+     * @param foodType     油辣椒酱-275g-辣椒酱(foodName-specification-category)
+     * @param com          公司名称
      * @param processCount 4
-     * @param name 菜籽油生产地
-     * @param master 负责人名称
-     * @param location 该process所在城市
+     * @param name         菜籽油生产地
+     * @param master       负责人名称
+     * @param location     该process所在城市
      * @return traceInfo，带有qrCode字段。
+     * @see #addProcess(String id, String name, String master, String location)
      */
     public String addFirstProcess(String foodType, String com, Integer processCount, String name, String master,
                                   String location) {
@@ -199,12 +200,13 @@ public class FabricDao {
     }
 
     /**
-     * 接收产品某个process的信息，将其存入fabric
-     * @param id
-     * @param name
-     * @param master
-     * @param location
-     * @return
+     * 接收产品某个具体process的信息，将其存入fabric。
+     *
+     * @param id       唯一溯源码
+     * @param name     process名称
+     * @param master   该process负责人
+     * @param location 该process所在城市
+     * @return 溯源码为id批次的产品所对应的TraceInfo的json字符串。包含二维码链接。
      */
     public String addProcess(String id, String name, String master, String location) {
         String infoStr = "";
@@ -226,11 +228,11 @@ public class FabricDao {
     }
 
     /**
-     *
-     * @param id
-     * @param name
-     * @param master
-     * @return
+     * 接收产品某个具体procedure信息，将其存入fabric。
+     * @param id        产品唯一溯源码
+     * @param name      procedure名称
+     * @param master    procedure负责人
+     * @return 溯源码为id批次的产品所对应的TraceInfo的json字符串。包含二维码链接。
      */
     public String addProcedure(String id, String name, String master) {
         String info = "";
@@ -251,7 +253,8 @@ public class FabricDao {
     }
 
     /**
-     * 依据传入的id获取管理员界面产品列表，即TraceManagerList的列表
+     * 依据传入的id获取管理员界面产品列表，即TraceManagerList的列表。
+     *
      * @param ids id列表
      * @return List<TraceManagerInfo>
      */
@@ -273,7 +276,8 @@ public class FabricDao {
         } catch (Exception e) {
             log.error(e.toString());
         }
-        return gson.fromJson(infoList, new TypeToken<List<TraceManagerInfo>>() {}.getType());
+        return gson.fromJson(infoList, new TypeToken<List<TraceManagerInfo>>() {
+        }.getType());
     }
 
     private enum FabricInfo {
