@@ -20,10 +20,10 @@ import java.util.List;
 @Component
 public class TraceRedisDao {
 
-    @Autowired
-    JedisUtil jedisUtil;
     //分页的每一页的结果数
     static int pageRecord = 10;
+    @Autowired
+    JedisUtil jedisUtil;
 
     /**
      * 获得初始流程输入时的产品列表选项内容

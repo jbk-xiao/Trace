@@ -87,25 +87,59 @@ message AllTraceRequest {
   string regisId = 2;
   string page = 3;
 }
-//以单String查询竞品图表，目前包括：getPredict、getNews
+// 以单String查询竞品图表，目前包括：getPredict、getNews
 message ChartsRequestByString {
-  string request = 1;
+  string chartsStrRequest = 1;
+}
+// 以单String查询溯源信息，目前包括：getVideo、getMedia、searchOrigin
+message TraceRequestByString {
+  string traceStrRequest = 1;
+}
+// 查询trace信息仅返回bytes，目前包括：getVideo、getMedia
+message TraceBytesResponse {
+  bytes traceBytesResponse = 1;
+}
+// 查询trace信息仅返回String，目前包括：searchOrigin
+message TraceStringResponse {
+  string traceStrResponse = 1;
 }
 
 service SearchService {
   rpc searchQuery(QueryRequest) returns (QueryResponse);
   rpc searchCompet(CompetRequest) returns (QueryResponse);
-  rpc searchTrace(QueryRequest) returns (TraceResponse);
+
+
+
+
   rpc searchGraphByKind(GraphRequestByKind) returns (GraphResponseByKind);
   rpc searchGraphByBrand(GraphRequestByBrand) returns (GraphResponseByBrand);
+
   rpc addProduct(AddProductRequest) returns (AddProductResponse);
   rpc deleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
   rpc searchProducts(ProductsRequest) returns (ProductsResponse);
-  rpc searchAllTraceByName(AllTraceRequest) returns (QueryResponse);
   rpc getAllProductNameList(ProductsRequest) returns (QueryResponse);
+
+
+}
+
+service SearchTraceService {
+  rpc searchTrace(QueryRequest) returns (TraceResponse);
+  rpc searchPicture(TraceRequestByString) returns(TraceBytesResponse);//
+  rpc searchVideo(TraceRequestByString) returns (TraceBytesResponse);//
+  rpc getOrigin(TraceRequestByString) returns (TraceStringResponse);//
+  rpc addFirstProcess(TraceRequestByString) returns (TraceStringResponse);//
+  rpc addProcess(TraceRequestByString) returns (TraceStringResponse);//
+  rpc addProcedure(TraceRequestByString) returns (TraceStringResponse);//
+
+  rpc searchAllTraceByName(AllTraceRequest) returns (QueryResponse);
   rpc getFirstProcessInfo(ProductsRequest) returns (QueryResponse);
+
+}
+
+service SearchChartsService {
   rpc getPredict(ChartsRequestByString) returns (QueryResponse);
   rpc getNews(ChartsRequestByString) returns (QueryResponse);
   rpc getAgeDistribution(ChartsRequestByString) returns (QueryResponse);
   rpc getProvinceIndex(ChartsRequestByString) returns (QueryResponse);
+  rpc getIndexPredict(ChartsRequestByString) returns (QueryResponse);
 }

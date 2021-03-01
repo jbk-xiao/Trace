@@ -8,6 +8,7 @@ import com.trace.trace.entity.JDdetail;
 import com.trace.trace.mapper.CompetMapper;
 import com.trace.trace.service.SearchGraph;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
@@ -15,10 +16,10 @@ import java.util.List;
 
 @SpringBootTest
 class Trace192ApplicationTests {
-
+    @Autowired
+    SearchGraph searchGraph;
     @Test
     void contextLoads() {
-        SearchGraph searchGraph = new SearchGraph();
         System.out.println(searchGraph.searchGraphByBrand("湾仔码头"));
     }
 

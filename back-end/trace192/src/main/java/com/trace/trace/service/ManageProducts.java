@@ -15,12 +15,16 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class ManageProducts {
-    @Autowired
-    ProductRedisDao productRedisDao;
+    final ProductRedisDao productRedisDao;
 
-    public String AddProduct(String key, String field, String value) {
+    @Autowired
+    public ManageProducts(ProductRedisDao productRedisDao) {
+        this.productRedisDao = productRedisDao;
+    }
+
+    public String addProduct(String regisId, String productName, String code) {
         String info = "";
-        int flag = productRedisDao.insert(key, field, value);
+        int flag = productRedisDao.insert(regisId, productName, code);
         if (flag == 1) {
             info = "添加产品成功";
         } else {
@@ -29,9 +33,9 @@ public class ManageProducts {
         return info;
     }
 
-    public String DeleteProduct(String key, String field) {
+    public String deleteProduct(String regisId, String productName) {
         String info = "";
-        int flag = productRedisDao.delete(key, field);
+        int flag = productRedisDao.delete(regisId, productName);
         if (flag == 1) {
             info = "删除产品成功";
         } else {
@@ -40,19 +44,9 @@ public class ManageProducts {
         return info;
     }
 
-    public String SearchProducts(String key) {
-        String res = productRedisDao.getAll(key);
+    public String searchProducts(String regisId) {
+        String res = productRedisDao.getAll(regisId);
         return res;
     }
 
-    /**
-     * 获取到所有的商品名称列表，用于商品名称选择
-     *
-     * @param regis_id
-     * @return
-     */
-//    public String getAllProductNameList(String regis_id){
-//        String res = productRedisDao.getAllProductName(regis_id).toString();
-//        return res;
-//    }
 }

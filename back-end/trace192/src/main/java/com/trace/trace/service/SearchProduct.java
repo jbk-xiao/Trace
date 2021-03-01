@@ -5,7 +5,7 @@ import com.trace.trace.dao.RedisDao;
 import com.trace.trace.entity.Detail;
 import com.trace.trace.mapper.DetailMapper;
 import com.trace.trace.mapper.QueryMapper;
-import com.trace.trace.util.createJson;
+import com.trace.trace.util.CreateJson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,7 +29,7 @@ public class SearchProduct {
 
     private final RedisDao redisDao;
 
-    private final createJson json = new createJson();
+    private final CreateJson json = new CreateJson();
 
     @Autowired
     public SearchProduct(QueryMapper queryMapper, DetailMapper detailMapper, RedisDao redisDao) {

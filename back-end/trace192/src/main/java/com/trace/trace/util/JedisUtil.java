@@ -20,6 +20,8 @@ import redis.clients.jedis.JedisPoolConfig;
 @Component
 public class JedisUtil {
 
+    @Autowired
+    JedisPool jedisPool;
     @Value("${spring.redis.host}")
     private String host;
     @Value("${spring.redis.port}")
@@ -48,12 +50,9 @@ public class JedisUtil {
 
         jedisPoolConfig.setMaxWaitMillis(10 * 1000);
         JedisPool jedisPool = new JedisPool(jedisPoolConfig, host, port, 3000, password);
-        log.info("检测jedisPool：" + jedisPool.getResource());
+//        log.info("检测jedisPool：" + jedisPool.getResource());
         return jedisPool;
     }
-
-    @Autowired
-    JedisPool jedisPool;
 
     public Jedis getClient() {
         log.info("调用getClient");

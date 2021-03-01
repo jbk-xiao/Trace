@@ -1,6 +1,8 @@
 package com.trace.trace.config;
 
+import com.trace.trace.grpc.SearchChartsServiceGrpc;
 import com.trace.trace.grpc.SearchServiceGrpc;
+import com.trace.trace.grpc.SearchTraceServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,5 +36,15 @@ public class GrpcConfig {
     @Bean
     SearchServiceGrpc.SearchServiceBlockingStub searchServiceBlockingStub(ManagedChannel channel) {
         return SearchServiceGrpc.newBlockingStub(channel);
+    }
+
+    @Bean
+    SearchTraceServiceGrpc.SearchTraceServiceBlockingStub searchTraceServiceBlockingStub(ManagedChannel channel) {
+        return SearchTraceServiceGrpc.newBlockingStub(channel);
+    }
+
+    @Bean
+    SearchChartsServiceGrpc.SearchChartsServiceBlockingStub searchChartsServiceBlockingStub(ManagedChannel channel) {
+        return SearchChartsServiceGrpc.newBlockingStub(channel);
     }
 }

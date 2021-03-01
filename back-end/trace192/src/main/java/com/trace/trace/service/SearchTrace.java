@@ -5,16 +5,13 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.protobuf.ByteString;
 import com.trace.trace.dao.FabricDao;
-import com.trace.trace.dao.ProcessEventDao;
 import com.trace.trace.dao.ProductRedisDao;
 import com.trace.trace.dao.TraceRedisDao;
 import com.trace.trace.entity.CompanyInfo;
-import com.trace.trace.grpc.QueryRequest;
-import com.trace.trace.grpc.TraceResponse;
 import com.trace.trace.mapper.CompetMapper;
 import com.trace.trace.pojo.TraceManagerInfo;
-import com.trace.trace.util.createJson;
-import com.trace.trace.util.media.FileUtil;
+import com.trace.trace.util.FileUtil;
+import com.trace.trace.util.CreateJson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,8 +32,6 @@ public class SearchTrace {
 
     private final Gson gson = new GsonBuilder().disableHtmlEscaping().create();  //防止出现字符转换
 
-    private final ProcessEventDao processEventDao;
-
     private final FabricDao fabricDao;
 
     private final FileUtil fileUtil;
@@ -47,97 +42,16 @@ public class SearchTrace {
 
     private final TraceRedisDao traceRedisDao;
 
-    private final createJson json = new createJson();
+    private final CreateJson json = new CreateJson();
 
     @Autowired
-    public SearchTrace(ProcessEventDao processEventDao, FabricDao fabricDao, FileUtil fileUtil,
-                       ProductRedisDao productRedisDao, CompetMapper competMapper, TraceRedisDao traceRedisDao) {
-        this.processEventDao = processEventDao;
+    public SearchTrace(FabricDao fabricDao, FileUtil fileUtil, ProductRedisDao productRedisDao,
+                       CompetMapper competMapper, TraceRedisDao traceRedisDao) {
         this.fabricDao = fabricDao;
         this.fileUtil = fileUtil;
         this.productRedisDao = productRedisDao;
         this.competMapper = competMapper;
         this.traceRedisDao = traceRedisDao;
-    }
-
-    public TraceResponse searchTrace(QueryRequest request) {
-
-        //获取请求类型和请求内容
-        String queryType = request.getQueryType();
-        String query = request.getQuery();
-        log.info("Receive queryType = " + queryType + ", query = " + query);
-
-        //返回结果为字符串jsonInfo或ByteString mediaData
-        String jsonInfo = "";
-        ByteString mediaData = ByteString.EMPTY;
-        boolean isString = true;
-
-        switch (queryType) {
-            case "video": {
-                //视频访问
-                isString = false;
-                log.info("Encoding video '" + query + "'...");
-                mediaData = ByteString.copyFrom(fileUtil.getBytesFromVideo(query));
-                break;
-            }
-            case "picture": {
-                //图片访问
-                isString = false;
-                log.info("Encoding picture '" + query + "'...");
-                mediaData = ByteString.copyFrom(fileUtil.getBytesFromPicture(query));
-                break;
-            }
-            case "event":
-                //生产线“最近动态”列表
-                int page = Integer.parseInt(request.getPage());
-                List<Long> timeList = processEventDao.getEventTitleListOnPage(query, page);
-                jsonInfo = gson.toJson(timeList);
-                break;
-            case "origin":
-                //依据溯源id查询流水线信息
-                log.info("Searching '" + query + "' in fabric.");
-                jsonInfo = fabricDao.getInfoByOriginId(query);
-                log.info("Fabric return: " + jsonInfo);
-                break;
-            case "addFirstProcess": {
-                HashMap<String, String> map = gson.fromJson(query, new TypeToken<HashMap<String, String>>() {
-                }.getType());
-                jsonInfo = fabricDao.addFirstProcess(map.get("foodType"), map.get("com"), Integer.parseInt(map.get("processCount")),
-                        map.get("name"), map.get("master"), map.get("location"));
-                break;
-            }
-            case "addProcess": {
-                //添加一道流程信息
-                long start = System.currentTimeMillis();
-                HashMap<String, String> map = gson.fromJson(query, new TypeToken<HashMap<String, String>>() {
-                }.getType());
-                jsonInfo = fabricDao.addProcess(map.get("id"), map.get("name"), map.get("master"), map.get("location"));
-                log.info("192 add process takes {} ms", System.currentTimeMillis() - start);
-                break;
-            }
-            case "addProcedure": {
-                //添加工厂内一道工序信息
-                long start = System.currentTimeMillis();
-                jsonInfo = addProcedure(query);
-                log.info("192 add procedure takes {} ms", System.currentTimeMillis() - start);
-                break;
-            }
-            default: {
-                log.error("Receive the wrong message!");
-                break;
-            }
-        }
-        return (isString
-                ? TraceResponse.newBuilder().setResponse(jsonInfo)
-                : TraceResponse.newBuilder().setResponseMedia(mediaData)
-        ).build();
-    }
-
-
-    private String addProcedure(String params) {
-        HashMap<String, String> map = gson.fromJson(params, new TypeToken<HashMap<String, String>>() {
-        }.getType());
-        return fabricDao.addProcedure(map.get("id"), map.get("name"), map.get("master"));
     }
 
     /**
@@ -166,10 +80,11 @@ public class SearchTrace {
     /**
      * 根据公司名、商品名、页码获取到管理员界面的溯源信息列表
      *
-     * @param product_name
-     * @param company_name
-     * @param page
-     * @return
+     * @param product_name 商品名称
+     * @param company_name 公司名称
+     * @param page         页码
+     * @return 溯源信息列表
+     * @see TraceManagerInfo
      */
     public String searchAllTraceByName(String product_name, String company_name, String page) {
         String code = traceRedisDao.getProductCode(product_name, company_name);
@@ -186,4 +101,67 @@ public class SearchTrace {
         }
         return json.toJson(pageCount, allTraceInfo);
     }
+
+    /**
+     * 根据图片名称返回图片字节码
+     *
+     * @param picName 图片名称
+     * @return ByteString，可转化为byte[]
+     */
+    public ByteString searchPicture(String picName) {
+        return ByteString.copyFrom(fileUtil.getBytesFromPicture(picName));
+    }
+
+    /**
+     * 根据视频文件名称返回视频字节码
+     *
+     * @param videoName 视频文件名称
+     * @return ByteString，可转化为byte[]
+     */
+    public ByteString searchVideo(String videoName) {
+        return ByteString.copyFrom(fileUtil.getBytesFromVideo(videoName));
+    }
+
+    /**
+     * 根据溯源id查询溯源信息
+     *
+     * @param originId 唯一溯源id
+     * @return 溯源信息json字符串，见示例数据。
+     * @see com.trace.trace.pojo.TraceInfo
+     */
+    public String getOrigin(String originId) {
+        return fabricDao.getInfoByOriginId(originId);
+    }
+
+    /**
+     * 接收带有产品基本信息的json字符串，提取出结构化的信息之后添加到区块链中。
+     *
+     * @param processInfo 带有产品基本信息的json字符串
+     * @return 带有二维码链接(qrCode)的json字符串
+     */
+    public String addFirstProcess(String processInfo) {
+        HashMap<String, String> map = gson.fromJson(processInfo, new TypeToken<HashMap<String, String>>() {
+        }.getType());
+        return fabricDao.addFirstProcess(map.get("foodType"), map.get("com"), Integer.parseInt(map.get("processCount")),
+                map.get("name"), map.get("master"), map.get("location"));
+    }
+
+    public String addProcess(String processInfo) {
+        long start = System.currentTimeMillis();
+        HashMap<String, String> map = gson.fromJson(processInfo, new TypeToken<HashMap<String, String>>() {
+        }.getType());
+        String jsonInfo = fabricDao.addProcess(map.get("id"), map.get("name"), map.get("master"), map.get("location"));
+        log.info("192 add process takes {} ms", System.currentTimeMillis() - start);
+        return jsonInfo;
+    }
+
+    public String addProcedure(String procedureInfo) {
+        long start = System.currentTimeMillis();
+        HashMap<String, String> map = gson.fromJson(procedureInfo, new TypeToken<HashMap<String, String>>() {
+        }.getType());
+        String jsonInfo = fabricDao.addProcedure(map.get("id"), map.get("name"), map.get("master"));
+        log.info("192 add procedure takes {} ms", System.currentTimeMillis() - start);
+        return jsonInfo;
+    }
+
 }

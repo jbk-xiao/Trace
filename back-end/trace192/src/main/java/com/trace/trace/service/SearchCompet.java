@@ -26,14 +26,17 @@ import java.util.List;
 @Slf4j
 @Component
 public class SearchCompet {
+    final CompetMapper competMapper;
+    final CompetRedisDao competRedisDao;
+    final CompetMongoDao competMongoDao;
     private final Gson gson = new GsonBuilder().disableHtmlEscaping().create();  //防止出现字符转换
 
     @Autowired
-    CompetMapper competMapper;
-    @Autowired
-    CompetRedisDao competRedisDao;
-    @Autowired
-    CompetMongoDao competMongoDao;
+    public SearchCompet(CompetMapper competMapper, CompetRedisDao competRedisDao, CompetMongoDao competMongoDao) {
+        this.competMapper = competMapper;
+        this.competRedisDao = competRedisDao;
+        this.competMongoDao = competMongoDao;
+    }
 
     public String searchCompetBasic(String regis_id) {
         log.info("Receive regis_id:" + regis_id);

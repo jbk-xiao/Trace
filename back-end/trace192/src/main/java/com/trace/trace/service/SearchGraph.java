@@ -2,7 +2,6 @@ package com.trace.trace.service;
 
 import com.trace.trace.dao.MongoDao;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,8 +14,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class SearchGraph {
-    @Autowired
-    MongoDao mongodbDao;
+    final MongoDao mongodbDao;
+
+    public SearchGraph(MongoDao mongodbDao) {
+        this.mongodbDao = mongodbDao;
+    }
 
     public String searchGraphByKind(String kind) {
         return mongodbDao.getGraphByKind(kind);

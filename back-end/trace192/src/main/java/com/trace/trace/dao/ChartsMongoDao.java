@@ -18,7 +18,7 @@ import static com.mongodb.client.model.Filters.regex;
  */
 @Slf4j
 @Component
-public class SearchChartsMongoDao {
+public class ChartsMongoDao {
 
     public String getPredictData(String companyName) {
         StringBuilder result = new StringBuilder();
@@ -51,5 +51,20 @@ public class SearchChartsMongoDao {
             log.warn("{} has no news.", companyName);
         }
         return "[" + result.toString() + "]";
+    }
+
+    public String getIndexPredict(String keyword) {
+        StringBuilder result = new StringBuilder();
+        MongoClient mongoClient;
+        mongoClient = MongoDBUtil.getConn();
+        MongoCollection<Document> collection = mongoClient.getDatabase("trace")
+                .getCollection("index");
+        for (Document document : collection.find(regex("key", keyword))) {
+            String docJson = document.toJson();
+            result.append(docJson);
+        }
+        mongoClient.close();
+        log.info("getIndexPredict: {}chars", result.length());
+        return result.toString();
     }
 }

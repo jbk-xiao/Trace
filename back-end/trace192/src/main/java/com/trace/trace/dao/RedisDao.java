@@ -161,13 +161,9 @@ public class RedisDao {
     /**
      * 返回要显示的页码总数
      *
-     * @param list
-     * @return
+     * @param length listLength
+     * @return pagenum
      */
-    private Integer getPageNumber(List<String> list) {
-        return getPageNumber(list.size());
-    }
-
     private Integer getPageNumber(int length) {
         return length / pageRecord + (length % pageRecord == 0 ? 0 : 1);
     }

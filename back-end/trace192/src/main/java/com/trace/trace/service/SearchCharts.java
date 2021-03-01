@@ -2,7 +2,7 @@ package com.trace.trace.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.trace.trace.dao.SearchChartsMongoDao;
+import com.trace.trace.dao.ChartsMongoDao;
 import com.trace.trace.entity.AgeOrSexDistributionData;
 import com.trace.trace.entity.ProvinceIndexData;
 import com.trace.trace.mapper.ChartsMapper;
@@ -22,22 +22,22 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class SearchCharts {
-    final SearchChartsMongoDao searchChartsMongoDao;
+    final ChartsMongoDao chartsMongoDao;
     final ChartsMapper chartsMapper;
-    final Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+    final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().disableHtmlEscaping().create();
 
     @Autowired
-    public SearchCharts(SearchChartsMongoDao searchChartsMongoDao, ChartsMapper chartsMapper) {
-        this.searchChartsMongoDao = searchChartsMongoDao;
+    public SearchCharts(ChartsMongoDao chartsMongoDao, ChartsMapper chartsMapper) {
+        this.chartsMongoDao = chartsMongoDao;
         this.chartsMapper = chartsMapper;
     }
 
     public String getPredictData(String companyName) {
-        return searchChartsMongoDao.getPredictData(companyName);
+        return chartsMongoDao.getPredictData(companyName);
     }
 
     public String getNewsData(String companyName) {
-        return searchChartsMongoDao.getNewsData(companyName);
+        return chartsMongoDao.getNewsData(companyName);
     }
 
     public String getAgeDistribution(String keyword) {
@@ -66,5 +66,9 @@ public class SearchCharts {
         ProvinceIndex provinceIndex = new ProvinceIndex(keyword, provinceIndexData[0].getPeriod());
         provinceIndex.setProvinceIndexData(provinceIndexData);
         return gson.toJson(provinceIndex);
+    }
+
+    public String getIndexPredict(String keyword) {
+        return chartsMongoDao.getIndexPredict(keyword);
     }
 }

@@ -2,9 +2,11 @@ package com.trace.trace.controller;
 
 import com.trace.trace.grpc.ChartsRequestByString;
 import com.trace.trace.grpc.QueryResponse;
-import com.trace.trace.grpc.SearchServiceGrpc;
+import com.trace.trace.grpc.SearchChartsServiceGrpc;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,10 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 @RestController
 public class ChartsController {
-    final SearchServiceGrpc.SearchServiceBlockingStub searchServiceBlockingStub;
+    final SearchChartsServiceGrpc.SearchChartsServiceBlockingStub searchChartsServiceBlockingStub;
 
-    public ChartsController(SearchServiceGrpc.SearchServiceBlockingStub searchServiceBlockingStub) {
-        this.searchServiceBlockingStub = searchServiceBlockingStub;
+    @Autowired
+    public ChartsController(SearchChartsServiceGrpc.SearchChartsServiceBlockingStub searchChartsServiceBlockingStub) {
+        this.searchChartsServiceBlockingStub = searchChartsServiceBlockingStub;
     }
 
     /**
@@ -35,12 +38,12 @@ public class ChartsController {
      * @param companyName 传入主公司名称。
      * @return 返回“预测曲线”所需内容。
      */
-    @RequestMapping(value = "/getPredict/{company_name}", method = RequestMethod.GET)
+    @GetMapping(value = "/getPredict/{company_name}")
     public String getPredict(@PathVariable("company_name") String companyName) {
         long start = System.currentTimeMillis();
         log.info("request getPredict: {}", companyName);
-        QueryResponse response = searchServiceBlockingStub
-                .getPredict(ChartsRequestByString.newBuilder().setRequest(companyName)
+        QueryResponse response = searchChartsServiceBlockingStub
+                .getPredict(ChartsRequestByString.newBuilder().setChartsStrRequest(companyName)
                         .build());
         log.info("use {} ms", System.currentTimeMillis() - start);
         return response.getResponse();
@@ -52,12 +55,12 @@ public class ChartsController {
      * @param companyName 企业名称
      * @return json
      */
-    @RequestMapping(value = "/getNews/{company_name}", method = RequestMethod.GET)
+    @GetMapping(value = "/getNews/{company_name}")
     public String getNews(@PathVariable("company_name") String companyName) {
         long start = System.currentTimeMillis();
         log.info("request getNews: {}", companyName);
-        QueryResponse response = searchServiceBlockingStub
-                .getNews(ChartsRequestByString.newBuilder().setRequest(companyName)
+        QueryResponse response = searchChartsServiceBlockingStub
+                .getNews(ChartsRequestByString.newBuilder().setChartsStrRequest(companyName)
                         .build());
         log.info("use {} ms", System.currentTimeMillis() - start);
         return response.getResponse();
@@ -69,12 +72,12 @@ public class ChartsController {
      * @param keyword 百度指数中的关键词。
      * @return 关键词对应用户的年龄分布指数和性别分布指数。
      */
-    @RequestMapping(value = "/getAgeDistribution/{keyword}", method = RequestMethod.GET)
+    @GetMapping(value = "/getAgeDistribution/{keyword}")
     public String getAgeOrSexDistribution(@PathVariable("keyword") String keyword) {
         long start = System.currentTimeMillis();
         log.info("request getAgeDistribution: {}", keyword);
-        QueryResponse response = searchServiceBlockingStub
-                .getAgeDistribution(ChartsRequestByString.newBuilder().setRequest(keyword)
+        QueryResponse response = searchChartsServiceBlockingStub
+                .getAgeDistribution(ChartsRequestByString.newBuilder().setChartsStrRequest(keyword)
                         .build());
         log.info("use {} ms", System.currentTimeMillis() - start);
         return response.getResponse();
@@ -86,12 +89,28 @@ public class ChartsController {
      * @param keyword 百度指数中的关键词。
      * @return 关键词对应用户的省份分布指数。
      */
-    @RequestMapping(value = "/getProvinceIndex/{keyword}", method = RequestMethod.GET)
+    @GetMapping(value = "/getProvinceIndex/{keyword}")
     public String getProvinceIndex(@PathVariable("keyword") String keyword) {
         long start = System.currentTimeMillis();
         log.info("request getProvinceIndex: {}", keyword);
-        QueryResponse response = searchServiceBlockingStub
-                .getProvinceIndex(ChartsRequestByString.newBuilder().setRequest(keyword)
+        QueryResponse response = searchChartsServiceBlockingStub
+                .getProvinceIndex(ChartsRequestByString.newBuilder().setChartsStrRequest(keyword)
+                        .build());
+        log.info("use {} ms", System.currentTimeMillis() - start);
+        return response.getResponse();
+    }
+
+    /**
+     * 利用关键词获取该关键词的百度指数预测。
+     * @param keyword 百度指数中的关键词。
+     * @return 关键词的预测数据。
+     */
+    @GetMapping(value = "/getIndexPredict/{keyword}")
+    public String getIndexPredict(@PathVariable("keyword") String keyword) {
+        long start = System.currentTimeMillis();
+        log.info("request getIndexPredict: {}", keyword);
+        QueryResponse response = searchChartsServiceBlockingStub
+                .getIndexPredict(ChartsRequestByString.newBuilder().setChartsStrRequest(keyword)
                         .build());
         log.info("use {} ms", System.currentTimeMillis() - start);
         return response.getResponse();

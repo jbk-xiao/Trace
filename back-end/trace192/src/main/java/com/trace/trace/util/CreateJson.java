@@ -7,10 +7,10 @@ import java.util.List;
 /**
  * 生成json用的
  */
-public class createJson {
+public class CreateJson {
     private final Gson gson = new Gson();
 
-    public String toJson(List list) {
+    public <T> String toJson(List<T> list) {
         return gson.toJson(list);
     }
 
