@@ -4,8 +4,7 @@
 | ------------------------- | ------------------------------------------------------------ | -------- | ---------------------------------------------------------- | ---- |
 | /getPicture/{filename:.+} | http://121.46.19.26:8511/getPicture/01-20210130092923-13.jpg | 图片名称 | 直接返回HttpServletResponse，用\<img src="url"\>可以接收。 |      |
 | /getVideo/{filename:.+} | http://121.46.19.26:8511/getVideo/01-20210130092923.mkv | 视频名称 | 直接返回HttpServletResponse，用\<video\> \<source src="url"\>\</video\>可以接收。 |firefox、chrome、edge测试通过，IE不行。目前测试过传输200m大小的视频|
-| /getRecentEvent/{process_name}/{page} | http://121.46.19.26:8511/getRecentEvent/product/1 | process_name：生产流程中某个步骤；page：每15条一页 | 返回15个表示标准时间的整数组成的list。第1页是该生产线上最近的15条视频录制的时间（或者15张图片拍摄的时间，图片与视频是一一对应的）。 |由于没有提前商量，不确定时间的传输方式，暂时使用长整型（即1970.1.1至今的时间）。图片和视频的名称需要使用到这个时间（前端展示可能也需要？），所以这里需要改一个合适点的格式。|
-| /getCompet/{regis_id} | http://121.46.19.26:8511/getCompet/440108400003939 | 主公司的工商注册号 | 返回竞品模块的主公司基本信息、竞品公司基本信息和地理信息、主公司商品信息、竞品商品信息 ||
+| /getCompet/{regis_id} | http://121.46.19.26:8511/getCompet/440108400003939 、http://121.46.19.26:8511/getCompet/520102000400793 | 主公司的工商注册号 | 返回竞品模块的主公司基本信息、竞品公司基本信息和地理信息、主公司商品信息、竞品商品信息 ||
 | /getCommodity/{query}/{page} | http://121.46.19.26:8511/getCommodity/糖果/1 | 查询商品的检索词、要获取的商品页的页码 | 返回对应的检索结果，即对应页码的20条商品的skuId、标题、商店、价格、京东连接url、图片url、评价、类别等||
 |/getOrigin/{origin_id}|http://121.46.19.26:8511/getOrigin/16119701634150000|依据唯一溯源码查询溯源信息|json字符串，嵌套了两层内部类，见示例|暂时尚未与图片视频建立关联，待定。|
 | /getGraphByKind/{kind} | http://121.46.19.26:8511/getGraphByKind/冷冻食品 | 某一领域的关键词 | 返回该领域中主要的相关食品品牌信息，用于知识图谱的展示。 ||
@@ -13,14 +12,16 @@
 |/addProcess||POST请求接收四个参数：id=123456 &name=hahaha &master=lalala &location=lalala|返回更改后的溯源信息字符串或是报错信息。和/getOrigin返回结果同格式，但picture字段为空||
 |/addFirstProcess||POST请求，接收foodType:油辣椒酱-275g-辣椒酱，com:公司名称，processCount:步骤数，name:第一个process的名称，master:第一个process负责人的名称，location:第一个工序所在城市|同上||
 |/addProcedure||POST请求接收三个参数：id=123456 &name=hahaha &master=lalala| 同上                                                         ||
-|/getAllTraceInfo/{regis_id}/{product_name}/{page}|http://121.46.19.26:8511/getAllTraceInfo/440108400003939/原味八宝粥-370g-速食粥/1|公司工商注册号regis_id、商品名称product_name、页码page| 返回总页码pageCount以及溯源列表信息（溯源码id、产品名称foodname、规格specification、分类category、最新流程latestProcess、时间time） ||
+|/getAllTraceInfo/{regis_id}/{product_name}/{page}|http://121.46.19.26:8511/getAllTraceInfo/440108400003939/原味八宝粥-370g-速食粥/1 （泰奇）http://121.46.19.26:8511/getAllTraceInfo/520102000400793/油辣椒酱-275g-辣椒酱/1|公司工商注册号regis_id、商品名称product_name、页码page| 返回总页码pageCount以及溯源列表信息（溯源码id、产品名称foodname、规格specification、分类category、最新流程latestProcess、时间time） |可选值来自getProducts接口|
 |/getFirstProcessInfo/{regis_id}||公司工商注册号regis_id| 该公司的公司基本信息以及公司所有商品名称列表 |第一次流程获取的信息|
-| /getProducts/{regis_id} | http://121.46.19.26:8511/getProducts/440108400003939 | 公司工商注册号regis_id | 该公司的所有产品及其对应的编码 ||
+| /getProducts/{regis_id} | http://121.46.19.26:8511/getProducts/440108400003939 、http://121.46.19.26:8511/getProducts/520102000400793 | 公司工商注册号regis_id | 该公司的所有产品及其对应的编码 ||
 | /addProduct/{regis_id}/{product_name}/{code} | http://121.46.19.26:8511/addProduct/440108400003939/桂圆莲子八宝粥-370g-速食粥/6902613100020 | 公司工商注册号regis_id、商品名称product_name、产品编码code | 返回添加产品的执行结果（成功或不成功的字符串） ||
 | /deleteProduct/{regis_id}/{product_name} | http://121.46.19.26:8511/deleteProduct/440108400003939/桂圆莲子八宝粥-370g-速食粥 | 公司工商注册号regis_id、商品名称product_name | 返回删除产品的执行结果（成功或不成功的字符串） ||
 | /getPredict/{company_name} | http://121.46.19.26:8511/getPredict/泰奇食品 （或者）http://121.46.19.26:8511/getPredict/老干妈 | 企业名称company_name | 取出前端需求的预测曲线的json内容（直接根据company_name查询并返回MongoDB中存储的文档即可） ||
-| /getNews/{company_name} | http://121.46.19.26:8511/getPredict/泰奇食品 （或者）http://121.46.19.26:8511/getPredict/老干妈 | 企业名称company_name | 取出企业的新闻标题和链接的url，生成列表后返回给前端（直接根据company_name查询并返回MongoDB中存储的文档即可） ||
-|/getAgeDistribution/{keyword}|http://121.46.19.26:8511/getAgeDistribution/八宝粥 | 关键词|获取关键词对应的年龄分布和性别分布的数据||
-|/getProvinceIndex/{keyword}|http://121.46.19.26:8511/getProvinceIndex/八宝粥|关键词|获取关键词对应的分省份的指数||
-|/getIndexPredict/{keyword}|http://121.46.19.26:8511/getIndexPredict/老干妈|关键词|获取关键词对应百度指数的预测值||
+| /getNews/{company_name} | http://121.46.19.26:8511/getNews/泰奇食品 （或者）http://121.46.19.26:8511/getNews/老干妈 | 企业名称company_name | 取出企业的新闻标题和链接的url，生成列表后返回给前端（直接根据company_name查询并返回MongoDB中存储的文档即可） ||
+|/getAgeDistribution/{keyword}|http://121.46.19.26:8511/getAgeDistribution/八宝粥 | 关键词|获取关键词对应的年龄分布和性别分布的数据|可选值来自按钮|
+|/getProvinceIndex/{keyword}|http://121.46.19.26:8511/getProvinceIndex/八宝粥|关键词|获取关键词对应的分省份的指数|可选值来自按钮|
+|/getRelateSearch/{keyword}|http://121.46.19.26:8511/getRelateSearch/老干妈|关键词|获取相关关键词关联检索气泡图所需数据|可选值来自按钮|
+|/getIndexPredict/{keyword}|http://121.46.19.26:8511/getIndexPredict/老干妈|关键词|获取关键词对应百度指数的预测值|可选：八宝粥、老干妈、辣椒酱、泰奇八宝粥|
+
 

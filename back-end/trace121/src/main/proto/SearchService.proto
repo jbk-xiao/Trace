@@ -87,7 +87,7 @@ message AllTraceRequest {
   string regisId = 2;
   string page = 3;
 }
-// 以单String查询竞品图表，目前包括：getPredict、getNews
+// 以单String查询竞品图表，目前包括：getPredict、getNews、getAgeDistribution、getProvinceIndex、getIndexPredict
 message ChartsRequestByString {
   string chartsStrRequest = 1;
 }
@@ -112,15 +112,14 @@ service SearchService {
 }
 
 service SearchTraceService {
-  rpc searchPicture(TraceRequestByString) returns(TraceBytesResponse);//
-  rpc searchVideo(TraceRequestByString) returns (TraceBytesResponse);//
-  rpc getOrigin(TraceRequestByString) returns (TraceStringResponse);//
-  rpc addFirstProcess(TraceRequestByString) returns (TraceStringResponse);//
-  rpc addProcess(TraceRequestByString) returns (TraceStringResponse);//
-  rpc addProcedure(TraceRequestByString) returns (TraceStringResponse);//
+  rpc searchPicture(TraceRequestByString) returns(TraceBytesResponse);
+  rpc searchVideo(TraceRequestByString) returns (TraceBytesResponse);
+  rpc getOrigin(TraceRequestByString) returns (TraceStringResponse);
+  rpc addFirstProcess(TraceRequestByString) returns (TraceStringResponse);
+  rpc addProcess(TraceRequestByString) returns (TraceStringResponse);
+  rpc addProcedure(TraceRequestByString) returns (TraceStringResponse);
   rpc searchAllTraceByName(AllTraceRequest) returns (QueryResponse);
   rpc getFirstProcessInfo(ProductsRequest) returns (QueryResponse);
-
 }
 
 service SearchChartsService {
@@ -128,6 +127,7 @@ service SearchChartsService {
   rpc getNews(ChartsRequestByString) returns (QueryResponse);
   rpc getAgeDistribution(ChartsRequestByString) returns (QueryResponse);
   rpc getProvinceIndex(ChartsRequestByString) returns (QueryResponse);
+  rpc getRelateSearch(ChartsRequestByString) returns (QueryResponse);
   rpc getIndexPredict(ChartsRequestByString) returns (QueryResponse);
 }
 

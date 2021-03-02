@@ -5,9 +5,11 @@ import com.google.gson.GsonBuilder;
 import com.trace.trace.dao.ChartsMongoDao;
 import com.trace.trace.entity.AgeOrSexDistributionData;
 import com.trace.trace.entity.ProvinceIndexData;
+import com.trace.trace.entity.RelateSearchData;
 import com.trace.trace.mapper.ChartsMapper;
 import com.trace.trace.pojo.AgeOrSexDistribution;
 import com.trace.trace.pojo.ProvinceIndex;
+import com.trace.trace.pojo.RelateSearch;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -70,5 +72,15 @@ public class SearchCharts {
 
     public String getIndexPredict(String keyword) {
         return chartsMongoDao.getIndexPredict(keyword);
+    }
+
+    public String getRelateSearch(String keyword) {
+        long start = System.currentTimeMillis();
+        //从mysql中查找关键词关联检索数据
+        RelateSearchData[] relateSearchData = chartsMapper.selectRelateSearch(keyword);
+        log.info("mysql selecting {} uses: {}ms", keyword, System.currentTimeMillis() - start);
+        RelateSearch relateSearch = new RelateSearch(keyword, relateSearchData[0].getPeriod());
+        relateSearch.setRelateSearchData(relateSearchData);
+        return gson.toJson(relateSearch);
     }
 }

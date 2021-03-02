@@ -101,6 +101,22 @@ public class ChartsController {
     }
 
     /**
+     * 获取相关关键词关联检索气泡图所需数据
+     * @param keyword 百度指数中的关键词
+     * @return  关键词关联检索对应的json字符串
+     */
+    @GetMapping(value = "/getRelateSearch/{keyword}")
+    public String getRelateSearch(@PathVariable("keyword") String keyword) {
+        long start = System.currentTimeMillis();
+        log.info("request getRelateSearch: {}", keyword);
+        QueryResponse response = searchChartsServiceBlockingStub
+                .getRelateSearch(ChartsRequestByString.newBuilder().setChartsStrRequest(keyword)
+                        .build());
+        log.info("use {} ms", System.currentTimeMillis() - start);
+        return response.getResponse();
+    }
+
+    /**
      * 利用关键词获取该关键词的百度指数预测。
      * @param keyword 百度指数中的关键词。
      * @return 关键词的预测数据。
