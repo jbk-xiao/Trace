@@ -1,16 +1,10 @@
 package com.trace.trace.service;
 
-import com.trace.trace.grpc.AddProductRequest;
-import com.trace.trace.grpc.AddProductResponse;
 import com.trace.trace.grpc.CompetRequest;
-import com.trace.trace.grpc.DeleteProductRequest;
-import com.trace.trace.grpc.DeleteProductResponse;
 import com.trace.trace.grpc.GraphRequestByBrand;
 import com.trace.trace.grpc.GraphRequestByKind;
 import com.trace.trace.grpc.GraphResponseByBrand;
 import com.trace.trace.grpc.GraphResponseByKind;
-import com.trace.trace.grpc.ProductsRequest;
-import com.trace.trace.grpc.ProductsResponse;
 import com.trace.trace.grpc.QueryRequest;
 import com.trace.trace.grpc.QueryResponse;
 import com.trace.trace.grpc.SearchServiceGrpc;
@@ -39,18 +33,11 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
 
     final SearchGraph searchGraph;
 
-    final ManageProducts manageProducts;
-
-    final SearchCharts searchCharts;
-
     @Autowired
-    public SearchServiceImpl(SearchCompet searchCompet, SearchProduct searchProduct, SearchGraph searchGraph,
-                             ManageProducts manageProducts, SearchCharts searchCharts) {
+    public SearchServiceImpl(SearchCompet searchCompet, SearchProduct searchProduct, SearchGraph searchGraph) {
         this.searchCompet = searchCompet;
         this.searchProduct = searchProduct;
         this.searchGraph = searchGraph;
-        this.manageProducts = manageProducts;
-        this.searchCharts = searchCharts;
     }
 
     /**
@@ -153,69 +140,6 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
         String responseInfo = searchGraph.searchGraphByBrand(brand);
         log.info("find info: " + responseInfo);
         GraphResponseByBrand response = GraphResponseByBrand.newBuilder().setResponse(responseInfo).build();
-        //放入response，传回客户端
-        responseObserver.onNext(response);
-        //表示此次连接结束
-        responseObserver.onCompleted();
-    }
-
-    /**
-     * 产品列表查询
-     *
-     * @param request          带有公司regisId的请求
-     * @param responseObserver StreamObserver
-     */
-    @Override
-    public void searchProducts(ProductsRequest request, StreamObserver<ProductsResponse> responseObserver) {
-        String regisId = request.getKey();
-        log.info("receive regisId: " + regisId);
-        log.info("Start search products...");
-        String responseInfo = manageProducts.searchProducts(regisId);
-        log.info("find info: " + responseInfo);
-        ProductsResponse response = ProductsResponse.newBuilder().setResponse(responseInfo).build();
-        //放入response，传回客户端
-        responseObserver.onNext(response);
-        //表示此次连接结束
-        responseObserver.onCompleted();
-    }
-
-    /**
-     * 添加产品
-     *
-     * @param request
-     * @param responseObserver
-     */
-    @Override
-    public void addProduct(AddProductRequest request, StreamObserver<AddProductResponse> responseObserver) {
-        String key = request.getKey();
-        String field = request.getField();
-        String value = request.getValue();
-        log.info("receive: " + key + "-" + field + "-" + value);
-        log.info("Start adding products...");
-        String responseInfo = manageProducts.addProduct(key, field, value);
-        log.info("find info: " + responseInfo);
-        AddProductResponse response = AddProductResponse.newBuilder().setResponse(responseInfo).build();
-        //放入response，传回客户端
-        responseObserver.onNext(response);
-        //表示此次连接结束
-        responseObserver.onCompleted();
-    }
-
-    /**
-     * 删除产品
-     *
-     * @param request          包含公司regisID与产品名称的请求。
-     * @param responseObserver StreamObserver
-     */
-    @Override
-    public void deleteProduct(DeleteProductRequest request, StreamObserver<DeleteProductResponse> responseObserver) {
-        String regisId = request.getKey();
-        String productName = request.getField();
-        log.info("receive: " + regisId + "-" + productName);
-        log.info("Start deleting products...");
-        String responseInfo = manageProducts.deleteProduct(regisId, productName);
-        log.info("find info: " + responseInfo);
-        DeleteProductResponse response = DeleteProductResponse.newBuilder().setResponse(responseInfo).build();
         //放入response，传回客户端
         responseObserver.onNext(response);
         //表示此次连接结束

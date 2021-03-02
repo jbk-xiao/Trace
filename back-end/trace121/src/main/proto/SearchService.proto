@@ -91,7 +91,7 @@ message AllTraceRequest {
 message ChartsRequestByString {
   string chartsStrRequest = 1;
 }
-// 以单String查询溯源信息，目前包括：getVideo、getMedia、searchOrigin
+// 以单String查询溯源信息，目前包括：getVideo、getMedia、searchOrigin、addFirstProcess、addProcess、addProcedure
 message TraceRequestByString {
   string traceStrRequest = 1;
 }
@@ -107,27 +107,17 @@ message TraceStringResponse {
 service SearchService {
   rpc searchQuery(QueryRequest) returns (QueryResponse);
   rpc searchCompet(CompetRequest) returns (QueryResponse);
-
-
-
   rpc searchGraphByKind(GraphRequestByKind) returns (GraphResponseByKind);
   rpc searchGraphByBrand(GraphRequestByBrand) returns (GraphResponseByBrand);
-
-  rpc addProduct(AddProductRequest) returns (AddProductResponse);
-  rpc deleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
-  rpc searchProducts(ProductsRequest) returns (ProductsResponse);
-  rpc getAllProductNameList(ProductsRequest) returns (QueryResponse);
 }
 
 service SearchTraceService {
-  rpc searchTrace(QueryRequest) returns (TraceResponse);
   rpc searchPicture(TraceRequestByString) returns(TraceBytesResponse);//
   rpc searchVideo(TraceRequestByString) returns (TraceBytesResponse);//
   rpc getOrigin(TraceRequestByString) returns (TraceStringResponse);//
   rpc addFirstProcess(TraceRequestByString) returns (TraceStringResponse);//
   rpc addProcess(TraceRequestByString) returns (TraceStringResponse);//
   rpc addProcedure(TraceRequestByString) returns (TraceStringResponse);//
-
   rpc searchAllTraceByName(AllTraceRequest) returns (QueryResponse);
   rpc getFirstProcessInfo(ProductsRequest) returns (QueryResponse);
 
@@ -139,4 +129,10 @@ service SearchChartsService {
   rpc getAgeDistribution(ChartsRequestByString) returns (QueryResponse);
   rpc getProvinceIndex(ChartsRequestByString) returns (QueryResponse);
   rpc getIndexPredict(ChartsRequestByString) returns (QueryResponse);
+}
+
+service ManagerService {
+  rpc addProduct(AddProductRequest) returns (AddProductResponse);
+  rpc deleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
+  rpc searchProducts(ProductsRequest) returns (ProductsResponse);
 }

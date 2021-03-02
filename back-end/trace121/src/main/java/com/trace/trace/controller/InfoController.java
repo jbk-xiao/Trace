@@ -115,45 +115,4 @@ public class InfoController {
         return response.getResponse();
     }
 
-    @GetMapping(value = "/getProducts/{regis_id}")
-    public String getProducts(@PathVariable("regis_id") String regisId) {
-        log.info("Receive product request : " + regisId);
-        long start = System.currentTimeMillis();
-        ProductsResponse response = this.searchServiceBlockingStub
-                .searchProducts(ProductsRequest.newBuilder()
-                        .setKey(regisId).build());
-        long end = System.currentTimeMillis();
-        log.info("Search result: " + response.getResponse());
-        log.info("Retrieval time: " + (end - start));
-        return response.getResponse();
-    }
-
-    @GetMapping(value = "/addProduct/{regis_id}/{product_name}/{code}")
-    public String addProduct(@PathVariable("regis_id") String regisId,
-                             @PathVariable("product_name") String productName,
-                             @PathVariable("code") String code) {
-        log.info("Receive product request : " + regisId + "-" + productName + "-" + code);
-        long start = System.currentTimeMillis();
-        AddProductResponse response = this.searchServiceBlockingStub
-                .addProduct(AddProductRequest.newBuilder()
-                        .setKey(regisId).setField(productName).setValue(code).build());
-        long end = System.currentTimeMillis();
-        log.info("Add result: " + response.getResponse());
-        log.info("Retrieval time: " + (end - start));
-        return response.getResponse();
-    }
-
-    @GetMapping(value = "/deleteProduct/{regis_id}/{product_name}")
-    public String deleteProduct(@PathVariable("regis_id") String regisId,
-                                @PathVariable("product_name") String productName) {
-        log.info("Receive product request : " + regisId + "-" + productName);
-        long start = System.currentTimeMillis();
-        DeleteProductResponse response = this.searchServiceBlockingStub
-                .deleteProduct(DeleteProductRequest.newBuilder()
-                        .setKey(regisId).setField(productName).build());
-        long end = System.currentTimeMillis();
-        log.info("Delete result: " + response.getResponse());
-        log.info("Retrieval time: " + (end - start));
-        return response.getResponse();
-    }
 }

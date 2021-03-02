@@ -1,5 +1,6 @@
 package com.trace.trace.config;
 
+import com.trace.trace.grpc.ManagerServiceGrpc;
 import com.trace.trace.grpc.SearchChartsServiceGrpc;
 import com.trace.trace.grpc.SearchServiceGrpc;
 import com.trace.trace.grpc.SearchTraceServiceGrpc;
@@ -46,5 +47,10 @@ public class GrpcConfig {
     @Bean
     SearchChartsServiceGrpc.SearchChartsServiceBlockingStub searchChartsServiceBlockingStub(ManagedChannel channel) {
         return SearchChartsServiceGrpc.newBlockingStub(channel);
+    }
+
+    @Bean
+    ManagerServiceGrpc.ManagerServiceBlockingStub managerServiceBlockingStub(ManagedChannel channel) {
+        return ManagerServiceGrpc.newBlockingStub(channel);
     }
 }

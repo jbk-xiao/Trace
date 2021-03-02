@@ -15,7 +15,6 @@ import org.hyperledger.fabric.sdk.security.CryptoSuiteFactory;
 import org.hyperledger.fabric_ca.sdk.EnrollmentRequest;
 import org.hyperledger.fabric_ca.sdk.HFCAClient;
 import org.hyperledger.fabric_ca.sdk.RegistrationRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -170,43 +169,38 @@ public class FabricUtil {
         return wallet;
     }
 
-    @Autowired
-    private Wallet wallet;
-
     /**
-     * 使用wallet中的appUser连接到fabric网络，获得Gateway的对象。并将Gateway的对象作为Bean加载。
+     * 使用wallet中的appUser连接到fabric网络，获得Gateway的对象。并将Gateway的对象作为Bean加载。Wallet对象实例由initWallet注入。
      * 无fabric环境时交换方法体中注释内容。
      *
      * @return connected fabric Gateway
-     * @see #getNetwork()
+     * @see #initWallet()
      */
     @Bean
-    public Gateway getGateway() {
+    public Gateway getGateway(Wallet wallet) {
         //测试时注释掉下边所有内容
-//        Gateway.Builder builder = Gateway.createBuilder();
-//        Path networkConfigPath = Paths.get(conPath);
-//        try {
-//            builder.identity(wallet, user).networkConfig(networkConfigPath).discovery(true);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return builder.connect();
+        Gateway.Builder builder = Gateway.createBuilder();
+        Path networkConfigPath = Paths.get(conPath);
+        try {
+            builder.identity(wallet, user).networkConfig(networkConfigPath).discovery(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return builder.connect();
 
         //测试时取消下边内容的注释
-        return new NoErrorGateway();
+//        return new NoErrorGateway();
     }
 
-    @Autowired
-    private Gateway gateway;
-
     /**
-     * 使用已连接入fabric网络的gateway对象连接到mychannel合约，获得Network的对象。
+     * 使用已连接入fabric网络的gateway对象连接到mychannel合约，获得Network的对象。Gateway对象实例由getGateway注入。
      * 直接使用@Bean注解，一开始就将Network的连接注入spring。
      *
      * @return 已连接到mychannel的network对象。
+     * @see #getGateway(Wallet)
      */
     @Bean
-    public Network getNetwork() {
+    public Network getNetwork(Gateway gateway) {
         return gateway.getNetwork("mychannel");
     }
 }
