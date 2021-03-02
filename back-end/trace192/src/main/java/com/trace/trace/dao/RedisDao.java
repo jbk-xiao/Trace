@@ -60,7 +60,8 @@ public class RedisDao {
         //去重（顺序不变）
         List<String> result1 = new ArrayList<>(new LinkedHashSet<>(res));
         List<String> result = new ArrayList<>();
-        log.info("redis模糊查找:" + query + ",返回" + result1.toString());
+        log.debug("redis模糊查找:" + query + ",返回" + result1.toString());
+        log.info("redis模糊查找:{},返回{}条。", query, result1.size());
         for (String id : result1) {
             id = id.trim();
             result.add(id);
