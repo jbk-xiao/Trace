@@ -98,6 +98,22 @@ public class SearchChartsServiceImpl extends SearchChartsServiceGrpc.SearchChart
     }
 
     /**
+     * 获取相关关键词关联检索气泡图所需数据
+     * @param request           带有关键词的ChartsRequestByString
+     * @param responseObserver  StreamObserver
+     */
+    @Override
+    public void getRelateSearch(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
+        String keyword = request.getChartsStrRequest();
+        log.info("getRelateSearch: {}", keyword);
+        String provinceIndex = searchCharts.getRelateSearch(keyword);
+        log.info("getRelateSearch: {}", provinceIndex);
+        QueryResponse response = QueryResponse.newBuilder().setResponse(provinceIndex).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    /**
      * 获取关键词的百度指数预测结果。
      *
      * @param request          关键词

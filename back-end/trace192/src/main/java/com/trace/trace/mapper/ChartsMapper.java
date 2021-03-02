@@ -2,6 +2,7 @@ package com.trace.trace.mapper;
 
 import com.trace.trace.entity.AgeOrSexDistributionData;
 import com.trace.trace.entity.ProvinceIndexData;
+import com.trace.trace.entity.RelateSearchData;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -28,4 +29,6 @@ public interface ChartsMapper {
     @Select("SELECT period, province name, sum_index value FROM province_index WHERE keyword = #{keyword}")
     ProvinceIndexData[] selectProvinceIndexData(@Param("keyword") String keyword);
 
+    @Select("SELECT period, word, pv, ratio FROM relate_search WHERE keyword = #{keyword}")
+    RelateSearchData[] selectRelateSearch(String keyword);
 }
