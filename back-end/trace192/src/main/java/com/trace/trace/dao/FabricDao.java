@@ -229,9 +229,10 @@ public class FabricDao {
 
     /**
      * 接收产品某个具体procedure信息，将其存入fabric。
-     * @param id        产品唯一溯源码
-     * @param name      procedure名称
-     * @param master    procedure负责人
+     *
+     * @param id     产品唯一溯源码
+     * @param name   procedure名称
+     * @param master procedure负责人
      * @return 溯源码为id批次的产品所对应的TraceInfo的json字符串。包含二维码链接。
      */
     public String addProcedure(String id, String name, String master) {

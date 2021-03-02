@@ -21,4 +21,5 @@
 | /getPredict/{company_name} | http://121.46.19.26:8511/getPredict/泰奇食品 （或者）http://121.46.19.26:8511/getPredict/老干妈 | 企业名称company_name | 取出前端需求的预测曲线的json内容（直接根据company_name查询并返回MongoDB中存储的文档即可） ||
 | /getNews/{company_name} | http://121.46.19.26:8511/getPredict/泰奇食品 （或者）http://121.46.19.26:8511/getPredict/老干妈 | 企业名称company_name | 取出企业的新闻标题和链接的url，生成列表后返回给前端（直接根据company_name查询并返回MongoDB中存储的文档即可） ||
 |/getAgeDistribution/{keyword}|http://121.46.19.26:8511/getAgeDistribution/八宝粥 | 关键词|获取关键词对应的年龄分布和性别分布的数据||
-|/getProvinceIndex/{keyword}|http://getProvinceIndex/八宝粥|关键词|获取关键词对应的分省份的指数||
+|/getProvinceIndex/{keyword}|http://121.46.19.26:8511/getProvinceIndex/八宝粥|关键词|获取关键词对应的分省份的指数||
+|/getPredict/{keyword}|http://121.46.19.26:8511/getIndexPredict/老干妈|关键词|获取关键词对应百度指数的预测值|

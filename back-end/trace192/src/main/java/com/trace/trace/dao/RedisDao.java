@@ -9,7 +9,6 @@ import redis.clients.jedis.ScanParams;
 import redis.clients.jedis.ScanResult;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -45,7 +44,7 @@ public class RedisDao {
         ExecutorService executor = Executors.newFixedThreadPool(runsize);
         final CountDownLatch latch = new CountDownLatch(runsize);
         log.info("list:" + list.toString());
-        List<String> res = Collections.synchronizedList(new ArrayList<>(fuzzySearchList(query)));
+        List<String> res = new ArrayList<>(fuzzySearchList(query));
         for (String key : list) {
             executor.execute(() -> {
                 res.addAll(fuzzySearchList(key));
@@ -61,7 +60,8 @@ public class RedisDao {
         //去重（顺序不变）
         List<String> result1 = new ArrayList<>(new LinkedHashSet<>(res));
         List<String> result = new ArrayList<>();
-        log.info("redis模糊查找:" + query + ",返回" + result1.toString());
+        log.debug("redis模糊查找:" + query + ",返回" + result1.toString());
+        log.info("redis模糊查找:{},返回{}条。", query, result1.size());
         for (String id : result1) {
             id = id.trim();
             result.add(id);
@@ -98,15 +98,12 @@ public class RedisDao {
         long startTime = System.currentTimeMillis();
         List<String> keys = fuzzySearchQueryByKeys(query);
         Jedis jedis = jedisUtil.getClient();
-        log.info("模糊匹配到keys：" + keys.toString());
+        log.debug("模糊匹配到keys：" + keys.toString());
+        log.info("模糊匹配到{}条keys",keys.size());
         List<String> list = new ArrayList<>();
-//        if (keys.size() > 0) {
         for (String key : keys) {
             list.addAll(jedis.zrevrange(key, 0, -1));
         }
-//        } else {
-//            log.info("redis没有查到，返回" + list.toString());
-//        }
         jedis.close();
         long finishQueryTime = System.currentTimeMillis();
         log.info("Jedis process time:" + (finishQueryTime - startTime));
@@ -161,13 +158,9 @@ public class RedisDao {
     /**
      * 返回要显示的页码总数
      *
-     * @param list
-     * @return
+     * @param length listLength
+     * @return pagenum
      */
-    private Integer getPageNumber(List<String> list) {
-        return getPageNumber(list.size());
-    }
-
     private Integer getPageNumber(int length) {
         return length / pageRecord + (length % pageRecord == 0 ? 0 : 1);
     }

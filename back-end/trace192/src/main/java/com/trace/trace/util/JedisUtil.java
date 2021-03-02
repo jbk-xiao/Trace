@@ -48,7 +48,7 @@ public class JedisUtil {
 
         jedisPoolConfig.setMaxWaitMillis(10 * 1000);
         JedisPool jedisPool = new JedisPool(jedisPoolConfig, host, port, 3000, password);
-        log.info("检测jedisPool：" + jedisPool.getResource());
+//        log.info("检测jedisPool：" + jedisPool.getResource());
         return jedisPool;
     }
 
@@ -56,7 +56,7 @@ public class JedisUtil {
     JedisPool jedisPool;
 
     public Jedis getClient() {
-        log.info("调用getClient");
+        log.info("调用Redis getClient");
         return jedisPool.getResource();
     }
 }

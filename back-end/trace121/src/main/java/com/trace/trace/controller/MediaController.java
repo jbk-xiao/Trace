@@ -2,7 +2,9 @@ package com.trace.trace.controller;
 
 import com.google.protobuf.ByteString;
 import com.trace.trace.grpc.QueryRequest;
-import com.trace.trace.grpc.SearchServiceGrpc;
+import com.trace.trace.grpc.SearchTraceServiceGrpc;
+import com.trace.trace.grpc.TraceBytesResponse;
+import com.trace.trace.grpc.TraceRequestByString;
 import com.trace.trace.grpc.TraceResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,26 +36,30 @@ public class MediaController {
     /**
      * 从容器中获取调用GRpc stub
      */
+    final SearchTraceServiceGrpc.SearchTraceServiceBlockingStub searchTraceServiceBlockingStub;
+
     @Autowired
-    SearchServiceGrpc.SearchServiceBlockingStub searchServiceBlockingStub;
+    public MediaController(SearchTraceServiceGrpc.SearchTraceServiceBlockingStub searchTraceServiceBlockingStub) {
+        this.searchTraceServiceBlockingStub = searchTraceServiceBlockingStub;
+    }
 
     /**
      * 处理远程视频请求和服务器视频返回。
      *
-     * @param filename request filename.
-     * @param response remote httpServletResponse.
-     * @param request  remote httpServletRequest.
-     * @throws IOException if IOException occurs.
+     * @param filename 视频名称
+     * @param response 远程请求对应的响应HttpServletResponse对象实例。
+     * @param request  远程请求HttpServletRequest对象实例。
+     * @throws IOException IOException
      */
     @RequestMapping(value = "/getVideo/{filename:.+}", method = RequestMethod.GET)
     public void getVideo(@PathVariable("filename") String filename,
                          HttpServletResponse response, HttpServletRequest request) throws IOException {
         log.info("Receive video request:" + filename);
         long start = System.currentTimeMillis();
-        TraceResponse traceResponse = this.searchServiceBlockingStub
-                .searchTrace(QueryRequest.newBuilder()
-                        .setQuery(filename).setQueryType("video").build());
-        ByteString responseBytes = traceResponse.getResponseMedia();
+        TraceBytesResponse traceBytesResponse = this.searchTraceServiceBlockingStub
+                .searchVideo(TraceRequestByString.newBuilder()
+                        .setTraceStrRequest(filename).build());
+        ByteString responseBytes = traceBytesResponse.getTraceBytesResponse();
         byte[] data = responseBytes.toByteArray();
         assert data != null;
 
@@ -101,7 +107,7 @@ public class MediaController {
             os.close();
         }
         long end = System.currentTimeMillis();
-        log.info("Retrieval time: " + (end - start));
+        log.info("Retrieval time: {}ms", (end - start));
     }
 
     /**
@@ -118,10 +124,10 @@ public class MediaController {
         log.info("Receive picture request: " + filename);
         long start = System.currentTimeMillis();
 
-        TraceResponse traceResponse = this.searchServiceBlockingStub
-                .searchTrace(QueryRequest.newBuilder()
-                        .setQuery(filename).setQueryType("picture").build());
-        ByteString responseBytes = traceResponse.getResponseMedia();
+        TraceBytesResponse traceBytesResponse = this.searchTraceServiceBlockingStub
+                .searchPicture(TraceRequestByString.newBuilder()
+                        .setTraceStrRequest(filename).build());
+        ByteString responseBytes = traceBytesResponse.getTraceBytesResponse();
         byte[] data = responseBytes.toByteArray();
         assert data != null;
         String range = request.getHeader("range");
@@ -139,22 +145,7 @@ public class MediaController {
         is.close();
         os.close();
         long end = System.currentTimeMillis();
-        log.info("Retrieval time: " + (end - start));
+        log.info("Retrieval time: {}ms", (end - start));
     }
 
-    @RequestMapping(value = "/getRecentEvent/{process_name}/{page}", method = RequestMethod.GET)
-    public String getRecentEventList(@PathVariable("process_name") String processName,
-                                     @PathVariable("page") String page) {
-        log.info("Receive recent event request about " + processName + " in " + page);
-        long start = System.currentTimeMillis();
-        TraceResponse traceResponse = searchServiceBlockingStub
-                .searchTrace(QueryRequest.newBuilder()
-                        .setQueryType("event").setQuery(processName).setPage(page)
-                        .build());
-        String response = traceResponse.getResponse();
-        long end = System.currentTimeMillis();
-        log.info("Retrieval time: " + (end - start));
-        log.info("Search result: " + response);
-        return response;
-    }
 }

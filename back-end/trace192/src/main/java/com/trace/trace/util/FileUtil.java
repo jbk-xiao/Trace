@@ -1,5 +1,6 @@
-package com.trace.trace.util.media;
+package com.trace.trace.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Base64Utils;
@@ -16,6 +17,7 @@ import java.io.InputStream;
  * @Description
  * @create 2021-01-31-15:47
  */
+@Slf4j
 @Component
 public class FileUtil {
 
@@ -28,7 +30,7 @@ public class FileUtil {
     /**
      * @param videoname local video's basename
      * @return encode video to byte array.
-     * @see com.trace.trace.util.media.FileUtil#getBytesFromFile(String)
+     * @see FileUtil#getBytesFromFile(String)
      */
     public byte[] getBytesFromVideo(String videoname) {
         return getBytesFromFile(videopath + File.separator + videoname);
@@ -37,7 +39,7 @@ public class FileUtil {
     /**
      * @param picname local picture's basename
      * @return encode picture to byte array.
-     * @see com.trace.trace.util.media.FileUtil#getBytesFromFile(String)
+     * @see FileUtil#getBytesFromFile(String)
      */
     public byte[] getBytesFromPicture(String picname) {
         return getBytesFromFile(picpath + File.separator + picname);
@@ -46,7 +48,7 @@ public class FileUtil {
     /**
      * @param picname local picture's basename.
      * @return encode picture to UTF-8 String.
-     * @see com.trace.trace.util.media.FileUtil#getBytesFromPicture(String)
+     * @see FileUtil#getBytesFromPicture(String)
      * @see org.springframework.util.Base64Utils#encodeToString(byte[])
      * @deprecated
      */
@@ -78,7 +80,8 @@ public class FileUtil {
             }
             is.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
+            log.debug("" + e);
         }
         return bytes;
     }

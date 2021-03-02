@@ -16,21 +16,17 @@ import java.util.List;
 @Data
 public class ProcessInfo {
     @Expose
+    @SerializedName("location")
+    private final String location = "123";
+    @Expose
     @SerializedName("name")
     private String name;
-
     @Expose
     @SerializedName("master")
     private String master;
-
     @Expose
     @SerializedName("time")
     private long time;
-
-    @Expose
-    @SerializedName("location")
-    private final String location = "123";
-
     @Expose
     @SerializedName("picture")
     private String picture;

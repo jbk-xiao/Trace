@@ -1,22 +1,13 @@
 package com.trace.trace.service;
 
-import com.trace.trace.grpc.AddProductRequest;
-import com.trace.trace.grpc.AddProductResponse;
-import com.trace.trace.grpc.AllTraceRequest;
-import com.trace.trace.grpc.ChartsRequestByString;
 import com.trace.trace.grpc.CompetRequest;
-import com.trace.trace.grpc.DeleteProductRequest;
-import com.trace.trace.grpc.DeleteProductResponse;
 import com.trace.trace.grpc.GraphRequestByBrand;
 import com.trace.trace.grpc.GraphRequestByKind;
 import com.trace.trace.grpc.GraphResponseByBrand;
 import com.trace.trace.grpc.GraphResponseByKind;
-import com.trace.trace.grpc.ProductsRequest;
-import com.trace.trace.grpc.ProductsResponse;
 import com.trace.trace.grpc.QueryRequest;
 import com.trace.trace.grpc.QueryResponse;
 import com.trace.trace.grpc.SearchServiceGrpc;
-import com.trace.trace.grpc.TraceResponse;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import org.lognet.springboot.grpc.GRpcService;
@@ -38,25 +29,15 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
 
     final SearchCompet searchCompet;
 
-    final SearchTrace searchTrace;
-
     final SearchProduct searchProduct;
 
     final SearchGraph searchGraph;
 
-    final ManageProducts manageProducts;
-
-    final SearchCharts searchCharts;
-
     @Autowired
-    public SearchServiceImpl(SearchCompet searchCompet, SearchTrace searchTrace, SearchProduct searchProduct,
-                             SearchGraph searchGraph, ManageProducts manageProducts, SearchCharts searchCharts) {
+    public SearchServiceImpl(SearchCompet searchCompet, SearchProduct searchProduct, SearchGraph searchGraph) {
         this.searchCompet = searchCompet;
-        this.searchTrace = searchTrace;
         this.searchProduct = searchProduct;
         this.searchGraph = searchGraph;
-        this.manageProducts = manageProducts;
-        this.searchCharts = searchCharts;
     }
 
     /**
@@ -77,21 +58,6 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
         //放入response，传回客户端
         responseObserver.onNext(response);
         //表示此次连接结束
-        responseObserver.onCompleted();
-    }
-
-    /**
-     * 溯源查询模块，调用searchTrace，得到trace response并传回客户端
-     *
-     * @param request          request
-     * @param responseObserver response
-     * @see SearchTrace#searchTrace(QueryRequest)
-     * @see com.trace.trace.grpc.TraceResponse
-     */
-    @Override
-    public void searchTrace(QueryRequest request, StreamObserver<TraceResponse> responseObserver) {
-        TraceResponse response = searchTrace.searchTrace(request);
-        responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 
@@ -177,195 +143,6 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
         //放入response，传回客户端
         responseObserver.onNext(response);
         //表示此次连接结束
-        responseObserver.onCompleted();
-    }
-
-    /**
-     * 产品列表查询
-     *
-     * @param request
-     * @param responseObserver
-     */
-    @Override
-    public void searchProducts(ProductsRequest request, StreamObserver<ProductsResponse> responseObserver) {
-        String key = request.getKey();
-        log.info("receive key: " + key);
-        log.info("Start search products...");
-        String responseInfo = manageProducts.SearchProducts(key);
-        log.info("find info: " + responseInfo);
-        ProductsResponse response = ProductsResponse.newBuilder().setResponse(responseInfo).build();
-        //放入response，传回客户端
-        responseObserver.onNext(response);
-        //表示此次连接结束
-        responseObserver.onCompleted();
-    }
-
-    /**
-     * 添加产品
-     *
-     * @param request
-     * @param responseObserver
-     */
-    @Override
-    public void addProduct(AddProductRequest request, StreamObserver<AddProductResponse> responseObserver) {
-        String key = request.getKey();
-        String field = request.getField();
-        String value = request.getValue();
-        log.info("receive: " + key + "-" + field + "-" + value);
-        log.info("Start adding products...");
-        String responseInfo = manageProducts.AddProduct(key, field, value);
-        log.info("find info: " + responseInfo);
-        AddProductResponse response = AddProductResponse.newBuilder().setResponse(responseInfo).build();
-        //放入response，传回客户端
-        responseObserver.onNext(response);
-        //表示此次连接结束
-        responseObserver.onCompleted();
-    }
-
-    /**
-     * 删除产品
-     *
-     * @param request
-     * @param responseObserver
-     */
-    @Override
-    public void deleteProduct(DeleteProductRequest request, StreamObserver<DeleteProductResponse> responseObserver) {
-        String key = request.getKey();
-        String field = request.getField();
-        log.info("receive: " + key + "-" + field);
-        log.info("Start deleting products...");
-        String responseInfo = manageProducts.DeleteProduct(key, field);
-        log.info("find info: " + responseInfo);
-        DeleteProductResponse response = DeleteProductResponse.newBuilder().setResponse(responseInfo).build();
-        //放入response，传回客户端
-        responseObserver.onNext(response);
-        //表示此次连接结束
-        responseObserver.onCompleted();
-    }
-
-    /**
-     * 管理界面获取到所有的溯源列表
-     *
-     * @param request
-     * @param responseObserver
-     */
-    @Override
-    public void searchAllTraceByName(AllTraceRequest request, StreamObserver<QueryResponse> responseObserver) {
-        String product_name = request.getProductName();
-        String regis_id = request.getRegisId();
-        String page = request.getPage();
-        log.info("receive regis_id: " + regis_id + ",product_name: " + product_name + ",page: " + page);
-        String responseInfo = searchTrace.searchAllTraceByName(product_name, regis_id, page);
-        log.info("searchAllTraceByName response: " + responseInfo);
-        QueryResponse response = QueryResponse.newBuilder().setResponse(responseInfo).build();
-        //放入response，传回客户端
-        responseObserver.onNext(response);
-        //表示此次连接结束
-        responseObserver.onCompleted();
-    }
-
-    /**
-     * 获取到所有商品名称列表
-     * @param request
-     * @param responseObserver
-     */
-//    @Override
-//    public void getAllProductNameList(ProductsRequest request, StreamObserver<QueryResponse> responseObserver){
-//        String regis_id = request.getKey();
-//        log.info("receive regis_id: " + regis_id);
-//        String responseInfo = manageProducts.getAllProductNameList(regis_id);
-//        log.info("getAllProductNameList response: " + responseInfo);
-//        QueryResponse response = QueryResponse.newBuilder().setResponse(responseInfo).build();
-//        //放入response，传回客户端
-//        responseObserver.onNext(response);
-//        //表示此次连接结束
-//        responseObserver.onCompleted();
-//    }
-
-    /**
-     * 返回第一次流程填写所需的信息
-     *
-     * @param request
-     * @param responseObserver
-     */
-    @Override
-    public void getFirstProcessInfo(ProductsRequest request, StreamObserver<QueryResponse> responseObserver) {
-        String regis_id = request.getKey();
-        log.info("receive regis_id: " + regis_id);
-        String responseInfo = searchTrace.getFirstProcessInfo(regis_id);
-        log.info("getFirstProcessInfo response: " + responseInfo);
-        QueryResponse response = QueryResponse.newBuilder().setResponse(responseInfo).build();
-        //放入response，传回客户端
-        responseObserver.onNext(response);
-        //表示此次连接结束
-        responseObserver.onCompleted();
-    }
-
-    /**
-     * 取出前端需求的预测曲线的json内容。
-     *
-     * @param request          包含公司名称的grpc请求。
-     * @param responseObserver StreamObserver<QueryResponse>
-     */
-    @Override
-    public void getPredict(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
-        String companyName = request.getRequest();
-        log.info("getPredict: {}", companyName);
-        String predictData = searchCharts.getPredictData(companyName);
-        log.info("getPredict response: {}", predictData);
-        QueryResponse response = QueryResponse.newBuilder().setResponse(predictData).build();
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
-    }
-
-    /**
-     * 取出企业的新闻标题和链接的url并返回。
-     *
-     * @param request          包含公司名称的grpc请求。
-     * @param responseObserver StreamObserver<QueryResponse>
-     */
-    @Override
-    public void getNews(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
-        String companyName = request.getRequest();
-        log.info("getNews: {}", companyName);
-        String newsData = searchCharts.getNewsData(companyName);
-        log.info("getNews response: {}", newsData);
-        QueryResponse response = QueryResponse.newBuilder().setResponse(newsData).build();
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
-    }
-
-    /**
-     * 取出年龄和性别分布指数
-     *
-     * @param request          关键词
-     * @param responseObserver StreamObserver<QueryResponse>
-     */
-    @Override
-    public void getAgeDistribution(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
-        String keyword = request.getRequest();
-        log.info("getAgeDistribution: {}", keyword);
-        String ageDistributionData = searchCharts.getAgeDistribution(keyword);
-        log.info("getAgeDistribution: {}", ageDistributionData);
-        QueryResponse response = QueryResponse.newBuilder().setResponse(ageDistributionData).build();
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
-    }
-
-    /**
-     * 取出省份分布指数
-     *
-     * @param request          关键词
-     * @param responseObserver StreamObserver<QueryResponse>
-     */
-    @Override
-    public void getProvinceIndex(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
-        String keyword = request.getRequest();
-        log.info("getProvinceIndex: {}", keyword);
-        String provinceIndex = searchCharts.getProvinceIndex(keyword);
-        log.info("getProvinceIndex: {}", provinceIndex);
-        QueryResponse response = QueryResponse.newBuilder().setResponse(provinceIndex).build();
-        responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 }

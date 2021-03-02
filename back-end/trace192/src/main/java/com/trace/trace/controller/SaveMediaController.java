@@ -1,6 +1,6 @@
 package com.trace.trace.controller;
 
-import com.trace.trace.util.media.SaveUtil;
+import com.trace.trace.util.SaveUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
