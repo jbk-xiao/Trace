@@ -91,7 +91,7 @@ message AllTraceRequest {
 message ChartsRequestByString {
   string chartsStrRequest = 1;
 }
-// 以单String查询溯源信息，目前包括：getVideo、getMedia、searchOrigin
+// 以单String查询溯源信息，目前包括：getVideo、getMedia、searchOrigin、addFirstProcess、addProcess、addProcedure
 message TraceRequestByString {
   string traceStrRequest = 1;
 }

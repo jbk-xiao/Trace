@@ -9,7 +9,6 @@ import redis.clients.jedis.ScanParams;
 import redis.clients.jedis.ScanResult;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -45,7 +44,7 @@ public class RedisDao {
         ExecutorService executor = Executors.newFixedThreadPool(runsize);
         final CountDownLatch latch = new CountDownLatch(runsize);
         log.info("list:" + list.toString());
-        List<String> res = Collections.synchronizedList(new ArrayList<>(fuzzySearchList(query)));
+        List<String> res = new ArrayList<>(fuzzySearchList(query));
         for (String key : list) {
             executor.execute(() -> {
                 res.addAll(fuzzySearchList(key));
@@ -98,15 +97,12 @@ public class RedisDao {
         long startTime = System.currentTimeMillis();
         List<String> keys = fuzzySearchQueryByKeys(query);
         Jedis jedis = jedisUtil.getClient();
-        log.info("模糊匹配到keys：" + keys.toString());
+        log.debug("模糊匹配到keys：" + keys.toString());
+        log.info("模糊匹配到{}条keys",keys.size());
         List<String> list = new ArrayList<>();
-//        if (keys.size() > 0) {
         for (String key : keys) {
             list.addAll(jedis.zrevrange(key, 0, -1));
         }
-//        } else {
-//            log.info("redis没有查到，返回" + list.toString());
-//        }
         jedis.close();
         long finishQueryTime = System.currentTimeMillis();
         log.info("Jedis process time:" + (finishQueryTime - startTime));

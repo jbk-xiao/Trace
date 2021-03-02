@@ -20,8 +20,6 @@ import redis.clients.jedis.JedisPoolConfig;
 @Component
 public class JedisUtil {
 
-    @Autowired
-    JedisPool jedisPool;
     @Value("${spring.redis.host}")
     private String host;
     @Value("${spring.redis.port}")
@@ -54,8 +52,11 @@ public class JedisUtil {
         return jedisPool;
     }
 
+    @Autowired
+    JedisPool jedisPool;
+
     public Jedis getClient() {
-        log.info("调用getClient");
+        log.info("调用Redis getClient");
         return jedisPool.getResource();
     }
 }
