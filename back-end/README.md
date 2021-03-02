@@ -12,8 +12,8 @@
 |/addProcess||POST请求接收四个参数：id=123456 &name=hahaha &master=lalala &location=lalala|返回更改后的溯源信息字符串或是报错信息。和/getOrigin返回结果同格式，但picture字段为空||
 |/addFirstProcess||POST请求，接收foodType:油辣椒酱-275g-辣椒酱，com:公司名称，processCount:步骤数，name:第一个process的名称，master:第一个process负责人的名称，location:第一个工序所在城市|同上||
 |/addProcedure||POST请求接收三个参数：id=123456 &name=hahaha &master=lalala| 同上                                                         ||
-|/getAllTraceInfo/{regis_id}/{product_name}/{page}|http://121.46.19.26:8511/getAllTraceInfo/440108400003939/原味八宝粥-370g-速食粥/1 （泰奇）http://121.46.19.26:8511/getAllTraceInfo/520102000400793/油辣椒酱-275g-辣椒酱/1|公司工商注册号regis_id、商品名称product_name、页码page| 返回总页码pageCount以及溯源列表信息（溯源码id、产品名称foodname、规格specification、分类category、最新流程latestProcess、时间time） |可选值来自getProducts接口|
-|/getFirstProcessInfo/{regis_id}||公司工商注册号regis_id| 该公司的公司基本信息以及公司所有商品名称列表 |第一次流程获取的信息|
+|/getAllTraceInfo/{regis_id}/{product_name}/{page}|http://121.46.19.26:8511/getAllTraceInfo/440108400003939/原味八宝粥-370g-速食粥/1 （泰奇）http://121.46.19.26:8511/getAllTraceInfo/520102000400793/油辣椒酱-275g-辣椒酱/1|公司工商注册号regis_id、商品名称product_name、页码page| 返回总页码pageCount以及溯源列表信息（溯源码id、产品名称foodname、规格specification、分类category、最新流程latestProcess、时间time） ||
+|/getFirstProcessInfo/{regis_id}|http://121.46.19.26:8511/getFirstProcessInfo/440108400003939 、http://121.46.19.26:8511/getFirstProcessInfo/520102000400793|公司工商注册号regis_id| 该公司的公司基本信息以及公司所有商品名称列表 |第一次流程获取的信息|
 | /getProducts/{regis_id} | http://121.46.19.26:8511/getProducts/440108400003939 、http://121.46.19.26:8511/getProducts/520102000400793 | 公司工商注册号regis_id | 该公司的所有产品及其对应的编码 ||
 | /addProduct/{regis_id}/{product_name}/{code} | http://121.46.19.26:8511/addProduct/440108400003939/桂圆莲子八宝粥-370g-速食粥/6902613100020 | 公司工商注册号regis_id、商品名称product_name、产品编码code | 返回添加产品的执行结果（成功或不成功的字符串） ||
 | /deleteProduct/{regis_id}/{product_name} | http://121.46.19.26:8511/deleteProduct/440108400003939/桂圆莲子八宝粥-370g-速食粥 | 公司工商注册号regis_id、商品名称product_name | 返回删除产品的执行结果（成功或不成功的字符串） ||
