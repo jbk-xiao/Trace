@@ -22,6 +22,7 @@
 |/getAgeDistribution/{keyword}|http://121.46.19.26:8511/getAgeDistribution/八宝粥 | 关键词|获取关键词对应的年龄分布和性别分布的数据|可选值来自按钮|
 |/getProvinceIndex/{keyword}|http://121.46.19.26:8511/getProvinceIndex/八宝粥|关键词|获取关键词对应的分省份的指数|可选值来自按钮|
 |/getRelateSearch/{keyword}|http://121.46.19.26:8511/getRelateSearch/老干妈|关键词|获取相关关键词关联检索气泡图所需数据|可选值来自按钮|
-|/getIndexPredict/{keyword}|http://121.46.19.26:8511/getIndexPredict/老干妈|关键词|获取关键词对应百度指数的预测值|可选：八宝粥、老干妈、辣椒酱、泰奇八宝粥|
+|/get3dScore/{sku_id}|http://121.46.19.26:8511/get3dScore/7552427 （泰奇的）、http://121.46.19.26:8511/get3dScore/844099 （老干妈的）|两个主公司的sku_id|获取三维图所需数据||
+|/getIndexPredict/{keyword}|http://121.46.19.26:8511/getIndexPredict/老干妈|关键词|获取关键词对应百度指数的预测值|可选：八宝粥、老干妈、辣椒酱、泰奇八宝粥，以及按钮上的关键词|
 
 

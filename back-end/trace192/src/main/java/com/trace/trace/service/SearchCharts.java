@@ -3,9 +3,11 @@ package com.trace.trace.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.trace.trace.dao.ChartsMongoDao;
+import com.trace.trace.dao.ChartsRedisDao;
 import com.trace.trace.entity.AgeOrSexDistributionData;
 import com.trace.trace.entity.ProvinceIndexData;
 import com.trace.trace.entity.RelateSearchData;
+import com.trace.trace.entity.S3dScore;
 import com.trace.trace.mapper.ChartsMapper;
 import com.trace.trace.pojo.AgeOrSexDistribution;
 import com.trace.trace.pojo.ProvinceIndex;
@@ -13,6 +15,8 @@ import com.trace.trace.pojo.RelateSearch;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 /**
  * @author jbk-xiao
@@ -26,12 +30,14 @@ import org.springframework.stereotype.Component;
 public class SearchCharts {
     final ChartsMongoDao chartsMongoDao;
     final ChartsMapper chartsMapper;
+    final ChartsRedisDao chartsRedisDao;
     final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().disableHtmlEscaping().create();
-
+    final String scoreTitles = "[\"brand\",\"comment_score\",\"count\",\"sku_id\",\"price\"]";
     @Autowired
-    public SearchCharts(ChartsMongoDao chartsMongoDao, ChartsMapper chartsMapper) {
+    public SearchCharts(ChartsMongoDao chartsMongoDao, ChartsMapper chartsMapper, ChartsRedisDao chartsRedisDao) {
         this.chartsMongoDao = chartsMongoDao;
         this.chartsMapper = chartsMapper;
+        this.chartsRedisDao = chartsRedisDao;
     }
 
     public String getPredictData(String companyName) {
@@ -82,5 +88,18 @@ public class SearchCharts {
         RelateSearch relateSearch = new RelateSearch(keyword, relateSearchData[0].getPeriod());
         relateSearch.setRelateSearchData(relateSearchData);
         return gson.toJson(relateSearch);
+    }
+
+    public String get3dScore(String skuId) {
+        long start = System.currentTimeMillis();
+        Set<String> skuIds = chartsRedisDao.getCompetSkuIds(skuId);
+        log.info("get {} competSkuIds from redis.", skuIds.size());
+        S3dScore[] s3dScores = chartsMapper.select3dScore(skuIds);
+        log.info("get {} 3dScores data from mysql.", s3dScores.length);
+        StringBuilder result = new StringBuilder(this.scoreTitles);
+        for (S3dScore s3dScore : s3dScores) {
+            result.append(",").append(s3dScore.toString());
+        }
+        return '[' + result.toString() + ']';
     }
 }

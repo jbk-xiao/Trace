@@ -128,6 +128,7 @@ service SearchChartsService {
   rpc getAgeDistribution(ChartsRequestByString) returns (QueryResponse);
   rpc getProvinceIndex(ChartsRequestByString) returns (QueryResponse);
   rpc getRelateSearch(ChartsRequestByString) returns (QueryResponse);
+  rpc get3dScore(ChartsRequestByString) returns (QueryResponse);
   rpc getIndexPredict(ChartsRequestByString) returns (QueryResponse);
 }
 

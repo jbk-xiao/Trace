@@ -3,10 +3,13 @@ package com.trace.trace.mapper;
 import com.trace.trace.entity.AgeOrSexDistributionData;
 import com.trace.trace.entity.ProvinceIndexData;
 import com.trace.trace.entity.RelateSearchData;
+import com.trace.trace.entity.S3dScore;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 /**
  * @author jbk-xiao
@@ -30,5 +33,7 @@ public interface ChartsMapper {
     ProvinceIndexData[] selectProvinceIndexData(@Param("keyword") String keyword);
 
     @Select("SELECT period, word, pv, ratio FROM relate_search WHERE keyword = #{keyword}")
-    RelateSearchData[] selectRelateSearch(String keyword);
+    RelateSearchData[] selectRelateSearch(@Param("keyword") String keyword);
+
+    S3dScore[] select3dScore(@Param("skuIds") Set<String> skuIds);
 }

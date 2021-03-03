@@ -116,6 +116,16 @@ public class ChartsController {
         return response.getResponse();
     }
 
+    @GetMapping(value = "/get3dScore/{sku_id}")
+    public String get3dScore(@PathVariable("sku_id") String skuId) {
+        long start = System.currentTimeMillis();
+        log.info("request get3dScore: {}", skuId);
+        QueryResponse response = searchChartsServiceBlockingStub
+                .get3dScore(ChartsRequestByString.newBuilder().setChartsStrRequest(skuId)
+                        .build());
+        log.info("use {} ms", System.currentTimeMillis() - start);
+        return response.getResponse();
+    }
     /**
      * 利用关键词获取该关键词的百度指数预测。
      * @param keyword 百度指数中的关键词。
