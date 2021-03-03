@@ -106,9 +106,20 @@ public class SearchChartsServiceImpl extends SearchChartsServiceGrpc.SearchChart
     public void getRelateSearch(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
         String keyword = request.getChartsStrRequest();
         log.info("getRelateSearch: {}", keyword);
-        String provinceIndex = searchCharts.getRelateSearch(keyword);
-        log.info("getRelateSearch: {}", provinceIndex);
-        QueryResponse response = QueryResponse.newBuilder().setResponse(provinceIndex).build();
+        String relateSearch = searchCharts.getRelateSearch(keyword);
+        log.info("getRelateSearch: {}", relateSearch);
+        QueryResponse response = QueryResponse.newBuilder().setResponse(relateSearch).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void get3dScore(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
+        String skuId = request.getChartsStrRequest();
+        log.info("get3dScore: {}", skuId);
+        String s3dScore = searchCharts.get3dScore(skuId);
+        log.info("get3dScore: {}", s3dScore);
+        QueryResponse response = QueryResponse.newBuilder().setResponse(s3dScore).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trace.trace.mapper.ChartsMapper">
+
+    <select id="select3dScore" parameterType="java.util.Set" resultType="S3dScore">
+        select brand, comment_score commentScore, `count`, sku_id skuId, price
+        from `3d_score`
+        where `sku_id` in
+        <foreach collection="skuIds" item="skuId" index="index"
+                 open="(" close=")" separator=",">
+            #{skuId}
+        </foreach>
+
+    </select>
+
+</mapper>
