@@ -67,4 +67,19 @@ public class ChartsMongoDao {
         log.info("getIndexPredict: {}chars", result.length());
         return result.toString();
     }
+
+    public String getCommentStatistic(String skuId) {
+        StringBuilder result = new StringBuilder();
+        MongoClient mongoClient;
+        mongoClient = MongoDBUtil.getConn();
+        MongoCollection<Document> collection = mongoClient.getDatabase("trace")
+                .getCollection("comment_statistic");
+        for (Document document : collection.find(regex("sku_id", skuId))) {
+            Object docJson = document.get("data");
+            result.append(docJson);
+        }
+        mongoClient.close();
+        log.info("getCommentStatistic: {}chars", result.length());
+        return result.toString();
+    }
 }

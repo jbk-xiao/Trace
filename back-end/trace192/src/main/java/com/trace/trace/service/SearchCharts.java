@@ -93,6 +93,7 @@ public class SearchCharts {
     public String get3dScore(String skuId) {
         long start = System.currentTimeMillis();
         Set<String> skuIds = chartsRedisDao.getCompetSkuIds(skuId);
+        skuIds.add(skuId);
         log.info("get {} competSkuIds from redis.", skuIds.size());
         S3dScore[] s3dScores = chartsMapper.select3dScore(skuIds);
         log.info("get {} 3dScores data from mysql.", s3dScores.length);
@@ -100,6 +101,15 @@ public class SearchCharts {
         for (S3dScore s3dScore : s3dScores) {
             result.append(",").append(s3dScore.toString());
         }
+        log.info("Getting 3dScore uses {} ms.", System.currentTimeMillis() - start);
         return '[' + result.toString() + ']';
+    }
+
+    public String getCommentStatistic(String skuId) {
+        long start = System.currentTimeMillis();
+        //从mongodb中查询公司评论分析数据
+        String result = chartsMongoDao.getCommentStatistic(skuId);
+        log.info("mongodb selecting {} uses: {}ms", skuId, System.currentTimeMillis() - start);
+        return result;
     }
 }

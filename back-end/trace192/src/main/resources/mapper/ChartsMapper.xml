@@ -10,7 +10,6 @@
                  open="(" close=")" separator=",">
             #{skuId}
         </foreach>
-
     </select>
 
 </mapper>

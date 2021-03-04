@@ -116,6 +116,11 @@ public class ChartsController {
         return response.getResponse();
     }
 
+    /**
+     * 根据主公司sku_id获取评论分析三维图所需数据。
+     * @param skuId 主公司sku_id
+     * @return  评论分析三维图所需数据。
+     */
     @GetMapping(value = "/get3dScore/{sku_id}")
     public String get3dScore(@PathVariable("sku_id") String skuId) {
         long start = System.currentTimeMillis();
@@ -137,6 +142,22 @@ public class ChartsController {
         log.info("request getIndexPredict: {}", keyword);
         QueryResponse response = searchChartsServiceBlockingStub
                 .getIndexPredict(ChartsRequestByString.newBuilder().setChartsStrRequest(keyword)
+                        .build());
+        log.info("use {} ms", System.currentTimeMillis() - start);
+        return response.getResponse();
+    }
+
+    /**
+     * 利用主公司的sku_id查询评论打分数据。
+     * @param skuId 主公司sku_id
+     * @return 评论打分数据。
+     */
+    @GetMapping(value = "/getCommentStatistic/{sku_id}")
+    public String getCommentStatistic(@PathVariable("sku_id") String skuId) {
+        long start = System.currentTimeMillis();
+        log.info("request getCommentStatistic: {}", skuId);
+        QueryResponse response = searchChartsServiceBlockingStub
+                .getCommentStatistic(ChartsRequestByString.newBuilder().setChartsStrRequest(skuId)
                         .build());
         log.info("use {} ms", System.currentTimeMillis() - start);
         return response.getResponse();
