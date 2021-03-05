@@ -18,11 +18,8 @@ public class MongoConfig {
     @Value("${spring.data.mongodb.uri}")
     private String uri;
 
-
     @Bean
     MongoDatabaseFactory mongoDatabaseFactory() {
-//        MongoClient mongoClient = MongoClients.create(uri);
-//        return new SimpleMongoClientDatabaseFactory(mongoClient, "trace");
         return new SimpleMongoClientDatabaseFactory(uri);
     }
 }

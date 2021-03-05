@@ -19,8 +19,12 @@ import java.util.List;
 @Slf4j
 @Repository
 public class CompetRedisDao {
+    private final JedisUtil jedisUtil;
+
     @Autowired
-    JedisUtil jedisUtil;
+    public CompetRedisDao(JedisUtil jedisUtil) {
+        this.jedisUtil = jedisUtil;
+    }
 
     /**
      * 获取到regis_id对应的sku_id

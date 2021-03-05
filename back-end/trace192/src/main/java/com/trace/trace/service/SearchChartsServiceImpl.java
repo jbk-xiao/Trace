@@ -57,7 +57,7 @@ public class SearchChartsServiceImpl extends SearchChartsServiceGrpc.SearchChart
         String companyName = request.getChartsStrRequest();
         log.info("getNews: {}", companyName);
         String newsData = searchCharts.getNewsData(companyName);
-        log.info("getNews response: {}", newsData);
+        log.info("getNews response: {}chars", newsData.length());
         QueryResponse response = QueryResponse.newBuilder().setResponse(newsData).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();

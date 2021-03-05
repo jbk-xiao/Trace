@@ -3,7 +3,6 @@ package com.trace.trace.util;
 import com.trace.trace.config.RedisIndexConfig;
 import com.trace.trace.dao.FabricDao;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
@@ -26,14 +25,17 @@ import java.rmi.UnexpectedException;
 @Component
 public class SaveUtil {
 
-    @Autowired
-    JedisUtil jedisUtil;
-    @Autowired
-    FabricDao fabricDao;
-    @Autowired
-    RedisIndexConfig redisIndexConfig;
+    private final JedisUtil jedisUtil;
+    private final FabricDao fabricDao;
+    private final RedisIndexConfig redisIndexConfig;
     @Value("${media.picture.path}")
     private String picPath;
+
+    public SaveUtil(JedisUtil jedisUtil, FabricDao fabricDao, RedisIndexConfig redisIndexConfig) {
+        this.jedisUtil = jedisUtil;
+        this.fabricDao = fabricDao;
+        this.redisIndexConfig = redisIndexConfig;
+    }
 
     /**
      * 保存文件路径

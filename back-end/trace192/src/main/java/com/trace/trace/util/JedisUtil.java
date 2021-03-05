@@ -41,6 +41,7 @@ public class JedisUtil {
         jedisPoolConfig.setMaxTotal(1000);
         jedisPoolConfig.setMaxIdle(MaxIdle);
         jedisPoolConfig.setMinIdle(MinIdle);
+        jedisPoolConfig.setMaxWaitMillis(-1);
         jedisPoolConfig.setTestOnBorrow(true);
         jedisPoolConfig.setTestOnCreate(true);
         jedisPoolConfig.setTestOnReturn(true);

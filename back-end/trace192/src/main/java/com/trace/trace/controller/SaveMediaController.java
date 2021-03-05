@@ -22,8 +22,12 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class SaveMediaController {
 
+    private final SaveUtil saveUtil;
+
     @Autowired
-    SaveUtil saveUtil;
+    public SaveMediaController(SaveUtil saveUtil) {
+        this.saveUtil = saveUtil;
+    }
 
     @GetMapping("/saveName/{filename}")
     public void saveMedia(@PathVariable("filename") String filename, HttpServletRequest request) {
