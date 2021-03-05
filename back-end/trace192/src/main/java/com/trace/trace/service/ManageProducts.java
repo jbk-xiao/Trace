@@ -3,7 +3,7 @@ package com.trace.trace.service;
 import com.trace.trace.dao.ProductRedisDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * @author: Clivia-Han
@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
  * @create: 2021-02-19-16:54
  */
 @Slf4j
-@Component
+@Service
 public class ManageProducts {
-    final ProductRedisDao productRedisDao;
+    private final ProductRedisDao productRedisDao;
 
     @Autowired
     public ManageProducts(ProductRedisDao productRedisDao) {

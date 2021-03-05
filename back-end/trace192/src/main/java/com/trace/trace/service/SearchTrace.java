@@ -10,11 +10,11 @@ import com.trace.trace.dao.TraceRedisDao;
 import com.trace.trace.entity.CompanyInfo;
 import com.trace.trace.mapper.CompetMapper;
 import com.trace.trace.pojo.TraceManagerInfo;
-import com.trace.trace.util.FileUtil;
 import com.trace.trace.util.CreateJson;
+import com.trace.trace.util.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.List;
  * @Description 溯源模块
  * @create 2021-02-07-7:57 下午
  */
-@Component
+@Service
 @Slf4j
 public class SearchTrace {
 

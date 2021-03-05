@@ -130,6 +130,7 @@ service SearchChartsService {
   rpc getRelateSearch(ChartsRequestByString) returns (QueryResponse);
   rpc get3dScore(ChartsRequestByString) returns (QueryResponse);
   rpc getIndexPredict(ChartsRequestByString) returns (QueryResponse);
+  rpc getCommentStatistic(ChartsRequestByString) returns (QueryResponse);
 }
 
 service ManagerService {

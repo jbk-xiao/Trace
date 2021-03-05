@@ -14,7 +14,7 @@ import com.trace.trace.pojo.ProvinceIndex;
 import com.trace.trace.pojo.RelateSearch;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
@@ -26,13 +26,13 @@ import java.util.Set;
  * @create 2021-02-23-17:05
  */
 @Slf4j
-@Component
+@Service
 public class SearchCharts {
-    final ChartsMongoDao chartsMongoDao;
-    final ChartsMapper chartsMapper;
-    final ChartsRedisDao chartsRedisDao;
-    final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().disableHtmlEscaping().create();
-    final String scoreTitles = "[\"brand\",\"comment_score\",\"count\",\"sku_id\",\"price\"]";
+    private final ChartsMongoDao chartsMongoDao;
+    private final ChartsMapper chartsMapper;
+    private final ChartsRedisDao chartsRedisDao;
+    private final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().disableHtmlEscaping().create();
+    private final String scoreTitles = "[\"brand\",\"comment_score\",\"count\",\"sku_id\",\"price\"]";
     @Autowired
     public SearchCharts(ChartsMongoDao chartsMongoDao, ChartsMapper chartsMapper, ChartsRedisDao chartsRedisDao) {
         this.chartsMongoDao = chartsMongoDao;
@@ -93,6 +93,7 @@ public class SearchCharts {
     public String get3dScore(String skuId) {
         long start = System.currentTimeMillis();
         Set<String> skuIds = chartsRedisDao.getCompetSkuIds(skuId);
+        skuIds.add(skuId);
         log.info("get {} competSkuIds from redis.", skuIds.size());
         S3dScore[] s3dScores = chartsMapper.select3dScore(skuIds);
         log.info("get {} 3dScores data from mysql.", s3dScores.length);
@@ -100,6 +101,15 @@ public class SearchCharts {
         for (S3dScore s3dScore : s3dScores) {
             result.append(",").append(s3dScore.toString());
         }
+        log.info("Getting 3dScore uses {} ms.", System.currentTimeMillis() - start);
         return '[' + result.toString() + ']';
+    }
+
+    public String getCommentStatistic(String skuId) {
+        long start = System.currentTimeMillis();
+        //从mongodb中查询公司评论分析数据
+        String result = chartsMongoDao.getCommentStatistic(skuId);
+        log.info("mongodb selecting {} uses: {}ms", skuId, System.currentTimeMillis() - start);
+        return result;
     }
 }

@@ -2,7 +2,7 @@ package com.trace.trace.dao;
 
 import com.trace.trace.util.JedisUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import redis.clients.jedis.Jedis;
 
 import java.util.Set;
@@ -15,7 +15,7 @@ import java.util.Set;
  * @create 2021-03-03-0:33
  */
 @Slf4j
-@Component
+@Repository
 public class ChartsRedisDao {
 
     private final JedisUtil jedisUtil;

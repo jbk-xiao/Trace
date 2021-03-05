@@ -12,7 +12,7 @@ import com.trace.trace.entity.JDdetail;
 import com.trace.trace.mapper.CompetMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -24,11 +24,11 @@ import java.util.List;
  * @create 2021-02-07-7:42 下午
  */
 @Slf4j
-@Component
+@Service
 public class SearchCompet {
-    final CompetMapper competMapper;
-    final CompetRedisDao competRedisDao;
-    final CompetMongoDao competMongoDao;
+    private final CompetMapper competMapper;
+    private final CompetRedisDao competRedisDao;
+    private final CompetMongoDao competMongoDao;
     private final Gson gson = new GsonBuilder().disableHtmlEscaping().create();  //防止出现字符转换
 
     @Autowired

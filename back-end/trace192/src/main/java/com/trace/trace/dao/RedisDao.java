@@ -3,7 +3,7 @@ package com.trace.trace.dao;
 import com.trace.trace.util.JedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.ScanParams;
 import redis.clients.jedis.ScanResult;
@@ -17,12 +17,12 @@ import java.util.concurrent.Executors;
 
 
 @Slf4j
-@Component
+@Repository
 public class RedisDao {
 
     //分页的每一页的结果数
     static int pageRecord = 20;
-    final JedisUtil jedisUtil;
+    private final JedisUtil jedisUtil;
 
     @Autowired
     public RedisDao(JedisUtil jedisUtil) {

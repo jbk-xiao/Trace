@@ -7,7 +7,7 @@ import com.trace.trace.entity.S3dScore;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 
@@ -19,7 +19,7 @@ import java.util.Set;
  * @create 2021-02-23-20:56
  */
 @Mapper
-@Component
+@Repository
 public interface ChartsMapper {
     @Select("SELECT period, age_range `range`, tgi, word_rate wordRate, all_rate allRate FROM age_distribution "
             + "WHERE keyword = #{keyword}")

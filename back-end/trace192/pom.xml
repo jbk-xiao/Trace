@@ -43,6 +43,21 @@
             <version>${mysql.version}</version>
         </dependency>
 
+        <!-- mongodb连接相关 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver</artifactId>
+            <version>3.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+        </dependency>
+
         <!-- Druid连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -79,7 +94,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-            <version>2.3.0.RELEASE</version>
+<!--            <version>2.3.0.RELEASE</version>-->
         </dependency>
 
         <dependency>
@@ -116,16 +131,8 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
-        <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongo-java-driver</artifactId>
-            <version>3.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-mongodb</artifactId>
-            <version>2.2.3.RELEASE</version>
-        </dependency>
+
+
 <!--        二维码生成-->
         <dependency>
             <groupId>com.google.zxing</groupId>
@@ -137,6 +144,7 @@
             <artifactId>javase</artifactId>
             <version>3.2.1</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -166,6 +174,23 @@
                         <goals>
                             <goal>compile</goal>
                             <goal>compile-custom</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- maven打包相关插件 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+
+                <configuration>
+                    <mainClass>com.trace.trace.Trace192Application</mainClass>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>

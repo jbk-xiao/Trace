@@ -1,13 +1,12 @@
 package com.trace.trace.dao;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.trace.trace.util.MongoDBUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
+import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
 
@@ -22,11 +21,15 @@ import static com.mongodb.client.model.Filters.regex;
  * @create: 2021-02-04-18:40
  */
 @Slf4j
-@Service
+@Repository
 public class MongoDao {
 
-    public MongoCollection<Document> collection;
-    public Document document;
+    private final MongoDatabaseFactory mongoDatabaseFactory;
+
+    @Autowired
+    public MongoDao(MongoDatabaseFactory mongoDatabaseFactory) {
+        this.mongoDatabaseFactory = mongoDatabaseFactory;
+    }
 
     /**
      * 对字符串数组进行去重
@@ -78,50 +81,12 @@ public class MongoDao {
         String categoryStr = null;
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        MongoClient mongoClient = MongoDBUtil.getConn();
-        collection = mongoClient.getDatabase("trace").getCollection("Graph");
-        MongoCursor<Document> cursor = collection.find(regex("keyword", kind)).iterator();
-        while (cursor.hasNext()) {
-            document = cursor.next();
-            String totalStr = document.toJson();
-            String str1 = totalStr.split("\", \"nodesMap\" : \\[")[1];
-            String nodeStr = str1.split("], \"linksMap\" : \\[")[0];
-            nodesSB.append(" ");
-            nodesSB.append(nodeStr);
-            nodesSB.append(",");
-            String str2 = str1.split("], \"linksMap\" : \\[")[1];
-            String linkStr = str2.split("], \"categoriesMap\" : \\[")[0];
-            linkSB.append(linkStr);
-            linkSB.append(",");
-            categoryStr = " \"categories\" : [" + str2.split("], \"categoriesMap\" : \\[")[1];
+        MongoCollection<Document> collection = mongoDatabaseFactory.getMongoDatabase()
+                .getCollection("Graph");
+        for (Document value : collection.find(regex("keyword", kind))) {
+            categoryStr = getGraphStringFromMongoDB(nodesSB, linkSB, value);
         }
-        log.info("node" + nodesSB.toString());
-        log.info("link" + linkSB.toString());
-        String[] singleNodes = nodesSB.toString().split("},");
-        singleNodes = unique(singleNodes);
-        String[] singleLinks = linkSB.toString().split("},");
-        singleLinks = unique(singleLinks);
-        sb.append("\"nodes\" :");
-        sb.append(" [");
-        for (int i = 0; i < singleNodes.length; i++) {
-            sb.append(singleNodes[i]);
-            sb.append("},");
-        }
-        sb.deleteCharAt(sb.lastIndexOf(","));
-        sb.append("], ");
-        sb.append("\"links\" :");
-        sb.append(" [");
-        for (int j = 0; j < singleLinks.length; j++) {
-            sb.append(singleLinks[j]);
-            sb.append("},");
-        }
-        sb.deleteCharAt(sb.lastIndexOf(","));
-        sb.append("], ");
-        sb.append(categoryStr);
-        sb.append("}");
-        sb.deleteCharAt(sb.lastIndexOf("}"));
-        mongoClient.close();
-        return sb.toString();
+        return getGraphString(nodesSB, linkSB, categoryStr, sb);
     }
 
     /**
@@ -136,8 +101,7 @@ public class MongoDao {
         String categoryStr = null;
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        MongoClient mongoClient = MongoDBUtil.getConn();
-        collection = mongoClient.getDatabase("trace").getCollection("Graph");
+        MongoCollection<Document> collection = mongoDatabaseFactory.getMongoDatabase().getCollection("Graph");
         /*db.Graph.find(
          {$and:
             [
@@ -151,39 +115,47 @@ public class MongoDao {
         BasicDBObject keywordObj1 = new BasicDBObject("keyword", new BasicDBObject("$ne", "生鲜"));
         BasicDBObject keywordObj2 = new BasicDBObject("keyword", new BasicDBObject("$ne", "食品饮料、保健食品"));
         BasicDBObject andObj = new BasicDBObject("$and", Arrays.asList(nodeObj, keywordObj1, keywordObj2));
-        MongoCursor<Document> cursor = collection.find(andObj).iterator();
-        while (cursor.hasNext()) {
-            document = cursor.next();
-            String totalStr = document.toJson();
-            String str1 = totalStr.split("\", \"nodesMap\" : \\[")[1];
-            String nodeStr = str1.split("], \"linksMap\" : \\[")[0];
-            nodesSB.append(" ");
-            nodesSB.append(nodeStr);
-            nodesSB.append(",");
-            String str2 = str1.split("], \"linksMap\" : \\[")[1];
-            String linkStr = str2.split("], \"categoriesMap\" : \\[")[0];
-            linkSB.append(linkStr);
-            linkSB.append(",");
-            categoryStr = " \"categories\" : [" + str2.split("], \"categoriesMap\" : \\[")[1];
+        for (Document value : collection.find(andObj)) {
+            categoryStr = getGraphStringFromMongoDB(nodesSB, linkSB, value);
         }
+        return getGraphString(nodesSB, linkSB, categoryStr, sb);
+    }
+
+    private String getGraphStringFromMongoDB(StringBuilder nodesSB, StringBuilder linkSB, Document value) {
+        String categoryStr;
+        String totalStr = value.toJson();
+        String str1 = totalStr.split("\", \"nodesMap\": \\[")[1];
+        String nodeStr = str1.split("], \"linksMap\": \\[")[0];
+        nodesSB.append(" ");
+        nodesSB.append(nodeStr);
+        nodesSB.append(",");
+        String str2 = str1.split("], \"linksMap\": \\[")[1];
+        String linkStr = str2.split("], \"categoriesMap\": \\[")[0];
+        linkSB.append(linkStr);
+        linkSB.append(",");
+        categoryStr = " \"categories\": [" + str2.split("], \"categoriesMap\": \\[")[1];
+        return categoryStr;
+    }
+
+    private String getGraphString(StringBuilder nodesSB, StringBuilder linkSB, String categoryStr, StringBuilder sb) {
         log.info("node" + nodesSB.toString());
         log.info("link" + linkSB.toString());
         String[] singleNodes = nodesSB.toString().split("},");
         singleNodes = unique(singleNodes);
         String[] singleLinks = linkSB.toString().split("},");
         singleLinks = unique(singleLinks);
-        sb.append("\"nodes\" :");
+        sb.append("\"nodes\":");
         sb.append(" [");
-        for (int i = 0; i < singleNodes.length; i++) {
-            sb.append(singleNodes[i]);
+        for (String singleNode : singleNodes) {
+            sb.append(singleNode);
             sb.append("},");
         }
         sb.deleteCharAt(sb.lastIndexOf(","));
         sb.append("], ");
-        sb.append("\"links\" :");
+        sb.append("\"links\":");
         sb.append(" [");
-        for (int j = 0; j < singleLinks.length; j++) {
-            sb.append(singleLinks[j]);
+        for (String singleLink : singleLinks) {
+            sb.append(singleLink);
             sb.append("},");
         }
         sb.deleteCharAt(sb.lastIndexOf(","));
@@ -191,7 +163,6 @@ public class MongoDao {
         sb.append(categoryStr);
         sb.append("}");
         sb.deleteCharAt(sb.lastIndexOf("}"));
-        mongoClient.close();
         return sb.toString();
     }
 }

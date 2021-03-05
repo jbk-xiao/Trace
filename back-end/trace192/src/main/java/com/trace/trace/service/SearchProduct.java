@@ -8,7 +8,7 @@ import com.trace.trace.mapper.QueryMapper;
 import com.trace.trace.util.CreateJson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import java.util.List;
  * @create 2021-01-26-5:18 下午
  */
 @Slf4j
-@Component
+@Service
 public class SearchProduct {
 
     private final QueryMapper queryMapper;

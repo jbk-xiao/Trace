@@ -18,12 +18,13 @@ import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.Network;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.DigestUtils;
 import redis.clients.jedis.Jedis;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,22 +37,17 @@ import java.util.Set;
  * @create 2021-02-01-10:53
  */
 @Slf4j
-@Component
+@Repository
 public class FabricDao {
-    final FabricUtil fabricUtil;
+    private final FabricUtil fabricUtil;
+    private final RedisIndexConfig redisIndexConfig;
+    private final JedisUtil jedisUtil;
+    private final Network network;
+    private final QRCodeUtil qrCodeUtil;
+    private final CreateTraceCode createTraceCode;
 
-    final RedisIndexConfig redisIndexConfig;
-
-    final JedisUtil jedisUtil;
-
-    final Network network;
-
-    final QRCodeUtil qrCodeUtil;
-
-    final CreateTraceCode createTraceCode;
-
-    final Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-
+    private final Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Map<String, Integer> dbMap;
     Set<String> databaseSet;
 
@@ -82,7 +78,7 @@ public class FabricDao {
         Contract contract = network.getContract(FabricInfo.MEDIA_CC.value);
 
         String type = "jpg".equals(filetype) ? 1 + "" : 2 + "";
-        String checkTime = System.currentTimeMillis() + "";
+        String checkTime = simpleDateFormat.format(System.currentTimeMillis());
 
         try {
             contract.submitTransaction("addMedia", type, filename, md5code, checkTime);
@@ -193,7 +189,7 @@ public class FabricDao {
         TraceInfo info = gson.fromJson(infoStr, TraceInfo.class);
         //依据指定名称生成二维码并补全链接
         String qrName = id + "inner";
-        //此处需要修改url为前端对应url
+        //TODO 此处需要修改url为前端对应url
         qrCodeUtil.addCode("http://121.46.19.26:8511/addProcess", qrName);
         info.setQrCode(FabricInfo.PICTURE_PREFIX.value + qrName + ".png");
         return gson.toJson(info);
@@ -212,8 +208,9 @@ public class FabricDao {
         String infoStr = "";
         try {
             Contract contract = network.getContract(FabricInfo.TRACE_CC.value);
+
             byte[] bytes = contract.submitTransaction("addProcess", id, name, master,
-                    System.currentTimeMillis() + "", location);
+                    simpleDateFormat.format(System.currentTimeMillis()), location);
             infoStr = new String(bytes);
             TraceInfo info = gson.fromJson(infoStr, TraceInfo.class);
             if (info.getProcessCount() == info.getProcess().size()) {
@@ -240,7 +237,7 @@ public class FabricDao {
         try {
             Contract contract = network.getContract(FabricInfo.TRACE_CC.value);
             info = new String(contract.submitTransaction("addProcedure", id, name, master,
-                    System.currentTimeMillis() + ""));
+                    simpleDateFormat.format(System.currentTimeMillis()) + ""));
         } catch (Exception e) {
             log.error(e.toString());
         }
@@ -288,7 +285,7 @@ public class FabricDao {
         PICTURE_PREFIX("http://121.46.19.26:8511/getPicture/"),
         PICTURE_NO_FOUND("picture_no_found.jpg");
 
-        final String value;
+        private final String value;
 
         FabricInfo(final String value) {
             this.value = value;

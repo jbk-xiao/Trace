@@ -19,6 +19,9 @@ spring:
     url: jdbc:mysql://localhost:3306/trace?useUnicode=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/trace?maxpoolsize=10&minpoolsize=3
   redis:
     host: localhost
     port: 6579
@@ -55,7 +58,7 @@ fabric:
   system:
     host: 192.168.106.7
     port: 7054
-    user: appUser
+    user: appUser1
     wallet: D:\dajiangsai\trace\trace192\src\main\resources\wallet
     properties: D:\dajiangsai\trace\trace192\src\main\resources\fabric.properties
     ca-pem: D:\dajiangsai\trace\trace192\src\main\resources\ca.org1.example.com-cert.pem

@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SearchChartsServiceImpl extends SearchChartsServiceGrpc.SearchChartsServiceImplBase {
 
-    final SearchCharts searchCharts;
+    private final SearchCharts searchCharts;
 
     @Autowired
     public SearchChartsServiceImpl(SearchCharts searchCharts) {
@@ -113,6 +113,11 @@ public class SearchChartsServiceImpl extends SearchChartsServiceGrpc.SearchChart
         responseObserver.onCompleted();
     }
 
+    /**
+     * 根据主公司sku_id获取评论分析三维图所需数据。
+     * @param request 含主公司sku_id的ChartsRequestByString
+     * @param responseObserver StreamObserver
+     */
     @Override
     public void get3dScore(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
         String skuId = request.getChartsStrRequest();
@@ -137,6 +142,21 @@ public class SearchChartsServiceImpl extends SearchChartsServiceGrpc.SearchChart
         String indexPredict = searchCharts.getIndexPredict(keyword);
         log.info("getIndexPredict: {}", indexPredict);
         QueryResponse response = QueryResponse.newBuilder().setResponse(indexPredict).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+    /**
+     * 利用主公司的sku_id查询评论打分数据。
+     * @param request           含主公司sku_id的ChartsRequestByString
+     * @param responseObserver  StreamObserver
+     */
+    @Override
+    public void getCommentStatistic(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
+        String skuId = request.getChartsStrRequest();
+        log.info("getCommentStatistic: {}", skuId);
+        String commentStatistic = searchCharts.getCommentStatistic(skuId);
+        log.info("getCommentStatistic: {}", commentStatistic);
+        QueryResponse response = QueryResponse.newBuilder().setResponse(commentStatistic).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
