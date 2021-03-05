@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class ManageProducts {
-    final ProductRedisDao productRedisDao;
+    private final ProductRedisDao productRedisDao;
 
     @Autowired
     public ManageProducts(ProductRedisDao productRedisDao) {

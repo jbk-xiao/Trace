@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class SearchTraceServiceImpl extends SearchTraceServiceGrpc.SearchTraceServiceImplBase {
-    final SearchTrace searchTrace;
+    private final SearchTrace searchTrace;
 
     @Autowired
     public SearchTraceServiceImpl(SearchTrace searchTrace) {

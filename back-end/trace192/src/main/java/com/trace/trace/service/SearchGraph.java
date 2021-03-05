@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class SearchGraph {
-    final MongoDao mongodbDao;
+    private final MongoDao mongodbDao;
 
     public SearchGraph(MongoDao mongodbDao) {
         this.mongodbDao = mongodbDao;

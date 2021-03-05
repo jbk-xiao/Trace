@@ -39,15 +39,15 @@ import java.util.Set;
 @Slf4j
 @Component
 public class FabricDao {
-    final FabricUtil fabricUtil;
-    final RedisIndexConfig redisIndexConfig;
-    final JedisUtil jedisUtil;
-    final Network network;
-    final QRCodeUtil qrCodeUtil;
-    final CreateTraceCode createTraceCode;
+    private final FabricUtil fabricUtil;
+    private final RedisIndexConfig redisIndexConfig;
+    private final JedisUtil jedisUtil;
+    private final Network network;
+    private final QRCodeUtil qrCodeUtil;
+    private final CreateTraceCode createTraceCode;
 
-    final Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-    final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private final Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Map<String, Integer> dbMap;
     Set<String> databaseSet;
 
@@ -285,7 +285,7 @@ public class FabricDao {
         PICTURE_PREFIX("http://121.46.19.26:8511/getPicture/"),
         PICTURE_NO_FOUND("picture_no_found.jpg");
 
-        final String value;
+        private final String value;
 
         FabricInfo(final String value) {
             this.value = value;

@@ -27,11 +27,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
 
-    final SearchCompet searchCompet;
+    private final SearchCompet searchCompet;
 
-    final SearchProduct searchProduct;
+    private final SearchProduct searchProduct;
 
-    final SearchGraph searchGraph;
+    private final SearchGraph searchGraph;
 
     @Autowired
     public SearchServiceImpl(SearchCompet searchCompet, SearchProduct searchProduct, SearchGraph searchGraph) {

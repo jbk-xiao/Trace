@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SearchChartsServiceImpl extends SearchChartsServiceGrpc.SearchChartsServiceImplBase {
 
-    final SearchCharts searchCharts;
+    private final SearchCharts searchCharts;
 
     @Autowired
     public SearchChartsServiceImpl(SearchCharts searchCharts) {

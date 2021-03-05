@@ -26,9 +26,9 @@ import java.util.List;
 @Slf4j
 @Component
 public class SearchCompet {
-    final CompetMapper competMapper;
-    final CompetRedisDao competRedisDao;
-    final CompetMongoDao competMongoDao;
+    private final CompetMapper competMapper;
+    private final CompetRedisDao competRedisDao;
+    private final CompetMongoDao competMongoDao;
     private final Gson gson = new GsonBuilder().disableHtmlEscaping().create();  //防止出现字符转换
 
     @Autowired

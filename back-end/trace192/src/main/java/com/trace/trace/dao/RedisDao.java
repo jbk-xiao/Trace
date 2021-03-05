@@ -22,7 +22,7 @@ public class RedisDao {
 
     //分页的每一页的结果数
     static int pageRecord = 20;
-    final JedisUtil jedisUtil;
+    private final JedisUtil jedisUtil;
 
     @Autowired
     public RedisDao(JedisUtil jedisUtil) {

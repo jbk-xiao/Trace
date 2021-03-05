@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ManagerServiceImpl extends ManagerServiceGrpc.ManagerServiceImplBase {
 
-    final ManageProducts manageProducts;
+    private final ManageProducts manageProducts;
 
     @Autowired
     public ManagerServiceImpl(ManageProducts manageProducts) {

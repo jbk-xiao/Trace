@@ -1,12 +1,14 @@
 package com.trace.trace.dao;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.MongoClient;
+import com.google.gson.Gson;
 import com.mongodb.client.MongoCollection;
-import com.trace.trace.util.MongoDBUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.stereotype.Component;
+
+import static com.mongodb.client.model.Filters.regex;
 
 /**
  * @author Zenglr
@@ -18,29 +20,21 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class CompetMongoDao {
+    private final MongoDatabaseFactory mongoDatabaseFactory;
 
-    public String getCommentStatistic(String sku_id) {
-        MongoClient mongoClient = null;
-        StringBuilder sb;
-        try {
-            mongoClient = MongoDBUtil.getConn();
-            MongoCollection<Document> collection = mongoClient.getDatabase("trace").getCollection("comment_statistic");
-            sb = new StringBuilder();
-            BasicDBObject sku = new BasicDBObject("sku_id", sku_id);
-            Document originDoc = collection.find(sku).first();
-            Document extractedDoc = new Document();
-            if (originDoc != null && !originDoc.isEmpty()) {
-                extractedDoc.put("comment_statistic", originDoc.get("data"));
-                sb.append(extractedDoc.toJson());
-            } else {
-                sb.append("{}");
-                log.info("not found");
-            }
-            sb.deleteCharAt(0);
-            log.info("has already comment_statistic from MongoDB");
-        } finally {
-            mongoClient.close();
+    @Autowired
+    public CompetMongoDao(MongoDatabaseFactory mongoDatabaseFactory) {
+        this.mongoDatabaseFactory = mongoDatabaseFactory;
+    }
+
+    public String getCommentStatistic(String skuId) {
+        StringBuilder result = new StringBuilder();
+        MongoCollection<Document> collection = mongoDatabaseFactory.getMongoDatabase()
+                .getCollection("comment_statistic");
+        for (Document document : collection.find(regex("sku_id", skuId))) {
+            Object str = document.get("data");
+            result.append(new Gson().toJson(str));
         }
-        return sb.toString();
+        return result.toString();
     }
 }

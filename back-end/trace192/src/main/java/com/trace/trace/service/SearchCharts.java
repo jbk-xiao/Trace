@@ -28,11 +28,11 @@ import java.util.Set;
 @Slf4j
 @Component
 public class SearchCharts {
-    final ChartsMongoDao chartsMongoDao;
-    final ChartsMapper chartsMapper;
-    final ChartsRedisDao chartsRedisDao;
-    final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().disableHtmlEscaping().create();
-    final String scoreTitles = "[\"brand\",\"comment_score\",\"count\",\"sku_id\",\"price\"]";
+    private final ChartsMongoDao chartsMongoDao;
+    private final ChartsMapper chartsMapper;
+    private final ChartsRedisDao chartsRedisDao;
+    private final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().disableHtmlEscaping().create();
+    private final String scoreTitles = "[\"brand\",\"comment_score\",\"count\",\"sku_id\",\"price\"]";
     @Autowired
     public SearchCharts(ChartsMongoDao chartsMongoDao, ChartsMapper chartsMapper, ChartsRedisDao chartsRedisDao) {
         this.chartsMongoDao = chartsMongoDao;
