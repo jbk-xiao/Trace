@@ -3,7 +3,7 @@ package com.trace.trace.dao;
 import com.trace.trace.util.JedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import redis.clients.jedis.Jedis;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.List;
  * @create 2021-02-18-1:13 下午
  */
 @Slf4j
-@Component
+@Repository
 public class TraceRedisDao {
 
     //分页的每一页的结果数

@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
 
@@ -21,7 +21,7 @@ import static com.mongodb.client.model.Filters.regex;
  * @create: 2021-02-04-18:40
  */
 @Slf4j
-@Service
+@Repository
 public class MongoDao {
 
     private final MongoDatabaseFactory mongoDatabaseFactory;

@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import static com.mongodb.client.model.Filters.regex;
 
@@ -18,7 +18,7 @@ import static com.mongodb.client.model.Filters.regex;
  * @create 2021-02-19-4:22 下午
  */
 @Slf4j
-@Component
+@Repository
 public class CompetMongoDao {
     private final MongoDatabaseFactory mongoDatabaseFactory;
 

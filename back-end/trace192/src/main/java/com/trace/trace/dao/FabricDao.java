@@ -18,7 +18,7 @@ import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.Network;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.DigestUtils;
 import redis.clients.jedis.Jedis;
 
@@ -37,7 +37,7 @@ import java.util.Set;
  * @create 2021-02-01-10:53
  */
 @Slf4j
-@Component
+@Repository
 public class FabricDao {
     private final FabricUtil fabricUtil;
     private final RedisIndexConfig redisIndexConfig;

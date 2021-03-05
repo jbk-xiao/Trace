@@ -14,7 +14,7 @@ import com.trace.trace.pojo.ProvinceIndex;
 import com.trace.trace.pojo.RelateSearch;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
@@ -26,7 +26,7 @@ import java.util.Set;
  * @create 2021-02-23-17:05
  */
 @Slf4j
-@Component
+@Service
 public class SearchCharts {
     private final ChartsMongoDao chartsMongoDao;
     private final ChartsMapper chartsMapper;
