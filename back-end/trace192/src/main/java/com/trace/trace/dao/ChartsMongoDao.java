@@ -78,4 +78,19 @@ public class ChartsMongoDao {
         log.info("getCommentStatistic: {}chars", result.length());
         return result.toString();
     }
+
+    public String getEmotionAnalysis(String companyName) {
+        StringBuilder result = new StringBuilder("[");
+        MongoCollection<Document> collection = mongoDatabaseFactory.getMongoDatabase()
+                .getCollection("emotion_analysis");
+        for (Document document : collection.find(regex("product_name", companyName))) {
+            result.append(",").append(document.toJson());
+        }
+        int index = result.indexOf(",");
+        if (index != -1) {
+            result.deleteCharAt(index);
+        }
+        result.append("]");
+        return  result.toString();
+    }
 }

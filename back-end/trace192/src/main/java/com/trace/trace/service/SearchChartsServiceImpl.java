@@ -160,4 +160,15 @@ public class SearchChartsServiceImpl extends SearchChartsServiceGrpc.SearchChart
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void getEmotionAnalysis(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
+        String companyName = request.getChartsStrRequest();
+        log.info("getEmotionAnalysis: {}", companyName);
+        String emotionAnalysis = searchCharts.getEmotionAnalysis(companyName);
+        log.info("getEmotionAnalysis: {}", emotionAnalysis);
+        QueryResponse response = QueryResponse.newBuilder().setResponse(emotionAnalysis).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
 }
