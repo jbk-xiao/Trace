@@ -104,7 +104,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
 
                 <configuration>
-                    <mainClass>com.trace.trace.Trace192Application</mainClass>
+                    <mainClass>com.trace.trace.Trace121Application</mainClass>
                 </configuration>
 
                 <executions>

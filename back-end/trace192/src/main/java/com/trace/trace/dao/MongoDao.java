@@ -124,16 +124,16 @@ public class MongoDao {
     private String getGraphStringFromMongoDB(StringBuilder nodesSB, StringBuilder linkSB, Document value) {
         String categoryStr;
         String totalStr = value.toJson();
-        String str1 = totalStr.split("\", \"nodesMap\" : \\[")[1];
-        String nodeStr = str1.split("], \"linksMap\" : \\[")[0];
+        String str1 = totalStr.split("\", \"nodesMap\": \\[")[1];
+        String nodeStr = str1.split("], \"linksMap\": \\[")[0];
         nodesSB.append(" ");
         nodesSB.append(nodeStr);
         nodesSB.append(",");
-        String str2 = str1.split("], \"linksMap\" : \\[")[1];
-        String linkStr = str2.split("], \"categoriesMap\" : \\[")[0];
+        String str2 = str1.split("], \"linksMap\": \\[")[1];
+        String linkStr = str2.split("], \"categoriesMap\": \\[")[0];
         linkSB.append(linkStr);
         linkSB.append(",");
-        categoryStr = " \"categories\" : [" + str2.split("], \"categoriesMap\" : \\[")[1];
+        categoryStr = " \"categories\": [" + str2.split("], \"categoriesMap\": \\[")[1];
         return categoryStr;
     }
 
@@ -144,7 +144,7 @@ public class MongoDao {
         singleNodes = unique(singleNodes);
         String[] singleLinks = linkSB.toString().split("},");
         singleLinks = unique(singleLinks);
-        sb.append("\"nodes\" :");
+        sb.append("\"nodes\":");
         sb.append(" [");
         for (String singleNode : singleNodes) {
             sb.append(singleNode);
@@ -152,7 +152,7 @@ public class MongoDao {
         }
         sb.deleteCharAt(sb.lastIndexOf(","));
         sb.append("], ");
-        sb.append("\"links\" :");
+        sb.append("\"links\":");
         sb.append(" [");
         for (String singleLink : singleLinks) {
             sb.append(singleLink);
