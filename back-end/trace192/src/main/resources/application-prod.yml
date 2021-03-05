@@ -19,6 +19,9 @@ spring:
     url: jdbc:mysql://localhost:3306/trace?useUnicode=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/trace?maxpoolsize=100&minpoolsize=3
   redis:
     host: localhost
     port: 6579

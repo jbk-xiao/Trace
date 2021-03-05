@@ -24,5 +24,5 @@
 |/getRelateSearch/{keyword}|http://121.46.19.26:8511/getRelateSearch/老干妈|关键词|获取相关关键词关联检索气泡图所需数据|可选值来自按钮|
 |/get3dScore/{sku_id}|http://121.46.19.26:8511/get3dScore/7552427 （泰奇的）、http://121.46.19.26:8511/get3dScore/844099 （老干妈的）|两个主公司的sku_id|获取三维图所需数据||
 |/getIndexPredict/{keyword}|http://121.46.19.26:8511/getIndexPredict/老干妈|关键词|获取关键词对应百度指数的预测值|可选：八宝粥、老干妈、辣椒酱、泰奇八宝粥，以及按钮上的关键词|
-
+|/getCommentStatistic/{sku_id}|http://121.46.19.26:8511/getCommentStatistic/844099 （老干妈的）和http://121.46.19.26:8511/getCommentStatistic/7552427 （泰奇的）|主公司sku_id|利用主公司的sku_id查询评论打分数据。||
 
