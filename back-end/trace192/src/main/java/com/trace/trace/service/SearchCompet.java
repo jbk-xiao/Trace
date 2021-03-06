@@ -2,7 +2,6 @@ package com.trace.trace.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.trace.trace.dao.CompetMongoDao;
 import com.trace.trace.dao.CompetRedisDao;
 import com.trace.trace.entity.AllCompetinfo;
 import com.trace.trace.entity.Comment_score;
@@ -28,14 +27,12 @@ import java.util.List;
 public class SearchCompet {
     private final CompetMapper competMapper;
     private final CompetRedisDao competRedisDao;
-    private final CompetMongoDao competMongoDao;
     private final Gson gson = new GsonBuilder().disableHtmlEscaping().create();  //防止出现字符转换
 
     @Autowired
-    public SearchCompet(CompetMapper competMapper, CompetRedisDao competRedisDao, CompetMongoDao competMongoDao) {
+    public SearchCompet(CompetMapper competMapper, CompetRedisDao competRedisDao) {
         this.competMapper = competMapper;
         this.competRedisDao = competRedisDao;
-        this.competMongoDao = competMongoDao;
     }
 
     public String searchCompetBasic(String regis_id) {
@@ -53,7 +50,6 @@ public class SearchCompet {
             List<JDdetail> jDdetails = competMapper.selectCompetBySkuIds(skuIdList);
             skuIdList.add(0, skuId);
             List<Comment_score> comment_scores = competMapper.selectCommentScoreBySkuIds(skuIdList);
-            String comment_statistic = competMongoDao.getCommentStatistic(skuId);
             AllCompetinfo allinfo = new AllCompetinfo();
             allinfo.setCompanyInfo(companyInfo);
             allinfo.setCompet_geoList(compets);
@@ -62,8 +58,7 @@ public class SearchCompet {
             allinfo.setScoreList(comment_scores);
             sb.append(gson.toJson(allinfo));
             sb.deleteCharAt(sb.length() - 1);
-            sb.append(",");
-            sb.append(comment_statistic);
+            sb.append("}");
             log.info("competPart response");
         }
         return sb.toString();

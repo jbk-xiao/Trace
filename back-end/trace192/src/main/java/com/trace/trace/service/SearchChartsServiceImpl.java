@@ -161,6 +161,11 @@ public class SearchChartsServiceImpl extends SearchChartsServiceGrpc.SearchChart
         responseObserver.onCompleted();
     }
 
+    /**
+     * 利用主公司简称（老干妈、泰奇）查询评论情感分析数据
+     * @param request           含主公司简称的ChartsRequestByString
+     * @param responseObserver  StreamObserver
+     */
     @Override
     public void getEmotionAnalysis(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
         String companyName = request.getChartsStrRequest();
