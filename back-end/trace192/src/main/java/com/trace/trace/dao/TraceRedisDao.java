@@ -21,9 +21,13 @@ import java.util.List;
 public class TraceRedisDao {
 
     //分页的每一页的结果数
-    static int pageRecord = 10;
+    private static final int pageRecord = 10;
+    private final JedisUtil jedisUtil;
+
     @Autowired
-    JedisUtil jedisUtil;
+    public TraceRedisDao(JedisUtil jedisUtil) {
+        this.jedisUtil = jedisUtil;
+    }
 
     /**
      * 获得初始流程输入时的产品列表选项内容
@@ -89,13 +93,13 @@ public class TraceRedisDao {
         jedis.select(4);
         List<String> traceCodeList = new ArrayList<>();
         int start = (page - 1) * pageRecord;
-        log.info("start: " + start);
+        log.debug("start: " + start);
         int end = start + pageRecord - 1;
         long length = jedis.llen(code);
         if (end > length) {
             end = (int) length;
         }
-        log.info("end: " + end);
+        log.debug("end: " + end);
         try {
             if (jedis.exists(code)) {
                 traceCodeList.addAll(jedis.lrange(code, start, end));

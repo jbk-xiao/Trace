@@ -23,13 +23,13 @@ public class ProcedureInfo {
 
     @Expose
     @SerializedName("time")
-    private long time;
+    private String time;
 
     @Expose
     @SerializedName("picture")
     private String picture;
 
-    public ProcedureInfo(String name, String master, long time) {
+    public ProcedureInfo(String name, String master, String time) {
         this.name = name;
         this.master = master;
         this.time = time;

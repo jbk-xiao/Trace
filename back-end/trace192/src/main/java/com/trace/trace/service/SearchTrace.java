@@ -9,6 +9,7 @@ import com.trace.trace.dao.ProductRedisDao;
 import com.trace.trace.dao.TraceRedisDao;
 import com.trace.trace.entity.CompanyInfo;
 import com.trace.trace.mapper.CompetMapper;
+import com.trace.trace.pojo.TraceInfo;
 import com.trace.trace.pojo.TraceManagerInfo;
 import com.trace.trace.util.CreateJson;
 import com.trace.trace.util.FileUtil;
@@ -130,7 +131,11 @@ public class SearchTrace {
      * @see com.trace.trace.pojo.TraceInfo
      */
     public String getOrigin(String originId) {
-        return fabricDao.getInfoByOriginId(originId);
+        TraceInfo traceInfo = fabricDao.getInfoByOriginId(originId);
+        String regisId = traceInfo.getCom();
+        CompanyInfo companyInfo = competMapper.selectCompanyBasicInfo(regisId);
+        traceInfo.setCompanyInfo(companyInfo);
+        return "[" + gson.toJson(traceInfo) + "]";
     }
 
     /**
