@@ -17,7 +17,7 @@ import java.util.List;
 public class ProcessInfo {
     @Expose
     @SerializedName("location")
-    private final String location = "123";
+    private String location;
     @Expose
     @SerializedName("name")
     private String name;
@@ -26,7 +26,7 @@ public class ProcessInfo {
     private String master;
     @Expose
     @SerializedName("time")
-    private long time;
+    private String time;
     @Expose
     @SerializedName("picture")
     private String picture;
@@ -35,10 +35,10 @@ public class ProcessInfo {
     @SerializedName("procedure")
     private List<ProcedureInfo> procedure;
 
-    public ProcessInfo(String name, String master, long time, String location) {
+    public ProcessInfo(String name, String master, String time, String location) {
         this.name = name;
         this.master = master;
         this.time = time;
-//        this.location = location;
+        this.location = location;
     }
 }

@@ -35,5 +35,5 @@ public class TraceManagerInfo {
 
     @Expose
     @SerializedName("time")
-    private Long time;
+    private String time;
 }

@@ -1,6 +1,7 @@
 package com.trace.trace.dao;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mongodb.client.MongoCollection;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
@@ -33,26 +34,26 @@ public class ChartsMongoDao {
         MongoCollection<Document> collection = mongoDatabaseFactory.getMongoDatabase()
                 .getCollection("predict");
         for (Document document : collection.find(regex("company_name", companyName))) {
-            String docJson = document.toJson();
-            result.append(docJson);
+            result.append(document.toJson());
         }
         return result.toString();
     }
 
     public String getNewsData(String companyName) {
-        StringBuilder result = new StringBuilder();
+        StringBuilder result = new StringBuilder("[");
         MongoCollection<Document> collection = mongoDatabaseFactory.getMongoDatabase()
                 .getCollection("news");
         for (Document document : collection.find(regex("company_name", companyName))) {
-            String docJson = document.toJson();
-            result.append(",").append(docJson);
+            result.append(",").append(document.toJson());
         }
         try {
             result.deleteCharAt(result.indexOf(","));
         } catch (StringIndexOutOfBoundsException e) {
             log.warn("{} has no news.", companyName);
+        } finally {
+            result.append("]");
         }
-        return "[" + result.toString() + "]";
+        return  result.toString();
     }
 
     public String getIndexPredict(String keyword) {
@@ -60,8 +61,7 @@ public class ChartsMongoDao {
         MongoCollection<Document> collection = mongoDatabaseFactory.getMongoDatabase()
                 .getCollection("index");
         for (Document document : collection.find(regex("key", keyword))) {
-            String docJson = document.toJson();
-            result.append(docJson);
+            result.append(document.toJson());
         }
         log.info("getIndexPredict: {}chars", result.length());
         return result.toString();
@@ -69,13 +69,28 @@ public class ChartsMongoDao {
 
     public String getCommentStatistic(String skuId) {
         StringBuilder result = new StringBuilder();
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().disableHtmlEscaping().create();
         MongoCollection<Document> collection = mongoDatabaseFactory.getMongoDatabase()
                 .getCollection("comment_statistic");
         for (Document document : collection.find(regex("sku_id", skuId))) {
-            Object str = document.get("data");
-            result.append(new Gson().toJson(str));
+            result.append(gson.toJson(document.get("data")));
         }
         log.info("getCommentStatistic: {}chars", result.length());
         return result.toString();
+    }
+
+    public String getEmotionAnalysis(String companyName) {
+        StringBuilder result = new StringBuilder("[");
+        MongoCollection<Document> collection = mongoDatabaseFactory.getMongoDatabase()
+                .getCollection("emotion_analysis");
+        for (Document document : collection.find(regex("product_name", companyName))) {
+            result.append(",").append(document.toJson());
+        }
+        int index = result.indexOf(",");
+        if (index != -1) {
+            result.deleteCharAt(index);
+        }
+        result.append("]");
+        return  result.toString();
     }
 }

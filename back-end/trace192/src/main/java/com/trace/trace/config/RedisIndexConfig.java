@@ -26,7 +26,7 @@ public class RedisIndexConfig {
     private HashMap<String, Integer> map;
 
     {
-        ClassPathResource classPathResource = new ClassPathResource("redis.properties");
+        ClassPathResource classPathResource = new ClassPathResource("redis_index.json");
         try {
             InputStream inputStream = classPathResource.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "6921804700221210306195837",
+    "foodName": "油辣椒酱",
+    "specification": "275g",
+    "category": "辣椒酱",
+    "processCount": 4,
+    "process": [
+      {
+        "name": "菜籽油产地",
+        "master": "张三",
+        "time": "2021-03-06 19:58:40",
+        "location": "遵义",
+        "picture": "",
+        "procedure": []
+      }
+    ]
+  },
+  {
+    "id": "6921804700221210306192907",
+    "foodName": "油辣椒酱",
+    "specification": "275g",
+    "category": "辣椒酱",
+    "processCount": 4,
+    "process": [
+      {
+        "name": "菜籽油产地",
+        "master": "张三",
+        "time": "2021-03-06 19:29:09",
+        "location": "遵义",
+        "picture": "",
+        "procedure": []
+      },
+      {
+        "name": "工厂 ",
+        "master": "李四",
+        "time": "2021-03-06 19:32:04",
+        "location": "贵阳",
+        "picture": "",
+        "procedure": []
+      }
+    ]
+  }
+]

@@ -57,7 +57,7 @@ public class SearchChartsServiceImpl extends SearchChartsServiceGrpc.SearchChart
         String companyName = request.getChartsStrRequest();
         log.info("getNews: {}", companyName);
         String newsData = searchCharts.getNewsData(companyName);
-        log.info("getNews response: {}", newsData);
+        log.info("getNews response: {}chars", newsData.length());
         QueryResponse response = QueryResponse.newBuilder().setResponse(newsData).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
@@ -157,6 +157,22 @@ public class SearchChartsServiceImpl extends SearchChartsServiceGrpc.SearchChart
         String commentStatistic = searchCharts.getCommentStatistic(skuId);
         log.info("getCommentStatistic: {}", commentStatistic);
         QueryResponse response = QueryResponse.newBuilder().setResponse(commentStatistic).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    /**
+     * 利用主公司简称（老干妈、泰奇）查询评论情感分析数据
+     * @param request           含主公司简称的ChartsRequestByString
+     * @param responseObserver  StreamObserver
+     */
+    @Override
+    public void getEmotionAnalysis(ChartsRequestByString request, StreamObserver<QueryResponse> responseObserver) {
+        String companyName = request.getChartsStrRequest();
+        log.info("getEmotionAnalysis: {}", companyName);
+        String emotionAnalysis = searchCharts.getEmotionAnalysis(companyName);
+        log.info("getEmotionAnalysis: {}", emotionAnalysis);
+        QueryResponse response = QueryResponse.newBuilder().setResponse(emotionAnalysis).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }

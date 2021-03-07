@@ -116,8 +116,9 @@ public class FabricDao {
      * @param originId 唯一溯源码
      * @return 溯源信息json。考虑是否通过公司名称在redis中查询公司其它信息并加入traceInfo对象
      */
-    public String getInfoByOriginId(String originId) {
+    public TraceInfo getInfoByOriginId(String originId) {
         Jedis jedis = jedisUtil.getClient();
+        TraceInfo traceInfo = new TraceInfo(originId);
         String traceInfoStr = "{}";
         String processName;
         String picturePrefix = FabricInfo.PICTURE_PREFIX.value;
@@ -126,7 +127,7 @@ public class FabricDao {
         try {
             Contract contract = network.getContract(FabricInfo.TRACE_CC.value);
             traceInfoStr = new String(contract.evaluateTransaction("queryInfoByID", originId));
-            TraceInfo traceInfo = gson.fromJson(traceInfoStr, TraceInfo.class);
+            traceInfo = gson.fromJson(traceInfoStr, TraceInfo.class);
             String id = traceInfo.getId();
             String picture = pictureNoFound;
             String latestPic;
@@ -139,17 +140,22 @@ public class FabricDao {
                         jedis.select(dbMap.get(sb.toString()));
                         latestPic = jedis.lindex(id, 0);
                         picture = (latestPic == null) ? pictureNoFound : latestPic;
-                        procedure.setPicture(picturePrefix + picture);
                     }
+                    procedure.setPicture(picturePrefix + picture);
+                }
+                if (databaseSet.contains(processName)) {
+                    jedis.select(dbMap.get(processName));
+                    latestPic = jedis.lindex(id, 0);
+                    picture = (latestPic == null) ? pictureNoFound : latestPic;
                 }
                 process.setPicture(picturePrefix + picture);
             }
-            traceInfoStr = gson.toJson(traceInfo);
+//            traceInfoStr = gson.toJson(traceInfo);
         } catch (Exception e) {
             e.printStackTrace();
         }
         jedis.close();
-        return "[" + traceInfoStr + "]";
+        return traceInfo;
     }
 
     /**
@@ -180,7 +186,7 @@ public class FabricDao {
         //依据生成的id和拆分过的食品基本信息调用区块链的createFood方法生成新的食品记录
         try {
             Contract contract = network.getContract(FabricInfo.TRACE_CC.value);
-            contract.submitTransaction("createFood", id, food[0], food[1], food[2], processCount + "");
+            contract.submitTransaction("createFood", id, com, food[0], food[1], food[2], processCount + "");
         } catch (Exception e) {
             log.error(e.toString());
         }

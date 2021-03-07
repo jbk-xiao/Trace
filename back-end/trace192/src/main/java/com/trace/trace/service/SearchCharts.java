@@ -112,4 +112,12 @@ public class SearchCharts {
         log.info("mongodb selecting {} uses: {}ms", skuId, System.currentTimeMillis() - start);
         return result;
     }
+
+    public String getEmotionAnalysis(String companyName) {
+        long start = System.currentTimeMillis();
+        //从mongodb中查询评论情感分析数据
+        String result = chartsMongoDao.getEmotionAnalysis(companyName);
+        log.info("mongodb selecting {} uses: {}ms", companyName, System.currentTimeMillis() - start);
+        return result;
+    }
 }

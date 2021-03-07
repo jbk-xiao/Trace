@@ -162,4 +162,20 @@ public class ChartsController {
         log.info("use {} ms", System.currentTimeMillis() - start);
         return response.getResponse();
     }
+
+    /**
+     * 利用主公司简称（老干妈、泰奇）查询评论情感分析数据
+     * @param companyName 主公司简称
+     * @return  评论情感分析数据
+     */
+    @GetMapping(value = "/getEmotionAnalysis/{company_name}")
+    public String getEmotionAnalysis(@PathVariable("company_name") String companyName) {
+        long start = System.currentTimeMillis();
+        log.info("request getEmotionAnalysis: {}", companyName);
+        QueryResponse response = searchChartsServiceBlockingStub
+                .getEmotionAnalysis(ChartsRequestByString.newBuilder().setChartsStrRequest(companyName)
+                        .build());
+        log.info("use {} ms", System.currentTimeMillis() - start);
+        return response.getResponse();
+    }
 }

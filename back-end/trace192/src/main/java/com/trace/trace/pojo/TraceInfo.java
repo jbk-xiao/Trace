@@ -2,6 +2,7 @@ package com.trace.trace.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.trace.trace.entity.CompanyInfo;
 import lombok.Data;
 
 import java.util.List;
@@ -40,12 +41,19 @@ public class TraceInfo {
     private String com;
 
     @Expose
-    @SerializedName("address")
-    private String address;
-
-    @Expose
-    @SerializedName("contact")
-    private String contact;
+    @SerializedName("company_info")
+    private CompanyInfo companyInfo;
+//    @Expose
+//    @SerializedName("address")
+//    private String address;
+//
+//    @Expose
+//    @SerializedName("contact")
+//    private String contact;
+//
+//    @Expose
+//    @SerializedName("description")
+//    private String description;
 
     @Expose
     @SerializedName("qrCode")
