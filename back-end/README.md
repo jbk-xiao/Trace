@@ -1,14 +1,82 @@
 ### 1. 代码结构
-后端代码包括，实现业务逻辑的springboot项目：trace121模块和trace192模块；部署在区块链中的智能合约文件：chaincode目录下的fabmedia模块和fabtrace模块。
+后端代码包括，实现业务逻辑的springboot项目：trace121模块和trace192模块；区块链相关文件：blockchain目录下代表智能合约（链码）的chaincode目录和配置文件config目录。
 
-```java
+```terminal
 back-end/
+├── blockchain		//区块链相关文件
+│   ├── chaincode
+│   │   ├── fabmedia
+│   │   │   ├── build.gradle
+│   │   │   ├── config
+│   │   │   │   └── checkstyle
+│   │   │   │       ├── checkstyle.xml
+│   │   │   │       └── suppressions.xml
+│   │   │   ├── gradle
+│   │   │   │   └── wrapper
+│   │   │   │       ├── gradle-wrapper.jar
+│   │   │   │       └── gradle-wrapper.properties
+│   │   │   ├── gradlew
+│   │   │   ├── gradlew.bat
+│   │   │   ├── settings.gradle
+│   │   │   └── src
+│   │   │       ├── main
+│   │   │       │   └── java
+│   │   │       │       └── com
+│   │   │       │           └── trace
+│   │   │       │               └── fabric
+│   │   │       │                   └── fabtrace
+│   │   │       │                       ├── FabMedia.java
+│   │   │       │                       ├── MediaInfo.java
+│   │   │       │                       └── MediaQueryResult.java
+│   │   │       └── test
+│   │   │           └── java
+│   │   │               └── com
+│   │   │                   └── trace
+│   │   │                       └── fabric
+│   │   │                           └── fabtrace
+│   │   │                               └── FabMediaTest.java
+│   │   └── fabtrace
+│   │       ├── build.gradle
+│   │       ├── config
+│   │       │   └── checkstyle
+│   │       │       ├── checkstyle.xml
+│   │       │       └── suppressions.xml
+│   │       ├── gradle
+│   │       │   └── wrapper
+│   │       │       ├── gradle-wrapper.jar
+│   │       │       └── gradle-wrapper.properties
+│   │       ├── gradlew
+│   │       ├── gradlew.bat
+│   │       ├── README.md
+│   │       ├── settings.gradle
+│   │       └── src
+│   │           └── main
+│   │               ├── java
+│   │               │   └── com
+│   │               │       └── trace
+│   │               │           └── fabric
+│   │               │               └── fabtrace
+│   │               │                   ├── datatype
+│   │               │                   │   ├── ProcedureInfo.java
+│   │               │                   │   ├── ProcessInfo.java
+│   │               │                   │   ├── TraceInfo.java
+│   │               │                   │   └── TraceManagerInfo.java
+│   │               │                   └── FabTrace.java
+│   │               └── resources
+│   │                   └── initLedger.json
+│   └── config
+│       ├── configtx.yaml
+│       ├── core.yaml
+│       └── orderer.yaml
+├── mysql初始化.sql
+├── README.assets
+│   └── 区块链网络.png
 ├── README.md
-├── trace121			//项目表示层代码，接收前端发送过来的请求
+├── trace121
 │   ├── HELP.md
-│   ├── nohupstart.sh	//后台运行脚本
-│   ├── pom.xml			//maven项目对象工程文件
-│   ├── shutdown.sh		//项目关闭脚本
+│   ├── nohupstart.sh
+│   ├── pom.xml
+│   ├── shutdown.sh
 │   └── src
 │       ├── main
 │       │   ├── java
@@ -30,6 +98,7 @@ back-end/
 │       │       └── application.yml
 │       └── test
 ├── trace192
+│   ├── HELP.md
 │   ├── nohupstart.sh
 │   ├── pom.xml
 │   ├── shutdown.sh
@@ -118,7 +187,7 @@ back-end/
 │       │       │   ├── CompetMapper.xml
 │       │       │   ├── DetailMapper.xml
 │       │       │   └── QueryMapper.xml
-│       │       └── redis.properties
+│       │       └── redis_index.json
 │       └── test
 └── Trace-BackEnd.md
 
