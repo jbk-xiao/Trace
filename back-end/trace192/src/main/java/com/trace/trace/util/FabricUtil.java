@@ -27,13 +27,6 @@ import java.security.PrivateKey;
 import java.util.Properties;
 import java.util.Set;
 
-/**
- * @author jbk-xiao
- * @program trace
- * @packagename com.trace.trace.util
- * @Description
- * @create 2021-02-01-20:18
- */
 @Slf4j
 @Component
 public class FabricUtil {
@@ -187,9 +180,6 @@ public class FabricUtil {
             e.printStackTrace();
         }
         return builder.connect();
-
-        //测试时取消下边内容的注释
-//        return new NoErrorGateway();
     }
 
     /**

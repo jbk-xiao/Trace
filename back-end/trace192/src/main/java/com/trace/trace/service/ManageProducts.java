@@ -6,11 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * @author: Clivia-Han
- * @projectName: Foxishengcun-github-new
- * @packageName: com.trace.trace.service
- * @Description: 管理模块
- * @create: 2021-02-19-16:54
+ * 管理模块
  */
 @Slf4j
 @Service

@@ -4,13 +4,6 @@ import com.trace.trace.dao.MongoDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-/**
- * @author: Clivia-Han
- * @projectName: Foxishengcun-github
- * @packageName: com.trace.trace.service
- * @Description:
- * @create: 2021-02-09-22:16
- */
 @Slf4j
 @Service
 public class SearchGraph {

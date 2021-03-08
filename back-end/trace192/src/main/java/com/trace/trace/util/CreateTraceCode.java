@@ -8,13 +8,6 @@ import org.springframework.stereotype.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * @author Zenglr
- * @program: FoXiShengCun
- * @packagename: com.trace.trace.util
- * @Description
- * @create 2021-02-18-1:15 下午
- */
 @Component
 @Slf4j
 public class CreateTraceCode {

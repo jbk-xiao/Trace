@@ -8,11 +8,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * @author Clivia-Han
- * @version 1.0
- * @ClassName Query 商品信息实体类
- * @Description TODO
- * @date 2020/5/24 16:11
+ * Query 商品信息实体类
  */
 @Data
 @NoArgsConstructor

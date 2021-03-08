@@ -14,13 +14,6 @@ import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * @author jbk-xiao
- * @program trace192
- * @packagename com.trace.trace.service
- * @Description
- * @create 2021-02-28-20:58
- */
 @GRpcService
 @Slf4j
 @Service

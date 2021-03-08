@@ -12,13 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @author Zenglr
- * @program: trace
- * @packagename: com.trace.trace.service
- * @Description 电商模块
- * @create 2021-01-26-5:18 下午
- */
 @Slf4j
 @Service
 public class SearchProduct {

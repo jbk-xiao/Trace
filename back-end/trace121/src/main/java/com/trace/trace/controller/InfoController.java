@@ -1,16 +1,10 @@
 package com.trace.trace.controller;
 
-import com.trace.trace.grpc.AddProductRequest;
-import com.trace.trace.grpc.AddProductResponse;
 import com.trace.trace.grpc.CompetRequest;
-import com.trace.trace.grpc.DeleteProductRequest;
-import com.trace.trace.grpc.DeleteProductResponse;
 import com.trace.trace.grpc.GraphRequestByBrand;
 import com.trace.trace.grpc.GraphRequestByKind;
 import com.trace.trace.grpc.GraphResponseByBrand;
 import com.trace.trace.grpc.GraphResponseByKind;
-import com.trace.trace.grpc.ProductsRequest;
-import com.trace.trace.grpc.ProductsResponse;
 import com.trace.trace.grpc.QueryRequest;
 import com.trace.trace.grpc.QueryResponse;
 import com.trace.trace.grpc.SearchServiceGrpc;
@@ -21,13 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author Zenglr
- * @program: trace
- * @packagename: com.trace.trace.controller
- * @Description
- * @create 2021-01-25-10:32 上午
- */
 @Slf4j
 @CrossOrigin("*")
 @RestController
@@ -36,7 +23,7 @@ public class InfoController {
     /**
      * 从容器中获取调用GRpc stub
      */
-    final SearchServiceGrpc.SearchServiceBlockingStub searchServiceBlockingStub;
+    private final SearchServiceGrpc.SearchServiceBlockingStub searchServiceBlockingStub;
 
     @Autowired
     public InfoController(SearchServiceGrpc.SearchServiceBlockingStub searchServiceBlockingStub) {
@@ -46,13 +33,17 @@ public class InfoController {
     /**
      * 依据检索词展示出对应的电商
      *
-     * @param query
-     * @param page
-     * @return
+     * @param query 检索词
+     * @param page  页码
+     * @return      检索结果
      */
     @GetMapping("/getCommodity/{query}/{page}")
     public String query(@PathVariable("query") String query, @PathVariable("page") String page) {
         log.info("Receive commodity request : " + query + " page=" + page);
+        if (query.isEmpty() || "undefined".equals(query) || "NaN".equals(page)) {
+            log.warn("Receive NaN page or empty query.");
+            return "[]";
+        }
         long start = System.currentTimeMillis();
         QueryResponse response = this.searchServiceBlockingStub
                 .searchQuery(QueryRequest.newBuilder()

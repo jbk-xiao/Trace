@@ -12,14 +12,6 @@ import java.util.Arrays;
 
 import static com.mongodb.client.model.Filters.regex;
 
-
-/**
- * @author: Clivia-Han
- * @projectName: Foxishengcun-github
- * @packageName: com.trace.trace.dao
- * @Description:
- * @create: 2021-02-04-18:40
- */
 @Slf4j
 @Repository
 public class MongoDao {

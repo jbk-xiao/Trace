@@ -16,13 +16,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.HashMap;
 
-/**
- * @author Zenglr
- * @program: FoXiShengCun
- * @packagename: com.trace.trace.util
- * @Description
- * @create 2021-02-17-5:20 下午
- */
 @Component
 public class QRCodeUtil {
 

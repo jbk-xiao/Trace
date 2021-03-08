@@ -6,13 +6,6 @@ import lombok.Data;
 
 import java.util.List;
 
-/**
- * @author jbk-xiao
- * @program trace
- * @packagename com.trace.trace.pojo
- * @Description
- * @create 2021-02-07-11:22
- */
 @Data
 public class ProcessInfo {
     @Expose

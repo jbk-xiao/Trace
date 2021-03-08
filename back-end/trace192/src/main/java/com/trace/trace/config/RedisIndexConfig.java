@@ -13,13 +13,6 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
-/**
- * @author jbk-xiao
- * @program trace
- * @packagename com.trace.trace.config
- * @Description
- * @create 2021-02-07-10:05
- */
 @Data
 @Component
 public class RedisIndexConfig {

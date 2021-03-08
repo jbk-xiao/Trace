@@ -1,11 +1,9 @@
 package com.trace.trace.controller;
 
 import com.google.protobuf.ByteString;
-import com.trace.trace.grpc.QueryRequest;
 import com.trace.trace.grpc.SearchTraceServiceGrpc;
 import com.trace.trace.grpc.TraceBytesResponse;
 import com.trace.trace.grpc.TraceRequestByString;
-import com.trace.trace.grpc.TraceResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -36,7 +34,7 @@ public class MediaController {
     /**
      * 从容器中获取调用GRpc stub
      */
-    final SearchTraceServiceGrpc.SearchTraceServiceBlockingStub searchTraceServiceBlockingStub;
+    private final SearchTraceServiceGrpc.SearchTraceServiceBlockingStub searchTraceServiceBlockingStub;
 
     @Autowired
     public MediaController(SearchTraceServiceGrpc.SearchTraceServiceBlockingStub searchTraceServiceBlockingStub) {

@@ -16,6 +16,4 @@ public interface DetailMapper {
     @Select("select * from load_test2 where skuId=#{skuId}")
     Detail selectDetailBySkuId(@Param("skuId") String skuId);
 
-//    List<Detail> selectDetailBySkuId(@Param("skuId")String skuId);
-
 }

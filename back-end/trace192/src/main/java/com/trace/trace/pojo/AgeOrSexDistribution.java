@@ -7,12 +7,6 @@ import lombok.Data;
 
 /**
  * 性别或年龄分布返回数据对应pojo。（复用）
- *
- * @author jbk-xiao
- * @program trace192
- * @packagename com.trace.trace.pojo
- * @Description
- * @create 2021-02-23-21:26
  */
 @Data
 public class AgeOrSexDistribution {

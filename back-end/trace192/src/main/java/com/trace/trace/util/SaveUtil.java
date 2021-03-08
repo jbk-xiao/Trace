@@ -14,13 +14,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.UnexpectedException;
 
-/**
- * @author jbk-xiao
- * @program trace
- * @packagename com.trace.trace.util.media
- * @Description
- * @create 2021-01-31-20:20
- */
 @Slf4j
 @Component
 public class SaveUtil {

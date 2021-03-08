@@ -52,8 +52,7 @@ media:
   picture:
     path: D:\dajiangsai\monitor_files
     database: 14
-#  other:
-#    database: 15
+
 fabric:
   system:
     host: 192.168.106.7

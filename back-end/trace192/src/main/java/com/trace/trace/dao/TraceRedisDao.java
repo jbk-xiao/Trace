@@ -9,13 +9,6 @@ import redis.clients.jedis.Jedis;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Zenglr
- * @program: FoXiShengCun
- * @packagename: com.trace.trace.dao
- * @Description 溯源模块
- * @create 2021-02-18-1:13 下午
- */
 @Slf4j
 @Repository
 public class TraceRedisDao {

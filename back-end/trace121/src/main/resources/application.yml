@@ -15,13 +15,6 @@ server:
   port: 8511
 
 app-config:
-  grpc-server-name: localhost
+  grpc-server-name: 222.200.184.74
   grpc-server-port: 8289
   max-message-size: 1073741824
-#
-#grpc:
-#  port: 6565
-#
-#app-config:
-#  grpc-server-name: localhost
-#  grpc-server-port: 6565

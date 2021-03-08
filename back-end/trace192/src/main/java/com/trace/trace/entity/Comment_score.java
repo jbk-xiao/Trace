@@ -6,11 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author Zenglr
- * @program: FoXiShengCun
- * @packagename: com.trace.trace.entity
- * @Description 商品评论
- * @create 2021-02-08-8:00 下午
+ * 商品评论
  */
 @Data
 @NoArgsConstructor

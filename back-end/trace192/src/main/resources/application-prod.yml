@@ -52,8 +52,7 @@ media:
   picture:
     path: /data/st01/monitor_files
     database: 14
-#  other:
-#    database: 15
+
 fabric:
   system:
     host: localhost

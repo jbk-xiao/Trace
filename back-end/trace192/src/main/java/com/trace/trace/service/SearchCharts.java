@@ -18,13 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-/**
- * @author jbk-xiao
- * @program trace192
- * @packagename com.trace.trace.service
- * @Description
- * @create 2021-02-23-17:05
- */
 @Slf4j
 @Service
 public class SearchCharts {

@@ -10,13 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * @author jbk-xiao
- * @program trace
- * @packagename com.trace.trace.controller
- * @Description save media's name from raspberrypi
- * @create 2021-01-31-19:42
- */
 @Slf4j
 @CrossOrigin("*")
 @RestController
