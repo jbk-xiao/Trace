@@ -1,0 +1,557 @@
+.service-one {
+  background-color: $thm-primary;
+  padding-top: 80px;
+  padding-bottom: 50px;
+  position: relative;
+  &::before {
+    content: "";
+    width: 100%;
+    height: 16px;
+    background-image: url(../images/shapes/ripped-paper-primary-up.png);
+    position: absolute;
+    top: -16px;
+    left: 0;
+    z-index: 10;
+    transform: rotate(180deg);
+    background-size: auto;
+    @media (min-width: 1700px) {
+      background-size: 100%;
+      bottom: -15px;
+    }
+  }
+  @include large-tablet {
+    padding-bottom: 0;
+    margin-bottom: 120px;
+  }
+  @include laptop {
+    padding-top: 120px;
+  }
+  &__box {
+    position: relative;
+    margin-bottom: 60px;
+    @include large-tablet {
+      margin-bottom: -90px;
+    }
+    > img {
+      width: 100%;
+      filter: blur(0);
+      border-radius: $border-radius;
+      transition: 500ms ease;
+    }
+    &:hover > img {
+      filter: blur(2px);
+    }
+    &-content {
+      width: calc(100% - 40px);
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%) translateY(50%);
+      background-color: #fff;
+      border-radius: $border-radius;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      transition: all 500ms ease;
+      @include laptop {
+        padding-top: 29px;
+        padding-bottom: 29px;
+      }
+      h3 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #255946;
+        text-align: center;
+        @include laptop {
+          font-size: 22px;
+        }
+        a {
+          color: inherit;
+          transition: all 500ms ease;
+          &:hover {
+            color: $thm-primary;
+          }
+        }
+      }
+    }
+    &:hover &-content {
+      box-shadow: 0px 10px 60px 0px rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
+.service-one__about {
+  background-color: #fff;
+  margin-top: 0;
+  margin-bottom: 0;
+  @include large-tablet {
+    padding-bottom: 50px;
+  }
+  @include laptop {
+    padding-bottom: 100px;
+  }
+  &::before {
+    display: none;
+  }
+  .service-one__box {
+    @include large-tablet {
+      margin-bottom: 60px;
+    }
+  }
+}
+
+.service-two {
+  background-color: #f6f5f2;
+  padding-top: 80px;
+  padding-bottom: 60px;
+  position: relative;
+  &::before {
+    content: "";
+    width: 100%;
+    height: 16px;
+    background-image: url(../images/shapes/ripped-paper-gray-up.png);
+    position: absolute;
+    top: -16px;
+    left: 0;
+    z-index: 10;
+    transform: rotate(180deg);
+    background-size: auto;
+    @media (min-width: 1700px) {
+      background-size: 100%;
+      bottom: -15px;
+    }
+  }
+  @include laptop {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+  &__bottom-curv {
+    width: 100%;
+    height: 360px;
+    background-color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: none;
+    @include laptop {
+      display: block;
+    }
+    &::before {
+      content: "";
+      width: 100%;
+      height: 16px;
+      background-image: url(../images/shapes/ripped-paper-white-up.png);
+      position: absolute;
+      top: -16px;
+      left: 0;
+      z-index: 10;
+      transform: rotate(180deg);
+      background-size: auto;
+      @media (min-width: 1700px) {
+        background-size: 100%;
+        bottom: -15px;
+      }
+    }
+  }
+  .container {
+    position: relative;
+    z-index: 10;
+  }
+  .row {
+    margin-left: -10px;
+    margin-right: -10px;
+    @include large-tablet {
+      margin-left: -3px;
+      margin-right: -3px;
+    }
+    [class*="col-"] {
+      padding-left: 10px;
+      padding-right: 10px;
+      @include large-tablet {
+        padding-left: 3px;
+        padding-right: 3px;
+      }
+    }
+  }
+}
+
+.service-two__card {
+  border-radius: $border-radius;
+  margin-bottom: 20px;
+  transition: all 500ms ease;
+  @include laptop {
+    margin-bottom: 0;
+  }
+  &-image {
+    position: relative;
+    overflow: hidden;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+    > img {
+      width: 100%;
+    }
+  }
+  &-content {
+    background-color: #fff;
+    position: relative;
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    padding-bottom: 30px;
+    transition: all 500ms ease;
+    box-shadow: 0px 10px 60px 0px rgba(0, 0, 0, 0.05);
+    @include laptop {
+      padding-bottom: 45px;
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+    h3 {
+      color: $thm-black;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      @include tablet {
+        font-size: 20px;
+      }
+      @include laptop {
+        max-width: 145px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      a {
+        color: inherit;
+        transition: all 500ms ease;
+        &:hover {
+          color: $thm-primary;
+        }
+      }
+    }
+    p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.875;
+      color: #6e7673;
+      @include tablet {
+        font-size: 16px;
+      }
+    }
+  }
+
+  &:hover &-content {
+    box-shadow: 0px 10px 60px 0px rgba(0, 0, 0, 0.1);
+  }
+  &-icon {
+    width: 78px;
+    height: 78px;
+    background-color: $thm-base;
+    border: 6px solid #fff;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 35px;
+    color: #fff;
+    border-radius: 50%;
+    position: relative;
+    top: -39px;
+    margin-bottom: -39px;
+    transition: all 500ms ease;
+    @include tablet {
+      width: 98px;
+      height: 98px;
+      top: -(98/2) * 1px;
+      margin-bottom: -(98/2) * 1px;
+    }
+    @include laptop {
+      width: 108px;
+      height: 108px;
+      top: -(108/2) * 1px;
+      margin-bottom: -(108/2) * 1px;
+      font-size: 50px;
+    }
+  }
+  &:hover &-icon {
+    background-color: $thm-primary;
+  }
+  &:hover {
+    box-shadow: 0 4px 0 0 $thm-primary;
+  }
+}
+
+.service-two__service-page {
+  background-color: #fff;
+  &::before {
+    display: none;
+  }
+}
+
+.service-two__home-two {
+  padding-bottom: 50px;
+  @include laptop {
+    padding-bottom: 90px;
+    padding-top: 200px;
+    margin-top: -80px;
+  }
+  .row {
+    margin-left: -15px;
+    margin-right: -15px;
+    [class*="col-"] {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+  .service-two__card-content {
+    margin-top: 0;
+    padding-top: 10px;
+    text-align: left;
+    margin-bottom: 30px;
+    @include laptop {
+      padding-left: 40px;
+      padding-right: 40px;
+      padding-bottom: 35px;
+    }
+    h3 {
+      margin-left: 0;
+      margin-right: 0;
+      @include laptop {
+        margin-top: 25px;
+      }
+    }
+  }
+}
+
+.service-details {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  @include laptop {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+  img {
+    border-radius: $border-radius;
+    max-width: 100%;
+  }
+  h2 {
+    margin: 0;
+    color: $thm-black;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    @include laptop {
+      font-size: 40px;
+      margin-top: 30px;
+      margin-bottom: 35px;
+    }
+  }
+  h4 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: $thm-black;
+    margin-top: 20px;
+    @include laptop {
+      font-size: 24px;
+      margin-top: 0;
+    }
+  }
+  p {
+    margin: 0;
+  }
+  &__list {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    @include laptop {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+    li {
+      position: relative;
+      padding-left: 60px;
+      @include laptop {
+        padding-left: 80px;
+        min-height: 60px;
+      }
+      + li {
+        @include laptop {
+          margin-top: 30px;
+        }
+      }
+      strong {
+        color: #255946;
+        font-weight: bold;
+      }
+      > i {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $thm-primary;
+        border-radius: 50%;
+        position: absolute;
+        top: 14px;
+        left: 0;
+        text-align: center;
+        color: #fff;
+        font-size: 17px;
+        transform: translateY(0%) rotate(0deg);
+        transition: background 500ms ease, transform 500ms ease;
+        @include laptop {
+          top: 50%;
+          transform: translateY(-50%) rotate(0deg);
+          width: 60px;
+          height: 60px;
+          font-size: 20px;
+        }
+      }
+      &:hover {
+        > i {
+          background-color: $thm-black;
+          transform: translateY(0%) rotate(360deg);
+          @include laptop {
+            transform: translateY(-50%) rotate(360deg);
+          }
+        }
+      }
+    }
+  }
+  .special-box {
+    background-color: $thm-base;
+    color: #fff;
+    font-family: $special-font;
+    font-size: 22px;
+    padding: 30px;
+    line-height: 1.4;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: $border-radius;
+    @include laptop {
+      font-size: 30px;
+      font-weight: bold;
+      padding-left: 80px;
+      padding-right: 80px;
+      padding-top: 45px;
+      padding-bottom: 45px;
+      margin-top: 50px;
+      margin-bottom: 60px;
+    }
+  }
+  &__list-2 {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    @include tablet {
+      margin-top: 0;
+    }
+    @include laptop {
+      margin-top: 20px;
+      margin-bottom: 0px;
+    }
+    li {
+      position: relative;
+      padding-left: 25px;
+      color: $thm-black;
+      font-weight: 500;
+      @include laptop {
+        padding-left: 30px;
+      }
+      + li {
+        @include laptop {
+          margin-top: 5px;
+        }
+      }
+      > i {
+        color: $thm-primary;
+        font-size: 18px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+.service-sidebar {
+  margin-bottom: 50px;
+  &__links {
+    margin-bottom: 30px;
+    background-color: #f6f5f2;
+    border-radius: $border-radius;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      padding-left: 20px;
+      padding-right: 20px;
+      li {
+        display: block;
+        + li {
+          border-top: 1px solid #e9e7e2;
+        }
+        a {
+          display: block;
+          font-size: 16px;
+          color: #255946;
+          line-height: 50px;
+          font-weight: 500;
+          transition: all 500ms ease;
+          padding-left: 20px;
+          padding-right: 20px;
+          border-radius: $border-radius;
+          &:hover {
+            background-color: #fff;
+            color: $thm-base;
+          }
+          @include large-tablet {
+            line-height: 80px;
+            font-size: 18px;
+            padding-left: 40px;
+            padding-right: 40px;
+          }
+        }
+      }
+    }
+  }
+  &__call {
+    position: relative;
+    background-color: #49a760;
+    border-radius: $border-radius;
+    overflow: hidden;
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    @include laptop {
+      padding-top: 83px;
+      padding-bottom: 83px;
+    }
+    &-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      mix-blend-mode: luminosity;
+      opacity: 0.1;
+    }
+    h3 {
+      margin: 0;
+      position: relative;
+      font-size: 36px;
+      text-align: center;
+      color: #fff;
+      font-family: $special-font;
+      @include laptop {
+        font-size: 46px;
+      }
+    }
+  }
+}

@@ -1,0 +1,722 @@
+{
+    "companyInfo": {
+        "proj_name": "老干妈",
+        "img_url": "https://zhengxin-pub.cdn.bcebos.com/brandpic/dad5c7ad216fc82776763b404b4ae491_fullsize.jpg",
+        "es_time": "1997/10/5",
+        "region": "贵阳",
+        "company_name": "贵阳南明老干妈风味食品有限责任公司",
+        "proj_desc": "老干妈（陶华碧）牌油制辣椒是贵州地区传统风味食品之一。老干妈是国内生产及销售量最大的辣椒制品生产企业，主要生产风味豆豉、风味鸡油辣椒、香辣菜、风味腐乳等20余个系列产品。",
+        "address": "贵州省贵阳市南明区龙洞堡见龙路138-15号",
+        "lng": "106.786346",
+        "lat": "26.539301",
+        "phone_num": "0851-85406886"
+    },
+    "compet_geoList": [
+        {
+            "proj_name": "小酱仙",
+            "company_name": "北京九门坊商贸股份有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d12d_fullsize.jpg",
+            "region": "北京",
+            "lng": "116.4908849",
+            "lat": "39.92323986"
+        },
+        {
+            "proj_name": "鲜8食品",
+            "company_name": "北京八日鲜食品有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d16d_fullsize.jpg",
+            "region": "北京",
+            "lng": "116.3529198",
+            "lat": "40.03605554"
+        },
+        {
+            "proj_name": "媛家酱",
+            "company_name": "北京媛家科技发展有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d14d_fullsize.jpg",
+            "region": "北京",
+            "lng": "116.278586",
+            "lat": "40.13767907"
+        },
+        {
+            "proj_name": "川崎食品",
+            "company_name": "上海川崎食品有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d22d_fullsize.jpg",
+            "region": "上海",
+            "lng": "121.6176672",
+            "lat": "31.33780877"
+        },
+        {
+            "proj_name": "美鑫食品",
+            "company_name": "江苏美鑫食品科技有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d11d_fullsize.jpg",
+            "region": "徐州",
+            "lng": "117.2830176",
+            "lat": "34.2999927"
+        },
+        {
+            "proj_name": "福鑫食品",
+            "company_name": "福鑫食品有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d19d_fullsize.jpg",
+            "region": "福建",
+            "lng": "120.4463718",
+            "lat": "30.46960298"
+        },
+        {
+            "proj_name": "老恒和",
+            "company_name": "湖州老恒和酿造有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d27d_fullsize.jpg",
+            "region": "湖州",
+            "lng": "120.165284",
+            "lat": "30.84716287"
+        },
+        {
+            "proj_name": "咸亨股份",
+            "company_name": "绍兴咸亨食品股份有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d25d_fullsize.jpg",
+            "region": "绍兴",
+            "lng": "120.6047735",
+            "lat": "30.02942402"
+        },
+        {
+            "proj_name": "安记食品",
+            "company_name": "安记食品股份有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d24d_fullsize.jpg",
+            "region": "福建",
+            "lng": "118.56679",
+            "lat": "24.87740594"
+        },
+        {
+            "proj_name": "新青大",
+            "company_name": "青岛新青大食品有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d17d_fullsize.jpg",
+            "region": "青岛",
+            "lng": "120.391189",
+            "lat": "36.12502688"
+        },
+        {
+            "proj_name": "二和嫁嫁",
+            "company_name": "武汉明利和丰食品有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d15d_fullsize.jpg",
+            "region": "武汉",
+            "lng": "114.3076592",
+            "lat": "30.41501682"
+        },
+        {
+            "proj_name": "长剑牌",
+            "company_name": "深圳市聚味食品科技有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d10d_fullsize.jpg",
+            "region": "深圳",
+            "lng": "114.0680991",
+            "lat": "22.62821243"
+        },
+        {
+            "proj_name": "海天味业",
+            "company_name": "佛山市海天调味食品股份有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d21d_fullsize.jpg",
+            "region": "广东",
+            "lng": "113.128595",
+            "lat": "23.05310401"
+        },
+        {
+            "proj_name": "嘉豪食品",
+            "company_name": "广东嘉豪食品有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d20d_fullsize.jpg",
+            "region": "广东",
+            "lng": "113.3619163",
+            "lat": "22.59199782"
+        },
+        {
+            "proj_name": "千禾味业",
+            "company_name": "千禾味业食品股份有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d23d_fullsize.jpg",
+            "region": "四川",
+            "lng": "103.8385248",
+            "lat": "30.04827213"
+        },
+        {
+            "proj_name": "味之浓",
+            "company_name": "四川味之浓食品有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d18d_fullsize.jpg",
+            "region": "四川",
+            "lng": "103.8599541",
+            "lat": "30.03260251"
+        },
+        {
+            "proj_name": "太阳食品",
+            "company_name": "西安太阳食品集团公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d26d_fullsize.jpg",
+            "region": "西安",
+            "lng": "109.003131",
+            "lat": "34.2372613"
+        },
+        {
+            "proj_name": "广海记",
+            "company_name": "新疆广海记农业科技发展有限公司",
+            "img_url": "https://zhengxin-pub.cdn.bcebos.com/logopic/fa2b3dc48749a7f183d46f110802d13d_fullsize.jpg",
+            "region": "新疆",
+            "lng": "83.64570001",
+            "lat": "46.52939588"
+        }
+    ],
+    "jdetail": {
+        "pname": "陶华碧老干妈油辣椒",
+        "price": "9.9",
+        "detail_url": "http://item.jd.com/844099.html",
+        "img_url": "https://img14.360buyimg.com/n1/jfs/t1/120265/6/15663/58734/5f8fa697Ef4f51524/9650bf9c0cb1cfb9.jpg",
+        "brand": "陶华碧老干妈",
+        "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=22171&ev=exbrand_16737",
+        "commentCount": 2127107,
+        "goodRate": 0.99
+    },
+    "compet_jdetails": [
+        {
+            "pname": "海底捞海底捞好好吃饭精品牛肉佐餐酱200g",
+            "price": "18.9",
+            "detail_url": "http://item.jd.com/100002398567.html",
+            "img_url": "https://img12.360buyimg.com/n1/jfs/t1/127025/26/10782/178810/5f45d080E3de7bdcc/2d00289bd4067fd6.jpg",
+            "brand": "海底捞",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=22171&ev=exbrand_7811",
+            "commentCount": 1199782,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "海天招牌拌饭酱 300g",
+            "price": "12.9",
+            "detail_url": "http://item.jd.com/1338357.html",
+            "img_url": "https://img12.360buyimg.com/n1/jfs/t1/84351/29/14025/181954/5db1153bEc5ef8d6b/2d404cb8213120cd.jpg",
+            "brand": "海天",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=21383&ev=exbrand_7876",
+            "commentCount": 732884,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "吉香居暴下饭川香味250g*1瓶",
+            "price": "8.8",
+            "detail_url": "http://item.jd.com/4665497.html",
+            "img_url": "https://img12.360buyimg.com/n1/jfs/t1/147320/38/16243/196908/5fc5ba39Ef98f5927/2a318856fc13374a.jpg",
+            "brand": "吉香居（JI XIANG JU）",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=22171&ev=exbrand_41569",
+            "commentCount": 684614,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "鹃城牌鹃城牌 郫县豆瓣酱500g",
+            "price": "10.9",
+            "detail_url": "http://item.jd.com/3798578.html",
+            "img_url": "https://img13.360buyimg.com/n1/jfs/t19588/40/2649718355/240859/9b5fb073/5b068789N9f77fb92.jpg",
+            "brand": "鹃城牌（juanchengpai）",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=22173&ev=exbrand_137101",
+            "commentCount": 682865,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "特瑞肯特瑞肯烧烤全家福组合321g/盒",
+            "price": "19.9",
+            "detail_url": "http://item.jd.com/5964486.html",
+            "img_url": "https://img11.360buyimg.com/n1/jfs/t1/166989/5/4163/176096/6010d5f6E36bb29f6/1b2169865dc35cfe.jpg",
+            "brand": "特瑞肯（TRICON）",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=21384&ev=exbrand_299242",
+            "commentCount": 479519,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "厨邦厨邦蒜蓉辣椒酱210g",
+            "price": "5.9",
+            "detail_url": "http://item.jd.com/3763759.html",
+            "img_url": "https://img14.360buyimg.com/n1/jfs/t1/6981/33/9015/109899/5c1320feEe1629799/ee027320a8174f1a.jpg",
+            "brand": "厨邦",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=21383&ev=exbrand_21703",
+            "commentCount": 442845,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "李锦记蒜蓉辣酱226g",
+            "price": "16.9",
+            "detail_url": "http://item.jd.com/1078121.html",
+            "img_url": "https://img11.360buyimg.com/n1/jfs/t1/163081/19/3983/181325/600fad6eE1afe6993/c0757fad176ac306.jpg",
+            "brand": "李锦记",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=22171&ev=exbrand_11330",
+            "commentCount": 359429,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "茂德公香辣牛肉225g",
+            "price": "15.8",
+            "detail_url": "http://item.jd.com/6644451.html",
+            "img_url": "https://img11.360buyimg.com/n1/jfs/t1/116838/37/13918/142354/5f2a1b74Ebaa87863/112a975d7d007744.jpg",
+            "brand": "茂德公（Modocom）",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=22171&ev=exbrand_193767",
+            "commentCount": 293333,
+            "goodRate": 0.97
+        },
+        {
+            "pname": "韩今辣酱 500g",
+            "price": "32.9",
+            "detail_url": "http://item.jd.com/3681877.html",
+            "img_url": "https://img12.360buyimg.com/n1/jfs/t1/160852/7/3804/120493/600a4e08E32cd68a0/29d8d78ad2d94aa4.jpg",
+            "brand": "韩今",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,5019,5024&tid=17660&ev=exbrand_497056",
+            "commentCount": 257086,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "川娃子烧椒酱",
+            "price": "12.8",
+            "detail_url": "http://item.jd.com/100005264233.html",
+            "img_url": "https://img13.360buyimg.com/n1/jfs/t1/138478/34/18248/120129/5fd48839Ea31e647b/348faed7d6bb1927.jpg",
+            "brand": "川娃子",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=21383&ev=exbrand_277836",
+            "commentCount": 246186,
+            "goodRate": 0.98
+        },
+        {
+            "pname": "虎邦鲁西牛肉 鲜椒酱 210g",
+            "price": "18.8",
+            "detail_url": "http://item.jd.com/4410290.html",
+            "img_url": "https://img10.360buyimg.com/n1/jfs/t1/138078/23/20214/196826/5fe69ddfE6a0f4acd/ec4d43beaeddaaeb.jpg",
+            "brand": "虎邦",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=22171&ev=exbrand_313861",
+            "commentCount": 239716,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "蜀姑娘剁椒酱280g",
+            "price": "13.9",
+            "detail_url": "http://item.jd.com/8922029.html",
+            "img_url": "https://img14.360buyimg.com/n1/jfs/t26137/160/265687491/381152/439f23c9/5b8ce45bN755f649f.jpg",
+            "brand": "蜀姑娘",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=21383&ev=exbrand_274046",
+            "commentCount": 200798,
+            "goodRate": 0.97
+        },
+        {
+            "pname": "春光香辣 灯笼辣椒酱",
+            "price": "5.5",
+            "detail_url": "http://item.jd.com/5676502.html",
+            "img_url": "https://img12.360buyimg.com/n1/jfs/t1/168046/5/3152/153166/60050321E524e17b5/0679bc09e46b50ce.jpg",
+            "brand": "春光",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=22171&ev=exbrand_43453",
+            "commentCount": 178660,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "清净园辣椒酱",
+            "price": "18.9",
+            "detail_url": "http://item.jd.com/100007770057.html",
+            "img_url": "https://img12.360buyimg.com/n1/jfs/t1/119715/3/10120/145451/5eff13e8Ee44efcfe/62c6565c6df33f64.jpg",
+            "brand": "清净园",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,5019,5024&tid=17660&ev=exbrand_14525",
+            "commentCount": 128798,
+            "goodRate": 0.98
+        },
+        {
+            "pname": "川南油辣子280g",
+            "price": "13.9",
+            "detail_url": "http://item.jd.com/100000428823.html",
+            "img_url": "https://img13.360buyimg.com/n1/jfs/t1/112636/32/743/243311/5e8fe46aE45776f1a/7c2f89ec422d2685.jpg",
+            "brand": "川南",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=22171&ev=exbrand_21421",
+            "commentCount": 103230,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "饭扫光剁椒酱200g",
+            "price": "12.6",
+            "detail_url": "http://item.jd.com/100015029096.html",
+            "img_url": "https://img11.360buyimg.com/n1/jfs/t1/114077/23/16258/141141/5f471dfeE06658c39/5eb435ff56a86281.jpg",
+            "brand": "饭扫光",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=22171&ev=exbrand_6655",
+            "commentCount": 66492,
+            "goodRate": 0.98
+        },
+        {
+            "pname": "南国黄辣椒酱",
+            "price": "21.9",
+            "detail_url": "http://item.jd.com/623760.html",
+            "img_url": "https://img10.360buyimg.com/n1/jfs/t19657/243/864478450/255239/96290898/5aaf4e7eN8ebc0069.jpg",
+            "brand": "南国（nanguo）",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=22171&ev=exbrand_13331",
+            "commentCount": 58903,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "聪厨蒜蓉辣酱180g",
+            "price": "14.9",
+            "detail_url": "http://item.jd.com/100008050179.html",
+            "img_url": "https://img14.360buyimg.com/n1/jfs/t1/144033/18/4435/130740/5f278affE92b374b5/c12ad4e698a7658b.jpg",
+            "brand": "聪厨",
+            "brand_url": "https://list.jd.com/list.html?cat=12218,21455,21457&ev=exbrand_246393",
+            "commentCount": 58546,
+            "goodRate": 0.98
+        },
+        {
+            "pname": "川珍双椒酱",
+            "price": "11.8",
+            "detail_url": "http://item.jd.com/100010637500.html",
+            "img_url": "https://img10.360buyimg.com/n1/jfs/t1/132004/1/5544/161810/5f2109b5E48b8ad6e/e83ce5961c5b854a.jpg",
+            "brand": "川珍",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=21383&ev=exbrand_5534",
+            "commentCount": 46350,
+            "goodRate": 0.98
+        },
+        {
+            "pname": "亨氏亨氏番茄辣椒酱",
+            "price": "9.9",
+            "detail_url": "http://item.jd.com/2169939.html",
+            "img_url": "https://img14.360buyimg.com/n1/jfs/t2416/26/1479225670/79008/b96177d7/56654713Nf7dc5e84.jpg",
+            "brand": "亨氏（Heinz）",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=22171&ev=exbrand_8241",
+            "commentCount": 33443,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "渡江宴烧椒酱200g*2瓶+彩椒酱200g*2瓶",
+            "price": "39.9",
+            "detail_url": "http://item.jd.com/100009224435.html",
+            "img_url": "https://img10.360buyimg.com/n1/jfs/t1/140174/26/11954/205830/5f93c6faE6e79f24c/39101d3c1487d4fb.jpg",
+            "brand": "渡江宴",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=22171&ev=exbrand_230226",
+            "commentCount": 31563,
+            "goodRate": 0.98
+        },
+        {
+            "pname": "六婆辣椒油 油泼辣子 四川特色油辣子凉拌红油 熟油辣子230g",
+            "price": "14.8",
+            "detail_url": "http://item.jd.com/12738293049.html",
+            "img_url": "https://img14.360buyimg.com/n1/jfs/t1/167145/28/1693/161406/5ff9506bEd3defd32/5c77e5b6fba4cd05.jpg",
+            "brand": "六婆",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=21382&ev=exbrand_47655",
+            "commentCount": 21262,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "老坛子鲜椒酱",
+            "price": "22.8",
+            "detail_url": "http://item.jd.com/100006982973.html",
+            "img_url": "https://img13.360buyimg.com/n1/jfs/t1/128749/19/19692/179457/5fbcc418E8ae255d6/46c537ad3e6fcffd.jpg",
+            "brand": "老坛子",
+            "brand_url": "https://list.jd.com/list.html?cat=12218,13553,13578&ev=exbrand_470200",
+            "commentCount": 15646,
+            "goodRate": 0.98
+        },
+        {
+            "pname": "湖南超特辣剁辣椒 地道湘2.3kg精制朝天椒 4.6斤大瓶装蒜蓉剁椒酱辣椒酱 蒸菜炒菜拌饭酱调料",
+            "price": "29.8",
+            "detail_url": "http://item.jd.com/30750526915.html",
+            "img_url": "https://img10.360buyimg.com/n1/jfs/t1/40450/6/3205/246233/5cc3f794E1d6c6327/e13d69ef17cca1c6.jpg",
+            "brand": "地道湘",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=21389&ev=exbrand_355572",
+            "commentCount": 8552,
+            "goodRate": 0.97
+        },
+        {
+            "pname": "仲景调味油麻油 低温冷萃非油炸 凉拌热炒烧烤火锅米线凉拌菜125ml 花椒油+辣椒油",
+            "price": "29.6",
+            "detail_url": "http://item.jd.com/42269144142.html",
+            "img_url": "https://img12.360buyimg.com/n1/jfs/t1/131204/20/16777/117754/5fbb8390E2118cd7e/636e8f972ee71d11.jpg",
+            "brand": "仲景",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=21385&ev=exbrand_21030",
+            "commentCount": 6395,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "大嘴先生双椒酱230g",
+            "price": "13.8",
+            "detail_url": "http://item.jd.com/100015687534.html",
+            "img_url": "https://img14.360buyimg.com/n1/jfs/t1/148847/40/9185/174864/5f6c7401Edf331c24/5e357c156129afd8.jpg",
+            "brand": "大嘴先生",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=21383&ev=exbrand_525012",
+            "commentCount": 6212,
+            "goodRate": 0.97
+        },
+        {
+            "pname": "李子柒 贵州糟辣酱 辣椒酱贵州风味特产酸辣鲜香 调味酱 230g*3瓶",
+            "price": "34.9",
+            "detail_url": "http://item.jd.com/10024090168114.html",
+            "img_url": "https://img14.360buyimg.com/n1/jfs/t1/171295/38/2626/388970/5fff9d85E28d6451d/b1593611077d8dd1.jpg",
+            "brand": "李子柒",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=21383&ev=exbrand_387375",
+            "commentCount": 4217,
+            "goodRate": 0.98
+        },
+        {
+            "pname": "酱先生鲜椒酱",
+            "price": "14.9",
+            "detail_url": "http://item.jd.com/100015856592.html",
+            "img_url": "https://img12.360buyimg.com/n1/jfs/t1/144349/5/14222/228782/5facddd4E16d36a65/a9fea223937cd734.jpg",
+            "brand": "酱先生",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=22171&ev=exbrand_426958",
+            "commentCount": 2282,
+            "goodRate": 0.98
+        },
+        {
+            "pname": "华源良品广西八角大料香料调料大全桂皮香叶干辣椒茴香花椒厨房香辛料煲汤炖肉大红八角全干货 八角大料 250克",
+            "price": "31.2",
+            "detail_url": "http://item.jd.com/10020176668539.html",
+            "img_url": "https://img14.360buyimg.com/n1/jfs/t1/144251/8/7261/408739/5f4dfff4E0b4e1279/c2f6c7332d6c1bea.jpg",
+            "brand": "华源良品",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=21384&ev=exbrand_593869",
+            "commentCount": 1147,
+            "goodRate": 0.95
+        },
+        {
+            "pname": "【三瓶装】人高一等 香辣麻辣对虾酱200gX3瓶  下饭拌菜凉拌炒菜海鲜酱肉酱辣椒酱 厨房调味品 简装虾酱香辣味x3",
+            "price": "39.9",
+            "detail_url": "http://item.jd.com/54222597156.html",
+            "img_url": "https://img11.360buyimg.com/n1/jfs/t1/112649/25/11113/141327/5efb0258E3626ad46/dd86b4e3652f4e44.jpg",
+            "brand": "人高一等",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2677&tid=21383&ev=exbrand_314634",
+            "commentCount": 970,
+            "goodRate": 0.95
+        }
+    ],
+    "comment_scores": [
+        {
+            "brand": "老干妈",
+            "package_score": "0.724137931",
+            "price_score": "0.864583333",
+            "logistics_score": "0.728813559",
+            "taste_score": "0.721276596",
+            "service_score": "0.695652174"
+        },
+        {
+            "brand": "海底捞",
+            "package_score": "0.688888889",
+            "price_score": "0.754098361",
+            "logistics_score": "0.788888889",
+            "taste_score": "0.613675214",
+            "service_score": "0.551724138"
+        },
+        {
+            "brand": "海天",
+            "package_score": "0.752808989",
+            "price_score": "0.815384615",
+            "logistics_score": "0.72826087",
+            "taste_score": "0.752475248",
+            "service_score": "0.7"
+        },
+        {
+            "brand": "吉香居",
+            "package_score": "0.684210526",
+            "price_score": "0.933333333",
+            "logistics_score": "0.718120805",
+            "taste_score": "0.642092747",
+            "service_score": "0.61971831"
+        },
+        {
+            "brand": "鹃城牌",
+            "package_score": "0.758241758",
+            "price_score": "0.843137255",
+            "logistics_score": "0.700729927",
+            "taste_score": "0.636678201",
+            "service_score": "0.685393258"
+        },
+        {
+            "brand": "特瑞肯",
+            "package_score": "0.783505155",
+            "price_score": "0.790123457",
+            "logistics_score": "0.725",
+            "taste_score": "0.52027027",
+            "service_score": "0.633333333"
+        },
+        {
+            "brand": "厨邦",
+            "package_score": "0.782608696",
+            "price_score": "0.842105263",
+            "logistics_score": "0.810810811",
+            "taste_score": "0.743494424",
+            "service_score": "0.62962963"
+        },
+        {
+            "brand": "李锦记",
+            "package_score": "0.904109589",
+            "price_score": "0.818181818",
+            "logistics_score": "0.794871795",
+            "taste_score": "0.757062147",
+            "service_score": "0.634920635"
+        },
+        {
+            "brand": "茂德公",
+            "package_score": "0.647058824",
+            "price_score": "0.909090909",
+            "logistics_score": "0.674698795",
+            "taste_score": "0.65210084",
+            "service_score": "0.62295082"
+        },
+        {
+            "brand": "韩今",
+            "package_score": "0.818181818",
+            "price_score": "0.86440678",
+            "logistics_score": "0.840909091",
+            "taste_score": "0.753456221",
+            "service_score": "0.591549296"
+        },
+        {
+            "brand": "川娃子",
+            "package_score": "0.807692308",
+            "price_score": "0.837209302",
+            "logistics_score": "0.817307692",
+            "taste_score": "0.640601504",
+            "service_score": "0.628205128"
+        },
+        {
+            "brand": "虎邦",
+            "package_score": "0.738636364",
+            "price_score": "0.848484848",
+            "logistics_score": "0.752380952",
+            "taste_score": "0.707535121",
+            "service_score": "0.578947368"
+        },
+        {
+            "brand": "蜀姑娘",
+            "package_score": "0.643678161",
+            "price_score": "0.861111111",
+            "logistics_score": "0.818181818",
+            "taste_score": "0.668174962",
+            "service_score": "0.617647059"
+        },
+        {
+            "brand": "春光",
+            "package_score": "0.708333333",
+            "price_score": "0.87804878",
+            "logistics_score": "0.629032258",
+            "taste_score": "0.704797048",
+            "service_score": "0.696969697"
+        },
+        {
+            "brand": "清净园",
+            "package_score": "0.733333333",
+            "price_score": "0.80952381",
+            "logistics_score": "0.739726027",
+            "taste_score": "0.678632479",
+            "service_score": "0.655737705"
+        },
+        {
+            "brand": "川南",
+            "package_score": "0.728",
+            "price_score": "0.864864865",
+            "logistics_score": "0.72",
+            "taste_score": "0.652605459",
+            "service_score": "0.706422018"
+        },
+        {
+            "brand": "饭扫光",
+            "package_score": "0.516129032",
+            "price_score": "0.888888889",
+            "logistics_score": "0.903225806",
+            "taste_score": "0.632653061",
+            "service_score": "0.555555556"
+        },
+        {
+            "brand": "南国",
+            "package_score": "0.62",
+            "price_score": "0.766666667",
+            "logistics_score": "0.653333333",
+            "taste_score": "0.5856",
+            "service_score": "0.534482759"
+        },
+        {
+            "brand": "聪厨",
+            "package_score": "0.81512605",
+            "price_score": "0.952941176",
+            "logistics_score": "0.758823529",
+            "taste_score": "0.746268657",
+            "service_score": "0.742857143"
+        },
+        {
+            "brand": "川珍",
+            "package_score": "0.634146341",
+            "price_score": "0.85",
+            "logistics_score": "0.734693878",
+            "taste_score": "0.617486339",
+            "service_score": "0.487804878"
+        },
+        {
+            "brand": "亨氏",
+            "package_score": "0.733333333",
+            "price_score": "0.907407407",
+            "logistics_score": "0.788732394",
+            "taste_score": "0.638248848",
+            "service_score": "0.767857143"
+        },
+        {
+            "brand": "渡江宴",
+            "package_score": "0.689320388",
+            "price_score": "0.931034483",
+            "logistics_score": "0.75",
+            "taste_score": "0.730673317",
+            "service_score": "0.721153846"
+        },
+        {
+            "brand": "六婆",
+            "package_score": "0.540540541",
+            "price_score": "0.846153846",
+            "logistics_score": "0.733333333",
+            "taste_score": "0.533088235",
+            "service_score": "0.485714286"
+        },
+        {
+            "brand": "老坛子",
+            "package_score": "0.691666667",
+            "price_score": "0.890243902",
+            "logistics_score": "0.738562092",
+            "taste_score": "0.704851752",
+            "service_score": "0.689320388"
+        },
+        {
+            "brand": "地道湘",
+            "package_score": "0.598484848",
+            "price_score": "0.842105263",
+            "logistics_score": "0.587301587",
+            "taste_score": "0.584026622",
+            "service_score": "0.557142857"
+        },
+        {
+            "brand": "仲景",
+            "package_score": "0.795180723",
+            "price_score": "0.805555556",
+            "logistics_score": "0.84375",
+            "taste_score": "0.546242775",
+            "service_score": "0.620689655"
+        },
+        {
+            "brand": "大嘴先生",
+            "package_score": "0.830508475",
+            "price_score": "0.84",
+            "logistics_score": "0.826923077",
+            "taste_score": "0.659663866",
+            "service_score": "0.745098039"
+        },
+        {
+            "brand": "李子柒",
+            "package_score": "0.771428571",
+            "price_score": "0.818181818",
+            "logistics_score": "0.6875",
+            "taste_score": "0.595918367",
+            "service_score": "0.555555556"
+        },
+        {
+            "brand": "酱先生",
+            "package_score": "0.578947368",
+            "price_score": "0.857142857",
+            "logistics_score": "0.727272727",
+            "taste_score": "0.745454545",
+            "service_score": "0.6"
+        },
+        {
+            "brand": "华源良品",
+            "package_score": "0.777777778",
+            "price_score": "0.777777778",
+            "logistics_score": "0.611111111",
+            "taste_score": "0.588235294",
+            "service_score": "0.625"
+        },
+        {
+            "brand": "人高一等",
+            "package_score": "0.642857143",
+            "price_score": "0.714285714",
+            "logistics_score": "0.8",
+            "taste_score": "0.530120482",
+            "service_score": "0.421052632"
+        }
+    ]
+}

@@ -1,0 +1,439 @@
+.about-one {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  position: relative;
+  @include large-tablet {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+  &__bg-shape-1 {
+    position: absolute;
+    bottom: -90px;
+    right: 0;
+  }
+  &__images {
+    position: relative;
+    img {
+      max-width: 100%;
+      margin-bottom: 30px;
+      border-radius: $border-radius;
+      @include large-tablet {
+        max-width: none;
+        margin-bottom: 0;
+      }
+      &:nth-child(2) {
+        @include large-tablet {
+          position: absolute;
+          bottom: -50px;
+          left: -120px;
+        }
+        @include laptop {
+          bottom: -150px;
+        }
+      }
+    }
+  }
+  &__count {
+    width: 219px;
+    height: 219px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../images/shapes/about-circle-1-1.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    flex-direction: column;
+    position: absolute;
+    top: -30px;
+    right: -20px;
+    @include large-tablet {
+      top: 90px;
+      left: -20px;
+      right: auto;
+    }
+    @include laptop {
+      left: -109.5px;
+    }
+    span {
+      display: block;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 0.2em;
+      color: #fff;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    h4 {
+      margin: 0;
+      font-size: 30px;
+      font-family: $special-font;
+      color: #fff;
+      line-height: 1;
+      @include laptop {
+        font-size: 40px;
+      }
+    }
+  }
+  &__tagline {
+    @include laptop {
+      margin-top: -20px;
+    }
+    p {
+      margin: 0;
+      color: $thm-primary;
+      font-size: 24px;
+      line-height: 1;
+      font-family: $special-font;
+      @include laptop {
+        font-size: 26px;
+      }
+    }
+  }
+  &__summery {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    @include laptop {
+      margin-top: 35px;
+      margin-bottom: 40px;
+    }
+    p {
+      margin: 0;
+      @include laptop {
+        max-width: 95%;
+      }
+    }
+  }
+  &__icon-row {
+    border-top: 1px solid #e9e7e2;
+    border-bottom: 1px solid #e9e7e2;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    @include laptop {
+      margin-bottom: 50px;
+      padding-bottom: 30px;
+    }
+  }
+  &__box {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    @include laptop {
+      margin-top: 30px;
+    }
+    i {
+      font-size: 45px;
+      color: $thm-base;
+      margin-right: 20px;
+      transition: all 500ms ease;
+      @include laptop {
+        font-size: 60px;
+      }
+    }
+    h4 {
+      margin: 0;
+      color: $thm-black;
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: bold;
+      transition: all 500ms ease;
+      a {
+        color: inherit;
+      }
+
+      @include laptop {
+        max-width: 200px;
+        font-size: 20px;
+      }
+    }
+
+    &:hover {
+      i {
+        color: $thm-primary;
+      }
+      h4 {
+        color: $thm-base;
+      }
+    }
+  }
+  &__content {
+    @include large-tablet {
+      background-color: #fff;
+      padding: 50px;
+      border-radius: $border-radius;
+      margin-top: 40px;
+    }
+    @include laptop {
+      margin-top: 60px;
+      margin-left: 30px;
+      padding-left: 120px;
+      padding-top: 100px;
+      padding-bottom: 0;
+      padding-right: 0;
+    }
+  }
+  .thm-btn {
+    background-color: $thm-primary;
+    @include laptop {
+      font-size: 18px;
+    }
+    &:hover {
+      background-color: $thm-base;
+      color: #fff;
+    }
+  }
+}
+
+.about-two {
+  padding-top: 110px;
+  padding-bottom: 80px;
+  position: relative;
+  @include laptop {
+    padding-top: 120px;
+    padding-bottom: 195px;
+  }
+  &__bg {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+  }
+  .container {
+    position: relative;
+  }
+  &__images {
+    position: relative;
+    margin-bottom: 60px;
+    &::before {
+      content: "";
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: $thm-primary;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      -webkit-animation-name: squareMover;
+      animation-name: squareMover;
+      -webkit-animation-duration: 10s;
+      animation-duration: 10s;
+      -webkit-animation-timing-function: linear;
+      animation-timing-function: linear;
+      -webkit-animation-delay: 2s;
+      animation-delay: 2s;
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+      -webkit-perspective: 100px;
+      perspective: 100px;
+      -webkit-transform-origin: center center;
+      transform-origin: center center;
+      @include large-tablet {
+        width: 55px;
+        height: 55px;
+      }
+      @include laptop {
+        left: -47px;
+        bottom: -27.5px;
+      }
+    }
+    img {
+      border-radius: 50%;
+      max-width: 100%;
+      @include laptop {
+        max-width: none;
+      }
+      &:nth-child(2) {
+        position: absolute;
+        top: -30px;
+        left: 0;
+        @include laptop {
+          top: 80px;
+          left: -100px;
+        }
+      }
+    }
+  }
+  &__content {
+    @include laptop {
+      padding-left: 70px;
+    }
+  }
+  &__summery {
+    @include tablet {
+      margin-bottom: 20px;
+    }
+    @include laptop {
+      margin-top: -25px;
+    }
+    p {
+      margin: 0;
+    }
+  }
+  &__designation {
+    display: block;
+    margin-bottom: 30px;
+    @include tablet {
+      margin-bottom: 0;
+    }
+    @include laptop {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  }
+
+  &__list {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    @include tablet {
+      margin-top: 0;
+    }
+    @include laptop {
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+    li {
+      position: relative;
+      padding-left: 25px;
+      color: $thm-black;
+      font-weight: 500;
+      @include laptop {
+        font-size: 18px;
+        padding-left: 30px;
+      }
+      > i {
+        color: $thm-primary;
+        font-size: 18px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  &__progress {
+    display: flex;
+    align-items: center;
+    &-box {
+      position: relative;
+      width: 118px;
+      margin-right: 20px;
+      span {
+        display: block;
+        font-family: $special-font;
+        color: $thm-base;
+        font-size: 18px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+      canvas {
+        transform: rotate(90deg);
+        display: block;
+      }
+    }
+    &-content {
+      h3 {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.667;
+        color: $thm-black;
+        font-weight: bold;
+        @include tablet {
+          max-width: 85px;
+        }
+      }
+    }
+  }
+  &__progress + &__progress {
+    margin-top: 10px;
+  }
+}
+
+.about-three {
+  padding-top: 96px;
+  padding-bottom: 80px;
+  position: relative;
+  @include large-tablet {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+  &__image {
+    margin-bottom: 50px;
+    @include large-tablet {
+      margin-bottom: 0;
+    }
+    img {
+      border-radius: $border-radius;
+      max-width: 100%;
+    }
+  }
+  .container {
+    position: relative;
+  }
+  &__list {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    @include laptop {
+      margin-top: -20px;
+    }
+    li {
+      flex: 0 0 100%;
+      position: relative;
+      font-size: 16px;
+      color: $thm-black;
+      padding-left: 25px;
+      font-weight: 500;
+      @include tablet {
+        flex: 0 0 50%;
+      }
+      @include large-tablet {
+        flex: 0 0 100%;
+      }
+      @include laptop {
+        flex: 0 0 50%;
+        font-size: 16px;
+      }
+      + li {
+        @include laptop {
+          margin-top: 5px;
+        }
+      }
+      > i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        color: $thm-primary;
+        font-size: 16px;
+        @include laptop {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  &__summery {
+    margin-bottom: 20px;
+    @include laptop {
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    p {
+      margin: 0;
+      @include laptop {
+        font-size: 18px;
+      }
+    }
+  }
+  &__signs {
+    display: flex;
+    align-items: center;
+    img:nth-child(1) {
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+  }
+}

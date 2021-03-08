@@ -1,0 +1,236 @@
+.video-one {
+  background-color: #255a47;
+  position: relative;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  margin-top: 80px;
+  &::before {
+    content: "";
+    width: 100%;
+    height: 16px;
+    background-image: url(../images/shapes/ripped-paper-base-2.png);
+    position: absolute;
+    top: -15px;
+    left: 0;
+    z-index: 10;
+    background-size: auto;
+    @media (min-width: 1700px) {
+      background-size: 100%;
+      top: -16px;
+    }
+  }
+  &::after {
+    content: "";
+    width: 100%;
+    height: 16px;
+    background-image: url(../images/shapes/ripped-paper-base-2.png);
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    z-index: 10;
+    background-size: auto;
+    transform: rotate(180deg);
+    @media (min-width: 1700px) {
+      background-size: 100%;
+      bottom: -16px;
+    }
+  }
+  @include laptop {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  &__bg {
+    position: absolute;
+    bottom: -80px;
+    right: 0;
+  }
+  .container {
+    position: relative;
+  }
+  &__image {
+    position: relative;
+    margin-bottom: 50px;
+    z-index: 20;
+    > img {
+      width: 100%;
+      border-radius: $border-radius;
+      @include laptop {
+        width: auto;
+        border-top-left-radius: 0;
+      }
+    }
+    @include laptop {
+      left: -80px;
+      top: -100px;
+    }
+  }
+  .video-popup {
+    width: 100px;
+    height: 100px;
+    background-color: $thm-primary;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    transition: all 500ms ease;
+    border-radius: $border-radius;
+    &:hover {
+      background-color: #fff;
+      color: $thm-black;
+    }
+    @include laptop {
+      width: 190px;
+      height: 190px;
+      border-radius: 0;
+      border-top-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+      position: absolute;
+      bottom: 0;
+      right: -81px;
+      top: auto;
+      left: auto;
+      font-size: 40px;
+      transform: translateX(0) translateY(0);
+    }
+  }
+  &__content {
+    @include laptop {
+      padding-left: 70px;
+      padding-top: 120px;
+    }
+  }
+  &__text {
+    width: 100%;
+    text-align: center;
+    border-radius: $border-radius;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: $thm-base;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    @include laptop {
+      width: 450px;
+      height: 70px;
+      bottom: auto;
+      left: -70px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(-90deg);
+      transform-origin: left top;
+      top: 59.75%;
+      border-radius: $border-radius;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+  .block-title {
+    p {
+      color: #b5c3be;
+    }
+    h3 {
+      color: #fff;
+    }
+  }
+  &__summery {
+    @include laptop {
+      margin-top: -30px;
+    }
+    p {
+      margin: 0;
+      color: #b5c3be;
+      @include laptop {
+        font-size: 18px;
+      }
+    }
+  }
+  &__list {
+    margin-top: 20px;
+    li {
+      position: relative;
+      font-size: 16px;
+      color: #fff;
+      padding-left: 25px;
+      @include laptop {
+        font-size: 20px;
+        padding-left: 40px;
+      }
+      + li {
+        @include laptop {
+          margin-top: 6px;
+        }
+      }
+      > i {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        font-size: 18px;
+        color: $thm-primary;
+        @include laptop {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+  &__count {
+    display: flex;
+    align-items: flex-start;
+    @include laptop {
+      align-items: center;
+    }
+    &-wrap {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 30px;
+      margin-top: 20px;
+      @include laptop {
+        margin-top: 30px;
+        padding-top: 25px;
+      }
+    }
+    i {
+      font-size: 50px;
+      color: $thm-primary;
+      margin-right: 20px;
+      @include laptop {
+        font-size: 60px;
+        margin-right: 30px;
+      }
+    }
+    h3 {
+      margin: 0;
+      font-size: 30px;
+      color: #fff;
+      font-family: $special-font !important;
+      font-weight: bold;
+      span {
+        font-family: inherit !important;
+      }
+      @include laptop {
+        font-size: 50px;
+      }
+    }
+    p {
+      margin: 0;
+      font-size: 16px;
+      color: #b5c3be;
+      @include laptop {
+        font-size: 18px;
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "6921804700221210219194001",
+    "foodName": "油辣椒酱1",
+    "specification": "275g",
+    "category": "辣椒酱",
+    "latestProcess": "经销商超市",
+    "time":1611970163415
+  },
+  {
+    "id": "6921804700221210219194402",
+    "foodName": "油辣椒酱2",
+    "specification": "276g",
+    "category": "辣椒酱",
+    "latestProcess": "经销商超市",
+    "time":1611970163415
+  },
+  {
+    "id": "6921804700221210219194003",
+    "foodName": "油辣椒酱3",
+    "specification": "277g",
+    "category": "辣椒酱",
+    "latestProcess": "经销商超市",
+    "time":1611970163415
+  },
+  {
+    "id": "6921804700221210219194404",
+    "foodName": "油辣椒酱4",
+    "specification": "278g",
+    "category": "辣椒酱",
+    "latestProcess": "经销商超市",
+    "time":1611970163415
+  },
+  {
+    "id": "6921804700221210219194005",
+    "foodName": "油辣椒酱5",
+    "specification": "279g",
+    "category": "辣椒酱",
+    "latestProcess": "经销商超市",
+    "time":1611970163415
+  }
+]

@@ -1,0 +1,27 @@
+{
+    "comment_score": [{
+            "brand": "泰奇食品",
+            "package_score": 0.84,
+            "price_score": 0.77,
+            "logistics_score": 0.78,
+            "taste_score": 0.74,
+            "service_score": 0.76
+        },
+        {
+            "brand": "方家铺子",
+            "package_score": 0.68,
+            "price_score": 0.92,
+            "logistics_score": 0.71,
+            "taste_score": 0.62,
+            "service_score": 0.77
+        },
+        {
+            "brand": "美丽石岛",
+            "package_score": 0.28,
+            "price_score": 0.82,
+            "logistics_score": 0.81,
+            "taste_score": 0.52,
+            "service_score": 0.79
+        }
+    ]
+}

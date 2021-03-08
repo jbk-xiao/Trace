@@ -1,0 +1,478 @@
+{
+    "companyInfo": {
+        "proj_name": "泰奇食品",
+        "img_url": "https://img.qichacha.com/Product/c425b926-bc1c-4c48-b8ef-862f9919f37e.jpg",
+        "es_time": "2007-01-22",
+        "region": "广州",
+        "company_name": "广州市泰奇食品有限公司",
+        "proj_desc": "广州市泰奇食品有限公司是一家专业生产八宝粥类产品企业，主要以经营天然、方便的罐装食品为主。",
+        "address": "广州经济技术开发区永和经济区斗塘路20号",
+        "lng": "113.5779469",
+        "lat": "23.21084196",
+        "phone_num": "020-81812388"
+    },
+    "compet_geoList": [
+        {
+            "proj_name": "盛泽佳禾",
+            "company_name": "盛泽佳禾食品科技河北有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "邯郸",
+            "lng": "114.489755",
+            "lat": "36.61346692"
+        },
+        {
+            "proj_name": "和之悦",
+            "company_name": "河北和之悦生物科技有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "保定",
+            "lng": "115.4804521",
+            "lat": "38.90092504"
+        },
+        {
+            "proj_name": "美丽石岛",
+            "company_name": "黑龙江美丽石岛科技开发有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "哈尔滨",
+            "lng": "126.6929418",
+            "lat": "45.7573219"
+        },
+        {
+            "proj_name": "素膳工坊",
+            "company_name": "素膳工坊（上海）健康科技有限公司",
+            "img_url": "https://img.qichacha.com/Product/9f307dd2-b61a-4f96-82f3-84736e32f58a.jpg",
+            "region": "上海",
+            "lng": "121.448041",
+            "lat": "31.30329919"
+        },
+        {
+            "proj_name": "一包营养",
+            "company_name": "上海熙边信息科技有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "上海",
+            "lng": "121.4059894",
+            "lat": "31.34427145"
+        },
+        {
+            "proj_name": "济含实业",
+            "company_name": "上海济含实业有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "上海",
+            "lng": "121.2627521",
+            "lat": "30.89867707"
+        },
+        {
+            "proj_name": "郁氏生物",
+            "company_name": "南京郁氏生物科技有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "南京",
+            "lng": "119.0584517",
+            "lat": "32.01174435"
+        },
+        {
+            "proj_name": "悠果维",
+            "company_name": "江苏名芊生物科技有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "南京",
+            "lng": "118.8273351",
+            "lat": "31.93517489"
+        },
+        {
+            "proj_name": "优益生物",
+            "company_name": "苏州优益生物技术有限公司",
+            "img_url": "https://img.qichacha.com/Product/478eda75-af93-4da8-b810-68ca7d20d021.jpg",
+            "region": "苏州",
+            "lng": "120.6158572",
+            "lat": "31.24863355"
+        },
+        {
+            "proj_name": "硒泰克生物",
+            "company_name": "苏州硒泰克生物科技有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "苏州",
+            "lng": "120.752894",
+            "lat": "31.27575391"
+        },
+        {
+            "proj_name": "慧弘微品贸易",
+            "company_name": "泉州慧弘微品贸易有限责任公司",
+            "img_url": "https://img.qichacha.com/Product/60f4c947-6517-4e30-9f0e-b02fd0c0b2d7.jpg",
+            "region": "泉州",
+            "lng": "118.6370254",
+            "lat": "24.73796176"
+        },
+        {
+            "proj_name": "千年生物",
+            "company_name": "临沂千年生物工程有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "临沂",
+            "lng": "118.3544997",
+            "lat": "35.05734023"
+        },
+        {
+            "proj_name": "汇元特医",
+            "company_name": "河南汇元特殊医学用途配方食品有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "南阳",
+            "lng": "112.9484279",
+            "lat": "33.0444088"
+        },
+        {
+            "proj_name": "珍妃燕",
+            "company_name": "珍妃燕商贸（武汉）有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "武汉",
+            "lng": "114.294261",
+            "lat": "30.64398173"
+        },
+        {
+            "proj_name": "臻进商贸",
+            "company_name": "广州市臻进商贸有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "广州",
+            "lng": "113.3931678",
+            "lat": "23.17592779"
+        },
+        {
+            "proj_name": "蓝幄生物",
+            "company_name": "广州蓝幄生物科技有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "广州",
+            "lng": "113.439394",
+            "lat": "23.14183901"
+        },
+        {
+            "proj_name": "保时健生物",
+            "company_name": "深圳保时健生物工程有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "深圳",
+            "lng": "114.3251863",
+            "lat": "22.7032828"
+        },
+        {
+            "proj_name": "康惠宝",
+            "company_name": "广东康惠宝实业有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "汕头",
+            "lng": "116.7442427",
+            "lat": "23.3967075"
+        },
+        {
+            "proj_name": "澳思瑞雅",
+            "company_name": "广东澳思瑞雅健康美容生物科技有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "佛山",
+            "lng": "113.196907",
+            "lat": "23.06013104"
+        },
+        {
+            "proj_name": "华芳植物科技",
+            "company_name": "广东华芳植物科技有限公司",
+            "img_url": "https://www.qcc.com/material/theme/chacha/cms/v2/images/no_image.png",
+            "region": "东莞",
+            "lng": "113.8934342",
+            "lat": "22.94967279"
+        }
+    ],
+    "jdetail": {
+        "pname": "泰奇八宝粥礼盒装370g*12罐",
+        "price": "66.0",
+        "detail_url": "http://item.jd.com/7552427.html",
+        "img_url": "https://img12.360buyimg.com/n1/jfs/t1/33179/18/14751/231211/5d1db1bfE014ee81b/16d701a5131f1d54.jpg",
+        "brand": "泰奇",
+        "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2679&tid=17698&ev=exbrand_39501",
+        "commentCount": 77673,
+        "goodRate": 0.99
+    },
+    "compet_jdetails": [
+        {
+            "pname": "十月稻田八宝粥米1kg",
+            "price": "13.8",
+            "detail_url": "http://item.jd.com/4292944.html",
+            "img_url": "https://img14.360buyimg.com/n1/jfs/t1/142923/4/15637/140889/5fbc5fbaE4a88c6ae/9d1f57b9860a56bc.jpg",
+            "brand": "十月稻田",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,13790&tid=17670&ev=exbrand_15840",
+            "commentCount": 1554675,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "方家铺子八宝米 1kg",
+            "price": "15.9",
+            "detail_url": "http://item.jd.com/5415987.html",
+            "img_url": "https://img12.360buyimg.com/n1/jfs/t1/82711/39/4828/177935/5d3039eaE1b5d5043/104401675b1a72fd.jpg",
+            "brand": "方家铺子",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,13790&tid=22433&ev=exbrand_6702",
+            "commentCount": 1314056,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "银鹭五色营养混合装",
+            "price": "34.9",
+            "detail_url": "http://item.jd.com/7585104.html",
+            "img_url": "https://img14.360buyimg.com/n1/jfs/t1/130936/33/6550/169369/5f30de14E4666d306/4e873b6b22f7decf.jpg",
+            "brand": "银鹭",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2679&tid=17698&ev=exbrand_19787",
+            "commentCount": 1098536,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "达利园八宝粥",
+            "price": "32.9",
+            "detail_url": "http://item.jd.com/705816.html",
+            "img_url": "https://img11.360buyimg.com/n1/jfs/t1/144128/21/19691/146449/5fe3e0e9E261a4319/24653f0d0e770e36.jpg",
+            "brand": "达利园",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2679&tid=17698&ev=exbrand_5673",
+            "commentCount": 827407,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "燕之坊八宝米 1kg",
+            "price": "13.8",
+            "detail_url": "http://item.jd.com/2804958.html",
+            "img_url": "https://img13.360buyimg.com/n1/jfs/t1/120211/23/19964/96895/5fbded4aEe080ef8e/b4068953154bd9b4.jpg",
+            "brand": "燕之坊",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,13790&tid=22433&ev=exbrand_19088",
+            "commentCount": 427676,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "俏香阁八宝粥360g*12罐",
+            "price": "35.0",
+            "detail_url": "http://item.jd.com/100012901812.html",
+            "img_url": "https://img12.360buyimg.com/n1/jfs/t1/139891/6/4541/110810/5f2919ebE09e128e3/9dde1f3b8d95875e.jpg",
+            "brand": "俏香阁",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2679&tid=17698&ev=exbrand_219371",
+            "commentCount": 385131,
+            "goodRate": 0.98
+        },
+        {
+            "pname": "天地粮人八宝粥米",
+            "price": "21.7",
+            "detail_url": "http://item.jd.com/100006732924.html",
+            "img_url": "https://img14.360buyimg.com/n1/jfs/t1/117890/24/260/377049/5e89c77dE27c9691b/a0f571c2829cf6d9.jpg",
+            "brand": "天地粮人",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,13790&tid=22433&ev=exbrand_23016",
+            "commentCount": 316451,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "娃哈哈速食粥",
+            "price": "48.0",
+            "detail_url": "http://item.jd.com/1129090.html",
+            "img_url": "https://img10.360buyimg.com/n1/jfs/t26383/212/486846404/348835/ae8f3311/5baf0232N6866bf5c.jpg",
+            "brand": "娃哈哈",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,2679&tid=17698&ev=exbrand_17176",
+            "commentCount": 91771,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "珍尚米十二粥道",
+            "price": "46.8",
+            "detail_url": "http://item.jd.com/100008762408.html",
+            "img_url": "https://img13.360buyimg.com/n1/jfs/t1/171298/14/4299/230152/600fcb55E1f8dba8d/0fae6100638bc1e5.jpg",
+            "brand": "珍尚米",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,13790&tid=17670&ev=exbrand_343349",
+            "commentCount": 80862,
+            "goodRate": 0.97
+        },
+        {
+            "pname": "禾煜7日谷",
+            "price": "28.7",
+            "detail_url": "http://item.jd.com/100000977790.html",
+            "img_url": "https://img10.360buyimg.com/n1/jfs/t1/159175/25/4403/182762/600a9a6fEa1ce23e3/101c0e783fbd32e7.jpg",
+            "brand": "禾煜（HEYU）",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,13790&tid=22433&ev=exbrand_8142",
+            "commentCount": 71493,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "汴都铺子30日粥袋装五谷杂粮粥礼盒组合米面粗粮杂粮饭八宝粥原料 节日送礼养生粥米伴侣3kg 八宝粥原料100g*30袋",
+            "price": "79.0",
+            "detail_url": "http://item.jd.com/29438929692.html",
+            "img_url": "https://img12.360buyimg.com/n1/jfs/t1/143387/21/3915/225261/5f1fb8e0E0cf22fa1/272f7f29e73cab65.jpg",
+            "brand": "汴都铺子",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,13790&tid=17670&ev=exbrand_196797",
+            "commentCount": 36832,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "谷小宝有机十谷米1kg",
+            "price": "29.9",
+            "detail_url": "http://item.jd.com/100016415708.html",
+            "img_url": "https://img13.360buyimg.com/n1/jfs/t1/150604/33/16995/83536/600fb112Ea0801616/0029cbbc25f5793a.jpg",
+            "brand": "谷小宝",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,13790&tid=22433&ev=exbrand_381516",
+            "commentCount": 15194,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "五芳斋八宝粥料量贩装",
+            "price": "26.8",
+            "detail_url": "http://item.jd.com/100001559639.html",
+            "img_url": "https://img14.360buyimg.com/n1/jfs/t29920/304/688839105/461111/ceaaca38/5bfb91d8N8c5972e8.jpg",
+            "brand": "五芳斋",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,13790&tid=17670&ev=exbrand_17804",
+            "commentCount": 10234,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "北纯八宝粥",
+            "price": "19.9",
+            "detail_url": "http://item.jd.com/5361565.html",
+            "img_url": "https://img10.360buyimg.com/n1/jfs/t1/100915/7/16957/206436/5e816f44E159ca934/1cb357166f4d1015.jpg",
+            "brand": "北纯",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,13790&tid=22433&ev=exbrand_4505",
+            "commentCount": 9625,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "袁氏五谷杂粮礼盒装2910g 黑米 红米小黄米 玉米糁 糙米 燕麦米六款粗粮组合 八宝粥米原料 团购",
+            "price": "49.0",
+            "detail_url": "http://item.jd.com/10843259007.html",
+            "img_url": "https://img12.360buyimg.com/n1/jfs/t1/70779/33/14566/199781/5dc22d83E8934c4b7/2c3bf05f6c50f041.jpg",
+            "brand": "袁氏（yuanshi）",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,13790&tid=17670&ev=exbrand_69461",
+            "commentCount": 6950,
+            "goodRate": 0.99
+        },
+        {
+            "pname": "京荟堂十谷米",
+            "price": "14.9",
+            "detail_url": "http://item.jd.com/8093775.html",
+            "img_url": "https://img10.360buyimg.com/n1/jfs/t27796/284/899718118/240611/d0b75905/5bbc5cb1N927f14ef.jpg",
+            "brand": "京荟堂",
+            "brand_url": "https://list.jd.com/list.html?cat=1320,1584,13790&tid=17672&ev=exbrand_242375",
+            "commentCount": 6752,
+            "goodRate": 0.99
+        }
+    ],
+    "comment_scores": [
+        {
+            "brand": "泰奇",
+            "package_score": "0.696629213",
+            "price_score": "0.781818182",
+            "logistics_score": "0.75257732",
+            "taste_score": "0.814569536",
+            "service_score": "0.660714286"
+        },
+        {
+            "brand": "十月稻田",
+            "package_score": "0.61341853",
+            "price_score": "0.754285714",
+            "logistics_score": "0.722021661",
+            "taste_score": "0.824561404",
+            "service_score": "0.699530516"
+        },
+        {
+            "brand": "方家铺子",
+            "package_score": "0.668674699",
+            "price_score": "0.862068966",
+            "logistics_score": "0.711111111",
+            "taste_score": "0.804932735",
+            "service_score": "0.827586207"
+        },
+        {
+            "brand": "银鹭",
+            "package_score": "0.613034623",
+            "price_score": "0.857142857",
+            "logistics_score": "0.675925926",
+            "taste_score": "0.696639419",
+            "service_score": "0.633187773"
+        },
+        {
+            "brand": "燕之坊",
+            "package_score": "0.620779221",
+            "price_score": "0.817567568",
+            "logistics_score": "0.669322709",
+            "taste_score": "0.798969072",
+            "service_score": "0.729411765"
+        },
+        {
+            "brand": "俏香阁",
+            "package_score": "0.65",
+            "price_score": "0.892857143",
+            "logistics_score": "0.731707317",
+            "taste_score": "0.830357143",
+            "service_score": "0.65"
+        },
+        {
+            "brand": "天地粮人",
+            "package_score": "0.676470588",
+            "price_score": "0.714285714",
+            "logistics_score": "0.683333333",
+            "taste_score": "0.8203125",
+            "service_score": "0.720930233"
+        },
+        {
+            "brand": "娃哈哈",
+            "package_score": "0.637931034",
+            "price_score": "0.837837838",
+            "logistics_score": "0.586206897",
+            "taste_score": "0.794642857",
+            "service_score": "0.695121951"
+        },
+        {
+            "brand": "珍尚米",
+            "package_score": "0.438709677",
+            "price_score": "0.78125",
+            "logistics_score": "0.761904762",
+            "taste_score": "0.624671916",
+            "service_score": "0.458333333"
+        },
+        {
+            "brand": "禾煜",
+            "package_score": "0.81443299",
+            "price_score": "0.895348837",
+            "logistics_score": "0.738888889",
+            "taste_score": "0.811688312",
+            "service_score": "0.740740741"
+        },
+        {
+            "brand": "汴都铺子",
+            "package_score": "0.789473684",
+            "price_score": "0.788461538",
+            "logistics_score": "0.72826087",
+            "taste_score": "0.717871486",
+            "service_score": "0.713375796"
+        },
+        {
+            "brand": "谷小宝",
+            "package_score": "0.812834225",
+            "price_score": "0.924050633",
+            "logistics_score": "0.912280702",
+            "taste_score": "0.914454277",
+            "service_score": "0.772151899"
+        },
+        {
+            "brand": "五芳斋",
+            "package_score": "0.802083333",
+            "price_score": "0.631578947",
+            "logistics_score": "0.716666667",
+            "taste_score": "0.805936073",
+            "service_score": "0.576923077"
+        },
+        {
+            "brand": "北纯",
+            "package_score": "0.713656388",
+            "price_score": "0.876923077",
+            "logistics_score": "0.722222222",
+            "taste_score": "0.771356784",
+            "service_score": "0.717105263"
+        },
+        {
+            "brand": "袁氏",
+            "package_score": "0.658119658",
+            "price_score": "0.75",
+            "logistics_score": "0.461538462",
+            "taste_score": "0.765714286",
+            "service_score": "0.5"
+        },
+        {
+            "brand": "京荟堂",
+            "package_score": "0.753424658",
+            "price_score": "0.807017544",
+            "logistics_score": "0.78313253",
+            "taste_score": "0.805555556",
+            "service_score": "0.695652174"
+        }
+    ]
+}

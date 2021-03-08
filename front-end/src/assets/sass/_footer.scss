@@ -1,0 +1,372 @@
+.site-footer {
+  background-color: #255946;
+  padding-top: 80px;
+  padding-bottom: 40px;
+  position: relative;
+  margin-top: 16px;
+  &::before {
+    content: "";
+    width: 100%;
+    height: 16px;
+    background-image: url(../images/shapes/ripped-paper-base-2.png);
+    position: absolute;
+    top: -15px;
+    left: 0;
+    z-index: 10;
+    background-size: auto;
+    @media (min-width: 1700px) {
+      background-size: 100%;
+      top: -16px;
+    }
+  }
+  @include laptop {
+    padding-top: 100px;
+    padding-bottom: 76px;
+  }
+  [class*="site-footer__shape-"] {
+    display: none;
+    @include tablet {
+      display: block;
+      position: absolute;
+    }
+  }
+}
+
+.site-footer__shape-1 {
+  bottom: -45px;
+  right: -15px;
+}
+
+.site-footer__shape-2 {
+  bottom: -85px;
+  left: 96px;
+  mix-blend-mode: luminosity;
+}
+.footer-widget {
+  margin-bottom: 40px;
+  &__title {
+    margin: 0;
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 25px;
+    @include laptop {
+      margin-bottom: 50px;
+    }
+  }
+  p {
+    font-size: 14px;
+    color: #b5c3be;
+    max-width: 271px;
+    margin: 0;
+    margin-top: 25px;
+    @include laptop {
+      font-size: 15px;
+      max-width: 291px;
+      margin-top: 15px;
+    }
+  }
+  .mc-form {
+    width: 100%;
+    max-width: 300px;
+    background-color: #fff;
+    border-radius: $border-radius;
+    height: 50px;
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    @include laptop {
+      height: 60px;
+      margin-bottom: 30px;
+    }
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      border: none;
+      display: block;
+      outline: none;
+      appearance: none;
+      height: 100%;
+      border-radius: $border-radius;
+      background-color: #fff;
+      color: #6e7673;
+      font-size: 14px;
+      padding-left: 30px;
+    }
+    button[type="submit"] {
+      border: none;
+      outline: none;
+      appearance: none;
+      width: auto;
+      font-size: 20px;
+      color: $thm-base;
+      background-color: transparent;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 20px;
+    }
+  }
+}
+
+.footer-widget__Logo {
+  position: relative;
+  @include laptop {
+    top: -15px;
+  }
+}
+
+.footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  a {
+    font-size: 16px;
+    color: #fff;
+    transition: all 500ms ease;
+    @include laptop {
+      font-size: 18px;
+    }
+    &:hover {
+      color: $thm-primary;
+    }
+    + a {
+      margin-left: 10px;
+      @include laptop {
+        margin-left: 35px;
+      }
+    }
+  }
+}
+
+.footer-widget__links-widget {
+  @include laptop {
+    margin-left: -30px;
+  }
+}
+
+.footer-widget__links {
+  margin: 0;
+  margin-top: -10px;
+
+  li {
+    position: relative;
+    + li {
+      @include laptop {
+        margin-top: 10px;
+      }
+    }
+    &::before {
+      content: "\f105";
+      font-family: "Font Awesome 5 Pro";
+      font-weight: 400;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      font-size: 14px;
+      color: #b5c3be;
+      transform: translateY(-50%);
+      @include laptop {
+        font-size: 15px;
+      }
+    }
+    a {
+      padding-left: 15px;
+      display: block;
+      color: #b5c3be;
+      font-size: 14px;
+      transition: all 500ms ease;
+      @include laptop {
+        font-size: 15px;
+      }
+    }
+    &:hover {
+      &::before,
+      a {
+        color: $thm-primary;
+      }
+    }
+  }
+}
+
+.footer-widget__post {
+  li {
+    display: flex;
+    align-items: flex-start;
+    + li {
+      margin-top: 30px;
+    }
+    > img {
+      width: 70px;
+      height: 69px;
+      margin-right: 20px;
+      flex-shrink: 0;
+    }
+  }
+  &-content {
+    @include laptop {
+      margin-top: -13px;
+    }
+    h4 {
+      margin: 0;
+      font-size: 14px;
+      color: #ffffff;
+      font-weight: 500;
+      line-height: 2.133;
+      @include laptop {
+        font-size: 15px;
+        margin-top: 5px;
+      }
+      a {
+        color: inherit;
+      }
+    }
+    span {
+      font-size: 13px;
+      color: $thm-primary;
+      font-weight: bold;
+      line-height: 1;
+    }
+  }
+}
+
+.footer-widget__contact {
+  margin-top: -10px;
+  @include laptop {
+    margin-top: -25px;
+  }
+  li {
+    position: relative;
+    padding-left: 20px;
+    @include laptop {
+      min-height: 60px;
+      padding-left: 30px;
+      display: flex;
+      align-items: center;
+    }
+    &:last-child {
+      @include laptop {
+        padding-top: 15px;
+      }
+      > i {
+        @include laptop {
+          top: 21px;
+          transform: translateY(0);
+        }
+      }
+    }
+    + li {
+      border-top: 1px solid rgba($color: #ffffff, $alpha: 0.1);
+    }
+    > i {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      font-size: 14px;
+      color: $thm-primary;
+      transform: translateY(-50%);
+      @include laptop {
+        font-size: 18px;
+      }
+    }
+    a {
+      color: #b5c3be;
+      font-size: 14px;
+      line-height: 2;
+      transition: all 500ms ease;
+      @include laptop {
+        font-size: 15px;
+        line-height: 2.133;
+      }
+    }
+    &:hover {
+      a {
+        color: $thm-primary;
+      }
+      > i {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.bottom-footer {
+  background-color: #1f4e3d;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  position: relative;
+  @include laptop {
+    padding-top: 42.5px;
+    padding-bottom: 42.5px;
+  }
+  &::before {
+    content: "";
+    width: 100%;
+    height: 16px;
+    background-image: url(../images/shapes/ripped-paper-base.png);
+    position: absolute;
+    top: -16px;
+    left: 0;
+    z-index: 10;
+    background-size: auto;
+    @media (min-width: 1700px) {
+      background-size: 100%;
+      bottom: -16px;
+    }
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    @include laptop {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: #b5c3be;
+    font-weight: 500;
+    line-height: 1;
+    @include laptop {
+      font-size: 15px;
+    }
+  }
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    @include laptop {
+      margin-top: 0;
+    }
+    a {
+      line-height: 1;
+      font-size: 14px;
+      color: #b5c3be;
+      display: flex;
+      align-items: center;
+      transition: all 500ms ease;
+      &:not(:last-of-type)::after {
+        content: "/";
+        margin-left: 5px;
+        margin-right: 5px;
+        @include laptop {
+          margin-left: 10px;
+          margin-right: 10px;
+        }
+      }
+      &:hover {
+        color: #fff;
+      }
+      @include laptop {
+        font-size: 15px;
+      }
+    }
+  }
+}

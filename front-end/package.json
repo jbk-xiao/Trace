@@ -1,0 +1,68 @@
+{
+  "name": "faxianbei",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "ace-builds": "^1.4.12",
+    "axios": "^0.21.1",
+    "core-js": "^3.6.5",
+    "echarts": "^5.0.2",
+    "echarts-gl": "^2.0.2",
+    "element-ui": "^2.4.5",
+    "jquery": "^3.5.1",
+    "node-sass": "^4.12.0",
+    "qs": "^6.5.2",
+    "vue": "^2.6.11",
+    "vue-amap": "^0.5.10",
+    "vue-baidu-map": "^0.21.22",
+    "vue-router": "^3.2.0",
+    "vue-video-player": "^5.0.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "^4.5.10",
+    "@vue/cli-service": "~4.5.0",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "echarts-wordcloud": "^2.0.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "less": "^4.1.1",
+    "less-loader": "^7.3.0",
+    "sass-loader": "^7.3.1",
+    "vue-cli-plugin-element": "^1.0.1",
+    "vue-cli-plugin-wyz-echarts": "^1.0.5",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "globals": {
+      "BMap": true
+    },
+    "rules": {
+      "no-tabs": "off",
+      "no-irregular-whitespace": "off"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

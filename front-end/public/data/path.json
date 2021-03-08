@@ -1,0 +1,9 @@
+{
+    "pdata":[
+    {"name": "上海", "value": 50},
+    {"name": "厦门", "value": 50},
+    {"name": "深圳", "value": 50},
+    {"name": "三亚", "value": 50}
+    
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "age_distribution": {
+        "keyword": "八宝粥",
+        "period": "2021-01-01|2021-01-31",
+        "data": [
+            {
+                "age_range": "0-19",
+                "tgi": 48.61,
+                "word_rate": 4.53,
+                "all_rate": 9.33
+            },
+            {
+                "age_range": "20-29",
+                "tgi": 85.88,
+                "word_rate": 28.63,
+                "all_rate": 33.34
+            }
+        ]
+    }
+}

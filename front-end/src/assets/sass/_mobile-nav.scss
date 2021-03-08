@@ -1,0 +1,210 @@
+.mobile-nav__wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  transform: scale(0, 1);
+  transform-origin: left center;
+  transition: transform 500ms ease;
+  z-index: 999;
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+.mobile-nav__wrapper.expanded {
+  transform: scale(1, 1);
+}
+.mobile-nav__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $thm-black;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.mobile-nav__content {
+  width: 300px;
+  background-color: #1f4e3d;
+  z-index: 10;
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.mobile-nav__content .thm-btn {
+  padding: 8px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.mobile-nav__content .logo-box {
+  margin-bottom: 40px;
+  display: flex;
+}
+.mobile-nav__close {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  font-size: 18px;
+  color: #b5c3be;
+  cursor: pointer;
+}
+
+.mobile-nav__content .main-menu__list,
+.mobile-nav__content .main-menu__list ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.mobile-nav__content .main-menu__list ul {
+  display: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.mobile-nav__content .main-menu__list ul li a {
+  padding-left: 1em;
+}
+.mobile-nav__content .main-menu__list li:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.mobile-nav__content .main-menu__list li a {
+  display: flex;
+  justify-content: space-between;
+  line-height: 30px;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: $thm-font;
+  font-weight: 500;
+  height: 46px;
+  align-items: center;
+  transition: 500ms;
+}
+.mobile-nav__content .main-menu__list li a.expanded {
+  color: $thm-primary;
+}
+.mobile-nav__content .main-menu__list li a button {
+  width: 30px;
+  height: 30px;
+  background-color: $thm-primary;
+  border: none;
+  outline: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: rotate(-90deg);
+  transition: transform 500ms ease;
+}
+.mobile-nav__content .main-menu__list li a button.expanded {
+  transform: rotate(0deg);
+  background-color: #fff;
+  color: $thm-black;
+}
+.mobile-nav__content .main-menu__list li.cart-btn span {
+  position: relative;
+  top: auto;
+  right: auto;
+  transform: translate(0, 0);
+}
+.mobile-nav__content .main-menu__list li.cart-btn i {
+  font-size: 16px;
+}
+
+.mobile-nav__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.mobile-nav__language {
+  display: flex;
+  align-items: center;
+  img {
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: 70px;
+  }
+  .bootstrap-select > .dropdown-toggle {
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+    outline: none;
+    color: #b5c3be;
+    font-size: 14px;
+  }
+}
+
+.mobile-nav__social {
+  display: flex;
+  align-items: center;
+  a {
+    font-size: 16px;
+    color: #b5c3be;
+    transition: 500ms;
+    + a {
+      margin-left: 10px;
+    }
+    &:hover {
+      color: $thm-primary;
+    }
+  }
+}
+
+.mobile-nav__contact {
+  margin-bottom: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  li {
+    color: #b5c3be;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    display: flex;
+    align-items: center;
+    + li {
+      margin-top: 15px;
+    }
+    a {
+      color: inherit;
+      transition: 500ms;
+      &:hover {
+        color: $thm-primary;
+      }
+    }
+    > i {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: $thm-primary;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 14px;
+      margin-right: 10px;
+      color: #fff;
+    }
+  }
+}
+
+.mobile-nav__container {
+  .logo-box {
+    display: none;
+  }
+  .main-header__info {
+    display: none;
+  }
+}

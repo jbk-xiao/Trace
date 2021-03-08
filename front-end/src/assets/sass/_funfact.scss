@@ -1,0 +1,102 @@
+.funfact-one {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  @include laptop {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+  [class*="col-"] + [class*="col-"] {
+    border-top: 1px solid #e9e7e2;
+    padding-top: 30px;
+    margin-top: 30px;
+    @include tablet {
+      border-left: 1px solid #e9e7e2;
+      border-top: 0;
+      padding-top: 0;
+      margin-top: 0;
+    }
+  }
+  [class*="col-"]:nth-child(3n) {
+    @include tablet {
+      border-left: 0;
+    }
+    @include large-tablet {
+      border-left: 1px solid #e9e7e2;
+    }
+  }
+  &__single {
+    text-align: center;
+    @include tablet {
+      margin-bottom: 30px;
+    }
+    @include large-tablet {
+      margin-bottom: 0;
+    }
+    i {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 50px;
+      background-color: #49a760;
+      color: #fff;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: $border-radius;
+      transition: all 500ms ease;
+
+      @include laptop {
+        width: 106px;
+        height: 101px;
+        font-size: 62px;
+      }
+    }
+    &:hover i {
+      background-color: $thm-primary;
+      color: #fff;
+    }
+    h3 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1;
+      font-family: $special-font !important;
+      color: $thm-black;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      span {
+        font-family: inherit !important;
+      }
+      @include laptop {
+        font-size: 50px;
+        margin-top: 40px;
+        margin-bottom: 10px;
+      }
+    }
+    p {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1;
+      color: #6e7673;
+      @include laptop {
+        font-size: 18px;
+      }
+    }
+  }
+
+  [class*="col-"]:nth-child(1) &__single {
+    @include laptop {
+      position: relative;
+      right: 30px;
+    }
+  }
+  [class*="col-"]:nth-child(4) &__single {
+    @include laptop {
+      position: relative;
+      left: 30px;
+    }
+  }
+}

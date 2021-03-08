@@ -1,0 +1,96 @@
+@font-face {
+  font-family: 'agrikon-icon';
+  src:  url('../fonts/agrikon-icon.eot?9nn143');
+  src:  url('../fonts/agrikon-icon.eot?9nn143#iefix') format('embedded-opentype'),
+    url('../fonts/agrikon-icon.ttf?9nn143') format('truetype'),
+    url('../fonts/agrikon-icon.woff?9nn143') format('woff'),
+    url('../fonts/agrikon-icon.svg?9nn143#agrikon-icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="agrikon-icon-"], [class*=" agrikon-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'agrikon-icon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.agrikon-icon-email:before {
+  content: "\e900";
+}
+.agrikon-icon-clock:before {
+  content: "\e901";
+}
+.agrikon-icon-shopping-cart:before {
+  content: "\e902";
+}
+.agrikon-icon-phone-call:before {
+  content: "\e903";
+}
+.agrikon-icon-magnifying-glass:before {
+  content: "\e904";
+}
+.agrikon-icon-left-arrow:before {
+  content: "\e905";
+}
+.agrikon-icon-right-arrow:before {
+  content: "\e916";
+}
+.agrikon-icon-farmer:before {
+  content: "\e906";
+}
+.agrikon-icon-agriculture:before {
+  content: "\e907";
+}
+.agrikon-icon-tractor:before {
+  content: "\e908";
+}
+.agrikon-icon-organic-food:before {
+  content: "\e909";
+}
+.agrikon-icon-vegetable:before {
+  content: "\e90a";
+}
+.agrikon-icon-dairy:before {
+  content: "\e90b";
+}
+.agrikon-icon-farm:before {
+  content: "\e90c";
+}
+.agrikon-icon-pin:before {
+  content: "\e90d";
+}
+.agrikon-icon-telephone:before {
+  content: "\e90e";
+}
+.agrikon-icon-investment:before {
+  content: "\e90f";
+}
+.agrikon-icon-tractor-1:before {
+  content: "\e910";
+}
+.agrikon-icon-planting:before {
+  content: "\e911";
+}
+.agrikon-icon-agriculture-1:before {
+  content: "\e912";
+}
+.agrikon-icon-customer:before {
+  content: "\e913";
+}
+.agrikon-icon-agriculture-2:before {
+  content: "\e914";
+}
+.agrikon-icon-tick:before {
+  content: "\e915";
+}
