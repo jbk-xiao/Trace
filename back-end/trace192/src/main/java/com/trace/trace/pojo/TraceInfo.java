@@ -7,13 +7,6 @@ import lombok.Data;
 
 import java.util.List;
 
-/**
- * @author jbk-xiao
- * @program trace
- * @packagename com.trace.trace.pojo
- * @Description
- * @create 2021-02-07-11:32
- */
 @Data
 public class TraceInfo {
     @Expose

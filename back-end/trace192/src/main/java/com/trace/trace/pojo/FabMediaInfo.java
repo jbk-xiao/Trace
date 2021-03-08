@@ -3,13 +3,6 @@ package com.trace.trace.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * @author jbk-xiao
- * @program trace
- * @packagename com.trace.trace.pojo
- * @Description
- * @create 2021-02-03-16:12
- */
 public class FabMediaInfo {
     @Expose
     @SerializedName("type")

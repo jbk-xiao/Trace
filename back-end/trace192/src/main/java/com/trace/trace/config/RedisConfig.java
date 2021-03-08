@@ -18,12 +18,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-/**
- * @author Zenglr
- * @ClassName RedisConfig
- * @Description Redis的相关配置，序列化以及缓存配置
- * @create 2020-10-08-9:18 上午
- */
 @Configuration
 public class RedisConfig extends CachingConfigurerSupport {
 //    自定义缓存key的生成策略。默认的生成策略是乱码，

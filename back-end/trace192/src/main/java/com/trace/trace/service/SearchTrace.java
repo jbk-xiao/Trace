@@ -20,13 +20,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * @author Zenglr
- * @program: FoXiShengCun
- * @packagename: com.trace.trace.service
- * @Description 溯源模块
- * @create 2021-02-07-7:57 下午
- */
 @Service
 @Slf4j
 public class SearchTrace {

@@ -9,13 +9,6 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
-/**
- * @author Zenglr
- * @ClassName JedisUtil
- * @Description JedisPool配置以及连接
- * @create 2020-10-16-7:09 下午
- */
-
 @Slf4j
 @Component
 public class JedisUtil {

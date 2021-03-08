@@ -8,13 +8,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author: Clivia-Han
- * @projectName: JsonToMongodb
- * @packageName: PACKAGE_NAME
- * @Description:
- * @create: 2021-02-06-11:14
- */
 @Data
 @Document("Graph")
 public class Graph {

@@ -6,12 +6,6 @@ import lombok.Data;
 
 /**
  * 年龄或性别分布返回值中列表内的每个数据。（复用）
- *
- * @author jbk-xiao
- * @program trace192
- * @packagename com.trace.trace.entity
- * @Description
- * @create 2021-02-23-20:55
  */
 @Data
 public class AgeOrSexDistributionData {

@@ -10,13 +10,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * @author jbk-xiao
- * @program trace
- * @packagename com.trace.trace.util
- * @Description
- * @create 2021-01-31-15:47
- */
 @Slf4j
 @Component
 public class FileUtil {

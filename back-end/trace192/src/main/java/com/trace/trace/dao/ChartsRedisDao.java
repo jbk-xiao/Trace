@@ -7,13 +7,6 @@ import redis.clients.jedis.Jedis;
 
 import java.util.Set;
 
-/**
- * @author jbk-xiao
- * @program trace192
- * @packagename com.trace.trace.dao
- * @Description
- * @create 2021-03-03-0:33
- */
 @Slf4j
 @Repository
 public class ChartsRedisDao {

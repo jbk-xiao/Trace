@@ -5,13 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.trace.trace.entity.RelateSearchData;
 import lombok.Data;
 
-/**
- * @author jbk-xiao
- * @program trace192
- * @packagename com.trace.trace.pojo
- * @Description
- * @create 2021-03-02-20:04
- */
 @Data
 public class RelateSearch {
     @Expose

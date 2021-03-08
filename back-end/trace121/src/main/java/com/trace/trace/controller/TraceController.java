@@ -16,24 +16,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.RequestWrapper;
 import java.util.HashMap;
 
-/**
- * @author jbk-xiao
- * @program trace121
- * @packagename com.trace.trace.controller
- * @Description
- * @create 2021-02-17-14:08
- */
 @Slf4j
 @CrossOrigin("*")
 @RestController
 public class TraceController {
 
-    final SearchTraceServiceGrpc.SearchTraceServiceBlockingStub searchTraceServiceBlockingStub;
+    private final SearchTraceServiceGrpc.SearchTraceServiceBlockingStub searchTraceServiceBlockingStub;
 
     @Autowired
     public TraceController(SearchTraceServiceGrpc.SearchTraceServiceBlockingStub searchTraceServiceBlockingStub) {

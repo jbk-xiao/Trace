@@ -11,13 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 
-/**
- * @author jbk-xiao
- * @program trace192
- * @packagename com.trace.trace.mapper
- * @Description
- * @create 2021-02-23-20:56
- */
 @Mapper
 @Repository
 public interface ChartsMapper {

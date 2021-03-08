@@ -11,13 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/**
- * @author Zenglr
- * @program: trace
- * @packagename: com.trace.trace.mapper
- * @Description
- * @create 2021-01-26-5:09 下午
- */
 @Mapper
 @Component
 public interface CompetMapper {

@@ -10,7 +10,6 @@ import com.trace.trace.pojo.ProcessInfo;
 import com.trace.trace.pojo.TraceInfo;
 import com.trace.trace.pojo.TraceManagerInfo;
 import com.trace.trace.util.CreateTraceCode;
-import com.trace.trace.util.FabricUtil;
 import com.trace.trace.util.JedisUtil;
 import com.trace.trace.util.QRCodeUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -29,18 +28,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @author jbk-xiao
- * @program trace
- * @packagename com.trace.trace.dao
- * @Description
- * @create 2021-02-01-10:53
- */
 @Slf4j
 @Repository
 public class FabricDao {
-    private final FabricUtil fabricUtil;
-    private final RedisIndexConfig redisIndexConfig;
     private final JedisUtil jedisUtil;
     private final Network network;
     private final QRCodeUtil qrCodeUtil;
@@ -55,10 +45,8 @@ public class FabricDao {
     String path;
 
     @Autowired
-    public FabricDao(RedisIndexConfig redisIndexConfig, FabricUtil fabricUtil, JedisUtil jedisUtil, Network network,
-                     QRCodeUtil qrCodeUtil, CreateTraceCode createTraceCode) {
-        this.redisIndexConfig = redisIndexConfig;
-        this.fabricUtil = fabricUtil;
+    public FabricDao(RedisIndexConfig redisIndexConfig, JedisUtil jedisUtil, Network network, QRCodeUtil qrCodeUtil,
+                     CreateTraceCode createTraceCode) {
         this.jedisUtil = jedisUtil;
         this.network = network;
         this.qrCodeUtil = qrCodeUtil;

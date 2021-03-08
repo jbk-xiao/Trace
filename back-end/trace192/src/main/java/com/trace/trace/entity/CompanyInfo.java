@@ -8,11 +8,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * @author Zenglr
- * @program: trace
- * @packagename: com.trace.trace.entity
- * @Description 公司基本信息
- * @create 2021-01-26-11:14 下午
+ * 公司基本信息
  */
 @Data
 @NoArgsConstructor

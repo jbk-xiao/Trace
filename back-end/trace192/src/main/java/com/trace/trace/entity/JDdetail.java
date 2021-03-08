@@ -5,13 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * @author Zenglr
- * @program: trace
- * @packagename: com.trace.trace192.entity
- * @Description
- * @create 2021-01-28-4:33 下午
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

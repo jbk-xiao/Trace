@@ -6,11 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author Clivia-Han
- * @version 1.0
- * @ClassName Comment 商品评论
- * @Description TODO
- * @date 2020/5/24 16:11
+ * Comment 商品评论
  */
 @Data
 @NoArgsConstructor

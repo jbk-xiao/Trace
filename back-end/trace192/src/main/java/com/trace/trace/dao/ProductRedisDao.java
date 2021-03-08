@@ -11,13 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author: Clivia-Han
- * @projectName: Foxishengcun-github-new
- * @packageName: com.trace.trace.dao
- * @Description:
- * @create: 2021-02-19-12:49
- */
 @Slf4j
 @Repository
 public class ProductRedisDao {

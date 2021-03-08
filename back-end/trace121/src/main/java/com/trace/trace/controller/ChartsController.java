@@ -8,24 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * 用于竞品图表所需数据的返回。
- *
- * @author jbk-xiao
- * @program trace121
- * @packagename com.trace.trace.controller
- * @Description
- * @create 2021-02-23-16:47
- */
 @Slf4j
 @CrossOrigin("*")
 @RestController
 public class ChartsController {
-    final SearchChartsServiceGrpc.SearchChartsServiceBlockingStub searchChartsServiceBlockingStub;
+    private final SearchChartsServiceGrpc.SearchChartsServiceBlockingStub searchChartsServiceBlockingStub;
 
     @Autowired
     public ChartsController(SearchChartsServiceGrpc.SearchChartsServiceBlockingStub searchChartsServiceBlockingStub) {
