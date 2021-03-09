@@ -1,0 +1,11 @@
+bert-tensorflow==1.0.4
+pandas==0.23.0
+tensorflow==1.14.0
+tensorflow-estimator==1.14.0
+gensim==3.8.3
+graphviz==0.16
+matplotlib==2.2.2
+numpy==1.14.5
+pandas==0.23.0
+snownlp==0.12.3
+tqdm==4.57.0
