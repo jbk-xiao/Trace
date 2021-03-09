@@ -1,24 +1,24 @@
 ### 1. 代码结构
 后端代码包括，实现业务逻辑的springboot项目：trace121模块和trace192模块；区块链相关文件：blockchain目录下代表智能合约（链码）的chaincode目录和配置文件config目录。
 
-```terminal
+```java
 back-end/
-├── blockchain		//区块链相关文件
-│   ├── chaincode
-│   │   ├── fabmedia
-│   │   │   ├── build.gradle
-│   │   │   ├── config
+├── blockchain			// 区块链相关文件
+│   ├── chaincode		// 区块链智能合约
+│   │   ├── fabmedia	// fabmedia合约，用于存储非结构化的媒体数据
+│   │   │   ├── build.gradle	// gradle项目的依赖配置中心
+│   │   │   ├── config			// 样式检查相关配置文件
 │   │   │   │   └── checkstyle
 │   │   │   │       ├── checkstyle.xml
 │   │   │   │       └── suppressions.xml
-│   │   │   ├── gradle
+│   │   │   ├── gradle			// 使用默认的gradle包装器
 │   │   │   │   └── wrapper
 │   │   │   │       ├── gradle-wrapper.jar
 │   │   │   │       └── gradle-wrapper.properties
-│   │   │   ├── gradlew
-│   │   │   ├── gradlew.bat
-│   │   │   ├── settings.gradle
-│   │   │   └── src
+│   │   │   ├── gradlew			// Linux下gradle启动脚本
+│   │   │   ├── gradlew.bat		// Windows下gradle启动脚本
+│   │   │   ├── settings.gradle	// gradle项目设置文件
+│   │   │   └── src				// 智能合约源文件
 │   │   │       ├── main
 │   │   │       │   └── java
 │   │   │       │       └── com
@@ -29,13 +29,7 @@ back-end/
 │   │   │       │                       ├── MediaInfo.java
 │   │   │       │                       └── MediaQueryResult.java
 │   │   │       └── test
-│   │   │           └── java
-│   │   │               └── com
-│   │   │                   └── trace
-│   │   │                       └── fabric
-│   │   │                           └── fabtrace
-│   │   │                               └── FabMediaTest.java
-│   │   └── fabtrace
+│   │   └── fabtrace	// fabtrace合约，用于存储结构化的溯源文本信息
 │   │       ├── build.gradle
 │   │       ├── config
 │   │       │   └── checkstyle
@@ -64,57 +58,52 @@ back-end/
 │   │               │                   └── FabTrace.java
 │   │               └── resources
 │   │                   └── initLedger.json
-│   └── config
+│   └── config		// 区块链网络配置文件
 │       ├── configtx.yaml
 │       ├── core.yaml
 │       └── orderer.yaml
-├── mysql初始化.sql
-├── README.assets
-│   └── 区块链网络.png
-├── README.md
-├── trace121
-│   ├── HELP.md
-│   ├── nohupstart.sh
-│   ├── pom.xml
-│   ├── shutdown.sh
+├── trace121			// springboot表示层模块
+│   ├── nohupstart.sh	// 模块后台运行启动脚本
+│   ├── pom.xml			// maven项目对象模型文件，指明项目信息及依赖导入
+│   ├── shutdown.sh		// 模块关闭脚本
 │   └── src
 │       ├── main
-│       │   ├── java
+│       │   ├── java	//  java源码
 │       │   │   └── com
 │       │   │       └── trace
 │       │   │           └── trace
-│       │   │               ├── config
+│       │   │               ├── config	//配置文件包，包括grpc应用配置和反向代理工具的配置
+│       │   │               │   ├── SolrProxyServletConfiguration.java
 │       │   │               │   └── GrpcConfig.java
-│       │   │               ├── controller
+│       │   │               ├── controller	// 用于接收前端请求的控制器所在包
 │       │   │               │   ├── ChartsController.java
 │       │   │               │   ├── InfoController.java
 │       │   │               │   ├── ManagerController.java
 │       │   │               │   ├── MediaController.java
 │       │   │               │   └── TraceController.java
-│       │   │               └── Trace121Application.java
-│       │   ├── proto
+│       │   │               └── Trace121Application.java	// trace121模块启动主类
+│       │   ├── proto	// proto源码，用于配置grpc
 │       │   │   └── SearchService.proto
 │       │   └── resources
-│       │       └── application.yml
+│       │       └── application.yml	// springboot配置文件
 │       └── test
-├── trace192
-│   ├── HELP.md
-│   ├── nohupstart.sh
-│   ├── pom.xml
-│   ├── shutdown.sh
+├── trace192			// springboot业务逻辑层和表示层模块
+│   ├── nohupstart.sh	// 模块后台运行启动脚本
+│   ├── pom.xml			// maven项目对象模型文件，指明项目信息及依赖导入
+│   ├── shutdown.sh		// 模块关闭脚本
 │   └── src
 │       ├── main
 │       │   ├── java
 │       │   │   └── com
 │       │   │       └── trace
 │       │   │           └── trace
-│       │   │               ├── config
-│       │   │               │   ├── MongoConfig.java
-│       │   │               │   ├── RedisConfig.java
-│       │   │               │   └── RedisIndexConfig.java
+│       │   │               ├── config	// 模块配置导入
+│       │   │               │   ├── MongoConfig.java	// 配置mongodb连接池
+│       │   │               │   ├── RedisConfig.java	// 导入redis配置
+│       │   │               │   └── RedisIndexConfig.java	// 导入redis数据库索引
 │       │   │               ├── controller
-│       │   │               │   └── SaveMediaController.java
-│       │   │               ├── dao
+│       │   │               │   └── SaveMediaController.java	// 后台监控访问接口
+│       │   │               ├── dao		// 数据库访问层文件
 │       │   │               │   ├── ChartsMongoDao.java
 │       │   │               │   ├── ChartsRedisDao.java
 │       │   │               │   ├── CompetRedisDao.java
@@ -140,7 +129,7 @@ back-end/
 │       │   │               │   ├── Relate.java
 │       │   │               │   ├── RelateSearchData.java
 │       │   │               │   └── S3dScore.java
-│       │   │               ├── mapper
+│       │   │               ├── mapper	// mybatis对应mapper文件
 │       │   │               │   ├── ChartsMapper.java
 │       │   │               │   ├── CompetMapper.java
 │       │   │               │   ├── DetailMapper.java
@@ -154,42 +143,43 @@ back-end/
 │       │   │               │   ├── RelateSearch.java
 │       │   │               │   ├── TraceInfo.java
 │       │   │               │   └── TraceManagerInfo.java
-│       │   │               ├── service
+│       │   │               ├── service	// 业务逻辑层文件
 │       │   │               │   ├── ManageProducts.java
-│       │   │               │   ├── ManagerServiceImpl.java
+│       │   │               │   ├── ManagerServiceImpl.java	// 企业后台管理模块业务逻辑
 │       │   │               │   ├── SearchCharts.java
-│       │   │               │   ├── SearchChartsServiceImpl.java
+│       │   │               │   ├── SearchChartsServiceImpl.java	// 营销分析图谱业务逻辑
 │       │   │               │   ├── SearchCompet.java
 │       │   │               │   ├── SearchGraph.java
 │       │   │               │   ├── SearchProduct.java
-│       │   │               │   ├── SearchServiceImpl.java
+│       │   │               │   ├── SearchServiceImpl.java	// 检索模块业务逻辑
 │       │   │               │   ├── SearchTrace.java
-│       │   │               │   └── SearchTraceServiceImpl.java
-│       │   │               ├── Trace192Application.java
-│       │   │               └── util
-│       │   │                   ├── CreateJson.java
-│       │   │                   ├── CreateTraceCode.java
-│       │   │                   ├── FabricUtil.java
-│       │   │                   ├── FileUtil.java
-│       │   │                   ├── JedisUtil.java
-│       │   │                   ├── QRCodeUtil.java
-│       │   │                   └── SaveUtil.java
+│       │   │               │   └── SearchTraceServiceImpl.java	// 溯源模块业务逻辑
+│       │   │               ├── Trace192Application.java	// trace192模块启动主类
+│       │   │               └── util	// 工具类包
+│       │   │                   ├── CreateJson.java	// 接收不同格式对象并生成json
+│       │   │                   ├── CreateTraceCode.java	// 生成唯一溯源码
+│       │   │                   ├── FabricUtil.java		// 区块链连接工具类
+│       │   │                   ├── FileUtil.java		// 文件读取工具类
+│       │   │                   ├── JedisUtil.java		// redis连接工具类
+│       │   │                   ├── QRCodeUtil.java		// 生成二维码
+│       │   │                   └── SaveUtil.java		// 文件保存工具类
 │       │   ├── proto
 │       │   │   └── SearchService.proto
 │       │   └── resources
-│       │       ├── application-dev.yml
-│       │       ├── application-prod.yml
+│       │       ├── application-dev.yml		// springboot开发环境配置文件
+│       │       ├── application-prod.yml	// springboot生产环境配置文件
 │       │       ├── application.yml
-│       │       ├── fabric.properties
-│       │       ├── log4j.properties
-│       │       ├── mapper
+│       │       ├── fabric.properties		// 区块链连接属性文件
+│       │       ├── log4j.properties		// slf4j配置文件
+│       │       ├── mapper		// mybatis数据库访问配置文件
 │       │       │   ├── ChartsMapper.xml
 │       │       │   ├── CompetMapper.xml
 │       │       │   ├── DetailMapper.xml
 │       │       │   └── QueryMapper.xml
-│       │       └── redis_index.json
+│       │       └── redis_index.json	// redis数据库索引对照文件
 │       └── test
-└── Trace-BackEnd.md
+├── mysql初始化.sql  // mysql数据库初始化文件
+└── README.md		// 后端项目说明文件
 
 ```
 
@@ -198,6 +188,7 @@ back-end/
 #### 2.1 环境依赖
 后端项目部署于Linux服务器上，其中trace121模块位于121.46.19.26主机，该主机具备公网内的联通性；trace192模块位于内网主机上，可被121主机访问到。
 环境依赖包括：
+
 | 名称 | 版本号 | 官网      |
 | ---- | ------ | ------------------------ |
 |Java SE Development Kit(JDK)  | 1.8.0  | https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html |
@@ -211,9 +202,7 @@ back-end/
 分别在`trace121`和`trace192`目录下运行`sh shutdown.sh`脚本停止项目。
 
 ### 3. 区块链环境部署
-我们使用的区块链平台是Hyperledger Fabric，目前搭建出的架构包括两个组织Org1、Org2和一个排序服务，三者各拥有一个节点。Org1模拟第三方认证机构，即本团队，Org2模拟加盟企业。具体结构可见示意图，[区块链网络.png](README.assets/区块链网络.png)
-
-![区块链网络](README.assets/区块链网络.png)
+我们使用的区块链平台是Hyperledger Fabric，目前搭建出的架构包括两个组织Org1、Org2和一个排序服务，三者各拥有一个节点。Org1模拟第三方认证机构，即本团队，Org2模拟加盟企业。
 
 
 具体部署过程如下：
