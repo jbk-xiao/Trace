@@ -183,8 +183,7 @@ public class FabricDao {
         TraceInfo info = gson.fromJson(infoStr, TraceInfo.class);
         //依据指定名称生成二维码并补全链接
         String qrName = id + "inner";
-        //TODO 此处需要修改url为前端对应url
-        qrCodeUtil.addCode("http://121.46.19.26:8511/addProcess", qrName);
+        qrCodeUtil.addCode("http://180.76.249.27/Trace/TRACE/#/AddProcess/" + id, qrName);
         info.setQrCode(FabricInfo.PICTURE_PREFIX.value + qrName + ".png");
         return gson.toJson(info);
     }
@@ -208,7 +207,7 @@ public class FabricDao {
             infoStr = new String(bytes);
             TraceInfo info = gson.fromJson(infoStr, TraceInfo.class);
             if (info.getProcessCount() == info.getProcess().size()) {
-                qrCodeUtil.addCode("", id);
+                qrCodeUtil.addCode("http://180.76.249.27/Trace/TRACE/#/Origin?query=" + id, id);
                 info.setQrCode(FabricInfo.PICTURE_PREFIX.value + id + ".png");
                 infoStr = gson.toJson(info);
             }
